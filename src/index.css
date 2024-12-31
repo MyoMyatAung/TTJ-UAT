@@ -166,7 +166,7 @@ input[type="range"]::-moz-range-thumb {
   border-color: #F54100 !important;
 } */
 .gradient-bg-home {
-  background: linear-gradient(to right, #ff007f, #ffc25c);
+  background: linear-gradient(to right, #FE58B5, #F3A34E);
   /* background: linear-gradient(
       180deg,
       rgba(22, 22, 25, 0) 100%,
@@ -187,7 +187,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 18.138px;
   border: 1.008px solid var(#ffffff33);
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff66;
+  color: #ffffff;
   font-family: "PingFang SC";
   font-size: 16px;
   font-style: normal;
@@ -200,7 +200,9 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   gap: 4px;
 }
-
+.home-input::placeholder {
+  color: white;
+}
 /* Add this to your global CSS */
 .no-scroll-auth {
   overflow: hidden;
