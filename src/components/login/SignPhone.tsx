@@ -16,6 +16,8 @@ import {
 } from "../../features/login/ModelSlice";
 import { showToast } from "../../pages/profile/error/ErrorSlice";
 import { useLocation } from "react-router-dom";
+import BackBtn from "../../assets/svg/BackBtn";
+import CloseBtn from "../../assets/svg/CloseBtn";
 
 interface SignPhoneProps {
   handleBack2: () => void; // Accept handleBack as a prop
@@ -111,12 +113,17 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
   return (
     <div className="min-h-screen flex items-center justify-center overflow-hidden">
       {openOtp && (
-        <Opt key={key} setIsVisible={setIsVisible} phone={phone} password={password} />
+        <Opt
+          key={key}
+          setIsVisible={setIsVisible}
+          phone={phone}
+          password={password}
+        />
       )}
       {openCaptcha && (
         <Captch
-        key={key}
-        setKey={setKey}
+          key={key}
+          setKey={setKey}
           setIsVisible={setIsVisible}
           isLogin={false}
           username={phone}
@@ -139,21 +146,30 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
             <div className="flex flex-col justify-center items-center gap-[16px]">
               <motion.p className="w-[60px] h-[4px] drag_line mt-[12px] cursor-pointer bg-gray-400"></motion.p>
               <div className="flex justify-between items-center w-full pb-[20px]">
-                <img
+                {/* <img
                   className="p-3 cursor-pointer"
                   src={back}
                   alt="Back"
                   onClick={handleBack2}
-                />
-                <h2 className="text-[18px] font-[600] leading-[20px] text-white">
+                /> */}
+                <div className="p-3 cursor-pointer" onClick={handleBack2}>
+                  <BackBtn />
+                </div>
+                <h2 className="text-[18px] font-[600] leading-[20px] text-black">
                   使用手机号码注册
                 </h2>
-                <img
+                <div
+                  className="p-3 cursor-pointer"
+                  onClick={handleClose}
+                >
+                  <CloseBtn />
+                </div>
+                {/* <img
                   className="close_btn p-3 cursor-pointer"
                   src={close}
                   alt="Close"
                   onClick={handleClose}
-                />
+                /> */}
               </div>
 
               <form
@@ -167,7 +183,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPhone(e.target.value)}
                     onFocus={() => setIsFocusedEmail(true)}
                     onBlur={() => setIsFocusedEmail(phone !== "")}
-                    className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                     required
                     placeholder="请输入您的电话号码"
                   />
@@ -190,7 +206,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={() => setIsFocusedPassword(true)}
                     onBlur={() => setIsFocusedPassword(password !== "")}
-                    className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                     required
                     placeholder="设置您的密码"
                   />

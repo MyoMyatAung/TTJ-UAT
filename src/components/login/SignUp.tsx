@@ -14,6 +14,8 @@ import phone from "../../assets/login/phone.svg";
 import email from "../../assets/login/email.svg";
 import "../../pages/login/login.css";
 import { useLocation } from "react-router-dom";
+import CloseBtn from "../../assets/svg/CloseBtn";
+import BackBtn from "../../assets/svg/BackBtn";
 
 interface SignUpProps {
   handleBack: () => void; // Accept handleBack as a prop
@@ -33,9 +35,9 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
   useEffect(() => {
     if (previousPathname.current !== currentLocation.pathname) {
       setIsVisible(false);
-      closeAllModals()
+      closeAllModals();
     }
-    previousPathname.current = currentLocation.pathname; 
+    previousPathname.current = currentLocation.pathname;
   }, [currentLocation.pathname]);
 
   const closeAllModals = () => {
@@ -118,28 +120,34 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
               <motion.p className="w-[60px] h-[4px] drag_line mt-[12px] cursor-pointer"></motion.p>
               {/* header */}
               <div className="flex justify-between items-center w-full pb-[px]">
-                <img
+                {/* <img
                   className="p-[6px] cursor-pointer"
                   src={back}
                   alt="Back"
                   onClick={handleBack}
-                />
-                <h2 className="text-[18px] font-[600] leading-[20px] text-white">
+                /> */}
+                <div className="p-[6px]" onClick={handleBack}>
+                  <BackBtn />
+                </div>
+                <h2 className="text-[18px] font-[600] leading-[20px] text-black">
                   注册
                 </h2>
-                <img
+                <div className="p-3 cursor-pointer" onClick={handleClose}>
+                  <CloseBtn />
+                </div>
+                {/* <img
                   className="close_btn p-3 cursor-pointer"
                   src={close}
                   alt="Close"
                   onClick={handleClose}
-                />
+                /> */}
               </div>
               {/* decs */}
               <div className=" w-full pl-2 py-[10px]">
-                <h1 className=" text-white text-[14px] font-[500]">
+                <h1 className=" text-black text-[14px] font-[500]">
                   选择注册方式{" "}
                 </h1>
-                <p className=" text-white/60 text-[14px] font-[400]">
+                <p className=" text-black/60 text-[14px] font-[400]">
                   海外用户请选择使用邮箱注册
                 </p>
               </div>
@@ -150,14 +158,14 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
                 /> */}
                 <button
                   onClick={handleShowSignUpPhone}
-                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-white"
+                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-black"
                 >
                   <img className=" absolute left-[20px]" src={phone} alt="" />
                   使用手机号注册
                 </button>
                 <button
                   onClick={handleShowSignUpEmail}
-                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-white"
+                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-black"
                 >
                   <img className=" absolute left-[20px]" src={email} alt="" />
                   使用邮箱注册

@@ -17,6 +17,8 @@ import axios from "axios";
 import UserName from "./UserName";
 import "../../pages/login/login.css";
 import { useLocation } from "react-router-dom";
+import CloseBtn from "../../assets/svg/CloseBtn";
+import BackBtn from "../../assets/svg/BackBtn";
 
 interface SignEmailProps {
   handleBack2: () => void; // Accept handleBack as a prop
@@ -58,7 +60,6 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
   const show = () => {
     setShowPassword(!showPassword);
   };
-
 
   // Password validation function
   const validatePassword = (password: string) => {
@@ -104,7 +105,12 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
   return (
     <>
       {openOtp && (
-        <Opt key={key} setIsVisible={setIsVisible} password={password} email={email} />
+        <Opt
+          key={key}
+          setIsVisible={setIsVisible}
+          password={password}
+          email={email}
+        />
       )}
       <div className="min-h-screen flex items-center justify-center overflow-hidde fixed z-[99999]">
         {openCaptcha && (
@@ -135,21 +141,30 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
               <div className="flex flex-col justify-center items-center gap-[16px]">
                 <motion.p className="w-[60px] h-[4px] drag_line mt-[8px] cursor-pointer bg-gray-400"></motion.p>
                 <div className="flex justify-between items-center w-full pb-[20px]">
-                  <img
+                  {/* <img
                     className="p-3 cursor-pointer"
                     src={back}
                     alt="Back"
                     onClick={handleBack2}
-                  />
-                  <h2 className="text-[18px] font-[600] leading-[20px] text-white">
+                  /> */}
+                  <div className="p-3 cursor-pointer"  onClick={handleBack2}>
+                    <BackBtn />
+                  </div>
+                  <h2 className="text-[18px] font-[600] leading-[20px] text-black">
                     使用邮箱注册
                   </h2>
-                  <img
+                  {/* <img
                     className="close_btn p-3 cursor-pointer"
                     src={close}
                     alt="Close"
                     onClick={handleClose}
-                  />
+                  /> */}
+                  <div
+                    className="p-3 cursor-pointer"
+                    onClick={handleClose}
+                  >
+                    <CloseBtn />
+                  </div>
                 </div>
 
                 <form
@@ -163,7 +178,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setIsFocusedEmail(true)}
                       onBlur={() => setIsFocusedEmail(email !== "")}
-                      className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                       required
                       placeholder="请输入您的电子邮件"
                     />
@@ -186,7 +201,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       onChange={(e) => setPassword(e.target.value)}
                       onFocus={() => setIsFocusedPassword(true)}
                       onBlur={() => setIsFocusedPassword(password !== "")}
-                      className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                       required
                       placeholder="设置您的密码"
                     />
@@ -229,7 +244,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                     type="submit"
                     className={`w-full text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px] ${
                       validatePassword(password)
-                        ? "login_button text-white"
+                        ? "login_button text-black"
                         : "next_button text-[#777]"
                     } transition duration-300 ease-in-out`}
                   >

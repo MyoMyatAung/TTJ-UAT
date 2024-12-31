@@ -16,6 +16,7 @@ import {
 import Captch from "./Captch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { showToast } from "../../pages/profile/error/ErrorSlice";
+import CloseBtn from "../../assets/svg/CloseBtn";
 
 interface LoginEmailProps {
   handleBack: () => void; // Accept handleBack as a prop
@@ -41,9 +42,9 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
   useEffect(() => {
     if (previousPathname.current !== currentLocation.pathname) {
       setIsVisible(false);
-      closeAllModals()
+      closeAllModals();
     }
-    previousPathname.current = currentLocation.pathname; 
+    previousPathname.current = currentLocation.pathname;
   }, [currentLocation.pathname]);
 
   const closeAllModals = () => {
@@ -59,7 +60,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
     // const containsLetters = /[a-zA-Z]/.test(password);
     // const containsNumbers = /\d/.test(password);
     // return lengthValid && containsLetters && containsNumbers;
-    return lengthValid
+    return lengthValid;
   };
 
   const validateEmail = (email: string) => {
@@ -125,8 +126,8 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
       {/* Conditionally render the ForgotPass component if `forgot` is true */}
       {openCaptcha && (
         <Captch
-        key={key}
-        setKey={setKey}
+          key={key}
+          setKey={setKey}
           setIsVisible={setIsVisible}
           isLogin={true}
           username={email}
@@ -139,7 +140,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
         <AnimatePresence>
           {isVisible && (
             <motion.div
-              className="login_box h-[480px] fixed bottom-0 z-[99999] w-screen  py-4 px-[20px] bg-[#2B2B2D] rounded-t-2xl"
+              className="login_box h-[480px] fixed bottom-0 z-[99999] w-screen  py-4 px-[20px] bg-[#fff] rounded-t-2xl"
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -150,7 +151,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
               onDragEnd={handleDragEnd}
             >
               <div className="flex flex-col justify-center items-center gap-[16px]">
-                <motion.p className="w-[60px] h-[4px] drag_line mt-[1px] mb-[12px] cursor-pointer bg-[#2B2B2D]"></motion.p>
+                <motion.p className="w-[60px] h-[4px] drag_line mt-[1px] mb-[12px] cursor-pointer bg-[#fff]"></motion.p>
                 <div className=" flex justify-center items-center w-full pb-[20px] relative">
                   {/* <img
                     className="p-3 cursor-pointer"
@@ -159,15 +160,15 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     onClick={handleBack}
                   /> */}
                   <div className=""></div>
-                  <h2 className="text-[18px] font-[600] leading-[20px] text-white">
+                  <h2 className="text-[18px] font-[600] leading-[20px] text-black">
                     登录
                   </h2>
-                  <img
-                    className="close_btn p-3 cursor-pointer fixed z-[999991] right-[30px]"
-                    src={close}
-                    alt="Close"
+                  <div
+                    className="p-3 cursor-pointer fixed z-[999991] right-[30px]"
                     onClick={handleClose}
-                  />
+                  >
+                    <CloseBtn />
+                  </div>
                 </div>
 
                 <form
@@ -181,7 +182,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setIsFocusedEmail(true)}
                       onBlur={() => setIsFocusedEmail(email !== "")}
-                      className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                       required
                       placeholder="输入用户名/手机号或邮箱"
                     />
@@ -204,7 +205,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                       onChange={(e) => setPassword(e.target.value)}
                       onFocus={() => setIsFocusedPassword(true)}
                       onBlur={() => setIsFocusedPassword(password !== "")}
-                      className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] input_border focus:outline-none text-black placeholder-[#5B5B5B]"
                       required
                       placeholder="输入登录密码"
                     />
@@ -232,13 +233,13 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                   <div className=" flex justify-between">
                     <div
                       onClick={() => toggleVisibility(false, true)}
-                      className="text-left mt-[-10px] text-white text-sm cursor-pointer"
+                      className="text-left mt-[-10px] text-black text-sm cursor-pointer"
                     >
                       注册账号
                     </div>
                     <div
                       onClick={() => setForgot(true)} // When clicked, set `forgot` to true to show the ForgotPass component
-                      className="text-left mt-[-10px] text-[#FF4E00] text-sm cursor-pointer"
+                      className="text-left mt-[-10px] text-[#fe58b5] text-sm cursor-pointer"
                     >
                       忘记密码？
                     </div>
@@ -250,7 +251,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     className={`w-full text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]  ${
                       validatePassword(password)
                         ? "login_button text-white"
-                        : "next_button text-[#777]"
+                        : "next_button text-[#fff]"
                     } transition duration-300 ease-in-out`}
                   >
                     登录
