@@ -110,7 +110,7 @@ const FilterByTag = ({
                   className={`${
                     sortData === item?.value
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#080808A3]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
                   } whitespace-nowrap py-1 rounded-full transition-colors`}
                 >
                   {item?.name}
@@ -133,7 +133,7 @@ const FilterByTag = ({
                   className={`${
                     classData === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#080808A3]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
@@ -155,7 +155,7 @@ const FilterByTag = ({
                   className={`${
                     area === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#080808A3]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
@@ -177,7 +177,7 @@ const FilterByTag = ({
                   className={`${
                     year === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#080808A3]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
