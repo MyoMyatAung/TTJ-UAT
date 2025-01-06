@@ -52,7 +52,8 @@ button {
 .loader div {
   width: 2px;
   height: 90%;
-  background-color: #fe58b5; /* Adjust color to match the design */
+  background-color: #FE58B5;
+  ; /* Adjust color to match the design */
   animation: grow 1s infinite ease-in-out;
 }
 
@@ -280,20 +281,20 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 10px !important;
 }
 
-.plyr--full-ui input[type="range"] {
+/* .plyr--full-ui input[type="range"] {
   color: rgba(245, 65, 0, 1) !important;
-}
+} */
 
 .plyr--video .plyr__control:hover {
   background: transparent !important;
 }
 
-.art-video-player .art-progress-played {
+/* .art-video-player .art-progress-played {
   background: rgba(245, 65, 0, 1) !important;
 }
 .art-video-player .art-progress-indicator {
   background: rgba(245, 65, 0, 1) !important;
-}
+} */
 
 @keyframes scrollText {
   0% {

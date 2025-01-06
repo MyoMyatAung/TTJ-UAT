@@ -29,7 +29,7 @@ const Player = ({ src, thumbnail }: { src: any; thumbnail: any }) => {
               miniProgressBar: true,
               fastForward: true,
               fullscreen: true,
-              theme: "#00a1d6",
+              theme: '#FE58B5'
             });
           //   artPlayerInstanceRef.current.on('control', (state) => {
           //     if(state && artPlayerInstanceRef.current?.playing) {
