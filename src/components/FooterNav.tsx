@@ -3,12 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 // Import SVG files directly
-import homeIcon from "../assets/home.png";
-import homeSelectedIcon from "../assets/homeSelected.png";
-import explorerIcon from "../assets/explorer.png";
-import explorerSelectedIcon from "../assets/explorerSelected.png";
-import profileIcon from "../assets/profile.png";
-import profileSelectedIcon from "../assets/profileSelected.png";
+import homeIcon from "../assets/home1.png";
+import homeSelectedIcon from "../assets/homeSelected1.png";
+import explorerIcon from "../assets/explorer1.png";
+import explorerSelectedIcon from "../assets/explorerSelected1.png";
+import socialIcon from "../assets/social1.png";
+import socialSelectedIcon from "../assets/socialSelected1.png";
+import profileIcon from "../assets/profile2.png";
+import profileSelectedIcon from "../assets/profileSelected1.png";
 import beforePostIcon from "../assets/beforepost.png";
 import afterPostIcon from "../assets/afterpost.png";
 import beforeShortIcon from "../assets/beforeshort.png";
@@ -110,8 +112,28 @@ const Footer: FC = () => {
             {t("footer.explorer")}
           </span>
         </Link>
-        {/* Explorer Icon */}
         <Link
+          to="/social"
+          className="flex flex-col items-center"
+          onClick={() => setSelectedMenu("social")}
+        >
+          <div className="rounded-full">
+            <img
+              src={selectedMenu === "social" ? socialSelectedIcon : socialIcon}
+              alt="social"
+              className="h-8 w-8"
+            />
+          </div>
+          <span
+            className={`${
+              selectedMenu === "social" ? "text-black" : "text-[#000000CC]"
+            } text-[10px]`}
+          >
+            {t("广场")}
+          </span>
+        </Link>
+        {/* Explorer Icon */}
+        {/* <Link
           to="/social"
           className="flex flex-col items-center"
           onClick={() => setSelectedMenu("social")}
@@ -130,9 +152,10 @@ const Footer: FC = () => {
           >
             广场
           </span>
-        </Link>
+        </Link> */}
+
         {/* Explorer Icon */}
-        <Link
+        {/* <Link
           to="/short"
           className="flex flex-col items-center"
           onClick={() => setSelectedMenu("short")}
@@ -151,7 +174,7 @@ const Footer: FC = () => {
           >
             短剧
           </span>
-        </Link>
+        </Link> */}
 
         {/* Profile Icon */}
         <Link
