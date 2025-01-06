@@ -1,6 +1,6 @@
 const Sidebar = ({ notices, onNoticeClick, selectedNotice }: any) => {
   return (
-    <div className="sidebar bg-[#242427] rounded-r-lg pb-10 p-1">
+    <div className="sidebar bg-white rounded-r-lg pb-10 p-1">
       {notices.map((notice: any) => (
         <button
           key={notice.id}
