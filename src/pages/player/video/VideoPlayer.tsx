@@ -68,6 +68,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           setting: true,
           fullscreen: true,
           airplay: true,
+          theme: '#FE58B5'
           // miniProgressBar: true,
           // moreVideoAttr: {
           //   playsInline: true,

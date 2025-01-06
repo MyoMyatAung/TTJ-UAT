@@ -123,13 +123,13 @@ const FeedbackComponent: React.FC<FeedbackComponentProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bottom-0">
       <div
-        className="bg-background backdrop-blur-md w-full max-w-md rounded-xl p-4 text-white"
+        className="bg-background backdrop-blur-md w-full max-w-md rounded-xl p-4 text-gray-600"
         style={{ height: height }}
         ref={modalRef}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-bold">反馈求片</h2>
-          <button onClick={onClose} className="text-white">
+          <button onClick={onClose} className="text-gray-600">
             <FontAwesomeIcon icon={faTimes} className="text-xl" />
           </button>
         </div>
@@ -142,8 +142,8 @@ const FeedbackComponent: React.FC<FeedbackComponentProps> = ({
                 onClick={() => handleIssueSelect(issue.value)}
                 className={`px-4 py-2 rounded-md w-full text-center ${
                   selectedIssue === issue.value
-                    ? "bg-orange-500 text-white"
-                    : "bg-gray-800 text-gray-300"
+                    ? "bg-[#FE58B5] text-white"
+                    : "bg-[#0000001A] text-gray-600"
                 }`}
               >
                 {issue.name}
@@ -157,7 +157,7 @@ const FeedbackComponent: React.FC<FeedbackComponentProps> = ({
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full bg-gray-800 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full bg-[#0000001A] text-gray-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             placeholder="请描述遇到的问题，我们会帮您解决"
             rows={4}
           />
@@ -165,7 +165,7 @@ const FeedbackComponent: React.FC<FeedbackComponentProps> = ({
 
         <button
           onClick={handleSubmitFeedback}
-          className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 focus:outline-none"
+          className="w-full bg-[#FE58B5] text-white py-2 rounded-md hover:bg-orange-600 focus:outline-none"
           disabled={isLoading}
         >
           {isLoading ? "提交中..." : "提 交"}
