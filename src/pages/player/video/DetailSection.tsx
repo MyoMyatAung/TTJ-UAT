@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import share from "../../../assets/share1.png";
+import share from "../../../assets/share.svg";
 import star from "../../../assets/star1.png";
 import info from "../../../assets/info1.png";
 import shareLink from "../../../assets/shareLink1.png";
