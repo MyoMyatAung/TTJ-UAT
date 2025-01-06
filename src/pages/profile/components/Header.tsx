@@ -5,6 +5,7 @@ import { useGetUserQuery } from "../services/profileApi"; // Import your query
 import { Link } from "react-router-dom";
 import { setUser } from "./slice/UserSlice";
 import ImageWithPlaceholder from "./info/ImageWithPlaceholder";
+import Right from "../../../assets/svg/Right";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -209,18 +210,7 @@ const Header = () => {
           </div>
           <div className="flex gap-2 items-center">
             <p>点击登录</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="6"
-              height="8"
-              viewBox="0 0 6 8"
-              fill="none"
-            >
-              <path
-                d="M0.185872 0.156564C0.244327 0.106935 0.313771 0.0675604 0.390224 0.0406946C0.466677 0.0138289 0.548637 0 0.631411 0C0.714185 0 0.796145 0.0138289 0.872599 0.0406946C0.949051 0.0675604 1.01849 0.106935 1.07695 0.156564L5.26049 3.69938C5.30716 3.73882 5.34418 3.78567 5.36945 3.83724C5.39471 3.88882 5.40771 3.94411 5.40771 3.99994C5.40771 4.05578 5.39471 4.11107 5.36945 4.16264C5.34418 4.21422 5.30716 4.26107 5.26049 4.30051L1.07695 7.84332C0.830267 8.05223 0.432554 8.05223 0.185872 7.84332C-0.0608115 7.63442 -0.0608115 7.29762 0.185872 7.08872L3.83074 3.99781L0.180838 0.906907C-0.0608106 0.702268 -0.0608115 0.361203 0.185872 0.156564Z"
-                fill="white"
-              />
-            </svg>
+            <Right />
           </div>
         </div>
       )}
