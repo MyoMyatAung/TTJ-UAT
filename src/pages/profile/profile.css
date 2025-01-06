@@ -455,8 +455,9 @@
   color: #080808;
 }
 
-.text-card h1 {
-  color: #fff;
+.text-card h3 {
+  /* color: #fff; */
+  color: rgba(0, 0, 0, 0.80);
   font-family: "PingFang SC";
   font-size: 12px;
   font-style: normal;
