@@ -8,7 +8,7 @@ import { useGetUserQuery } from "./services/profileApi";
 const index = () => {
   return (
     <>
-      {/* <div className="profile-bg"></div> */}
+      <div className="profile-bg"></div>
       <div className="text-black bg-white h-screen">
         <div className="">
           <div>
