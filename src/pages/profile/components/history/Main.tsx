@@ -74,7 +74,7 @@ const Main: React.FC<any> = ({
   };
 
   return (
-    <div className="bg-[#161619] mt-[60px] pb-[50px]">
+    <div className="bg-[#161619 bg-white mt-[60px] pb-[50px]">
       {isLoading || isFetching ? (
         <div className="flex justify-center items-center h-[126px]">
           <Loader />
@@ -99,7 +99,7 @@ const Main: React.FC<any> = ({
 
         return (
           <div className="mt-5" key={index}>
-            <div className="flex items-center justify-between bg-[#1B1B1F] px-4 py-1">
+            <div className="flex items-center justify-between bg-black/10 px-4 py-1">
               <div className="history-text">{movie?.title}</div>
               {/* <div className="flex gap-2 items-center">
                 <p className="filter-text">过滤已观看完视频</p>
@@ -114,7 +114,7 @@ const Main: React.FC<any> = ({
                   <div
                     className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
                       filterToggle
-                        ? "peer-checked:bg-[#F54100] hover:peer-checked:bg-[#F54100]"
+                        ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                         : "peer-checked:bg-[#606060]"
                     }`}
                   ></div>
@@ -153,7 +153,7 @@ const Main: React.FC<any> = ({
                         e.stopPropagation();
                         handleMovieSelect(mov.id);
                       }}
-                      className="h-5 w-5 text-[#F54100] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
+                      className="h-5 w-5 text-[#fe58b5] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
                     />
                   </div>
 
@@ -173,7 +173,7 @@ const Main: React.FC<any> = ({
 
                       <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent rounded-sm"></div>
 
-                      <div className="absolute bottom-1 text-[10px] left-1 z-10">
+                      <div className="absolute text-[#080808] bottom-1 text-[10px] left-1 z-10">
                         {mov?.episode_name}
                       </div>
                     </div>
@@ -183,7 +183,7 @@ const Main: React.FC<any> = ({
                         <h1 className="text-[16px] font-semibold">
                           {mov.movie_name}
                         </h1>
-                        <p className="text-sm text-gray-400 mt-1">
+                        <p className="text-sm text-black mt-1">
                           {mov.episode_name} 已观看
                           <span>
                             {" "}
@@ -202,7 +202,7 @@ const Main: React.FC<any> = ({
             </div>
 
             <div
-              className={`fixed z-10 bottom-0 gap-3 w-full bg-[#1B1B1F] p-6 flex justify-between items-center transition-transform duration-300 ease-in-out ${
+              className={`fixed z-10 bottom-0 gap-3 w-full bg-[#fff] border-t border-black/ p-6 flex justify-between items-center transition-transform duration-300 ease-in-out ${
                 isEditMode ? "translate-y-0" : "transform translate-y-full"
               }`}
             >
@@ -229,17 +229,17 @@ const Main: React.FC<any> = ({
       {/* Confirmation Modal */}
       {showConfirmation && (
         <div className="fixed inset-0 z-20 bg-black bg-opacity-80 flex justify-center items-center">
-          <div className="bg-[#242428] confirm rounded-2xl mx-10 text-center shadow-lg">
+          <div className="bg-[#fff] confirm rounded-2xl mx-10 text-center shadow-lg">
             <h2 className="p-5">确定要删除所有观看历史吗？</h2>
             <div className="flex justify-between">
               <button
-                className="text-white w-[50%] p-3 border-t-[1px] border-r-[1px] border-gray-500"
+                className="text-[#080808] w-[50%] p-3 border-t-[1px] border-r-[1px] border-gray-300"
                 onClick={cancelDelete}
               >
                 取消
               </button>
               <button
-                className="text-[#f54100] w-[50%] p-3 border-t-[1px] border-gray-500"
+                className="text-[#fe58b5] w-[50%] p-3 border-t-[1px] border-gray-500"
                 onClick={confirmDelete}
               >
                 删除全部

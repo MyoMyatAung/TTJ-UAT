@@ -143,7 +143,6 @@
 
 .watch {
   border-radius: 64px;
-
   background: var(
     --Gradient-Brand-Gradient-1,
     linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)

@@ -47,19 +47,19 @@ const Settings = () => {
   };
 
   return (
-    <div className="bg-[#161619] text-white w-full h-screen">
+    <div className="bg-[#fff] text-white w-full h-screen">
       <div className="z-10">
-        <div className="bg-[#161619]">
+        <div className="bg-[#fff]">
           <Navbar />
         </div>
-        <div className="bg-[#161619]">
+        <div className="bg-[#fff]">
           <SettingFirst />
         </div>
-        <div className="bg-[#161619]">
+        <div className="bg-[#fff]">
           <Versions />
         </div>
         {isLoggedIn && (
-          <div className="setting-profile-div bg-[#161619] flex">
+          <div className="setting-profile-div bg-[#fff] flex">
             <button className="logout-div gap-2" onClick={handleLogOut}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

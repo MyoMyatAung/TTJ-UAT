@@ -32,7 +32,7 @@ const ProfileSecond = () => {
           </div>
         </div>
         <Link
-          to={"https://cc3e497d.qdhgtch.com:1333/help"}
+          to={"https://euphonious-trifle-352add.netlify.app/"}
           target="_blank"
           className="p-first"
         >

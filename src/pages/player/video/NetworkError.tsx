@@ -14,7 +14,7 @@ const NetworkError: React.FC<any> = ({ switchNow, refresh, onBack }) => {
       // backgroundImage: `url(${noPlayImage})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      background: 'linear-gradient(180deg, #000000 0%, #3C3C3C 100%)'
+      background: 'linear-gradient(180deg, #343338 -2.84%, #181818 92.18%)'
     }}
   >
           {/* Back Arrow */}
@@ -50,7 +50,7 @@ const NetworkError: React.FC<any> = ({ switchNow, refresh, onBack }) => {
         </button>
         <button
           onClick={switchNow}
-          style={{background: 'rgba(245, 65, 0, 1)'}}
+          style={{background: '#FE58B5'}}
           className="px-6 py-2 bg-gradient-to-r from-gray-400 to-gray-700 text-white font-semibold  rounded-md shadow-md transition-all duration-300 ease-in-out"
         >
           切换资源

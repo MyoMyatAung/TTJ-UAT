@@ -96,10 +96,10 @@ const Main: React.FC<MainProps> = ({
   }
 
   return (
-    <div className="bg-[#161619] pb-[50px] mt-[65px] ">
+    <div className="bg-[#161619 bg-white pb-[50px] mt-[65px] ">
       <div className="mt-3">
         {isAdsLoading || isAdsFetching ? (
-          <div className="flex justify-center items-center h-[126px]">
+          <div className="flex bg-white justify-center items-center h-[126px]">
             <Loader />
           </div>
         ) : (
@@ -123,7 +123,7 @@ const Main: React.FC<MainProps> = ({
           ))}
         </div>
         {isFetching && currentPage === 1 ? (
-          <div className="flex justify-center items-center h-[60vh] bg-[#161616]">
+          <div className="flex justify-center items-center h-[60vh] bg-[#fff]">
             <Loader />
           </div>
         ) : movies.length > 0 ? (
@@ -148,7 +148,7 @@ const Main: React.FC<MainProps> = ({
                         e.stopPropagation();
                         handleMovieSelect(movie.movie_id);
                       }}
-                      className="h-5 w-5 text-[#F54100] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
+                      className="h-5 w-5 text-[#fe58b5] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
                     />
                   </div>
                   <ImageWithPlaceholder
@@ -372,13 +372,13 @@ const Main: React.FC<MainProps> = ({
         )}
 
         {isFetching && currentPage !== 1 && (
-          <div className="flex justify-center mt-8 items-center pb-8">
+          <div className="flex bg-white justify-center mt-8 items-center pb-8">
             <Loader />
           </div>
         )}
 
         <div
-          className={`fixed z-10 bottom-0 gap-3 w-full bg-[#1B1B1F] p-6 flex justify-between items-center  transition-transform duration-300 ease-in-out ${
+          className={`fixed z-10 bottom-0 gap-3 w-full bg-[#fff] p-6 flex justify-between items-center  transition-transform duration-300 ease-in-out ${
             isEditMode ? "translate-y-0" : "translate-y-full"
           }`}
         >
@@ -402,17 +402,17 @@ const Main: React.FC<MainProps> = ({
         {/* Confirmation Modal */}
         {showConfirmation && (
           <div className="fixed inset-0 z-20 bg-black bg-opacity-80 flex justify-center items-center">
-            <div className="bg-[#242428] confirm rounded-2xl mx-10 text-center shadow-lg">
+            <div className="bg-[#fff] confirm rounded-2xl mx-10 text-center shadow-lg">
               <h2 className="p-5">确定要删除所有历史记录吗?</h2>
               <div className="flex justify-between">
                 <button
-                  className="text-white w-[50%] p-3 border-t-[1px] border-r-[1px] border-gray-500"
+                  className="text-[#080808] w-[50%] p-3 border-t-[1px] border-r-[1px] border-gray-300"
                   onClick={cancelDelete}
                 >
                   取消
                 </button>
                 <button
-                  className="text-[#f54100] w-[50%] p-3 border-t-[1px] border-gray-500"
+                  className="text-[#fe58b5] w-[50%] p-3 border-t-[1px] border-gray-500"
                   onClick={confirmDelete}
                 >
                   删除全部

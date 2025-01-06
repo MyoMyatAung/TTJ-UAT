@@ -26,7 +26,7 @@ const SettingFirst = () => {
 
   const handleFilter = () => {
     setFilterToggle((prev: any) => !prev);
-    localStorage.removeItem("headerTopics");
+    localStorage.removeItem("headerTopics")
   };
 
   return (
@@ -35,7 +35,7 @@ const SettingFirst = () => {
         {/* Teen Mode */}
         <div className="p-first">
           <div className="flex gap-1 max-w-[230px] flex-col ">
-            <h1>青少年模式</h1>
+            <h1 className=" text-black">青少年模式</h1>
             <p className="settings-text">开启后不再展示R18内容 </p>
           </div>
           <div>
@@ -49,7 +49,7 @@ const SettingFirst = () => {
               <div
                 className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
                   filterToggle
-                    ? "peer-checked:bg-[#F54100] hover:peer-checked:bg-[#F54100]"
+                    ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                     : "peer-checked:bg-[#606060]"
                 }`}
               ></div>
@@ -60,7 +60,7 @@ const SettingFirst = () => {
         {/* Picture-in-Picture Mode */}
         <div className="p-first">
           <div className="flex gap-1 max-w-[230px] flex-col ">
-            <h1>自动画中画</h1>
+            <h1 className=" text-black">自动画中画</h1>
             <p className="settings-text">开启后打开自动画中画模式</p>
           </div>
           <div>
@@ -74,7 +74,7 @@ const SettingFirst = () => {
               <div
                 className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
                   pipMode
-                    ? "peer-checked:bg-[#F54100] hover:peer-checked:bg-[#F54100]"
+                    ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                     : "peer-checked:bg-[#606060]"
                 }`}
               ></div>
@@ -85,7 +85,7 @@ const SettingFirst = () => {
         {/* Vibrant Mode */}
         <div className="p-first">
           <div className="flex gap-1 max-w-[230px] flex-col ">
-            <h1>无痕模式</h1>
+            <h1 className=" text-black">无痕模式</h1>
             <p className="settings-text">开启后您的浏览不会被记录</p>
           </div>
           <div>
@@ -99,7 +99,7 @@ const SettingFirst = () => {
               <div
                 className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
                   vibrantMode
-                    ? "peer-checked:bg-[#F54100] hover:peer-checked:bg-[#F54100]"
+                    ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                     : "peer-checked:bg-[#606060]"
                 }`}
               ></div>

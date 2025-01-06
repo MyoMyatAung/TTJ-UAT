@@ -41,22 +41,23 @@ const Contact = () => {
 
         <div className="">
           {show ? (
-            <div className="bg-[#303033] bottom-0 rounded-t-[30px] absolute w-full p-4">
+            <div className="bg-black/10 bottom-0 rounded-t-[30px] absolute w-full p-4">
               <div>
                 <div className="flex justify-center relative text-center items-center">
                   {/* <div></div> */}
-                  <div>联系我们</div>
-                  <button onClick={handleClick} className="absolute right-0">
+                  <div className=" text-black">联系我们</div>
+                  <button onClick={handleClick} className="absolute right-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
                       fill="none"
                     >
                       <path
-                        d="M12 10.5862L16.95 5.63623L18.364 7.05023L13.414 12.0002L18.364 16.9502L16.95 18.3642L12 13.4142L7.04999 18.3642L5.63599 16.9502L10.586 12.0002L5.63599 7.05023L7.04999 5.63623L12 10.5862Z"
-                        fill="white"
+                        d="M5 3.88906L8.88906 0L10 1.11094L6.11094 5L10 8.88906L8.88906 10L5 6.11094L1.11094 10L0 8.88906L3.88906 5L0 1.11094L1.11094 0L5 3.88906Z"
+                        fill="black"
+                        fill-opacity="0.8"
                       />
                     </svg>
                   </button>
@@ -72,7 +73,7 @@ const Contact = () => {
                             ? `mailto:${data?.link}`
                             : data?.link
                         }`}
-                        className="flex justify-between mt-2 items-center bg-[#3b3b3d] p-3 rounded-sm"
+                        className="flex justify-between mt-2 items-center bg-[#fff] p-3 rounded-sm"
                       >
                         <div className="contact-link-text">{data?.text}</div>
                         <div className="flex items-center">
@@ -98,7 +99,7 @@ const Contact = () => {
                 )}
 
                 {isLoader && (
-                  <div className="text-white text-center flex justify-center items-center h-[100px] mt-5">
+                  <div className="text-white text-center bg-white flex justify-center items-center h-[100px] mt-5">
                     <Loader />
                   </div>
                 )}
@@ -107,7 +108,7 @@ const Contact = () => {
           ) : (
             <div className=" absolute px-4 py-3 bottom-0 w-full">
               <button
-                className={`w-full  bg-[#F54100] rounded-sm text-white text-center p-3`}
+                className={`w-full  bg-[#FE58B5] rounded-lg text-white text-center p-3`}
                 onClick={handleClick}
               >
                 联系我们

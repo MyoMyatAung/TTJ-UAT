@@ -107,10 +107,10 @@ const FilterByTag = ({
                     dispatch(setSort(item?.value));
                     dispatch(setSortName(item?.name));
                   }}
-                  className={`${
+                    className={`${
                     sortData === item?.value
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
                   } whitespace-nowrap py-1 rounded-full transition-colors`}
                 >
                   {item?.name}
@@ -130,10 +130,10 @@ const FilterByTag = ({
               >
                 <p
                   onClick={() => dispatch(setClass(item))}
-                  className={`${
+                 className={`${
                     classData === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
@@ -155,7 +155,7 @@ const FilterByTag = ({
                   className={`${
                     area === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
@@ -174,10 +174,10 @@ const FilterByTag = ({
               >
                 <p
                   onClick={() => dispatch(setYear(item))}
-                  className={`${
+                   className={`${
                     year === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
-                      : "bg-[#00000014] px-4 py-1 text-xs text-[#FFF]"
+                      : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
                   } whitespace-nowrap py-1 rounded-full  transition-colors`}
                 >
                   {item}
