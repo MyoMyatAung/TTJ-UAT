@@ -63,7 +63,7 @@ const Notifications = () => {
   return (
     <>
       <div className="fixed-bg"></div>
-      <div className="bg-[#161619] text-white">
+      <div className="bg-[#fff] text-white">
         {/* Header */}
         <Header
           categories={categories}
@@ -71,7 +71,7 @@ const Notifications = () => {
           selectedCategory={selectedCategory}
         />
 
-        <div className="border-b-[1px] border-[#242426] mb-5"></div>
+        <div className="border-b-[1px] border-black/10 mb-5"></div>
 
         {/* Ads */}
         {/* <Ads advert={advert} /> */}

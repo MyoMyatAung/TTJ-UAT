@@ -60,7 +60,7 @@ const Nickname = () => {
     <div>
       <div className="fixed-bg"></div>
       <div>
-        <div className="flex fixed top-0 w-full z-10 bg-[#161619] justify-between items-center p-2">
+        <div className="flex fixed top-0 w-full z-10 bg-[#161619 bg-transparent justify-between items-center p-2">
           <Link to="/info" className="back-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -70,8 +70,8 @@ const Nickname = () => {
               fill="none"
             >
               <path
-                d="M7.828 11H20V13H7.828L13.192 18.364L11.778 19.778L4 12L11.778 4.22198L13.192 5.63598L7.828 11Z"
-                fill="white"
+                d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+                fill="#080808"
               />
             </svg>
           </Link>
@@ -91,9 +91,11 @@ const Nickname = () => {
             />
             <button
               className={`submit_btn`}
+              disabled={!active}
               style={{
-                background: active ? "#F54100" : "rgba(255, 255, 255, 0.04)",
-                color: active ? "white" : "rgba(255, 255, 255, 0.20)",
+                background: active ? "#FE58B5" : "#FE58B5",
+                opacity : active ? "1" : "0.5",
+                color: active ? "white" : "white",
               }}
             >
               保存
@@ -109,7 +111,7 @@ const Nickname = () => {
             >
               <path
                 d="M5 3.88906L8.88906 0L10 1.11094L6.11094 5L10 8.88906L8.88906 10L5 6.11094L1.11094 10L0 8.88906L3.88906 5L0 1.11094L1.11094 0L5 3.88906Z"
-                fill="white"
+                fill="black"
                 fill-opacity="0.8"
               />
             </svg>
