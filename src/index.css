@@ -203,7 +203,9 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   gap: 4px;
 }
-
+.home-input::placeholder {
+  color: white;
+}
 /* Add this to your global CSS */
 .no-scroll-auth {
   overflow: hidden;

@@ -34,7 +34,7 @@ const ExplorerTags = ({
                   dispatch(setSort(item?.value));
                   dispatch(setSortName(item?.name));
                 }}
-                className={`${
+                              className={`${
                   sort === item?.value
                     ? "gradient-bg-home text-white px-4 py-1 text-xs"
                     : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
@@ -61,7 +61,7 @@ const ExplorerTags = ({
                     setActiveClass(index);
                     dispatch(setClass(item));
                   }}
-                  className={`${
+                                   className={`${
                     classData
                       ? classData === item
                         ? "gradient-bg-home text-white px-4 py-1 text-xs"
@@ -92,7 +92,7 @@ const ExplorerTags = ({
                     setActiveArea(index);
                     dispatch(setArea(item));
                   }}
-                  className={`${
+                                    className={`${
                     area
                       ? area === item
                         ? "gradient-bg-home text-white px-4 py-1 text-xs"
@@ -123,7 +123,7 @@ const ExplorerTags = ({
                     setActiveYear(index);
                     dispatch(setYear(item));
                   }}
-                  className={`${
+ className={`${
                     year
                       ? year === item
                         ? "gradient-bg-home text-white px-4 py-1 text-xs"

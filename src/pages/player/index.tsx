@@ -361,7 +361,7 @@ const DetailPage: React.FC = () => {
                     <div className="absolute bottom-0 left-3 w-4/6 h-1 bg-mainColor rounded-md"></div>
                   )}
                 </div>
-                <div
+                {/* <div
                   className={`px-4 py-3 bg-[#fff] text-gray-400 rounded-t-lg cursor-pointer relative ${
                     activeTab === "tab-2" ? "text-black z-10" : ""
                   }`}
@@ -374,7 +374,7 @@ const DetailPage: React.FC = () => {
                   {activeTab === "tab-2" && (
                     <div className="absolute bottom-0 left-3.5 w-3/6 h-1 bg-mainColor rounded-md"></div>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

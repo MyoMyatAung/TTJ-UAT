@@ -107,7 +107,7 @@ const FilterByTag = ({
                     dispatch(setSort(item?.value));
                     dispatch(setSortName(item?.name));
                   }}
-                  className={`${
+                    className={`${
                     sortData === item?.value
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
                       : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
@@ -130,7 +130,7 @@ const FilterByTag = ({
               >
                 <p
                   onClick={() => dispatch(setClass(item))}
-                  className={`${
+                 className={`${
                     classData === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
                       : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
@@ -174,7 +174,7 @@ const FilterByTag = ({
               >
                 <p
                   onClick={() => dispatch(setYear(item))}
-                  className={`${
+                   className={`${
                     year === item
                       ? "gradient-bg-home text-white px-4 py-1 text-xs"
                       : "bg-[#00000014] px-4 py-1 text-xs text-[#000]"
