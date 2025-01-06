@@ -165,8 +165,11 @@ input[type="range"]::-moz-range-thumb {
 .video-react .video-react-scrubber-button .video-react-scrubber-button-inner {
   border-color: #F54100 !important;
 } */
+.gradient-bg-home2 {
+  background: linear-gradient(to bottom, #fdb1dc, #fcdfd4, #fff9fc);
+}
 .gradient-bg-home {
-  background: linear-gradient(to right, #ff007f, #ffc25c);
+  background: linear-gradient(to right, #fe58b5, #ff7584, #ff9153);
   /* background: linear-gradient(
       180deg,
       rgba(22, 22, 25, 0) 100%,
@@ -186,7 +189,7 @@ input[type="range"]::-moz-range-thumb {
 .home-input {
   border-radius: 18.138px;
   border: 1.008px solid var(#ffffff33);
-  background: rgba(255, 255, 255, 0.1);
+  /* background: #ffffff1a; */
   color: #ffffff66;
   font-family: "PingFang SC";
   font-size: 16px;

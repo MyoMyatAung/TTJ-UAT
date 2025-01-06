@@ -70,7 +70,9 @@ const Header: FC = () => {
       // className={`w-full z-[99999] fixed  gradient-bg-home pt-4 pb-2 transition-all duration-300 ${
       //   isHeaderVisible ? "top-0" : "-top-[135px]"
       // }`}
-      className={`w-full z-[99999] fixed  gradient-bg-home pt-4 pb-2 transition-all duration-300 top-0`}
+      className={`w-full z-[99999] fixed  ${
+        showFilterTag ? "gradient-bg-home2" : "gradient-bg-home"
+      } pt-4 pb-2 transition-all duration-300 top-0`}
     >
       <div className="flex items-center px-3 gap-3">
         <div className="flex-1 relative">
@@ -78,7 +80,13 @@ const Header: FC = () => {
             onFocus={() => navigate("/search_overlay")}
             placeholder="觉醒年代"
             type="text"
-            className="rounded-[18.138px] home-input py-[8.062px] px-[16.123px] w-full text-white outline-none placeholder:text-white"
+            className={`rounded-[18.138px] home-input ${
+              showFilterTag ? "bg-[#FFFFFF33]" : "bg-[#ffffff1a]"
+            } py-[8.062px] px-[16.123px] w-full ${
+              showFilterTag
+                ? "text-black placeholder:text-[#0000007A]"
+                : "text-white placeholder:text-white"
+            } outline-none `}
           />
           <div className="absolute top-2 right-2">
             <svg
@@ -109,9 +117,13 @@ const Header: FC = () => {
               <p
                 className={`${
                   activeTab === item?.id
-                    ? "text-white font-bold text-[24px]"
+                    ? showFilterTag
+                      ? "text-black font-bold text-[24px]"
+                      : "text-white font-bold text-[24px]"
+                    : showFilterTag
+                    ? "text-[#0000007A] text-[16px]"
                     : "text-white/80 text-[16px]"
-                } whitespace-nowrap py-2 rounded-lg hover:text-white transition-colors`}
+                } whitespace-nowrap py-2 rounded-lg transition-colors`}
               >
                 {item?.name}
               </p>
@@ -125,7 +137,9 @@ const Header: FC = () => {
           <>
             {showFilterTag && (
               <div
-                className={`text-white text-[14px] ${
+                className={` ${
+                  showFilterTag ? "text-black" : "text-white"
+                } text-[14px] ${
                   isShowMenu ? "hidden" : "flex"
                 } items-center gap-1 transition`}
                 onClick={filterTagHandler}
