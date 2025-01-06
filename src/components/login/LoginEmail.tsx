@@ -233,7 +233,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                   <div className=" flex justify-between">
                     <div
                       onClick={() => toggleVisibility(false, true)}
-                      className="text-left mt-[-10px] text-black text-sm cursor-pointer"
+                      className="text-left mt-[-10px] text-black text-sm cursor-pointer hidden"
                     >
                       注册账号
                     </div>

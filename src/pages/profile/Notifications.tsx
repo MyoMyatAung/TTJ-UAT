@@ -32,7 +32,7 @@ const Notifications = () => {
 
   if (isLoading || isFetching)
     return (
-      <div className="flex justify-center items-center h-screen bg-[#161619]">
+      <div className="flex justify-center items-center h-screen bg-[#fff]">
         <Loader />
       </div>
     );
