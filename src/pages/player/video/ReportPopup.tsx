@@ -48,7 +48,7 @@ const ReportPopup: React.FC<{
           );
         })}
         <button
-          className="bg-[#F54100] text-white py-2 px-4 rounded w-full"
+          className="bg-[#fe58b5] text-white py-2 px-4 rounded w-full"
           onClick={reportSubmit}
         >
           提交

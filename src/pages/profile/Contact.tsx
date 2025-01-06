@@ -107,7 +107,7 @@ const Contact = () => {
           ) : (
             <div className=" absolute px-4 py-3 bottom-0 w-full">
               <button
-                className={`w-full  bg-[#F54100] rounded-sm text-white text-center p-3`}
+                className={`w-full  bg-[#fe58b5] rounded-sm text-white text-center p-3`}
                 onClick={handleClick}
               >
                 联系我们

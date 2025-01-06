@@ -149,11 +149,11 @@ const Navbar: React.FC<NavbarProps> = ({
               <li
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion.name)}
-                className="cursor-pointer ml-[20px] p-2 active:text-[#f54100]"
+                className="cursor-pointer ml-[20px] p-2 active:text-[#fe58b5]"
                 dangerouslySetInnerHTML={{
                   __html: suggestion?.highlight.replace(
                     /<em>(.*?)<\/em>/g,
-                    '<span style="color: #F54100;">$1</span>'
+                    '<span style="color: #fe58b5;">$1</span>'
                   ),
                 }} // Render highlighted text
               />

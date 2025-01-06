@@ -358,7 +358,7 @@ const DetailPage: React.FC = () => {
                 >
                   <span className="text-black">详情</span>
                   {activeTab === "tab-1" && (
-                    <div className="absolute bottom-0 left-3 w-4/6 h-1 bg-mainColor rounded-md"></div>
+                    <div className="absolute bottom-0 left-3 w-4/6 h-1 bg-[#FE58B5] rounded-md"></div>
                   )}
                 </div>
                 {/* <div

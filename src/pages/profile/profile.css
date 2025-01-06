@@ -13,7 +13,7 @@
 
 .collect_active {
   border-radius: 16px;
-  background: #f54100;
+  background: #fe58b5;
 }
 
 .back-button {
@@ -287,8 +287,8 @@
 }
 
 .custom-checkbox input[type="checkbox"]:checked {
-  border-color: #f54100;
-  background-color: #f54100;
+  border-color: #fe58b5;
+  background-color: #fe58b5;
 }
 
 /* Add SVG checkmark when checkbox is checked */
@@ -334,7 +334,7 @@
   flex: 1 0 0;
   border-radius: 20px;
   background: rgba(245, 65, 0, 0.08);
-  color: #f54100;
+  color: #fe58b5;
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -437,7 +437,7 @@
 }
 
 .noti-header .act {
-  border-bottom: 2px solid #f54100;
+  border-bottom: 2px solid #fe58b5;
 }
 .noti-header div {
   padding: 8px;
@@ -472,7 +472,7 @@
   gap: 10px;
   border-radius: 8px;
   border: 1px solid #df3b00;
-  color: #f54100;
+  color: #fe58b5;
   /* font-family: Inter; */
   font-size: 12px;
   font-style: normal;
@@ -489,7 +489,7 @@
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
-  background: #f54100;
+  background: #fe58b5;
   border-bottom: none;
 }
 
@@ -543,7 +543,7 @@
   height: 100%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: #f54100;
+  background: #fe58b5;
 }
 
 .his-text {

@@ -189,7 +189,7 @@ const Password = () => {
 
             <button
               style={{
-                background: active ? "#F54100" : "rgba(255, 255, 255, 0.04)",
+                background: active ? "#fe58b5" : "rgba(255, 255, 255, 0.04)",
                 color: active ? "white" : "rgba(255, 255, 255, 0.20)",
               }}
               type="submit" // Correctly using type submit here

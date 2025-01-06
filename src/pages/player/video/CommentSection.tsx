@@ -596,7 +596,7 @@ const CommentComponent: React.FC<CommentProps> = ({
                 取消
               </button>
               <button
-                className="text-[#f54100] w-[50%] p-3 border-t-[1px] border-gray-500"
+                className="text-[#fe58b5] w-[50%] p-3 border-t-[1px] border-gray-500"
                 onClick={handleConfirm}
               >
                 删除全部
