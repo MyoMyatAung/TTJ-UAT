@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import share from "../../../assets/share.png";
-import star from "../../../assets/star.png";
-import info from "../../../assets/info.png";
-import shareLink from "../../../assets/shareLink.png";
-import selectedStar from "../../../assets/selectedStar.png";
+import share from "../../../assets/share1.png";
+import star from "../../../assets/star1.png";
+import info from "../../../assets/info1.png";
+import shareLink from "../../../assets/shareLink1.png";
+import selectedStar from "../../../assets/selectedStar1.png";
 import rate from "../../../assets/rate.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
