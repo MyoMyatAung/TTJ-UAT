@@ -94,7 +94,7 @@ const Help = () => {
     //             gradientUnits="userSpaceOnUse"
     //           >
     //             <stop stop-color="#FF8517" />
-    //             <stop offset="0.500036" stop-color="#F54100" />
+    //             <stop offset="0.500036" stop-color="#fe58b5" />
     //             <stop offset="1" stop-color="#FF4E00" />
     //           </linearGradient>
     //           <linearGradient
@@ -106,7 +106,7 @@ const Help = () => {
     //             gradientUnits="userSpaceOnUse"
     //           >
     //             <stop stop-color="#FF8517" />
-    //             <stop offset="0.500036" stop-color="#F54100" />
+    //             <stop offset="0.500036" stop-color="#fe58b5" />
     //             <stop offset="1" stop-color="#FF4E00" />
     //           </linearGradient>
     //           <linearGradient
@@ -118,7 +118,7 @@ const Help = () => {
     //             gradientUnits="userSpaceOnUse"
     //           >
     //             <stop stop-color="#FF8517" />
-    //             <stop offset="0.500036" stop-color="#F54100" />
+    //             <stop offset="0.500036" stop-color="#fe58b5" />
     //             <stop offset="1" stop-color="#FF4E00" />
     //           </linearGradient>
     //           <linearGradient
@@ -130,7 +130,7 @@ const Help = () => {
     //             gradientUnits="userSpaceOnUse"
     //           >
     //             <stop stop-color="#FF8517" />
-    //             <stop offset="0.500036" stop-color="#F54100" />
+    //             <stop offset="0.500036" stop-color="#fe58b5" />
     //             <stop offset="1" stop-color="#FF4E00" />
     //           </linearGradient>
     //           <linearGradient
@@ -142,7 +142,7 @@ const Help = () => {
     //             gradientUnits="userSpaceOnUse"
     //           >
     //             <stop stop-color="#FF8517" />
-    //             <stop offset="0.500036" stop-color="#F54100" />
+    //             <stop offset="0.500036" stop-color="#fe58b5" />
     //             <stop offset="1" stop-color="#FF4E00" />
     //           </linearGradient>
     //         </defs>

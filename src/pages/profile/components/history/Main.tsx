@@ -114,7 +114,7 @@ const Main: React.FC<any> = ({
                   <div
                     className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
                       filterToggle
-                        ? "peer-checked:bg-[#F54100] hover:peer-checked:bg-[#F54100]"
+                        ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                         : "peer-checked:bg-[#606060]"
                     }`}
                   ></div>
@@ -153,7 +153,7 @@ const Main: React.FC<any> = ({
                         e.stopPropagation();
                         handleMovieSelect(mov.id);
                       }}
-                      className="h-5 w-5 text-[#F54100 border-2 border-gray-300 rounded-full focus:ring-0 focus:outline-none"
+                      className="h-5 w-5 text-[#fe58b5] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
                     />
                   </div>
 
@@ -239,7 +239,7 @@ const Main: React.FC<any> = ({
                 取消
               </button>
               <button
-                className="text-[#FE58B5] w-[50%] p-3 border-t-[1px] border-gray-300"
+                className="text-[#fe58b5] w-[50%] p-3 border-t-[1px] border-gray-500"
                 onClick={confirmDelete}
               >
                 删除全部

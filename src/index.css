@@ -52,7 +52,7 @@ button {
 .loader div {
   width: 2px;
   height: 90%;
-  background-color: #ff5500; /* Adjust color to match the design */
+  background-color: #fe58b5; /* Adjust color to match the design */
   animation: grow 1s infinite ease-in-out;
 }
 
@@ -160,10 +160,10 @@ input[type="range"]::-moz-range-thumb {
 }
 /* 
 .video-react .video-react-play-progress {
-  background-color: #F54100 !important;
+  background-color: #fe58b5 !important;
 }
 .video-react .video-react-scrubber-button .video-react-scrubber-button-inner {
-  border-color: #F54100 !important;
+  border-color: #fe58b5 !important;
 } */
 .gradient-bg-home2 {
   background: linear-gradient(to bottom, #fdb1dc, #fcdfd4, #fff9fc);

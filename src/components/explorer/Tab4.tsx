@@ -91,7 +91,7 @@ const Tab4 = () => {
                 {item?.title}
               </p>
               <div
-                className={`w-[29px] h-[3px] bg-[#F54100] absolute left-[20px] ${
+                className={`w-[29px] h-[3px] bg-[#fe58b5] absolute left-[20px] ${
                   activeRank
                     ? activeRank === item?.id
                       ? "opacity-1"

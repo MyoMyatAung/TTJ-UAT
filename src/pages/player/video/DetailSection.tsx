@@ -330,10 +330,10 @@ const DetailSection: React.FC<DetailSectionProps> = ({
             {/* Warning Message */}
             <div className="warning rounded-md text-white text-center">
               <div className="warning-content">
-                <span className="warning-text">
+                <span className="warning-text text-gray-500">
                   ⬇️官方推荐靠谱平台⬇️，请勿相信视频中任何广告，谨防被骗！
                 </span>
-                <span className="warning-text">
+                <span className="warning-text text-gray-500">
                   ⬇️官方推荐靠谱平台⬇️，请勿相信视频中任何广告，谨防被骗！
                 </span>
               </div>
@@ -396,7 +396,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
               <h2 className="text-2xl font-bold mb-2">
                 {movieDetail.name || ""}
               </h2>
-              <div className="flex items-center text-sm text-gray-400 mb-4">
+              <div className="flex items-center text-sm text-gray-500 mb-4">
                 <span className="text-orange-500 flex items-center">
                   <img src={rate} alt="" />
                   {movieDetail.popularity_score || 0}
@@ -411,7 +411,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
 
               {/* Cast Section */}
               <h3 className="text-lg font-semibold mt-4">演员表</h3>
-              <div className="text-gray-400 text-sm mt-2">
+              <div className="text-gray-500 text-sm mt-2">
                 <div className="flex space-x-4">
                   {/* Director */}
                   <span>
@@ -452,7 +452,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
 
               {/* Introduction Section */}
               <h3 className="text-lg font-semibold mt-6">简介</h3>
-              <p className="text-gray-300 mt-2 leading-relaxed">
+              <p className="text-gray-500 mt-2 leading-relaxed">
                 {movieDetail.content || "No description available."}
               </p>
             </div>

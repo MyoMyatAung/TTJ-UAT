@@ -411,8 +411,8 @@ const PostList = ({
               }
               className={`flex gap-2 follow_btn items-center ${
                 followStatus[post.user.id]
-                  ? "border-[#F54100] border-[1px] text-[#F54100] bg-transparent"
-                  : "bg-[#F54100]"
+                  ? "border-[#fe58b5] border-[1px] text-[#fe58b5] bg-transparent"
+                  : "bg-[#fe58b5]"
               } rounded-[6px]`}
             >
               {followStatus[post.user.id] ? (

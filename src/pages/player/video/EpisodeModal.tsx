@@ -80,7 +80,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
   }, [modalRef]);
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center">
-      <div className="bg-sourceBack backdrop-blur-md w-full max-w-md rounded-t-xl p-4 text-white" ref={modalRef}
+      <div className="bg-sourceBack backdrop-blur-md w-full max-w-md rounded-t-xl p-4" ref={modalRef}
         style={{ height: `${lowerDivHeight}px` }}>
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-6 overflow-x-auto m-auto">
@@ -101,7 +101,7 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
               {activeTab === "sources" && <div className="absolute w-[32px] h-1 bg-mainColor rounded-md mt-1 ml-2"></div>}
             </button>
           </div>
-          <button onClick={onClose} className="text-white">
+          <button onClick={onClose} className="text-black">
             <FontAwesomeIcon icon={faTimes} className="text-lg" />
           </button>
         </div>
@@ -137,8 +137,8 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
                       onClick={() => {handleEpisodeClick(episode); onClose();}}
                       className={`py-2 text-center rounded-lg ${
                         episode.episode_id !== selectedEpisodeId
-                          ? "bg-source text-white"
-                          : "bg-episodeSelected  text-white"
+                          ? "bg-source text-black"
+                          : "bg-episodeSelected  text-black"
                       }`}
                     > 
                       {episode.episode_name.length > 7 ? `${episode.episode_name.substring(0, 100)}...` : episode.episode_name}
@@ -170,21 +170,21 @@ const ModalComponent: React.FC<ModalComponentProps> = ({
                     }}
                   >
                     <div>
-                      <h4 className="text-white">{source.name}</h4>
+                      <h4 className="text-black">{source.name}</h4>
                       {/* Display total videos if available */}
                       <div className="flex justify-between items-center">
                       {source.total && (
-                        <p className="bg-source text-white text-xs px-3 py-1.5 my-2 mr-3 rounded-md">{source.total} 个视频</p>
+                        <p className="bg-source text-black text-xs px-3 py-1.5 my-2 mr-3 rounded-md">{source.total} 个视频</p>
                       )}
                       {/* Display tips if available */}
-                      <p className="bg-source text-white text-xs px-3 py-1.5 my-2 rounded-md">
+                      <p className="bg-source text-black text-xs px-3 py-1.5 my-2 rounded-md">
                         {source.tips || "No description available"}
                       </p>
                       </div>
                     </div>
                     {index === selectedSource && (
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="9" fill="#F54100"/>
+                      <circle cx="12" cy="12" r="9" fill="#fe58b5"/>
                       <path d="M10.5 13.6032L16.0152 8.0874L16.8642 8.9358L10.5 15.3L6.68158 11.4816L7.52998 10.6332L10.5 13.6032Z" fill="white"/>
                       </svg>
                     )}

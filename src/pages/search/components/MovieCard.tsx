@@ -109,7 +109,7 @@ const MovieCard = ({
                 dangerouslySetInnerHTML={{
                   __html: movie?.highlight.replace(
                     /<em>(.*?)<\/em>/g,
-                    '<span style="color: #F54100;">$1</span>'
+                    '<span style="color: #fe58b5;">$1</span>'
                   ),
                 }}
               />
