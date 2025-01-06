@@ -235,7 +235,7 @@ const ProfileFirst = () => {
           </div>
         )}
 
-        <a className="p-first cursor-pointer" onClick={handleInviteClick}>
+        <a className="p-firs hidden cursor-pointer" onClick={handleInviteClick}>
           <div className="flex gap-3 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -12,8 +12,8 @@ const Header = ({ categories, onCategoryClick, selectedCategory }: any) => {
           fill="none"
         >
           <path
-            d="M7.828 11H20V13H7.828L13.192 18.364L11.778 19.778L4 12L11.778 4.22198L13.192 5.63598L7.828 11Z"
-            fill="white"
+            d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+            fill="#080808"
           />
         </svg>
       </Link>
