@@ -9,7 +9,7 @@ const index = () => {
   return (
     <>
       {/* <div className="profile-bg"></div> */}
-      <div className="text-black bg-white  h-screen">
+      <div className="text-black bg-[#dfdfdfc0]  h-screen">
         <img src={bg} alt="" className="fixed top-0 left-0" />
         <div className="">
           <div className="">
@@ -18,7 +18,7 @@ const index = () => {
           <div>
             <Header />
           </div>
-          <div className="pb-[100px] bg-white">
+          <div className="pb-[100px] bg-[#dfdfdfc0]">
             <ProfileFirst />
             <ProfileSecond />
           </div>
