@@ -109,7 +109,7 @@ const MovieCard = ({
                 dangerouslySetInnerHTML={{
                   __html: movie?.highlight.replace(
                     /<em>(.*?)<\/em>/g,
-                    '<span style="color: #F54100;">$1</span>'
+                    '<span style="color:#f472b6;">$1</span>'
                   ),
                 }}
               />
@@ -163,7 +163,11 @@ const MovieCard = ({
               onClick={
                 movie.is_collect ? handleRemoveFavorite : handleAddFavorite
               }
-              className="star_watch flex items-center"
+              className={`star_watch flex items-center ${
+                movie?.is_collect
+                  ? "text-[#ff5353] border-[1px] border-[#FF9153]"
+                  : "text-black border-[#33333333] border-[1px]"
+              }`}
             >
               {movie.is_collect ? (
                 <svg
@@ -173,14 +177,26 @@ const MovieCard = ({
                   viewBox="0 0 16 17"
                   fill="none"
                 >
-                  <g clip-path="url(#clip0_4_2182)">
+                  <g clip-path="url(#clip0_459_8436)">
                     <path
-                      d="M8.00002 12.6735L3.29802 15.3055L4.34802 10.0202L0.391357 6.3615L5.74269 5.72683L8.00002 0.833496L10.2574 5.72683L15.6087 6.3615L11.652 10.0202L12.702 15.3055L8.00002 12.6735Z"
-                      fill="#FF6A33"
+                      d="M7.99978 12.6733L3.29778 15.3053L4.34778 10.0199L0.391113 6.36125L5.74245 5.72659L7.99978 0.833252L10.2571 5.72659L15.6084 6.36125L11.6518 10.0199L12.7018 15.3053L7.99978 12.6733Z"
+                      fill="url(#paint0_linear_459_8436)"
                     />
                   </g>
                   <defs>
-                    <clipPath id="clip0_4_2182)">
+                    <linearGradient
+                      id="paint0_linear_459_8436"
+                      x1="15.0283"
+                      y1="8.06926"
+                      x2="2.44577"
+                      y2="8.06926"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#FF9153" />
+                      <stop offset="0.5" stop-color="#FF7584" />
+                      <stop offset="1" stop-color="#FE58B5" />
+                    </linearGradient>
+                    <clipPath id="clip0_459_8436">
                       <rect
                         width="16"
                         height="16"
@@ -191,6 +207,54 @@ const MovieCard = ({
                   </defs>
                 </svg>
               ) : (
+                // <svg
+                //   xmlns="http://www.w3.org/2000/svg"
+                //   width="16"
+                //   height="17"
+                //   viewBox="0 0 16 17"
+                //   fill="none"
+                // >
+                //   <g clip-path="url(#clip0_4_2182)">
+                //     <path
+                //       d="M8.00002 12.6735L3.29802 15.3055L4.34802 10.0202L0.391357 6.3615L5.74269 5.72683L8.00002 0.833496L10.2574 5.72683L15.6087 6.3615L11.652 10.0202L12.702 15.3055L8.00002 12.6735Z"
+                //       fill="#FF6A33"
+                //     />
+                //   </g>
+                //   <defs>
+                //     <clipPath id="clip0_4_2182)">
+                //       <rect
+                //         width="16"
+                //         height="16"
+                //         fill="white"
+                //         transform="translate(0 0.5)"
+                //       />
+                //     </clipPath>
+                //   </defs>
+                // </svg>
+                // <svg
+                //   xmlns="http://www.w3.org/2000/svg"
+                //   width="16"
+                //   height="17"
+                //   viewBox="0 0 16 17"
+                //   fill="none"
+                // >
+                //   <g clip-path="url(#clip0_4_2162)">
+                //     <path
+                //       d="M8.00002 12.6735L3.29802 15.3055L4.34802 10.0202L0.391357 6.3615L5.74269 5.72683L8.00002 0.833496L10.2574 5.72683L15.6087 6.3615L11.652 10.0202L12.702 15.3055L8.00002 12.6735ZM8.00002 11.1455L10.8314 12.7302L10.1987 9.54816L12.5807 7.34483L9.35869 6.96283L8.00002 4.01683L6.64136 6.9635L3.41936 7.34483L5.80136 9.54816L5.16869 12.7302L8.00002 11.1455Z"
+                //       fill="white"
+                //     />
+                //   </g>
+                //   <defs>
+                //     <clipPath id="clip0_4_2162">
+                //       <rect
+                //         width="16"
+                //         height="16"
+                //         fill="white"
+                //         transform="translate(0 0.5)"
+                //       />
+                //     </clipPath>
+                //   </defs>
+                // </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -198,14 +262,14 @@ const MovieCard = ({
                   viewBox="0 0 16 17"
                   fill="none"
                 >
-                  <g clip-path="url(#clip0_4_2162)">
+                  <g clip-path="url(#clip0_459_8416)">
                     <path
-                      d="M8.00002 12.6735L3.29802 15.3055L4.34802 10.0202L0.391357 6.3615L5.74269 5.72683L8.00002 0.833496L10.2574 5.72683L15.6087 6.3615L11.652 10.0202L12.702 15.3055L8.00002 12.6735ZM8.00002 11.1455L10.8314 12.7302L10.1987 9.54816L12.5807 7.34483L9.35869 6.96283L8.00002 4.01683L6.64136 6.9635L3.41936 7.34483L5.80136 9.54816L5.16869 12.7302L8.00002 11.1455Z"
-                      fill="white"
+                      d="M7.99978 12.6733L3.29778 15.3053L4.34778 10.0199L0.391113 6.36125L5.74245 5.72659L7.99978 0.833252L10.2571 5.72659L15.6084 6.36125L11.6518 10.0199L12.7018 15.3053L7.99978 12.6733ZM7.99978 11.1453L10.8311 12.7299L10.1984 9.54792L12.5804 7.34459L9.35845 6.96259L7.99978 4.01659L6.64111 6.96325L3.41911 7.34459L5.80111 9.54792L5.16845 12.7299L7.99978 11.1453Z"
+                      fill="#080808"
                     />
                   </g>
                   <defs>
-                    <clipPath id="clip0_4_2162">
+                    <clipPath id="clip0_459_8416">
                       <rect
                         width="16"
                         height="16"

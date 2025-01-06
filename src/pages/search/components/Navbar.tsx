@@ -107,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({
       >
         <div className="flex gap-4 w-full py-3 pt-5 px-3 z-10  items-center justify-between">
           <form onSubmit={handleSearch} className="w-full">
-            <div className="absolute top-[27px] left-6">
+            {/* <div className="absolute top-[27px] left-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="21"
@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   fillOpacity="0.6"
                 />
               </svg>
-            </div>
+            </div> */}
 
             <div className="w-full">
               <input
@@ -144,16 +144,16 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {isFocused && suggestions.length > 0 && (
-          <ul className="fixed top-[60px] left-0 pt-[20px] pb-[80px] h-screen w-full bg-[#161616] text-white z-50 overflow-y-auto">
+          <ul className="fixed top-[60px] left-0 pt-[20px] pb-[80px] h-screen w-full bg-white text-black z-50 overflow-y-auto">
             {suggestions.map((suggestion: any, index) => (
               <li
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion.name)}
-                className="cursor-pointer ml-[20px] p-2 active:text-[#f54100]"
+                className="cursor-pointer ml-[20px] p-2 active:text-[#f472b6]"
                 dangerouslySetInnerHTML={{
                   __html: suggestion?.highlight.replace(
                     /<em>(.*?)<\/em>/g,
-                    '<span style="color: #F54100;">$1</span>'
+                    '<span style="color: #f472b6;">$1</span>'
                   ),
                 }} // Render highlighted text
               />

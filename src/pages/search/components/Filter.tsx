@@ -88,10 +88,19 @@ const Filter: React.FC<FilterProps> = ({
               height="4"
               viewBox="0 0 4 4"
               fill="none"
+            >
+              <circle cx="2" cy="2" r="2" fill="black" />
+            </svg>
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="4"
+              height="4"
+              viewBox="0 0 4 4"
+              fill="none"
               className="mx-1"
             >
               <circle cx="2" cy="2" r="2" fill="white" />
-            </svg>
+            </svg> */}
             {selectedSort.name}
           </span>
         );
@@ -110,10 +119,19 @@ const Filter: React.FC<FilterProps> = ({
               height="4"
               viewBox="0 0 4 4"
               fill="none"
+            >
+              <circle cx="2" cy="2" r="2" fill="black" />
+            </svg>
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="4"
+              height="4"
+              viewBox="0 0 4 4"
+              fill="none"
               className="mx-1"
             >
               <circle cx="2" cy="2" r="2" fill="white" />
-            </svg>
+            </svg> */}
             {selectedType.name}
           </span>
         );
@@ -132,7 +150,7 @@ const Filter: React.FC<FilterProps> = ({
           className="flex gap-1 mt-1 items-center relative z-1"
         >
           <span className="filter-title">{filterText}</span>
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="9"
             height="8"
@@ -143,6 +161,19 @@ const Filter: React.FC<FilterProps> = ({
               d="M5.36603 7.5C4.98113 8.16667 4.01887 8.16667 3.63397 7.5L0.169873 1.5C-0.215027 0.833334 0.266099 0 1.0359 0L7.9641 0C8.7339 0 9.21503 0.833333 8.83013 1.5L5.36603 7.5Z"
               fill="white"
               fillOpacity="0.6"
+            />
+          </svg> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="8"
+            viewBox="0 0 10 8"
+            fill="none"
+          >
+            <path
+              d="M5.86603 7.5C5.48113 8.16667 4.51887 8.16667 4.13397 7.5L0.669873 1.5C0.284973 0.833334 0.766099 0 1.5359 0L8.4641 0C9.2339 0 9.71503 0.833333 9.33013 1.5L5.86603 7.5Z"
+              fill="black"
+              fill-opacity="0.6"
             />
           </svg>
         </button>
@@ -158,7 +189,7 @@ const Filter: React.FC<FilterProps> = ({
 
       {/* Tabs Container */}
       <div
-        className={`overflow-hidden mt-3 transition-all duration-500 ease-in-out fixed top-[55px] left-0 w-full tab-main text-white z-20 rounded-lg ${
+        className={`overflow-hidden mt-0 transition-all duration-500 ease-in-out fixed top-[55px] left-0 w-full tab-main text-black z-20 rounded-lg ${
           showTabs ? "max-h-52" : "max-h-0"
         }`}
       >

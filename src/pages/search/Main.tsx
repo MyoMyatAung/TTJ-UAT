@@ -387,7 +387,7 @@ const Main = () => {
                   fill="#565454"
                 />
               </svg>
-              <p className="no_history">空空如也</p>
+              <p className="no_history1 text-black">空空如也</p>
             </div>
           </div>
         ) : (
@@ -405,7 +405,7 @@ const Main = () => {
               </div>
             )}
             {noData && (
-              <div className="text-gray-500 flex justify-center pb-4 items-center text-center">
+              <div className="text-black flex justify-center pb-4 items-center text-center">
                 没有更多数据了
               </div>
             )}

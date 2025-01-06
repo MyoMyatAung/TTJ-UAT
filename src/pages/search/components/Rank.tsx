@@ -7,16 +7,25 @@ const Rank = ({ data, index }: { data: any; index: number }) => {
   const dispatch = useDispatch();
   const getColorByIndex = (idx: number) => {
     if (idx === 0) return "#FF0F00";
-    if (idx === 1) return "#FF8E75";
-    if (idx === 2) return "#F90";
-    return "var(--White-100, #FFF)";
+    if (idx === 1) return "#EFFF0B";
+    if (idx === 2) return "#FF018F";
+    return "#fff";
   };
+
+  // linear-gradient(180deg, #FE8181 0%, #FF9F5E 46%)
+
+  // // Alternate background for odd/even indices
+  // const getBackgroundByIndex = (index: number) => {
+  //   return index % 2 === 0
+  //     ? "linear-gradient(180deg, #341b1b 0%, #1f1f22 46%)" // Red background for even indexes (1st, 3rd, etc.)
+  //     : "linear-gradient(180deg, #1b2a34 0%, #1f1f22 46%)"; // Blue background for odd indexes (2nd, 4th, etc.)
+  // };
 
   // Alternate background for odd/even indices
   const getBackgroundByIndex = (index: number) => {
     return index % 2 === 0
-      ? "linear-gradient(180deg, #341b1b 0%, #1f1f22 46%)" // Red background for even indexes (1st, 3rd, etc.)
-      : "linear-gradient(180deg, #1b2a34 0%, #1f1f22 46%)"; // Blue background for odd indexes (2nd, 4th, etc.)
+      ? "linear-gradient(180deg, #FE8181 0%, #FF9F5E 46%)" // Red background for even indexes (1st, 3rd, etc.)
+      : "linear-gradient(180deg, #14527E 0%, #484875 46%)"; // Blue background for odd indexes (2nd, 4th, etc.)
   };
 
   const handleClick = (query: any) => {
@@ -28,7 +37,7 @@ const Rank = ({ data, index }: { data: any; index: number }) => {
 
   return (
     <div className="rank" style={{ background: getBackgroundByIndex(index) }}>
-      <h1 className="mb-3">{data?.title}</h1>
+      <h1 className="mb-3 text-white">{data?.title}</h1>
       {data?.list?.map((res: any, idx: any) => (
         <button
           key={idx}
@@ -37,7 +46,7 @@ const Rank = ({ data, index }: { data: any; index: number }) => {
         >
           <span
             className={`number ${
-              idx !== 1 && idx !== 2 && idx !== 0 && "opacity-40"
+              idx !== 1 && idx !== 2 && idx !== 0 && "opacity-60"
             }`}
             style={{ color: getColorByIndex(idx) }}
           >
