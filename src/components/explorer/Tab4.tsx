@@ -64,8 +64,8 @@ const Tab4 = () => {
   }, [id]);
 
   return (
-    <div className="pb-32 min-h-screen bg-white dark:bg-black">
-      <div className="w-full px-3 sticky top-[50px] z-50 bg-white dark:bg-black">
+    <div className="pb-32 min-h-screen bg-white dark:bg-[#161619]">
+      <div className="w-full px-3 sticky top-[50px] z-50 bg-white dark:bg-[#161619]">
         <nav className="flex overflow-x-scroll no-scrollbar pb-5 gap-3 remove-scrollbar">
           {data?.data?.map((item: any, index: number) => (
             <div

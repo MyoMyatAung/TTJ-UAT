@@ -306,11 +306,11 @@ const DetailPage: React.FC = () => {
     fetchMovieDetail(id);
   };
   return (
-    <div className="bg-[#fff] dark:bg-black min-h-screen">
+    <div className="bg-[#fff] dark:bg-[#161619] min-h-screen">
       {!movieDetail ? (
         <>
           <PlayerLoading onBack={navigateBackFunction} />
-          <div className="flex justify-center items-center pt-52 bg-[#fff] dark:bg-black">
+          <div className="flex justify-center items-center pt-52 bg-[#fff] dark:bg-[#161619]">
             <Loader />
           </div>
         </>
@@ -343,7 +343,7 @@ const DetailPage: React.FC = () => {
               )}
             </div>
             <div
-              className="relative flex px-2 justify-between items-center bg-[#fff] dark:bg-black pb-[10px] bprder-2 border-white dark:border-black"
+              className="relative flex px-2 justify-between items-center bg-[#fff] dark:bg-[#161619] pb-[10px] bprder-2 border-white dark:border-black"
               // style={{
               //   paddingBottom: "10px",
               //   borderBottom: "2px solid #fff",
@@ -351,7 +351,7 @@ const DetailPage: React.FC = () => {
             >
               <div className="flex">
                 <div
-                  className={`px-4 py-3 bg-[#fff] dark:bg-black text-gray-400 rounded-t-lg cursor-pointer relative ${
+                  className={`px-4 py-3 bg-[#fff] dark:bg-[#161619] text-gray-400 rounded-t-lg cursor-pointer relative ${
                     activeTab === "tab-1" ? "text-black  z-10" : ""
                   }`}
                   onClick={() => setActiveTab("tab-1")}
@@ -362,7 +362,7 @@ const DetailPage: React.FC = () => {
                   )}
                 </div>
                 {/* <div
-                  className={`px-4 py-3 bg-[#fff] dark:bg-black text-gray-400 rounded-t-lg cursor-pointer relative ${
+                  className={`px-4 py-3 bg-[#fff] dark:bg-[#161619] text-gray-400 rounded-t-lg cursor-pointer relative ${
                     activeTab === "tab-2" ? "text-black z-10" : ""
                   }`}
                   onClick={() => setActiveTab("tab-2")}
@@ -420,7 +420,7 @@ const DetailPage: React.FC = () => {
         </>
       )}
       {visible && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#fff] dark:bg-black text-black text-lg font-medium px-4 py-2 rounded-lg shadow-md">
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#fff] dark:bg-[#161619] text-black text-lg font-medium px-4 py-2 rounded-lg shadow-md">
           没有更多资源了
         </div>
       )}

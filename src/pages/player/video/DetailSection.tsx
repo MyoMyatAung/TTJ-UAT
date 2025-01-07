@@ -243,12 +243,12 @@ const DetailSection: React.FC<DetailSectionProps> = ({
   }, [activeTab]);
 
   return (
-    <div className="flex flex-col w-full dark:bg-black bg-white">
+    <div className="flex flex-col w-full dark:bg-[#161619] bg-white">
       {/* Tabs */}
 
       {/* Tab content */}
       <div
-        className={`dark:bg-black bg-white rounded-b-lg p-1 ${
+        className={`dark:bg-[#161619] bg-white rounded-b-lg p-1 ${
           activeTab === "tab-1" && "p-4"
         }`}
       >
@@ -397,7 +397,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
         <div className="fixed inset-0 z-50 flex items-end">
           <div
             ref={modalRef}
-            className="dark:bg-black bg-white backdrop-blur-md w-full max-w-md bottom-0 rounded-lg p-6 text-black dark:text-white overflow-y-auto"
+            className="dark:bg-[#161619] bg-white backdrop-blur-md w-full max-w-md bottom-0 rounded-lg p-6 text-black dark:text-white overflow-y-auto"
             style={{ height: `${lowerDivHeight}px` }}
           >
             {/* Modal Header */}

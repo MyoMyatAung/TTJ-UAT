@@ -49,7 +49,7 @@ const Explorer: React.FC = () => {
         // className={`flex flex-wrap gap-4 items-center py-2 px-3  bg-background fixed transition-all duration-300 w-full z-50 ${
         //   isHeaderVisible ? "top-0" : "-top-[135px]"
         // }`}
-        className={`flex flex-wrap gap-4 items-center py-2 px-3  bg-white dark:bg-black fixed transition-all duration-300 w-full z-50 top-0`}
+        className={`flex flex-wrap gap-4 items-center py-2 px-3  bg-white dark:bg-[#161619] fixed transition-all duration-300 w-full z-50 top-0`}
       >
         {tabs.map((tab, index) => (
           <button
@@ -75,7 +75,7 @@ const Explorer: React.FC = () => {
           </button>
         ))}
       </nav>
-      <div className="bg-white dark:bg-black pt-12">
+      <div className="bg-white dark:bg-[#161619] pt-12">
         <div className="text-black">
           {tabs[activeNav ? activeNav : activeTab]?.content}
         </div>
