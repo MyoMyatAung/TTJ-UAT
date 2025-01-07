@@ -19,7 +19,7 @@ const EpisodeSelector: React.FC<EpisodeSelectorProps> = ({
   }, [selectedEpisode]);
 
   return (
-    <div className="overflow-x-auto whitespace-nowrap m-4 bg-white dark:bg-black remove-scrollbar">
+    <div className="overflow-x-auto whitespace-nowrap m-4 bg-white dark:bg-[#161619] remove-scrollbar">
       {" "}
       {/* Horizontal scroll container */}
       <div className="inline-flex space-x-3">

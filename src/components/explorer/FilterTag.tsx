@@ -152,9 +152,9 @@ const FilterTag = () => {
           // className={`fixed w-full z-50 bg-background transition-all duration-300 ${
           //   isHeaderVisible ? "top-[53px]" : "-top-[135px]"
           // }`}
-          className={`fixed w-full z-50 bg-white dark:bg-black transition-all duration-300 top-[53px]`}
+          className={`fixed w-full z-50 bg-white dark:bg-[#161619] transition-all duration-300 top-[53px]`}
         >
-          <div className="flex  overflow-x-scroll px-3 gap-6 remove-scrollbar bg-white dark:bg-black items-center  w-full">
+          <div className="flex  overflow-x-scroll px-3 gap-6 remove-scrollbar bg-white dark:bg-[#161619] items-center  w-full">
             {configData?.data?.movie_search_screen?.type
               ?.filter((data: any) => data?.id !== 0)
               ?.map((item: any, index: any) => (

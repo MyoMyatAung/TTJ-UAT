@@ -93,8 +93,8 @@ const Tab2 = () => {
   // console.log(currentIndex, "ci");
 
   return (
-    <div className="pb-32 min-h-screen bg-white dark:bg-black">
-      <nav className="py-4 sticky top-[50px] z-50 bg-white dark:bg-black">
+    <div className="pb-32 min-h-screen bg-white dark:bg-[#161619]">
+      <nav className="py-4 sticky top-[50px] z-50 bg-white dark:bg-[#161619]">
         <div className="grid grid-cols-7 mb-2">
           {currentWeekDates?.map((date, index) => (
             <button
