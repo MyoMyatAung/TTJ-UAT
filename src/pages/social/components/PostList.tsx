@@ -104,7 +104,7 @@ const PostList = ({
 
   if (loading && !data.length) {
     return (
-      <div className="text-center -mt-[100px] bg-white max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
+      <div className="text-center -mt-[100px] bg-white dark:bg-black max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
         <Loader />
       </div>
     );
@@ -112,7 +112,7 @@ const PostList = ({
 
   if (!data.length) {
     return (
-      <div className="text-center -mt-[100px] bg-white  max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
+      <div className="text-center -mt-[100px] bg-white dark:bg-black  max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
         <div className="text-center flex flex-col justify-center items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
