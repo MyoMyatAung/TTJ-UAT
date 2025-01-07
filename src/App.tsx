@@ -182,7 +182,7 @@ const App: React.FC = () => {
               <div className="flex-grow">
                 <Suspense
                   fallback={
-                    <div className="flex justify-center items-center h-screen bg-[#fff]">
+                    <div className="flex justify-center items-center h-screen bg-[#fff] dark:bg-black">
                       <Loader />
                     </div>
                   }
