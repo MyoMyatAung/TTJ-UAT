@@ -110,10 +110,10 @@ const Tab2 = () => {
                 className={`${
                   activeWeek
                     ? activeWeek === index + 1
-                      ? "bg-orange-600 px-1.5 py-1 rounded-full"
+                      ? "bg-pink-600 text-white p-1.5 rounded-full"
                       : ""
                     : currentDate === date &&
-                      "bg-orange-600 px-1.5 py-1 rounded-full"
+                      "bg-pink-600 text-white p-1.5 rounded-full"
                 }`}
               >
                 {currentDate === date ? "今" : date}
