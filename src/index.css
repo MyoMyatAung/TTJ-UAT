@@ -52,8 +52,7 @@ button {
 .loader div {
   width: 2px;
   height: 90%;
-  background-color: #FE58B5;
-  ; /* Adjust color to match the design */
+  background-color: #fe58b5; /* Adjust color to match the design */
   animation: grow 1s infinite ease-in-out;
 }
 
@@ -213,18 +212,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .home-bg {
-  height: 100vh;
-  padding-bottom: 100px;
-  z-index: -1;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  /* background-image: url("./pages/home/images/homebg.png");
-  background-repeat: no-repeat;
-  background-size: contain; */
-  /* margin-top: 50px; */
+  @apply h-screen pb-[100px] -z-10 w-full fixed top-0 left-0 bg-white dark:bg-black;
 }
 
 @media screen and (min-width: 470px) {

@@ -71,7 +71,9 @@ const Header: FC = () => {
       //   isHeaderVisible ? "top-0" : "-top-[135px]"
       // }`}
       className={`w-full z-[99999] fixed  ${
-        showFilterTag ? "gradient-bg-home2" : "gradient-bg-home"
+        showFilterTag
+          ? "gradient-bg-home2"
+          : "gradient-bg-home"
       } pt-4 pb-2 transition-all duration-300 top-0`}
     >
       <div className="flex items-center px-3 gap-3">
