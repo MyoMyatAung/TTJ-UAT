@@ -178,7 +178,7 @@ const Main: React.FC<MainProps> = ({
                 </div>
 
                 <div>
-                  <h1 className="fav_text truncate">{movie?.movie_name}</h1>
+                  <h1 className={`fav_text truncate ${darkmode ? "text-white" : "text-black"}`}>{movie?.movie_name}</h1>
                 </div>
               </div>
             ))}

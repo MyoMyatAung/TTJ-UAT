@@ -36,7 +36,7 @@ const Notifications = () => {
 
   if (isLoading || isFetching)
     return (
-      <div className={`flex justify-center items-center h-screen  ${darkmode ? "bg-white/10" : "bg-[#fff]"}`}>
+      <div className={`flex justify-center items-center h-screen  ${darkmode ? "bg-black" : "bg-[#fff]"}`}>
         <Loader />
       </div>
     );

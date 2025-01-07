@@ -401,6 +401,20 @@
   transform: translate(-50%, -50%);
 }
 
+.custom-checkbox_dark input[type="checkbox"]:checked::after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.66674 10.1148L12.7947 3.98608L13.7381 4.92875L6.66674 12.0001L2.42407 7.75742L3.36674 6.81475L6.66674 10.1148Z" fill="white"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .cancel-all {
   display: flex;
   padding: 8px 24px;
@@ -428,8 +442,8 @@
   gap: 2px;
   flex: 1 0 0;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  background: rgba(254, 88, 181, 0.08);
   color: white;
   text-align: center;
   font-family: "PingFang SC";
@@ -447,7 +461,8 @@
   gap: 2px;
   flex: 1 0 0;
   border-radius: 20px;
-  background: rgba(245, 65, 0, 0.08);
+  /* background: rgba(245, 65, 0, 0.08); */
+  background: #FE58B514;
   color: #fe58b5;
   text-align: center;
   font-family: "PingFang SC";
@@ -656,7 +671,7 @@
 
 .fav_text {
   overflow: hidden;
-  color: var(--White-100, #080808);
+  /* color: var(--White-100, #080808); */
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: "PingFang SC";

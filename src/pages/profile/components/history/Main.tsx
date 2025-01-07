@@ -106,9 +106,9 @@ const Main: React.FC<any> = ({
           <div className="mt-5" key={index}>
             <div className="flex items-center justify-between bg-black/10 px-4 py-1">
               <div
-                className={`history-text w-full py-[4px] ${
+                className={`history-text w-full my-[4px] py-[4px] pl-[20px] ${
                   darkmode ? "text-white bg-white/5" : "text-black"
-                }`}
+                } absolute left-0`}
               >
                 {movie?.title}
               </div>
