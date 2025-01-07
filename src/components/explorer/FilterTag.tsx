@@ -11,6 +11,7 @@ import { useGetHeaderTopicsQuery } from "../../services/helperService";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import downh from "../../assets/downh.svg";
+import downd from "../../assets/downd.svg";
 import ExplorerTags from "./ExplorerTags";
 import { setShowMenu } from "../../features/counter/counterSlice";
 
@@ -188,7 +189,8 @@ const FilterTag = () => {
                 <span>
                   {sortName} . {classData} . {area} . {year}
                 </span>
-                <img src={downh} className="" alt="" />
+                <img src={downh} className="block dark:hidden" alt="" />
+                <img src={downd} className="hidden dark:block" alt="" />
               </div>
             </>
           ) : (
