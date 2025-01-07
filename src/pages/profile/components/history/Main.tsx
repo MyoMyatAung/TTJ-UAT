@@ -104,13 +104,13 @@ const Main: React.FC<any> = ({
 
         return (
           <div className="mt-5" key={index}>
-            <div className="flex items-center justify-between bg-black/10 px-4 py-1">
+            <div className={`flex items-center relative justify-between bg-black/10 ${darkmode ? "my-5" : ""} px-4 py-1`}>
               <div
-                className={`history-text w-full my-[4px] py-[4px] pl-[20px] ${
-                  darkmode ? "text-white bg-white/5" : "text-black"
-                } absolute left-0`}
+                className={`history-text w-full my-[4px py-[4px] pl-[20px] h-[30px] ${
+                  darkmode ? "text-white bg-white/5 absolute" : "text-black bg-black/1"
+                }  left-0`}
               >
-                {movie?.title}
+                h{movie?.title}
               </div>
               {/* <div className="flex gap-2 items-center">
                 <p className="filter-text">过滤已观看完视频</p>

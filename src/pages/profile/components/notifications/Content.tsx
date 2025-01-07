@@ -71,7 +71,7 @@ const Content = ({ notice, darkmode }: any) => {
         ) : (
           notice.extend.page_name && (
             <button
-              className="noti-btn mt-6"
+              className={` mt-6 ${darkmode ? "noti-btn_dark" : "noti-btn"}`}
               onClick={() => window.open(notice.extend.page_path, "_blank")}
             >
               {notice.extend.page_name}
