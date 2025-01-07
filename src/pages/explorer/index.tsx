@@ -75,7 +75,7 @@ const Explorer: React.FC = () => {
           </button>
         ))}
       </nav>
-      <div className="bg-white pt-12">
+      <div className="bg-white dark:bg-black pt-12">
         <div className="text-black">
           {tabs[activeNav ? activeNav : activeTab]?.content}
         </div>
