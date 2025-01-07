@@ -80,6 +80,17 @@
   z-index: -1;
 }
 
+.fixed-bg_dark {
+  background: #161619;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: -1;
+}
+
 .profile-header {
   display: flex;
   width: 100%;
@@ -112,6 +123,16 @@
   align-items: center;
   border-radius: 20px;
   background: white;
+  backdrop-filter: blur(12px);
+}
+
+.profile-card_dark {
+  display: flex;
+  padding: 17px 16px;
+  align-items: center;
+  border-radius: 20px;
+  background: rgba(136, 136, 136, 0.12);
+
   backdrop-filter: blur(12px);
 }
 
@@ -198,6 +219,13 @@
   backdrop-filter: blur(16px);
 }
 
+.profile-div-main_dark {
+  padding: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+}
+
 .info-div-main {
   padding: 8px;
   border-radius: 20px;
@@ -213,8 +241,28 @@
   line-height: normal;
 }
 
+.profile-text_dark {
+  color: #fff;
+  text-align: center;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .history-title {
   color: #080808;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+  opacity: 1;
+}
+
+.history-title_dark {
+  color: #fff;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -234,8 +282,19 @@
   text-transform: capitalize;
 }
 
+.edit-title_dark {
+  color: var(--White-100, #fff);
+  text-align: right;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
 .history-text {
-  color: var(--White-100, #080808);
+  /* color: var(--White-100, #080808); */
   font-family: "PingFang SC";
   font-size: 16px;
   font-style: normal;
@@ -253,7 +312,7 @@
   line-height: normal;
 }
 
-.history-card h1 {
+.history-car {
   color: var(--White-100, #080808);
   font-family: "PingFang SC";
   font-size: 16px;
@@ -263,14 +322,14 @@
   text-transform: capitalize;
 }
 
-.history-card p {
+/* .history-card p {
   color: rgba(0, 0, 0, 0.40);
   font-family: "PingFang SC";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-}
+} */
 
 .history-card {
   display: flex;
@@ -295,7 +354,23 @@
   cursor: pointer;
 }
 
+.custom-checkbox_dark input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #161619;
+  border: 1px solid #FFFFFF66;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
 .custom-checkbox input[type="checkbox"]:checked {
+  border-color: #fe58b5;
+  background-color: #fe58b5;
+}
+
+.custom-checkbox_dark input[type="checkbox"]:checked {
   border-color: #fe58b5;
   background-color: #fe58b5;
 }
@@ -334,6 +409,25 @@
   line-height: normal;
 }
 
+.cancel-all_dark {
+  display: flex;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex: 1 0 0;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  text-align: center;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
 .delete-all {
   display: flex;
   padding: 8px 24px;
@@ -353,7 +447,7 @@
 }
 
 .confirm h2 {
-  color: var(--Neutral-Color-Neutral_1, #080808);
+  /* color: var(--Neutral-Color-Neutral_1, #080808); */
   text-align: center;
   font-feature-settings: 'liga' off, 'clig' off;
   font-family: "PingFang SC";
@@ -384,7 +478,7 @@
 }
 
 .settings-text {
-  color: rgba(0, 0, 0, 0.40);
+  /* color: rgba(0, 0, 0, 0.40); */
 
   font-family: "PingFang SC";
   font-size: 10px;
@@ -405,7 +499,7 @@
 }
 
 .versions-title {
-  color: #000;
+  /* color: #000; */
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -415,7 +509,7 @@
   text-transform: capitalize;
 }
 .versions-text {
-  color: #000;
+  /* color: #000; */
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -449,13 +543,13 @@
 .noti-header .act {
   border-bottom: 2px solid #fe58b5;
 }
-.noti-header div {
+/* .noti-header div {
   background: #fff;
   padding: 8px;
   color: #080808;
-}
+} */
 
-.text-card h3 {
+.text-car  {
   /* color: #fff; */
   color: rgba(0, 0, 0, 0.80);
   font-family: "PingFang SC";
@@ -466,7 +560,7 @@
   letter-spacing: -0.132px;
 }
 
-.text-card p {
+.text-car {
   color: #bbb;
   font-family: "PingFang SC";
   font-size: 10px;
@@ -526,6 +620,27 @@
   letter-spacing: -0.132px;
   margin-top: 10px;
   border-bottom: 1px solid #CCC;
+}
+
+.sidebar-button_dark {
+  width: 100%;
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  font-family: "PingFang SC";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 116.667% */
+  letter-spacing: -0.132px;
+  margin-top: 10px;
+  border-bottom: 1px solid #474747;
 }
 
 .fav_text {
@@ -800,7 +915,7 @@
 }
 
 .content-link {
-  color: var(--White-100, #000);
+  /* color: var(--White-100, #000); */
   text-align: right;
   font-family: "PingFang SC";
   font-size: 12px;
@@ -811,7 +926,7 @@
 }
 
 .contact-link-text {
-  color: var(--White-100, #000);
+  /* color: var(--White-100, #000); */
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
