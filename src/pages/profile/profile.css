@@ -13,7 +13,7 @@
 
 .collect_active {
   border-radius: 16px;
-  background: var(--Brand-Color-2, #FE58B5);
+  background: var(--Brand-Color-2, #fe58b5);
   color: #fff !important;
 }
 
@@ -49,7 +49,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: #5B5B5B;
+  color: #5b5b5b;
   text-align: right;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -173,7 +173,7 @@
   align-self: stretch;
   border-radius: 20px;
   /* background: #1b1b1f; */
-  background: #1B1B1F;
+  background: #1b1b1f;
 }
 
 .info-first1 {
@@ -370,7 +370,7 @@
   width: 20px;
   height: 20px;
   background-color: #161619;
-  border: 1px solid #FFFFFF66;
+  border: 1px solid #ffffff66;
   border-radius: 50%;
   position: relative;
   cursor: pointer;
@@ -442,8 +442,8 @@
   gap: 2px;
   flex: 1 0 0;
   border-radius: 20px;
-  border-radius: 20px;
-  background: rgba(254, 88, 181, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.04);
   color: white;
   text-align: center;
   font-family: "PingFang SC";
@@ -462,8 +462,8 @@
   flex: 1 0 0;
   border-radius: 20px;
   /* background: rgba(245, 65, 0, 0.08); */
-  background: #FE58B514;
-  color: #fe58b5;
+  background: #fe58b514;
+  color: #FE58B5;
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -475,7 +475,7 @@
 .confirm h2 {
   /* color: var(--Neutral-Color-Neutral_1, #080808); */
   text-align: center;
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings: "liga" off, "clig" off;
   font-family: "PingFang SC";
   font-size: 16px;
   font-style: normal;
@@ -575,9 +575,9 @@
   color: #080808;
 } */
 
-.text-car  {
+.text-car {
   /* color: #fff; */
-  color: rgba(0, 0, 0, 0.80);
+  color: rgba(0, 0, 0, 0.8);
   font-family: "PingFang SC";
   font-size: 12px;
   font-style: normal;
@@ -614,6 +614,24 @@
   letter-spacing: -0.132px;
 }
 
+.noti-btn_dark {
+  display: flex;
+  width: 134px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Brand-Color-2, #fe58b5);
+  color: #fe58b5;
+  /* font-family: Inter; */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.132px;
+}
+
 .sidebar .active {
   display: flex;
   padding: 8px 12px;
@@ -623,7 +641,7 @@
   color: white;
   align-self: stretch;
   border-radius: 8px;
-  background: #FE58B5;
+  background: #fe58b5;
   border-bottom: none;
 }
 
@@ -645,7 +663,7 @@
   line-height: 14px; /* 116.667% */
   letter-spacing: -0.132px;
   margin-top: 10px;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
 }
 
 .sidebar-button_dark {
@@ -753,7 +771,7 @@
   /* background: #1b1b1f; */
   background: transparent;
   width: 100%;
-  color: #5B5B5B;
+  color: #5b5b5b;
   border-bottom: 0.5px solid #777;
 }
 
@@ -950,7 +968,7 @@
 }
 
 .contact-text {
-  color: var(--White-100, #000);
+  /* color: var(--White-100, #000); */
   font-family: "PingFang SC";
   font-size: 14px;
   font-style: normal;
