@@ -167,7 +167,7 @@ input[type="range"]::-moz-range-thumb {
 } */
 .gradient-bg-home2 {
   /* background: linear-gradient(to bottom, #fdb1dc, #fcdfd4, #fff9fc); */
-  @apply bg-gradient-to-b from-[#fdb1dc]  to-[#fff9fc] dark:to-[#58402E] dark:from-[#763459];
+  @apply bg-gradient-to-b from-[#fff9fc]  to-[#fff9fc] dark:to-[#58402E] dark:from-[#763459];
 }
 .gradient-bg-home {
   /* background: linear-gradient(to right, #fe58b5, #ff7584, #ff9153); */

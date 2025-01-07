@@ -83,7 +83,7 @@ const Header: FC = () => {
             type="text"
             className={`rounded-[18.138px] home-input ${
               showFilterTag
-                ? "bg-[#FFFFFF33] dark:bg-[#FFFFFF33]"
+                ? "bg-[#4e4e4e1a] dark:bg-[#FFFFFF33]"
                 : "bg-[#ffffff1a] dark:bg-[#FFFFFF33]"
             } py-[8.062px] px-[16.123px] w-full ${
               showFilterTag
