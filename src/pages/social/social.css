@@ -300,7 +300,8 @@
 } */
 
 .social_des {
-  color: #000;
+  /* color: #000; */
+  @apply text-black dark:text-white;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: "dlig" on;
   font-family: "PingFang SC";
