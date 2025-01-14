@@ -28,6 +28,11 @@
   border-radius: 0%;
 }
 
+.input_border_dark {
+  border-bottom: 0.5px solid #888;
+  border-radius: 0%;
+}
+
 .next_button {
   border-radius: var(--Height-And-Sizes-80, 80px);
   background: #fe58b5;
