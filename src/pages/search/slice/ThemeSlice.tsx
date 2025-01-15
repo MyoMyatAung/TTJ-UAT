@@ -9,7 +9,7 @@ interface ThemeState {
 const initialState: ThemeState = {
   data:
     window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
+    window.matchMedia("(prefers-color-scheme: white)").matches,
 };
 
 // Create the slice

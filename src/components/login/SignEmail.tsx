@@ -1,8 +1,8 @@
 import React, { startTransition, useEffect, useRef, useState } from "react";
 import back from "../../assets/login/back.svg";
 import close from "../../assets/login/close.svg";
-import eye from "../../assets/login/eye.svg";
 import { motion, AnimatePresence } from "framer-motion";
+import eye from "../../assets/login/eye.svg";
 import eyeClose from "../../assets/login/eyeClose.svg";
 import Opt from "./Opt";
 import Captch from "./Captch";
@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 import CloseBtn from "../../assets/svg/CloseBtn";
 import BackBtn from "../../assets/svg/BackBtn";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
+import SecQues from "./question/SecQues";
 
 interface SignEmailProps {
   handleBack2: () => void; // Accept handleBack as a prop
@@ -30,8 +31,9 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
 
   const dispatch = useDispatch();
   const [key, setKey] = useState("");
-  const { openCaptcha, openOtp, openSignUpEmailModel, openUserNameForm } =
+  const { openCaptcha, openOtp, openSignUpEmailModel, openUserNameForm , openSecQues} =
     useSelector((state: any) => state.model);
+    // console.log(openSecQues)
   const [showOtp, setShowOtp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -103,6 +105,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
 
   const handleClose = () => {
     setIsVisible(false);
+    closeAllModals()
   };
   // console.log(key);
   return (
@@ -114,6 +117,9 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
           password={password}
           email={email}
         />
+      )}
+      {openSecQues && (
+        <SecQues setIsVisible={setIsVisible} />
       )}
       <div className="min-h-screen flex items-center justify-center overflow-hidde fixed z-[99999]">
         {openCaptcha && (

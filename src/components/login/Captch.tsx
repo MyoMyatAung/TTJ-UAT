@@ -8,6 +8,7 @@ import {
   setGraphicKey,
   setLoginOpen,
   setOCapKey,
+  setOpenSecQues,
   setOtpOpen,
   setSignupOpen,
 } from "../../features/login/ModelSlice";
@@ -114,10 +115,12 @@ const Captch: React.FC<{
     try {
       const data = await check_captchaRegister(captchaCode, keyStatus);
       if (!data.code) {
-        setKey(data);
-        dispatch(setGraphicKey(data))
+        // setKey(data);
+        // dispatch(setGraphicKey(data))
+        setIsVisible(false)
         dispatch(setCaptchaOpen(false));
-        dispatch(setOtpOpen(true));
+        dispatch(setOpenSecQues(true))
+        // dispatch(setOtpOpen(true));
         // console.log(data);
       } else {
         dispatch(showToast({ message: "图形验证码错误", type: "error" }));
