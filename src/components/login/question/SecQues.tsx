@@ -24,9 +24,13 @@ interface SecQuesProps {
 const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
   const [showValue, setShowValue] = useState(false);
   const dispatch = useDispatch();
+  const [selectedValue, setSelectedValue] = useState<string>("选择问题");
   const [showPassword, setShowPassword] = useState(false);
   const darkmode = useSelector(selectTheme);
+  const [password, setPassword] = useState("");
   const [isSecVisible, setIsSecVisible] = useState(true);
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+  const [isFocusedPassword, setIsFocusedPassword] = useState(false);
   const variants = {
     hidden: { y: 300 },
     visible: {
@@ -78,6 +82,11 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
       dispatch(setLoginOpen(false));
       dispatch(setSignupOpen(false));
     });
+  };
+
+  const handleSelect = (name: string) => {
+    setSelectedValue(name);
+    setShowValue(false); // Close dropdown after selection
   };
   return (
     <>
@@ -184,7 +193,7 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                         darkmode ? "text-white/60" : "text-black/60"
                       }`}
                     >
-                      {"选择问题"}
+                      {selectedValue}
                     </span>
                     {showValue ? (
                       <>
@@ -248,7 +257,11 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                       } absolute z-[9999912] rounded-[8px] w-full mt-2`}
                     >
                       {value.map((vv: any) => (
-                        <div className=" px-[10px] py-[12px]">
+                        <div
+                          onClick={() => handleSelect(vv.name)}
+                          key={vv.id}
+                          className=" px-[10px] py-[12px]"
+                        >
                           <h1
                             className={`${
                               darkmode ? "text-white/70" : "text-black/70"
@@ -263,7 +276,20 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                 </div>
 
                 <div className="relative">
-                  <input type="text" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setIsFocusedPassword(true)}
+                    onBlur={() => setIsFocusedPassword(password !== "")}
+                    className={`w-full px- py-2 ${
+                      darkmode ? "input_border_dark" : "input_border"
+                    }  bg-transparent focus:outline-none ${
+                      darkmode ? "text-white" : "text-black"
+                    } placeholder-[#5B5B5B]`}
+                    required
+                    placeholder="设置您的密码"
+                  />
 
                   <div
                     onClick={show}
