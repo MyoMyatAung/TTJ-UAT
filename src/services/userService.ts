@@ -72,19 +72,19 @@ export const login = async (
       convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/check_captcha`),
       gg
     );
-    // console.log(captchaResult)
+    // console.log(captchaResult);
 
     const captchaResponse = await captchaResult.data;
-    let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};
+    // let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};
 
-    if (!newCap.data) {
-      throw new Error("Captcha verification failed");
-    }
+    // if (!newCap.data) {
+    //   throw new Error("Captcha verification failed");
+    // }
 
     const formData = {
       username,
       password,
-      captcha: newCap.data.key,
+      captcha: captchaResponse.data.key,
       timestamp: new Date().getTime(),
     };
 
@@ -100,11 +100,11 @@ export const login = async (
     if (!publicKey) {
       throw new Error("Public key is not defined");
     }
-    const encryptedData = encryptWithRsa(JSON.stringify(formData), publicKey);
+    // const encryptedData = encryptWithRsa(JSON.stringify(formData), publicKey);
     const ll = convertToSecurePayload(formData);
 
     // Step 3: Generate signature
-    const signature = generateSignature(encryptedData);
+    // const signature = generateSignature(encryptedData);
 
     // Step 4: Make the login API call
     // const loginResponse = await fetch(
@@ -121,20 +121,21 @@ export const login = async (
       ll
     );
 
-    const dataIsEncrypt = loginResponse.headers;
-    // const dataIsEncrypt = loginResponse.headers["x-app-data-encrypt"];
-
+    // const dataIsEncrypt = loginResponse.headers;
+    const dataIsEncrypt = loginResponse.headers["x-app-data-encrypt"];
+    console.log(dataIsEncrypt);
     console.log(dataIsEncrypt, "gg");
 
     const resultText = await loginResponse.data;
     // console.log(resultText)
 
     // Step 5: Handle the response (decrypt if needed)
-    if (!dataIsEncrypt) {
-      return JSON.parse(resultText);
-    } else {
-      return decryptWithAes(resultText);
-    }
+    return resultText
+    // if (!dataIsEncrypt) {
+    //   return JSON.parse(resultText);
+    // } else {
+    //   return decryptWithAes(resultText);
+    // }
   } catch (err) {
     // console.error("Error during login:", err);
     throw err;
@@ -203,7 +204,7 @@ export const getCodeForgotPass = async ({ send_type, session_token }: any) => {
     );
     // console.log(data)
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
@@ -224,12 +225,13 @@ export const check_captchaRegister = async (
     );
     const captchaResponse = captchaResult.data;
 
-    let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};
+    // let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};
+    // console.log(newCap)
 
-    if (!newCap.data) {
-      throw new Error("Captcha verification failed");
-    }
-    return newCap.data.key;
+    // if (!newCap.data) {
+    //   throw new Error("Captcha verification failed");
+    // }
+    return captchaResponse.data.key;
   } catch (error) {
     console.log("cap err", error);
     return error;
