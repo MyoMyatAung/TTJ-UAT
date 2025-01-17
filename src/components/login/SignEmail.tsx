@@ -21,6 +21,7 @@ import CloseBtn from "../../assets/svg/CloseBtn";
 import BackBtn from "../../assets/svg/BackBtn";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
 import SecQues from "./question/SecQues";
+import { showToast } from "../../pages/profile/error/ErrorSlice";
 
 interface SignEmailProps {
   handleBack2: () => void; // Accept handleBack as a prop
@@ -31,10 +32,16 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
 
   const dispatch = useDispatch();
   const [key, setKey] = useState("");
-  const { openCaptcha, openOtp, openSignUpEmailModel, openUserNameForm , openSecQues} =
-    useSelector((state: any) => state.model);
-    // console.log(openSecQues)
+  const {
+    openCaptcha,
+    openOtp,
+    openSignUpEmailModel,
+    openUserNameForm,
+    openSecQues,
+  } = useSelector((state: any) => state.model);
+  // console.log(openSecQues)
   const [showOtp, setShowOtp] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,7 +75,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
 
   // Password validation function
   const validatePassword = (password: string) => {
-    const lengthValid = password.length >= 8 && password.length <= 25;
+    const lengthValid = password.length >= 6 && password.length <= 25;
     const containsLetters = /[a-zA-Z]/.test(password);
     const containsNumbers = /\d/.test(password);
     return lengthValid && containsLetters && containsNumbers;
@@ -92,20 +99,43 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
     }
   };
 
+  const validateUsername = (password: string): string | null => {
+    const hasLetter = /[a-zA-Z]/.test(password); // Check for letters
+    const hasNumber = /\d/.test(password); // Check for numbers
+
+    if (!hasLetter || !hasNumber) {
+      return "密码必须包含字母和数字"; // "The password must contain both letters and numbers."
+    }
+
+    if (password.length < 5 || password.length > 25) {
+      return "请输入5-25位密码"; // "Please enter a password between 5-25 characters."
+    }
+
+    return null;
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const validationError = validatePassword(email);
+    console.log(validationError)
+
+    if (!validationError) {
+      dispatch(showToast({ message: "请输入5-25位用户名", type: "error" }));
+      return;
+    }
+  
     try {
       dispatch(setCaptchaOpen(true));
       // setShowOtp(true);
       // setIsVisible(false);
     } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      setError(" failed. Please check your credentials.");
     }
   };
 
   const handleClose = () => {
     setIsVisible(false);
-    closeAllModals()
+    closeAllModals();
   };
   // console.log(key);
   return (
@@ -118,12 +148,18 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
           email={email}
         />
       )}
-      {openSecQues && (
-        <SecQues setIsVisible={setIsVisible} />
+      {showQuestion && (
+        <SecQues
+        setShowQuestion={setShowQuestion}
+          email={email}
+          Userpassword={password}
+          setIsVisible={setIsVisible}
+        />
       )}
       <div className="min-h-screen flex items-center justify-center overflow-hidde fixed z-[99999]">
         {openCaptcha && (
           <Captch
+            setShowQuestion={setShowQuestion}
             key={key}
             setKey={setKey}
             setIsVisible={setIsVisible}

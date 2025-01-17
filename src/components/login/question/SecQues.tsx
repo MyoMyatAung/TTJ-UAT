@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import React, { startTransition, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTheme } from "../../../pages/search/slice/ThemeSlice";
@@ -16,21 +16,40 @@ import {
   setSignupOpen,
 } from "../../../features/login/ModelSlice";
 import "../../../pages/login/login.css";
+import {
+  getQuestion,
+  registerWithUsername,
+} from "../../../services/userService";
+import { showToast } from "../../../pages/profile/error/ErrorSlice";
+import Loader from "../Loader";
 
 interface SecQuesProps {
   setIsVisible: any;
+  Userpassword: string;
+  email: string;
+  setShowQuestion: any;
 }
 
-const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
+const SecQues: React.FC<SecQuesProps> = ({
+  setIsVisible,
+  email,
+  Userpassword,
+  setShowQuestion,
+}) => {
+  const { GraphicKey } = useSelector((state: any) => state.model);
   const [showValue, setShowValue] = useState(false);
   const dispatch = useDispatch();
-  const [selectedValue, setSelectedValue] = useState<string>("选择问题");
+  const [selectedValue, setSelectedValue] = useState<any>("选择问题");
   const [showPassword, setShowPassword] = useState(false);
   const darkmode = useSelector(selectTheme);
+  const [question, setQuestion] = useState<any[]>([]);
+  const [questionID, setQuestionID] = useState<any>();
+  const [panding, setPanding] = useState(false);
   const [password, setPassword] = useState("");
   const [isSecVisible, setIsSecVisible] = useState(true);
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
+  // console.log("this is mf => ", GraphicKey, email, Userpassword);
   const variants = {
     hidden: { y: 300 },
     visible: {
@@ -50,24 +69,67 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
     { id: 3, name: "Your graduation day" },
     { id: 4, name: "Your favorite song" },
   ];
+  const getqq = async () => {
+    try {
+      const  {data}  = await getQuestion(email);
+      console.log(data)
+      // if (data) {
+        setQuestion(data);
+      // }
+    } catch (error: any) {
+      console.log('object')
+      if (error) {
+        const msg = error.response.data.msg;
+        dispatch(showToast({ message: msg, type: "error" }));
+        closeAllModals();
+      }
+    }
+  };
 
+  useEffect(() => {
+    getqq();
+  }, []);
   const show = () => {
     setShowPassword(!showPassword);
   };
 
   const handleBack = () => {
-    dispatch(setOpenSecQues(false));
+    // dispatch(setOpenSecQues(false));
+    setShowQuestion(false);
     setIsVisible(true);
-    // setIsSecVisible(false);
   };
 
   const handleClose = () => {
     setIsSecVisible(false);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(e);
+    const validationError = password.length < 6;
+
+    if (validationError || selectedValue == "选择问题") {
+      dispatch(showToast({ message: "请回答安全问题", type: "error" }));
+      return;
+    }
+    const formdata = {
+      username: email,
+      password: Userpassword,
+      answer: password,
+      question_id: questionID,
+      captcha: GraphicKey,
+    };
+    setPanding(true);
+    try {
+      const data = await registerWithUsername(formdata);
+      console.log(data);
+      if (data) {
+        localStorage.setItem("authToken", JSON.stringify(data));
+        setTimeout(() => closeAllModals(), 1000);
+      }
+    } catch (error: any) {
+      console.log(error.response.data);
+    }
+    setPanding(false);
   };
 
   const handleDragEnd = (event: any, info: any) => {
@@ -84,16 +146,19 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
     });
   };
 
-  const handleSelect = (name: string) => {
-    setSelectedValue(name);
+  const handleSelect = (name: any) => {
+    setSelectedValue(name.question);
+    setQuestionID(name.id);
     setShowValue(false); // Close dropdown after selection
   };
   return (
     <>
+      {panding && <Loader />}
+
       {isSecVisible && (
         <AnimatePresence>
           <motion.div
-            className={`login_box h-[480px] fixed bottom-0 z-[99999] w-screen py-4 px-[10px] ${
+            className={`login_box h-[540px] fixed bottom-0 z-[99999] w-screen py-4 px-[10px] ${
               darkmode ? "bg-[#2B2B2D]" : "bg-white"
             } rounded-t-2xl`}
             initial="hidden"
@@ -254,11 +319,11 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                     <div
                       className={`${
                         darkmode ? " bg-[#454547]" : " bg-[#f5f5f5]"
-                      } absolute z-[9999912] rounded-[8px] w-full mt-2`}
+                      } absolute z-[9999912] rounded-[8px] w-full mt-2 h-[300px] overflow-auto`}
                     >
-                      {value.map((vv: any) => (
+                      {question.map((vv: any) => (
                         <div
-                          onClick={() => handleSelect(vv.name)}
+                          onClick={() => handleSelect(vv)}
                           key={vv.id}
                           className=" px-[10px] py-[12px]"
                         >
@@ -267,7 +332,7 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                               darkmode ? "text-white/70" : "text-black/70"
                             }`}
                           >
-                            {vv.name}
+                            {vv.question}
                           </h1>
                         </div>
                       ))}
@@ -287,7 +352,7 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                     }  bg-transparent focus:outline-none ${
                       darkmode ? "text-white" : "text-black"
                     } placeholder-[#5B5B5B]`}
-                    required
+                    // required
                     placeholder="设置您的密码"
                   />
 
@@ -339,7 +404,9 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                   className={` mt-[-20px] text-[14px] font-[500] leading-[20px] text-white `}
                 >
                   <p>8-25个字符</p>
-                  <p>必须是以下两者中的至少两种组合：字母，数字</p>{" "}
+                  <p>
+                    如果您忘记密码，这些问题将帮助您重设密码。请选择只有您才能回答的问题
+                  </p>{" "}
                   {/* <p>letters, numbers.</p> */}
                 </div>
 
@@ -347,7 +414,7 @@ const SecQues: React.FC<SecQuesProps> = ({ setIsVisible }) => {
                   //   disabled={!validatePassword(password)}
                   type="submit"
                   className={`w-full text-[14px] text-white font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px] 
-              next_btn transition duration-300 ease-in-out`}
+                  next_button transition duration-300 ease-in-out`}
                 >
                   注册
                 </button>

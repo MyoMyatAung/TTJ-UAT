@@ -130,7 +130,7 @@ export const login = async (
     // console.log(resultText)
 
     // Step 5: Handle the response (decrypt if needed)
-    return resultText
+    return resultText;
     // if (!dataIsEncrypt) {
     //   return JSON.parse(resultText);
     // } else {
@@ -139,6 +139,54 @@ export const login = async (
   } catch (err) {
     // console.error("Error during login:", err);
     throw err;
+  }
+};
+
+export const getQuestion = async (username: string) => {
+  try {
+    // const response = await fetch(
+    //   convertToSecureUrl(
+    //     `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}`
+    //   ),
+    //   {
+    //     method: "GET",
+    //   }
+    // );
+     const url = convertToSecureUrl(
+      `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}`
+    );
+
+    const response : any = await axios.get(url)
+    // console.log(response);
+    // const QuesData = await response.json();
+
+    if (response && response.data) {
+      return {
+        data: response.data.data,
+      };
+    } else {
+      throw new Error("Failed to fetch questoin data");
+    }
+  } catch (err) {
+    console.error("Error fetching questoin:", err);
+    throw err;
+  }
+};
+
+export const registerWithUsername = async (formData: any) => {
+  try {
+    const gg = convertToSecurePayload({
+      formData,
+    });
+    console.log(formData)
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/user/register/username`,
+      formData
+    );
+    // return decryptWithAes(data);
+    return data
+  } catch (error) {
+    throw error;
   }
 };
 
