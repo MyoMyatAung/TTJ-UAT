@@ -127,12 +127,8 @@ const Captch: React.FC<{
       if (!data.code) {
         // setKey(data);
         dispatch(setGraphicKey(data));
-        setIsVisible(false);
+        // setIsVisible(false);
         dispatch(setCaptchaOpen(false));
-        setShowQuestion(true);
-        // dispatch(setOpenSecQues(true))
-        // dispatch(setOtpOpen(true));
-        // console.log(data);
       } else {
         dispatch(showToast({ message: "图形验证码错误", type: "error" }));
       }

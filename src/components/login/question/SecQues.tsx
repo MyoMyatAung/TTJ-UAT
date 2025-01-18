@@ -28,6 +28,9 @@ interface SecQuesProps {
   Userpassword: string;
   email: string;
   setShowQuestion: any;
+  question: any;
+  setQuestion: any;
+  session_token : any
 }
 
 const SecQues: React.FC<SecQuesProps> = ({
@@ -35,6 +38,9 @@ const SecQues: React.FC<SecQuesProps> = ({
   email,
   Userpassword,
   setShowQuestion,
+  question,
+  setQuestion,
+  session_token
 }) => {
   const { GraphicKey } = useSelector((state: any) => state.model);
   const [showValue, setShowValue] = useState(false);
@@ -42,7 +48,6 @@ const SecQues: React.FC<SecQuesProps> = ({
   const [selectedValue, setSelectedValue] = useState<any>("选择问题");
   const [showPassword, setShowPassword] = useState(false);
   const darkmode = useSelector(selectTheme);
-  const [question, setQuestion] = useState<any[]>([]);
   const [questionID, setQuestionID] = useState<any>();
   const [panding, setPanding] = useState(false);
   const [password, setPassword] = useState("");
@@ -69,26 +74,11 @@ const SecQues: React.FC<SecQuesProps> = ({
     { id: 3, name: "Your graduation day" },
     { id: 4, name: "Your favorite song" },
   ];
-  const getqq = async () => {
-    try {
-      const  {data}  = await getQuestion(email);
-      console.log(data)
-      // if (data) {
-        setQuestion(data);
-      // }
-    } catch (error: any) {
-      console.log('object')
-      if (error) {
-        const msg = error.response.data.msg;
-        dispatch(showToast({ message: msg, type: "error" }));
-        closeAllModals();
-      }
-    }
-  };
+ 
 
-  useEffect(() => {
-    getqq();
-  }, []);
+  // useEffect(() => {
+  //   getqq();
+  // }, []);
   const show = () => {
     setShowPassword(!showPassword);
   };
@@ -116,12 +106,13 @@ const SecQues: React.FC<SecQuesProps> = ({
       password: Userpassword,
       answer: password,
       question_id: questionID,
-      captcha: GraphicKey,
+      // captcha: GraphicKey,
+      session_token : session_token
     };
     setPanding(true);
     try {
       const data = await registerWithUsername(formdata);
-      console.log(data);
+      // console.log(data);
       if (data) {
         localStorage.setItem("authToken", JSON.stringify(data));
         setTimeout(() => closeAllModals(), 1000);

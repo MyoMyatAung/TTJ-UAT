@@ -22,6 +22,7 @@ import BackBtn from "../../assets/svg/BackBtn";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
 import SecQues from "./question/SecQues";
 import { showToast } from "../../pages/profile/error/ErrorSlice";
+import { getQuestion } from "../../services/userService";
 
 interface SignEmailProps {
   handleBack2: () => void; // Accept handleBack as a prop
@@ -40,6 +41,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
     openSecQues,
   } = useSelector((state: any) => state.model);
   // console.log(openSecQues)
+  const { GraphicKey } = useSelector((state: any) => state.model);
   const [showOtp, setShowOtp] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -49,6 +51,8 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
+  const [question, setQuestion] = useState<any[]>([]);
+  const [session_token, setSession_token] = useState<any>();
 
   const currentLocation = useLocation(); // Use the `useLocation` hook from react-router-dom
   const previousPathname = useRef(currentLocation.pathname);
@@ -99,16 +103,38 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
     }
   };
 
+  const getqq = async () => {
+    try {
+      const { data } = await getQuestion(email, GraphicKey);
+      console.log(data);
+      setQuestion(data.list);
+      setSession_token(data.session_token);
+      setShowQuestion(true)
+      setIsVisible(false)
+    } catch (error: any) {
+      if (error) {
+        const msg = error.response.data.msg;
+        dispatch(showToast({ message: msg, type: "error" }));
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (GraphicKey && email) {
+      getqq();
+    }
+  }, [GraphicKey]);
+
   const validateUsername = (password: string): string | null => {
-    const hasLetter = /[a-zA-Z]/.test(password); // Check for letters
-    const hasNumber = /\d/.test(password); // Check for numbers
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
 
     if (!hasLetter || !hasNumber) {
-      return "密码必须包含字母和数字"; // "The password must contain both letters and numbers."
+      return "密码必须包含字母和数字";
     }
 
     if (password.length < 5 || password.length > 25) {
-      return "请输入5-25位密码"; // "Please enter a password between 5-25 characters."
+      return "请输入5-25位密码";
     }
 
     return null;
@@ -117,13 +143,10 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationError = validatePassword(email);
-    // console.log(validationError)
-
-    if (!validationError) {
-      dispatch(showToast({ message: "请输入5-25位用户名", type: "error" }));
-      return;
-    }
-  
+    // if (!validationError) {
+    //   dispatch(showToast({ message: "请输入5-25位用户名", type: "error" }));
+    //   return;
+    // }
     try {
       dispatch(setCaptchaOpen(true));
       // setShowOtp(true);
@@ -150,7 +173,10 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
       )}
       {showQuestion && (
         <SecQues
-        setShowQuestion={setShowQuestion}
+          session_token={session_token}
+          question={question}
+          setQuestion={setQuestion}
+          setShowQuestion={setShowQuestion}
           email={email}
           Userpassword={password}
           setIsVisible={setIsVisible}

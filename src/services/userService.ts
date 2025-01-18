@@ -142,24 +142,12 @@ export const login = async (
   }
 };
 
-export const getQuestion = async (username: string) => {
+export const getQuestion = async (username: string, captcha: any) => {
   try {
-    // const response = await fetch(
-    //   convertToSecureUrl(
-    //     `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}`
-    //   ),
-    //   {
-    //     method: "GET",
-    //   }
-    // );
     const url = convertToSecureUrl(
-      `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}`
+      `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}&captcha=${captcha}`
     );
-
     const response: any = await axios.get(url);
-    // console.log(response);
-    // const QuesData = await response.json();
-
     if (response && response.data) {
       return {
         data: response.data.data,
@@ -320,7 +308,7 @@ export const check_answer_forgot = async (formData: any) => {
   }
 };
 
-export const reset_pass_forgot =async (formData:any) => {
+export const reset_pass_forgot = async (formData: any) => {
   try {
     const gg = convertToSecurePayload({
       formData,
@@ -335,7 +323,7 @@ export const reset_pass_forgot =async (formData:any) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const getOtp = async (
   // captchaCode: string,
