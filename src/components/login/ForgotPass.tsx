@@ -24,6 +24,8 @@ import { showToast } from "../../pages/profile/error/ErrorSlice";
 import ErrorToast from "../../pages/profile/error/ErrorToast";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
 import SecQues from "./forgot/SecQues";
+import Loader from "./Loader";
+import { get_ques_forgot } from "../../services/userService";
 
 interface ForgotPassProps {
   setForgot: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,15 +34,16 @@ interface ForgotPassProps {
 
 const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
   const darkmode = useSelector(selectTheme);
+  const [graphicKey, setGraphicKey] = useState<string | null>(null);
 
   const dispatch = useDispatch();
   const { openCaptcha, captchaCode, captchaKey } = useSelector(
     (state: any) => state.model
   );
   const [panding, setPanding] = useState(false);
-  const [accessToken, setToken] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+  const [showCapt, setShowCapt] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -49,16 +52,11 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [isFocusedConfirmPassword, setIsFocusedConfirmPassword] =
-    useState(false);
+  const [ques_id, setQues_id] = useState<any>();
+  const [ques, setQues] = useState<any>("");
 
-  const validatePassword = (username: string) => {
-    const lengthValid = email.length >= 0;
-    return lengthValid;
-  };
-
-  const RevalidatePassword = (password: string) => {
-    const lengthValid = confirmPassword.length >= 8 && password.length <= 25;
+  const validatePassword = (password: string) => {
+    const lengthValid = password.length >= 6 && password.length <= 25;
     const containsLetters = /[a-zA-Z]/.test(password);
     const containsNumbers = /\d/.test(password);
     return lengthValid && containsLetters && containsNumbers;
@@ -78,14 +76,13 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email);
-    // if (!passwordsMatch(password, confirmPassword)) {
-    //   dispatch(showToast({ message: "密码不匹配", type: "error" }));
-    //   return;
-    // }
-    // dispatch(setCaptchaOpen(true));
-    setShowQuestion(true)
-    setIsVisible(false)
+    const validationError = validatePassword(email);
+    // console.log(validationError);
+    if (!validationError) {
+      dispatch(showToast({ message: "请输入5-25位用户名", type: "error" }));
+      return;
+    }
+    setShowCapt(true);
   };
 
   const variants = {
@@ -107,6 +104,35 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
     }
   };
 
+  const getAnswer = async () => {
+    setPanding(true);
+    try {
+      const data = await get_ques_forgot(email, graphicKey);
+      if (data) {
+        // console.log(data.data);
+        setQues(data.data[0].question);
+        setQues_id(data.data[0].id);
+        setIsVisible(false);
+        setShowQuestion(true);
+      } else {
+        throw new Error();
+      }
+    } catch (error: any) {
+      const msg = error.response.data.msg;
+      dispatch(showToast({ message: msg, type: "error" }));
+    }
+    setPanding(false);
+  };
+
+  useEffect(() => {
+    if (graphicKey) {
+      getAnswer();
+    } else {
+      return;
+    }
+  }, [graphicKey]);
+  // console.log(ques, ques_id);
+
   const closeAllModals = () => {
     startTransition(() => {
       dispatch(setAuthModel(false));
@@ -116,13 +142,15 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
   };
   return (
     <>
-      {panding && <Panding />}
-      {showQuestion && <SecQues />}
+      {panding && <Loader />}
+      {showQuestion && <SecQues graphicKey={graphicKey} email={email} ques={ques} ques_id={ques_id} />}
 
       {isVisible && (
         <div className=" min-h-screen flex items-center justify-center overflow-hidde fixed z-[99999]">
-          {openCaptcha && (
+          {showCapt && (
             <Capt
+              setGraphicKey={setGraphicKey}
+              setShowCapt={setShowCapt}
               password={password}
               confirmPassword={confirmPassword}
               email={email}
@@ -217,7 +245,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                 </div>
 
                 <button
-                  disabled={!validatePassword(email)}
+                  // disabled={!validatePassword(email)}
                   type="submit"
                   className={`w-full text-[14px] text-white font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px] ${
                     validatePassword(password) ? "next_button " : "next_button"

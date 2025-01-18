@@ -152,11 +152,11 @@ export const getQuestion = async (username: string) => {
     //     method: "GET",
     //   }
     // );
-     const url = convertToSecureUrl(
+    const url = convertToSecureUrl(
       `${process.env.REACT_APP_API_URL}/user/security/questions?username=${username}`
     );
 
-    const response : any = await axios.get(url)
+    const response: any = await axios.get(url);
     // console.log(response);
     // const QuesData = await response.json();
 
@@ -178,13 +178,13 @@ export const registerWithUsername = async (formData: any) => {
     const gg = convertToSecurePayload({
       formData,
     });
-    console.log(formData)
+    console.log(formData);
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/username`,
       formData
     );
     // return decryptWithAes(data);
-    return data
+    return data;
   } catch (error) {
     throw error;
   }
@@ -285,6 +285,57 @@ export const check_captchaRegister = async (
     return error;
   }
 };
+
+export const get_ques_forgot = async (username: string, captcha: any) => {
+  try {
+    const url = convertToSecureUrl(
+      `${process.env.REACT_APP_API_URL}/user/answered/security/questions?username=${username}&captcha=${captcha}`
+    );
+
+    const response: any = await axios.get(url);
+    if (response && response.data) {
+      return {
+        data: response.data.data,
+      };
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const check_answer_forgot = async (formData: any) => {
+  try {
+    const gg = convertToSecurePayload({
+      formData,
+    });
+    // console.log(formData);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/user/security/check/answer`,
+      formData
+    );
+    // return decryptWithAes(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const reset_pass_forgot =async (formData:any) => {
+  try {
+    const gg = convertToSecurePayload({
+      formData,
+    });
+    // console.log(formData);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/user/forget/password`,
+      formData
+    );
+    // return decryptWithAes(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export const getOtp = async (
   // captchaCode: string,

@@ -11,13 +11,21 @@ import {
 } from "../../../features/login/ModelSlice";
 import { selectTheme } from "../../../pages/search/slice/ThemeSlice";
 import { showToast } from "../../../pages/profile/error/ErrorSlice";
+import { reset_pass_forgot } from "../../../services/userService";
 interface ResetProps {
   closeAllModals: () => any;
   variants: any;
+  session_token: any;
+  graphicKey: any;
 }
 
-const Reset: React.FC<ResetProps> = ({ closeAllModals, variants }) => {
-   
+const Reset: React.FC<ResetProps> = ({
+  closeAllModals,
+  variants,
+  session_token,
+  graphicKey,
+}) => {
+  console.log(session_token);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -52,13 +60,33 @@ const Reset: React.FC<ResetProps> = ({ closeAllModals, variants }) => {
   const Reshow = () => {
     setShowRePassword(!showRePassword);
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!passwordsMatch(password, confirmPassword)) {
       dispatch(showToast({ message: "密码不匹配", type: "error" }));
       return;
     }
-    console.log("ans");
+    try {
+      const formData = {
+        password: password,
+        repassword: confirmPassword,
+        session_token: session_token,
+        captcha: graphicKey,
+      };
+
+      const data = await reset_pass_forgot(formData);
+      if (data?.data) {
+        dispatch(showToast({ message: "找回成功", type: "error" }));
+
+        setTimeout(() => {
+          closeAllModals();
+        }, 700);
+      }
+    } catch (error: any) {
+      const msg = error.response.data.msg;
+      dispatch(showToast({ message: msg, type: "error" }));
+    }
   };
   const show = () => {
     setShowPassword(!showPassword);
@@ -228,6 +256,16 @@ const Reset: React.FC<ResetProps> = ({ closeAllModals, variants }) => {
                   </>
                 )}
               </div>
+            </div>
+            {/* decs */}
+            <div
+              className={` mt-[-20px] text-[14px] font-[500] leading-[20px] ${
+                validatePassword(password) ? " text-[#00A048]" : "text-[#888]"
+              }  `}
+            >
+              <p>8-25个字符</p>
+              <p>必须是以下两者中的至少两种组合：字母，数字</p>{" "}
+              {/* <p>letters, numbers.</p> */}
             </div>
             <button
               disabled={!validatePassword(password)}

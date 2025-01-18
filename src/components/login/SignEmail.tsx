@@ -117,7 +117,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationError = validatePassword(email);
-    console.log(validationError)
+    // console.log(validationError)
 
     if (!validationError) {
       dispatch(showToast({ message: "请输入5-25位用户名", type: "error" }));
