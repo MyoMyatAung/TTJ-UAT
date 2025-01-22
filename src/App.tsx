@@ -80,7 +80,7 @@ const App: React.FC = () => {
   };
 
   useEffect(()=>{
-    sendNativeEvent('train');
+    sendNativeEvent('hctsh5');
   },[]);
 
   useEffect(() => {
