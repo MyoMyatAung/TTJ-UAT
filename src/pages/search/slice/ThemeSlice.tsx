@@ -4,12 +4,15 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ThemeState {
   data: boolean;
 }
+const movieData = JSON.parse(localStorage.getItem("movieAppSettings") || "");
+
+// console.log(
+//   window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+// );
 
 // Initialize the state based on the current system preference
 const initialState: ThemeState = {
-  data:
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
+  data: movieData?.themeMode,
 };
 
 // Create the slice
@@ -37,19 +40,21 @@ export const selectTheme = (state: any) => state.theme.data;
 // The reducer
 export default ThemeSlice.reducer;
 
-// Listener for system theme changes
-export const initializeThemeListener = (dispatch: any) => {
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+// console.log(window.matchMedia("(prefers-color-scheme: dark)"));
 
-  const handleChange = (event: MediaQueryListEvent) => {
-    dispatch(setTheme(event.matches));
-  };
+// // Listener for system theme changes
+// export const initializeThemeListener = (dispatch: any) => {
+//   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Add the event listener
-  mediaQuery.addEventListener("change", handleChange);
+//   const handleChange = (event: MediaQueryListEvent) => {
+//     dispatch(setTheme(movieData?.themeMode));
+//   };
 
-  // Optional: Remove the listener if necessary (e.g., on app unmount)
-  return () => {
-    mediaQuery.removeEventListener("change", handleChange);
-  };
-};
+//   // Add the event listener
+//   mediaQuery.addEventListener("change", handleChange);
+
+//   // Optional: Remove the listener if necessary (e.g., on app unmount)
+//   return () => {
+//     mediaQuery.removeEventListener("change", handleChange);
+//   };
+// };
