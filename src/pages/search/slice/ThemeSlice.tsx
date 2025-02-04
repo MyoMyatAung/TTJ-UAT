@@ -4,12 +4,37 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ThemeState {
   data: boolean;
 }
-const movieData = JSON.parse(localStorage.getItem("movieAppSettings") || "");
+const movieData = JSON.parse(localStorage.getItem("movieAppSettings") || "{}");
 
 // console.log(
 //   window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
 // );
+  const applyTheme = (isDark: boolean) => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      sendEventToNative('dark');
+    } else {
+      root.classList.remove('dark');
+      sendEventToNative('light');
+    }
+  };
 
+  const sendEventToNative = async (theme: string) => {
+    if (
+      (window as any).webkit &&
+      (window as any).webkit.messageHandlers &&
+      (window as any).webkit.messageHandlers.jsBridge
+    ) {
+      // Send the initial playUrl event
+      (window as any).webkit.messageHandlers.jsBridge.postMessage({
+        eventName: "themeMode",
+        value: theme,
+      });
+    }
+  }
+  
+  applyTheme(movieData?.themeMode);
 // Initialize the state based on the current system preference
 const initialState: ThemeState = {
   data: movieData?.themeMode,

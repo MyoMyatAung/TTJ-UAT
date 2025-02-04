@@ -164,6 +164,35 @@ const SettingFirst = ({ darkmode }: any) => {
     localStorage.removeItem("headerTopics");
   };
 
+  const applyTheme = (isDark: boolean) => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      sendEventToNative('dark');
+    } else {
+      root.classList.remove('dark');
+      sendEventToNative('light');
+    }
+  };
+
+  useEffect(()=>{
+    applyTheme(themeMode);
+  },[themeMode]);
+
+  const sendEventToNative = async (theme: string) => {
+    if (
+      (window as any).webkit &&
+      (window as any).webkit.messageHandlers &&
+      (window as any).webkit.messageHandlers.jsBridge
+    ) {
+      // Send the initial playUrl event
+      (window as any).webkit.messageHandlers.jsBridge.postMessage({
+        eventName: "themeMode",
+        value: theme,
+      });
+    }
+  }
+  
   return (
     <div className="profile-div">
       <div
@@ -302,7 +331,7 @@ const SettingFirst = ({ darkmode }: any) => {
         <div className="p-first">
           <div className="flex gap-1 max-w-[230px] flex-col ">
             <h1 className={`${darkmode ? " text-white" : "text-black"}`}>
-              Theme mode
+              简体中文
             </h1>
             <p
               className={`settings-text ${
@@ -318,8 +347,11 @@ const SettingFirst = ({ darkmode }: any) => {
                 type="checkbox"
                 checked={themeMode}
                 onChange={() => {
-                  setThemeMode((prev: any) => !prev);
-                  dispatch(setTheme(!themeMode));
+                  setThemeMode((prev: boolean) => {
+                    const newMode = !prev;
+                    dispatch(setTheme(newMode));
+                    return newMode;
+                  });
                 }}
                 className="sr-only peer"
               />

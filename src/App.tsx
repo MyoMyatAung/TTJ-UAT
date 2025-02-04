@@ -68,7 +68,7 @@ const App: React.FC = () => {
     useSelector((state: any) => state.model);
   const { data, refetchAds } = useGetAdsQuery();
   const { refetch } = useGetRecommendedMoviesQuery();
-
+  
   const sendNativeEvent = (message: string) => {
     if (
       (window as any).webkit &&
