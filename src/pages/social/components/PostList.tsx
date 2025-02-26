@@ -808,7 +808,7 @@ const PostList = ({
             onClick={() => toggleDescription(post.post_id)}
             className="text-[#000000CC] dark:text-[#FFFFFFCC] ml-1"
           >
-            显示较少
+            收起
           </button>
         )}
       </>
