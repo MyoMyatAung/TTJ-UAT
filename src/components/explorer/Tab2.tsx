@@ -97,7 +97,7 @@ const Tab2 = () => {
                       "bg-pink-600 text-white p-1.5 rounded-full"
                 }`}
               >
-                {currentDate === date?.date ? "今" : date}
+                {currentDate === date?.date ? "今" : date?.date}
               </span>
             </button>
           ))}
