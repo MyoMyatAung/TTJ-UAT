@@ -293,7 +293,7 @@ const DetailPage: React.FC = () => {
       // Check if the next episode exists and is ready to play
       const nextEpisode = episodes?.[currentEpisodeNumber + 1];
       
-      if (nextEpisode) {
+      if (nextEpisode && !nextEpisode.ready_to_play) {
         try {
           // Always parse a fresh URL for the next episode for native player
           const parseData = await parsePlaybackUrl(
@@ -311,18 +311,15 @@ const DetailPage: React.FC = () => {
         } catch (error) {
           console.error("Error parsing playback URL for next episode:", error);
         }
+      } else {
+        // If no currentEpisode, just send the url as is
+        (window as any).webkit.messageHandlers.jsBridge.postMessage({
+          eventName: "playUrl",
+          value: url,
+        });
       }
     } else {
-      console.warn("JS Bridge is not available in the current environment.", currentEpisode);
-      if (currentEpisode && !currentEpisode.ready_to_play) {
-      const parseData = await parsePlaybackUrl(
-        currentEpisode?.episode_id?.toString() || "",
-        currentEpisode?.from_code || "",
-        currentEpisode?.play_url || "",
-        "1"
-      );
-      console.log("parseData is=>", parseData);
-    }
+      console.warn("JS Bridge is not available in the current environment.");
     }
   };
 
