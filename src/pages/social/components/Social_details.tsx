@@ -6,6 +6,9 @@ import Comment from "./Comment";
 import { useGetCommentListQuery } from "../services/socialApi";
 import InfiniteScroll from "react-infinite-scroll-component/dist";
 import Loader from "../../../pages/search/components/Loader";
+import AudioPlayer from "./AudioPlayer";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowingDetail } from "../../../features/login/ModelSlice";
 
 const Social_details: React.FC<any> = ({
   setShowDetail,
@@ -19,15 +22,30 @@ const Social_details: React.FC<any> = ({
   likeStatus,
   sendEventToNative,
   handleLikeChange,
+  activePlayer,
+  setActivePlayer,
 }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [list, setList] = useState<any[]>([]);
+  const { isShowingDetails } = useSelector((state: any) => state.model);
+  // console.log(isShowingDetails);
+  const dispatch = useDispatch();
 
-  const { data, isFetching, refetch } = useGetCommentListQuery({
+  const { data, isFetching, refetch, isLoading } = useGetCommentListQuery({
     post_id: post.post_id,
     page,
   });
+
+  useEffect(() => {
+    if (isShowingDetails) {
+      refetch();
+    }
+  }, [isShowingDetails, refetch]);
+
+  useEffect(() => {
+    dispatch(setShowingDetail(true));
+  }, [dispatch]);
 
   useEffect(() => {
     if (data?.data) {
@@ -60,7 +78,13 @@ const Social_details: React.FC<any> = ({
     }
     // console.log('next', scrollTop, scrollHeight, clientHeight);
   };
+  const handleBackSocial = () => {
+    setShowDetail(false);
+    dispatch(setShowingDetail(false));
+    setList([]);
+  };
 
+  console.log(" this is mf =>",isLoading)
   return (
     <div
       className="inset-0 px-[10px] fixed w-screen top-0 h-screen bg-background overflow-y-scroll z-[99999]"
@@ -68,7 +92,7 @@ const Social_details: React.FC<any> = ({
     >
       {/* header */}
       <div className="fixed bg-background z-[99] w-full top-0 grid grid-cols-3 py-[10px] justify-betwee items-cente">
-        <span onClick={() => setShowDetail(false)}>
+        <span onClick={handleBackSocial}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -89,9 +113,9 @@ const Social_details: React.FC<any> = ({
       </div>
       {/* <h1>{post.post_id}</h1> */}
 
-      <div className=" pt-[40px] px-[10px] flex flex-col">
+      <div className=" pt-[40px]  flex flex-col">
         {/* user */}
-        <div className="flex justify-between items-center mb-4 pt-4">
+        <div className="flex justify-between items-center mb-4 pt-4 px-[10px]">
           <div className="flex items-center ">
             {post?.user?.avatar ? (
               <img
@@ -223,7 +247,7 @@ const Social_details: React.FC<any> = ({
           </button>
         </div>
         {/* decs */}
-        <p className=" text-white text-[16px] font-[400] leading-[20px]">
+        <p className="px-[10px] text-white text-[16px] font-[400] leading-[20px]">
           {post.description}
         </p>
         {/* player */}
@@ -258,12 +282,20 @@ const Social_details: React.FC<any> = ({
               isCenterPlay={false}
               src={post?.files[0].resourceURL}
               thumbnail={post?.files[0].thumbnail}
-              status={false}
+              status={undefined}
+            />
+          )}
+          {post.file_type === "audio" && (
+            <AudioPlayer
+              src={post?.files[0]?.resourceURL}
+              index={post.post_id}
+              setActivePlayer={setActivePlayer}
+              activePlayer={activePlayer}
             />
           )}
         </div>
         {/* status */}
-        <div className="flex bg-[#161619] justify-between items-center px-4 py-3 text-xs">
+        <div className="flex bg-[#161619] justify-between items-center px-[10px] py-3 text-xs">
           {showCreatedTime ? (
             <div className="fixed top-0 left-0 flex h-screen items-center justify-center z-[1000] w-full">
               <p className="text-[12px] text-white font-semibold bg-gradient-to-r from-background to-gray-800 px-3 py-1 rounded-md">
@@ -353,34 +385,44 @@ const Social_details: React.FC<any> = ({
             </button>
           </div>
         </div>
-        {/* comment */}
-        <Comment
-          setList={setList}
-          post_id={post.post_id}
-          list={list}
-          isFetching={hasMore}
-        />
+        {isFetching || isLoading ? (
+          <div className="flex bg-background justify-center items-center w-full py-[100px]">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <div className=" h-[4px] bg-black w-full"></div>
+            {/* comment */}
+            <Comment
+              setList={setList}
+              post_id={post.post_id}
+              list={list}
+              isFetching={hasMore}
+              isLoading={isLoading}
+            />
 
-        <InfiniteScroll
-          // className=" h-[100px]"
-          dataLength={list.length}
-          next={fetchMoreDataCmt}
-          hasMore={hasMore}
-          loader={
-            <div className="flex bg-background justify-center items-center w-full pb-32">
-              <Loader />
-            </div>
-          }
-          endMessage={
-            <div className="flex bg-background justify-center items-center w-full pb-32">
-              <p style={{ textAlign: "center" }}>
-                <b className=" text-white/60">没有更多评论</b>
-              </p>
-            </div>
-          }
-        >
-          <></>
-        </InfiniteScroll>
+            <InfiniteScroll
+              // className=" h-[100px]"
+              dataLength={list.length}
+              next={fetchMoreDataCmt}
+              hasMore={hasMore}
+              loader={
+                <div className="flex bg-background justify-center items-center w-full pb-32">
+                  <Loader />
+                </div>
+              }
+              endMessage={
+                <div className="flex bg-background justify-center items-center w-full pb-32">
+                  <p style={{ textAlign: "center" }}>
+                    <b className=" hidden text-white/60">没有更多评论</b>
+                  </p>
+                </div>
+              }
+            >
+              <></>
+            </InfiniteScroll>
+          </>
+        )}
       </div>
     </div>
   );
