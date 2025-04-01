@@ -171,7 +171,7 @@ const Comment: React.FC<any> = ({
         </div>
       )}
 
-      <h1 className="text-white text-[16px] font-[400]">评论</h1>
+      <h1 className="dark:text-white text-black text-[16px] font-[400]">评论</h1>
       {list?.length === 0 && !isFetching ? (
         <div className="w-full flex flex-col justify-center items-center py-[40px] gap-[10px]">
           <img src={nc} alt="No Comments" />
