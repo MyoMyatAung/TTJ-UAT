@@ -47,6 +47,7 @@ const Social_details: React.FC<any> = ({
   useEffect(() => {
     dispatch(setShowingDetail(true));
   }, [dispatch]);
+  // console.log(isShowingDetails)
 
   useEffect(() => {
     if (data?.data) {
@@ -85,7 +86,7 @@ const Social_details: React.FC<any> = ({
     setList([]);
   };
 
-  console.log(" this is mf =>", isLoading);
+  // console.log(" this is mf =>", isLoading);
   return (
     <div
       className="inset-0 px-[10px] fixed w-screen top-0 h-screen bg-gray-300 dark:bg-black overflow-y-scroll z-[99999]"

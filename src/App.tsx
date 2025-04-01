@@ -65,12 +65,13 @@ const Member = React.lazy(() => import("./pages/share/member"));
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { openAuthModel, openLoginModel, openSignupModel, panding } =
+  const { openAuthModel, openLoginModel, openSignupModel, panding,isShowingDetails } =
     useSelector((state: any) => state.model);
   const { data, refetchAds } = useGetAdsQuery();
   const { refetch } = useGetRecommendedMoviesQuery();
   const [showNotice, setShowNotice] = useState(false);
   const { data: headerData } = useGetHeaderTopicsQuery();
+  console.log(isShowingDetails)
 
   const sendNativeEvent = (message: string) => {
     if (
@@ -285,7 +286,10 @@ const App: React.FC = () => {
             {!hideHeaderFooter && <FooterNav />}
             {showNotice && <Announce setShowNotice={setShowNotice} config={headerData} showNotice={showNotice}/>}
             {location.pathname.startsWith("/profile") && <FooterNav />}
-            {location.pathname.startsWith("/social") && <FooterNav />}
+            {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
+            {location.pathname.startsWith("/social") && !isShowingDetails && (
+                <FooterNav />
+              )}
             {location.pathname.startsWith("/short") && <FooterNav />}
 
             {(openAuthModel || openLoginModel || openSignupModel) && (
