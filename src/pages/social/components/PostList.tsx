@@ -636,6 +636,7 @@ const PostList = ({
     [key: string]: { isOpen: boolean; currentIndex: number };
   }>({});
   const dispatch = useDispatch();
+  let videoData = useRef<HTMLVideoElement[]>([]);
 
   useEffect(() => {
     const newFollowStatus: { [key: string]: boolean } = {};
@@ -1087,6 +1088,7 @@ const PostList = ({
             )}
             {post.file_type === "video" && (
               <Player
+                videoData={videoData}
                 isCenterPlay={true}
                 src={post?.files[0].resourceURL}
                 thumbnail={post?.files[0].thumbnail}
