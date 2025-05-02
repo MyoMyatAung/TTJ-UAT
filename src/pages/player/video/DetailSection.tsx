@@ -171,10 +171,8 @@ const DetailSection: React.FC<DetailSectionProps> = ({
       // Check if the cookie exists
       const cachedContent = Cookies.get(cookieKey);
       if (cachedContent) {
-        console.log('cachedContent is=>', cachedContent);
         copyToClipboard(JSON.parse(cachedContent).data.content);
-        // sendShareEventToNative(JSON.parse(cachedContent).data.link);
-        sendShareDetailEventToNative(JSON.parse(cachedContent).data.content)
+        sendShareEventToNative(JSON.parse(cachedContent).data.content);
         return;
       }
   
@@ -194,8 +192,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
       if (data && result) {
         // Save to cookie with a 2-hour expiry
         Cookies.set(cookieKey, JSON.stringify(result), { expires: 1 / 12 }); // 1/12 day = 2 hours
-        // sendShareEventToNative(result?.data.link);
-        sendShareDetailEventToNative(result?.data.content);
+        sendShareEventToNative(result?.data.content);
         copyToClipboard(result?.data.content);
       }
     } catch (error) {
