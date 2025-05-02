@@ -588,6 +588,10 @@ import Social_details from "./Social_details";
 import { useNavigate } from "react-router";
 import { selectTheme } from "../../../pages/search/slice/ThemeSlice";
 import AudioPlayer from "./AudioPlayer";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { convertToSecureUrl } from "../../../services/newEncryption";
+import { decryptWithAes } from "../../../services/newEncryption";
 
 const PostList = ({
   data,
@@ -840,8 +844,7 @@ const PostList = ({
   //     }
   //   };
 
-  const sendEventToNative = () => {
-    copyToClipboard("https://d1svxjht0opoc5.cloudfront.net/kkoor4.pdf");
+  const sendEventToNative = ({ value }: { value: any }) => {
     if (
       (window as any).webkit &&
       (window as any).webkit.messageHandlers &&
@@ -849,11 +852,47 @@ const PostList = ({
     ) {
       (window as any).webkit.messageHandlers.jsBridge.postMessage({
         eventName: "socialMediaShare",
-        value: "https://d1svxjht0opoc5.cloudfront.net/kkoor4.pdf",
+        value: value,
       });
     }
   };
 
+  const handleShare = async () => {
+    const cookieKey = "shareContent";
+
+    try {
+      // Check if the cookie exists
+      const cachedContent = Cookies.get(cookieKey);
+      if (cachedContent) {
+        copyToClipboard(JSON.parse(cachedContent).data.content);
+        sendEventToNative(JSON.parse(cachedContent).data.content);
+        return;
+      }
+
+      // Call the API if no cached content is found
+      const response = await axios.get(
+        convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/get_share`),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.data;
+      const result: any = await decryptWithAes(data);
+
+      if (data && result) {
+        // Save to cookie with a 2-hour expiry
+        Cookies.set(cookieKey, JSON.stringify(result), { expires: 1 / 12 }); // 1/12 day = 2 hours
+        sendEventToNative(result?.data.content);
+        copyToClipboard(result?.data.content);
+      }
+    } catch (error) {
+      console.error("Error fetching share content:", error);
+    } finally {
+    }
+  };
   const copyToClipboard = async (text: string) => {
     try {
       // Attempt to use the Clipboard API (works in most modern browsers)
@@ -899,7 +938,7 @@ const PostList = ({
           closeLightbox={closeLightbox}
           showCreatedTime={showCreatedTime}
           likeStatus={likeStatus}
-          sendEventToNative={sendEventToNative}
+          sendEventToNative={handleShare}
           handleLikeChange={handleLikeChange}
         />
       )}
@@ -1238,7 +1277,7 @@ const PostList = ({
                   {darkmode ? (
                     <button
                       className="flex items-center gap-x-2"
-                      onClick={sendEventToNative}
+                      onClick={handleShare}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1256,7 +1295,7 @@ const PostList = ({
                   ) : (
                     <button
                       className="flex items-center gap-x-2"
-                      onClick={sendEventToNative}
+                      onClick={handleShare}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
