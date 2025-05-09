@@ -382,14 +382,14 @@ const App: React.FC = () => {
                 showNotice={showNotice}
               />
             )}
-            {/* {showUpdateNotification && !showNotice && !isWebView() && (
+            {showUpdateNotification && !showNotice && !isWebView() && (
                 <div className="fixed bottom-20 left-0 right-0 z-[9999] flex justify-center">
                   <UpdateNotification 
                     onUpdate={handleUpdateClick} 
                     onClose={handleCloseUpdateNotification}
                   />
                 </div>
-              )} */}
+              )}
             {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
             {location.pathname.startsWith("/social") && !isShowingDetails && (

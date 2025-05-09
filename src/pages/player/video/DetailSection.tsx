@@ -33,6 +33,7 @@ import {
 } from "../../../services/newEncryption";
 import axios from "axios";
 import { useGetAdsQuery } from "../../../services/helperService";
+import copy from "copy-to-clipboard";
 
 const DetailSection: React.FC<DetailSectionProps> = ({
   movieDetail,
@@ -124,31 +125,25 @@ const DetailSection: React.FC<DetailSectionProps> = ({
     }
   };
 
+  function isWebView() {
+    return (
+      (window as any).webkit &&
+      (window as any).webkit.messageHandlers &&
+      (window as any).webkit.messageHandlers.jsBridge
+    );
+  }
+
   const copyToClipboard = async (text: string) => {
     try {
-      handleCopy();
-      // sendEventToNative(text);
-      // Attempt to use the Clipboard API (works in most modern browsers)
-      if ('clipboard' in navigator) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const input = document.createElement('input');
-        input.setAttribute('value', text); // Set the value to the text we want to copy
-        input.setAttribute('readonly', '');  // Make it readonly so user can't modify it
-        input.style.position = 'absolute';  // Ensure it doesn't affect layout
-        input.style.opacity = '0';          // Make it invisible
-        input.style.pointerEvents = 'none'; // Disable interaction
-        input.style.zIndex = '-9999';       // Position it off-screen
-
-        document.body.appendChild(input);  // Append it to the body
-        input.select();  // Select the text
-        document.execCommand('copy');  // Copy the selected text to clipboard
-        document.body.removeChild(input); // Remove the input from the DOM
+      if(isWebView()) {
+        sendEventToNative(text  );
       }
+      handleCopy();
+      copy(text);
     } catch (error) {
       console.error("Clipboard copy failed", error);
     }
-  }
+  };
 
   const sendEventToNative = (text: string) => {
     if (

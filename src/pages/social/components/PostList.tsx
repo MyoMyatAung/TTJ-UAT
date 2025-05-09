@@ -592,6 +592,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { convertToSecureUrl } from "../../../services/newEncryption";
 import { decryptWithAes } from "../../../services/newEncryption";
+import copy from "copy-to-clipboard";
 
 const PostList = ({
   data,
@@ -893,25 +894,10 @@ const PostList = ({
     } finally {
     }
   };
+  
   const copyToClipboard = async (text: string) => {
     try {
-      // Attempt to use the Clipboard API (works in most modern browsers)
-      if ("clipboard" in navigator) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const input = document.createElement("input");
-        input.setAttribute("value", text); // Set the value to the text we want to copy
-        input.setAttribute("readonly", ""); // Make it readonly so user can't modify it
-        input.style.position = "absolute"; // Ensure it doesn't affect layout
-        input.style.opacity = "0"; // Make it invisible
-        input.style.pointerEvents = "none"; // Disable interaction
-        input.style.zIndex = "-9999"; // Position it off-screen
-
-        document.body.appendChild(input); // Append it to the body
-        input.select(); // Select the text
-        document.execCommand("copy"); // Copy the selected text to clipboard
-        document.body.removeChild(input); // Remove the input from the DOM
-      }
+      copy(text);
     } catch (error) {
       console.error("Clipboard copy failed", error);
     } finally {

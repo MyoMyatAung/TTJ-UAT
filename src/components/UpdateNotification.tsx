@@ -1,7 +1,7 @@
 import React from "react";
 import notiIcon from "../assets/noti.png";
-import appIcon from "../assets/logo2.svg";
-
+import appIcon from "../assets/promptLogo.png";
+import closeIcon from "../assets/close.png";
 interface UpdateNotificationProps {
   onUpdate: () => void;
   onClose: () => void;
@@ -18,7 +18,7 @@ export default function UpdateNotification({ onUpdate, onClose }: UpdateNotifica
       }}
     >
       {/* Top row: notification icon and close button */}
-      <div className="flex justify-between items-center w-full mb-2">
+      <div className="flex justify-between items-center w-full mb-6">
         <div className="flex items-center">
           <img
             src={notiIcon}
@@ -32,7 +32,7 @@ export default function UpdateNotification({ onUpdate, onClose }: UpdateNotifica
           onClick={onClose}
           aria-label="Close"
         >
-          ✕
+          <img src={closeIcon} alt="Close" className="w-4 h-4" />
         </button>
       </div>
       
