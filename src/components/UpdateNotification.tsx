@@ -44,11 +44,11 @@ export default function UpdateNotification({ onUpdate, onClose }: UpdateNotifica
           className="w-12 h-12 rounded-lg mr-3"
         />
         <div className="flex-1">
-          <div className="font-bold text-white">电影猎手</div>
+          <div className="font-bold text-white">火车太顺</div>
           <div className="text-sm text-gray-300 mt-1">建议安装，当前版本同样可用！</div>
         </div>
         <button
-          className="bg-[#F54100] text-white font-medium px-4 py-1 rounded-lg hover:opacity-90"
+          className="bg-[#FE58B5] text-white font-medium px-4 py-1 rounded-lg hover:opacity-90"
           onClick={onUpdate}
         >
           去下载
