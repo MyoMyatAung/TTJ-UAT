@@ -197,6 +197,7 @@ const App: React.FC = () => {
     location.pathname.startsWith("/share") ||
     location.pathname.startsWith("/invite") ||
     location.pathname.startsWith("/point_info") ||
+    location.pathname.startsWith("/game") ||
     location.pathname.startsWith("/share/member");
 
   const hideHeader = location.pathname.startsWith("/explorer");
@@ -379,6 +380,7 @@ const App: React.FC = () => {
                   <Route path="/share/member" element={<Member />} />
                   {/* points */}
                   <Route path="/point_info" element={<Point />} />
+                  <Route path="/game" element={<Game />} />
                 </Routes>
               </Suspense>
               <ErrorToast />
