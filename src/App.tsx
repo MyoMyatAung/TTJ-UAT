@@ -62,6 +62,14 @@ const Contact = React.lazy(() => import("./pages/profile/Contact"));
 const Invite = React.lazy(() => import("./pages/profile/Invite"));
 const Share = React.lazy(() => import("./pages/share"));
 const Member = React.lazy(() => import("./pages/share/member"));
+//point 
+const Game = React.lazy(() => import("./pages/Point/pages/Game"));
+const Mall = React.lazy(() => import("./pages/Point/pages/Mall"));
+const List = React.lazy(() => import("./pages/Point/pages/List"));
+const Shop = React.lazy(() => import("./pages/Point/pages/Shop"));
+const ItemDetail = React.lazy(() => import("./pages/Point/pages/ItemDetail"));
+const Point = React.lazy(() => import("./pages/Point"));
+const ItemInfo = React.lazy(() => import("./pages/Point/pages/ItemInfo"));
 
 // ProtectedRoute component to handle route guarding
 // const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -188,6 +196,7 @@ const App: React.FC = () => {
     location.pathname.startsWith("/contact") ||
     location.pathname.startsWith("/share") ||
     location.pathname.startsWith("/invite") ||
+    location.pathname.startsWith("/point_info") ||
     location.pathname.startsWith("/share/member");
 
   const hideHeader = location.pathname.startsWith("/explorer");
@@ -368,6 +377,8 @@ const App: React.FC = () => {
                   <Route path="/share" element={<Share />} />
                   <Route path="/invite" element={<Invite />} />
                   <Route path="/share/member" element={<Member />} />
+                  {/* points */}
+                  <Route path="/point_info" element={<Point />} />
                 </Routes>
               </Suspense>
               <ErrorToast />
