@@ -12,7 +12,7 @@ import { useGetActivityQuery } from "../service/PointApi";
 import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import noListImg from "../test.png";
+import noListImg from "../test2.png";
 
 export const Mall = () => {
   const [t, st] = useState<any>(0);
