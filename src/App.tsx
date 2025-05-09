@@ -389,8 +389,8 @@ const App: React.FC = () => {
                     onClose={handleCloseUpdateNotification}
                   />
                 </div>
-              )}
-            {location.pathname.startsWith("/profile") && <FooterNav />} */}
+              )} */}
+            {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
             {location.pathname.startsWith("/social") && !isShowingDetails && (
               <FooterNav />
