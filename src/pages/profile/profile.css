@@ -131,7 +131,7 @@
   padding: 17px 16px;
   align-items: center;
   border-radius: 20px;
-  background: rgba(136, 136, 136, 0.12);
+  /* background: rgba(136, 136, 136, 0.12); */
 
   backdrop-filter: blur(12px);
 }
