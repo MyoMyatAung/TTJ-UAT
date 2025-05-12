@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { setUser } from "./slice/UserSlice";
 import ImageWithPlaceholder from "./info/ImageWithPlaceholder";
 import Right from "../../../assets/svg/Right";
+import RightDark from "../../../assets/svg/RightDark";
+
+
 
 const Header = ({ darkmode }: any) => {
   const dispatch = useDispatch();
@@ -186,20 +189,7 @@ const Header = ({ darkmode }: any) => {
               <span className={`${darkmode ? " text-white" : "text-black"} text-[14px] font-[600]`}>
                 {user.integral}
               </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <g opacity="1">
-                  <path
-                    d="M13.1722 12L8.22217 7.04999L9.63617 5.63599L16.0002 12L9.63617 18.364L8.22217 16.95L13.1722 12Z"
-                    fill="white"
-                  />
-                </g>
-              </svg>
+              <div>{darkmode ? <RightDark /> : <Right />}</div>
             </div>
           </button>
         </div>

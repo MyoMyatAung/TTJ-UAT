@@ -343,7 +343,7 @@ const ProfileFirst = ({ darkmode }: any) => {
                   stroke-width="1.2"
                 />
               </svg>
-              <div className="profile-text">积分商城</div>
+              <div className={`${darkmode ? "profile-text_dark" : "profile-text"}`}>积分商城</div>
             </div>
             <div className="flex gap-1 items-center">
               <div className="text-[12px] text-[#d0bc94]">
