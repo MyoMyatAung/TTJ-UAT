@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import numeral from "numeral";
 import "../pages/style.css";
 import Loader from "../../../pages/search/components/Loader";
-import noListImg from "../test2.png";
+import noListImg from "../test3.png";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
