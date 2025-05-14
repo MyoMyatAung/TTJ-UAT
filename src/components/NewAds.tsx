@@ -9,6 +9,7 @@ interface AdItem {
     image?: string;
   };
   remarks?: string;
+  sort?: number;
 }
 
 interface NewAdsProps {
@@ -22,55 +23,37 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
 
   useEffect(() => {
     if (data?.data?.[section]) {
-      setCur(data.data[section] as AdItem[]);
+      const ads = data?.data?.[section];
+      const sortedData = [...ads].sort((a, b) => b.sort - a.sort);
+      setCur(sortedData as AdItem[]);
     }
   }, [data, section]);
 
   const AdItemComponent = ({ item }: { item: AdItem }) => {
     const imageUrl = item.data?.image || "";
     const { imgSrc, isLoading: imageLoading } = useCachedImage(imageUrl);
-    const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-    useEffect(() => {
-      setIsImageLoaded(false);
-    }, [imgSrc]);
     return (
       <Link
         target="_blank"
         className="flex flex-col justify-center items-center gap-[4px]"
         to={item.data?.url || "#"}
       >
-        {/* {imageLoading && (
+        {imageLoading && (
           <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
             <p className="text-[12px] font-[500] text-[#888]">
               {item?.remarks}
             </p>
           </div>
-        )} */}
-        {/* {imgSrc && (
+        )}
+        {imgSrc && (
           <img
             src={imgSrc}
             className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
             alt="ad"
             loading="lazy"
           />
-        )} */}
-        {!isImageLoaded || !imgSrc ? (
-          <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
-            <p className="text-[12px] font-[500] text-[#888]">
-              {item?.remarks}
-            </p>
-          </div>
-        ) : (
-          <img
-            src={imgSrc}
-            className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
-            alt="ad"
-            // loading="lazy"
-            loading="eager"
-          />
         )}
-
         <p className="text-[12px] font-[500] text-[#888]">
           {item?.remarks || "No description"}
         </p>
