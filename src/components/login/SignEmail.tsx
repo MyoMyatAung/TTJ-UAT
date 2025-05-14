@@ -113,7 +113,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
       setIsVisible(false);
     } catch (error: any) {
       if (error) {
-        const msg = error.response.data.msg;
+        const msg = error?.response?.data?.msg;
         dispatch(showToast({ message: msg, type: "error" }));
       }
     }
@@ -385,7 +385,9 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                   </div>
 
                   <button
-                    disabled={!validatePassword(password) && validatePassword(email)}
+                    disabled={
+                      !validatePassword(password) && validatePassword(email)
+                    }
                     type="submit"
                     className={`w-full text-[14px] text-white font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px] ${
                       !validatePassword(password) && !validatePassword(email)
