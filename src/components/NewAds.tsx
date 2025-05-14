@@ -27,7 +27,7 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
   }, [data, section]);
 
   const AdItemComponent = ({ item }: { item: AdItem }) => {
-    const imageUrl = item.data?.image || '';
+    const imageUrl = item.data?.image || "";
     const { imgSrc, isLoading: imageLoading } = useCachedImage(imageUrl);
 
     return (
@@ -36,14 +36,28 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
         className="flex flex-col justify-center items-center gap-[4px]"
         to={item.data?.url || "#"}
       >
-        {imageLoading && (
+        {/* {imageLoading && (
           <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
             <p className="text-[12px] font-[500] text-[#888]">
               {item?.remarks}
             </p>
           </div>
-        )}
-        {imgSrc && (
+        )} */}
+        {/* {imgSrc && (
+          <img
+            src={imgSrc}
+            className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
+            alt="ad"
+            loading="lazy"
+          />
+        )} */}
+        {imageLoading || !imgSrc ? (
+          <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
+            <p className="text-[12px] font-[500] text-[#888]">
+              {item?.remarks}
+            </p>
+          </div>
+        ) : (
           <img
             src={imgSrc}
             className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
@@ -51,6 +65,7 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
             loading="lazy"
           />
         )}
+
         <p className="text-[12px] font-[500] text-[#888]">
           {item?.remarks || "No description"}
         </p>
@@ -59,12 +74,16 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
   };
 
   return (
-    <div className={`${fromMovie ? '' : 'max-md:px-3 px-10'} flex flex-col justify-center py-1`}>
+    <div
+      className={`${
+        fromMovie ? "" : "max-md:px-3 px-10"
+      } flex flex-col justify-center py-1`}
+    >
       <div className="grid w-full grid-cols-5 md:grid-cols-10 justify-center items-center gap-2">
         {isLoading
           ? Array.from({ length: 10 }).map((_, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex flex-col items-center gap-[4px] animate-pulse mb-1"
               >
                 <div className="w-[58px] h-[58px] bg-white/30 rounded-[4px]" />
