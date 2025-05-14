@@ -140,7 +140,8 @@ const SettingFirst = ({ darkmode }: any) => {
   const [autoMode, setAutoMode] = useState(initialSettings.autoMode || false); // Picture-in-Picture Mode
   const [hideMode, setHideMode] = useState(initialSettings.hideMode || false); // Picture-in-Picture Mode
   const [themeMode, setThemeMode] = useState(
-    initialSettings.themeMode || false
+    // initialSettings.themeMode || false
+    initialSettings.themeMode ?? true
   ); // Picture-in-Picture Mode
   // const [vibrantMode, setVibrantMode] = useState(
   //   initialSettings.vibrantMode || false
@@ -167,17 +168,17 @@ const SettingFirst = ({ darkmode }: any) => {
   const applyTheme = (isDark: boolean) => {
     const root = document.documentElement;
     if (isDark) {
-      root.classList.add('dark');
-      sendEventToNative('dark');
+      root.classList.add("dark");
+      sendEventToNative("dark");
     } else {
-      root.classList.remove('dark');
-      sendEventToNative('light');
+      root.classList.remove("dark");
+      sendEventToNative("light");
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     applyTheme(themeMode);
-  },[themeMode]);
+  }, [themeMode]);
 
   const sendEventToNative = async (theme: string) => {
     if (
@@ -191,8 +192,8 @@ const SettingFirst = ({ darkmode }: any) => {
         value: theme,
       });
     }
-  }
-  
+  };
+
   return (
     <div className="profile-div">
       <div
@@ -331,7 +332,7 @@ const SettingFirst = ({ darkmode }: any) => {
         <div className="p-first">
           <div className="flex gap-1 max-w-[230px] flex-col ">
             <h1 className={`${darkmode ? " text-white" : "text-black"}`}>
-            深色主题 
+              深色主题
             </h1>
             <p
               className={`settings-text ${
@@ -345,7 +346,7 @@ const SettingFirst = ({ darkmode }: any) => {
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
-                checked={themeMode}
+                checked={!themeMode}
                 onChange={() => {
                   setThemeMode((prev: boolean) => {
                     const newMode = !prev;
@@ -357,7 +358,7 @@ const SettingFirst = ({ darkmode }: any) => {
               />
               <div
                 className={`w-9 h-5 bg-[#606060] hover:bg-[#606060] peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all ${
-                  themeMode
+                  !themeMode
                     ? "peer-checked:bg-[#fe58b5] hover:peer-checked:bg-[#fe58b5]"
                     : "peer-checked:bg-[#606060]"
                 }`}
