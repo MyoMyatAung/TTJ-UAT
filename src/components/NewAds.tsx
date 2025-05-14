@@ -29,7 +29,11 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
   const AdItemComponent = ({ item }: { item: AdItem }) => {
     const imageUrl = item.data?.image || "";
     const { imgSrc, isLoading: imageLoading } = useCachedImage(imageUrl);
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+    useEffect(() => {
+      setIsImageLoaded(false);
+    }, [imgSrc]);
     return (
       <Link
         target="_blank"
@@ -51,7 +55,7 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
             loading="lazy"
           />
         )} */}
-        {imageLoading || !imgSrc ? (
+        {!isImageLoaded || !imgSrc ? (
           <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
             <p className="text-[12px] font-[500] text-[#888]">
               {item?.remarks}
@@ -62,7 +66,8 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
             src={imgSrc}
             className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
             alt="ad"
-            loading="lazy"
+            // loading="lazy"
+            loading="eager"
           />
         )}
 
