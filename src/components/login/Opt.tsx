@@ -23,7 +23,7 @@ interface OptProps {
   email?: string;
   password?: string;
   phone?: string;
-  key: string;
+  setBox?: any;
   setIsVisible: (isVisible: boolean) => void;
 }
 interface messg {
@@ -35,11 +35,11 @@ const Opt: React.FC<OptProps> = ({
   password,
   phone,
   setIsVisible,
-  key,
+  setBox,
 }) => {
   const [signUpEmail, { isLoading, error }] = useSignUpEmailMutation();
   const [signUpPhone, { isLoading: phload }] = useSignUpPhoneMutation();
-  const [panding,setPanding] = useState(false)
+  const [panding, setPanding] = useState(false);
   const [otpDigits, setOtpDigits] = useState<string[]>(Array(6).fill(""));
   const [timer, setTimer] = useState<number>(59);
   const [buttonText, setButtonText] = useState<string>("59 s");
@@ -49,20 +49,34 @@ const Opt: React.FC<OptProps> = ({
   const { captchaCode, captchaKey, openSignUpEmailModel, GraphicKey } =
     useSelector((state: any) => state.model);
 
-  useEffect(() => {
-    if (email) {
-      getOtp(GraphicKey, email, "email");
-    } else if (phone) {
-      getOtp(GraphicKey, phone, "phone");
-    }
-  }, [email, phone]);
+  // useEffect(() => {
+  //   const fetchOtp = async () => {
+  //     try {
+  //       if (email) {
+  //         await getOtp(GraphicKey, email, "email");
+  //       } else if (phone) {
+  //         await getOtp(GraphicKey, phone, "phone");
+  //       }
+  //     } catch (error: any) {
+  //       // console.error("Error fetching OTP:", error);
+  //       const msg = error.response.data.msg;
+  //       dispatch(showToast({ message: msg, type: "error" }));
+  //       handleBack();
+  //       // Show error message to the user, e.g., using state or toast notification
+  //     }
+  //   };
+
+  //   if (email || phone) {
+  //     fetchOtp();
+  //   }
+  // }, [email, phone]);
 
   useEffect(() => {
     const countdown = setInterval(() => {
       if (timer > 0) setTimer((prev) => prev - 1);
     }, 1000);
-
-    if (timer === 0) setButtonText("Resend Code");
+    
+    if (timer === 0) setButtonText("重新发送");
     else setButtonText(`${timer} s`);
 
     return () => clearInterval(countdown);
@@ -96,28 +110,35 @@ const Opt: React.FC<OptProps> = ({
 
       const otpCode = updatedOTP.join("");
       try {
-        if(email && password){
-          setPanding(true)
-          const data: any = await signup({ email, password, email_code: otpCode });
-          if(data){
+        if (email && password) {
+          setPanding(true);
+          const data: any = await signup({
+            email,
+            password,
+            email_code: otpCode,
+          });
+          if (data) {
             dispatch(setOtpOpen(false));
             localStorage.setItem("authToken", JSON.stringify(data));
             setTimeout(() => closeAllModals(), 1000);
           }
-
-        }else if(phone && password){
-          setPanding(true)
-          const data: any = await signupPh({ phone, password, sms_code: otpCode });
-          if(data){
+        } else if (phone && password) {
+          setPanding(true);
+          const data: any = await signupPh({
+            phone,
+            password,
+            sms_code: otpCode,
+          });
+          if (data) {
             dispatch(setOtpOpen(false));
             localStorage.setItem("authToken", JSON.stringify(data));
             setTimeout(() => closeAllModals(), 1000);
           }
         }
-      } catch (err : any) {
+      } catch (err: any) {
         const Errmessage = err.response.data.msg;
-           dispatch(showToast({ message: Errmessage, type: "error" }));
-           setPanding(false)
+        dispatch(showToast({ message: Errmessage, type: "error" }));
+        setPanding(false);
         inputRefs.current.forEach((input) => input?.focus()); // Optional: Refocus on inputs i
         // console.log(err,'email')
       }
@@ -139,7 +160,9 @@ const Opt: React.FC<OptProps> = ({
   };
 
   const handleBack = () => {
+    setBox(false);
     dispatch(setOtpOpen(false));
+
     setIsVisible(true);
   };
 
@@ -172,16 +195,15 @@ const Opt: React.FC<OptProps> = ({
           ))}
         </div>
 
-        <p className="text-[#888] text-[10px] font-light leading-[15px] p-3 text-center">
+        <p className="text-[#888] text-[14px] font-light leading-[15px] p-3 text-center">
           验证码已发送至 <span className=" text-white">{email}</span>{" "}
           <span className="text-white">{phone}</span> 请
-
           检查您的邮件并确保检查您的垃圾邮件文件夹{" "}
         </p>
       </div>
 
       <div className="w-full flex justify-center items-center">
-        { panding ? (
+        {panding ? (
           <button
             disabled
             className="next_button text-[#777] w-[320px] text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]"
