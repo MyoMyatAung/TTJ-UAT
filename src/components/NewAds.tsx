@@ -80,7 +80,7 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
               loading="lazy"
             />
           )}
-          <h1 className="text-[#fff] text-[12px] font-[500]">
+          <h1 className="text-[12px] font-[500] text-[#888]">
             {item?.remarks || "No description"}
           </h1>
         </Link>
