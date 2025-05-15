@@ -94,11 +94,15 @@ const Favorite = () => {
     <>
       <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
       <div className=" text-white">
-        <Navbar isEditMode={isEditMode} darkmode={darkmode} onEditClick={handleEditClick} />
+        <Navbar
+          isEditMode={isEditMode}
+          darkmode={darkmode}
+          onEditClick={handleEditClick}
+        />
 
         <>
           <Main
-          darkmode={darkmode}
+            darkmode={darkmode}
             currentPage={currentPage}
             setcurrentType={setcurrentType}
             currentType={currentType}
