@@ -320,7 +320,7 @@ const App: React.FC = () => {
             <></>
           )}
           <div
-            className={`flex flex-col min-h-screen ${
+            className={`flex  flex-col min-h-screen ${
               panding ? "invisible" : "visible"
             }`}
           >
