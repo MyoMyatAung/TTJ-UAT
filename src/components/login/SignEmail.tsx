@@ -123,7 +123,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
           dispatch(setOtpOpen(false));
         }
       } catch (error: any) {
-        // console.error("Error fetching OTP:", error);
+        console.error("Error fetching OTP:", error);
         const msg = error.response.data.msg;
         dispatch(showToast({ message: msg, type: "error" }));
         dispatch(setOtpOpen(false));
@@ -187,24 +187,23 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                     使用邮箱注册
                   </h2>
                   <div className="p-3" onClick={handleClose}>
-
-                  {darkmode ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="10"
-                      height="10"
-                      viewBox="0 0 10 10"
-                      fill="none"
-                    >
-                      <path
-                        d="M5 3.88906L8.88906 0L10 1.11094L6.11094 5L10 8.88906L8.88906 10L5 6.11094L1.11094 10L0 8.88906L3.88906 5L0 1.11094L1.11094 0L5 3.88906Z"
-                        fill="white"
-                        fill-opacity="0.8"
-                      />
-                    </svg>
-                  ) : (
-                    <CloseBtn />
-                  )}
+                    {darkmode ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        fill="none"
+                      >
+                        <path
+                          d="M5 3.88906L8.88906 0L10 1.11094L6.11094 5L10 8.88906L8.88906 10L5 6.11094L1.11094 10L0 8.88906L3.88906 5L0 1.11094L1.11094 0L5 3.88906Z"
+                          fill="white"
+                          fill-opacity="0.8"
+                        />
+                      </svg>
+                    ) : (
+                      <CloseBtn />
+                    )}
                   </div>
                 </div>
 

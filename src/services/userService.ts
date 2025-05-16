@@ -373,6 +373,53 @@ export const reset_pass_forgot = async ({
   }
 };
 
+// export const getOtp = async (
+//   // captchaCode: string,
+//   // keyStatus: string,
+//   key: string,
+//   sendTo: string, // This can be either email or phone
+//   sendType: "email" | "phone" // Specifies if it's for email or phone
+// ): Promise<void> => {
+//   try {
+//     const formData = {
+//       send_type: sendType, // Set as "email" or "phone"
+//       to: sendTo, // The value will be either an email or a phone number
+//       captcha: key,
+//       timestamp: new Date().getTime(), // Add timestamp for extra security
+//     };
+//     // console.log(formData);
+
+//     // Step 3: Encrypt the data
+//     const publicKey = process.env.REACT_APP_PUBLIC_KEY;
+//     if (!publicKey) {
+//       throw new Error("Public key is not defined");
+//     }
+//     // const encryptedData = encryptWithRsa(JSON.stringify(formData), publicKey);
+//     const cc = convertToSecurePayload(formData);
+
+//     // Step 4: Generate signature for the encrypted data
+//     // const signature = generateSignature(encryptedData);
+
+//     // Step 5: Make the GET request with encrypted data and signature as query parameters
+//     const otpResponse = await axios.get(
+//       convertToSecureUrl(
+//         `${
+//           process.env.REACT_APP_API_URL
+//         }/user/get_code?send_type=${sendType}&to=${sendTo}&captcha=${key}&timestamp=${new Date().getTime()}`
+//       )
+//       // {
+//       //   params: {
+//       //     formData
+//       //   },
+//       // }
+//     );
+//     // console.log(otpResponse);
+//   } catch (error: any) {
+//     // console.error("Error requesting OTP:", error);
+//     return error.response;
+//   }
+// };
+
 export const getOtp = async (
   // captchaCode: string,
   // keyStatus: string,
@@ -416,7 +463,7 @@ export const getOtp = async (
     // console.log(otpResponse);
   } catch (error: any) {
     // console.error("Error requesting OTP:", error);
-    return error.response;
+    throw error;
   }
 };
 
