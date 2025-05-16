@@ -18,6 +18,7 @@ import {
 } from "../../features/login/RegisterApi";
 import ErrorToast from "../../pages/profile/error/ErrorToast";
 import { decryptWithAes } from "../../services/newEncryption";
+import { selectTheme } from "../../pages/search/slice/ThemeSlice";
 
 interface OptProps {
   email?: string;
@@ -37,6 +38,8 @@ const Opt: React.FC<OptProps> = ({
   setIsVisible,
   setBox,
 }) => {
+  const darkmode = useSelector(selectTheme);
+
   const [signUpEmail, { isLoading, error }] = useSignUpEmailMutation();
   const [signUpPhone, { isLoading: phload }] = useSignUpPhoneMutation();
   const [panding, setPanding] = useState(false);
@@ -75,7 +78,7 @@ const Opt: React.FC<OptProps> = ({
     const countdown = setInterval(() => {
       if (timer > 0) setTimer((prev) => prev - 1);
     }, 1000);
-    
+
     if (timer === 0) setButtonText("重新发送");
     else setButtonText(`${timer} s`);
 
@@ -167,15 +170,23 @@ const Opt: React.FC<OptProps> = ({
   };
 
   return (
-    <div className=" fixed top-0 w-screen h-screen  z-[9090900909] bg-[#161619] p-[20px]">
+    <div className=" fixed top-0 w-screen h-screen  z-[9090900909] bg-white dark:bg-[#161619] p-[20px]">
       <div className=" flex justify-center items-center">
-        <img
-          className=" absolute top-[20px] left-[20px] z-[9999008819]"
+        {/* <img
+          className=" "
           onClick={handleBack}
           src={back}
           alt="Back"
-        />{" "}
-        <h1 className="text-white text-[16px] font-semibold leading-[20px]">
+        /> */}
+        <img
+          className={`${
+            darkmode ? "" : "w-[30px] bg-gray-300 rounded-full"
+          } absolute top-[20px] left-[20px] z-[9999008819]`}
+          src={back}
+          alt="Back"
+          onClick={handleBack}
+        />
+        <h1 className="text-black dark:text-white text-[16px] font-semibold leading-[20px]">
           验证码
         </h1>
       </div>
@@ -196,7 +207,8 @@ const Opt: React.FC<OptProps> = ({
         </div>
 
         <p className="text-[#888] text-[14px] font-light leading-[15px] p-3 text-center">
-          验证码已发送至 <span className=" text-white">{email}</span>{" "}
+          验证码已发送至{" "}
+          <span className="text-[#888] dark:text-white">{email}</span>{" "}
           <span className="text-white">{phone}</span> 请
           检查您的邮件并确保检查您的垃圾邮件文件夹{" "}
         </p>

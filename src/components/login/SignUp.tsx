@@ -123,12 +123,14 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
               {/* header */}
               <div className="flex justify-between items-center w-full pb-[px]">
                 <img
-                  className="p-[6px] cursor-pointer"
+                  className={`${
+                    darkmode ? "" : "w-[30px] bg-gray-300 rounded-full"
+                  } p-[6px]  cursor-pointer `}
                   src={back}
                   alt="Back"
                   onClick={handleBack}
                 />
-                <h2 className="text-[18px] pr- font-[600] leading-[20px] text-white">
+                <h2 className="text-[18px] pr- font-[600] leading-[20px] text-black dark:text-white">
                   注册
                 </h2>
                 <div onClick={handleClose} className="p-3">
@@ -153,10 +155,10 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
               </div>
               {/* decs */}
               <div className=" w-full pl-2 py-[10px]">
-                <h1 className=" text-white text-[14px] font-[500]">
+                <h1 className="text-black dark:text-white text-[14px] font-[500]">
                   选择注册方式{" "}
                 </h1>
-                <p className=" text-white/60 text-[14px] font-[400]">
+                <p className=" text-black/60 dark:text-white/60 text-[14px] font-[400]">
                   海外用户请选择使用邮箱注册
                 </p>
               </div>

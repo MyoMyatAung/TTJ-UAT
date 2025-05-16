@@ -177,12 +177,20 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
               <motion.p className="w-[60px] h-[4px] drag_line mt-[12px] cursor-pointer bg-gray-400"></motion.p>
               <div className="flex justify-between items-center w-full pb-[20px]">
                 <img
-                  className="p-3 cursor-pointer"
+                  className={`${
+                    darkmode ? "" : "w-[30px] bg-gray-300 rounded-full"
+                  } p-[6px]  cursor-pointer `}
                   src={back}
                   alt="Back"
                   onClick={handleBack2}
                 />
-                <h2 className="text-[18px] font-[600] leading-[20px] text-white">
+                {/* <img
+                  className="p-3 cursor-pointer"
+                  src={back}
+                  alt="Back"
+                  onClick={handleBack2}
+                /> */}
+                <h2 className="text-[18px] font-[600] leading-[20px] text-black dark:text-white">
                   使用手机号码注册
                 </h2>
                 <div onClick={handleClose} className=" p-3">
@@ -217,7 +225,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPhone(e.target.value)}
                     onFocus={() => setIsFocusedEmail(true)}
                     onBlur={() => setIsFocusedEmail(phone !== "")}
-                    className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
                     required
                     placeholder="请输入您的电话号码"
                   />
@@ -240,7 +248,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={() => setIsFocusedPassword(true)}
                     onBlur={() => setIsFocusedPassword(password !== "")}
-                    className="w-full px- py-2 bg-[#2B2B2D] input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
                     required
                     placeholder="设置您的密码"
                     minLength={8}
