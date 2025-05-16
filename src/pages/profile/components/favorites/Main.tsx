@@ -105,7 +105,11 @@ const Main: React.FC<MainProps> = ({
     >
       <div className="mt-3">
         {isAdsLoading || isAdsFetching ? (
-          <div className="flex bg-white justify-center items-center h-[126px]">
+          <div
+            className={`flex ${
+              darkmode ? "bg-[#161619]" : "bg-white"
+            }    justify-center items-center h-[126px]`}
+          >
             <Loader />
           </div>
         ) : (
@@ -178,7 +182,13 @@ const Main: React.FC<MainProps> = ({
                 </div>
 
                 <div>
-                  <h1 className={`fav_text truncate ${darkmode ? "text-white" : "text-black"}`}>{movie?.movie_name}</h1>
+                  <h1
+                    className={`fav_text truncate ${
+                      darkmode ? "text-white" : "text-black"
+                    }`}
+                  >
+                    {movie?.movie_name}
+                  </h1>
                 </div>
               </div>
             ))}
@@ -436,7 +446,9 @@ const Main: React.FC<MainProps> = ({
               </h2>
               <div className="flex justify-between">
                 <button
-                  className={`${darkmode ? " text-white" : "text-[#080808]"} w-[50%] p-3 border-t-[1px] border-r-[1px] border-white/30`}
+                  className={`${
+                    darkmode ? " text-white" : "text-[#080808]"
+                  } w-[50%] p-3 border-t-[1px] border-r-[1px] border-white/30`}
                   onClick={cancelDelete}
                 >
                   取消

@@ -34,30 +34,57 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
     const { imgSrc, isLoading: imageLoading } = useCachedImage(imageUrl);
 
     return (
-      <Link
-        target="_blank"
-        className="flex flex-col justify-center items-center gap-[4px]"
-        to={item.data?.url || "#"}
-      >
-        {imageLoading && (
-          <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
-            <p className="text-[12px] font-[500] text-[#888]">
-              {item?.remarks}
-            </p>
-          </div>
-        )}
-        {imgSrc && (
-          <img
-            src={imgSrc}
-            className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto"
-            alt="ad"
-            loading="lazy"
-          />
-        )}
-        <p className="text-[12px] font-[500] text-[#888]">
-          {item?.remarks || "No description"}
-        </p>
-      </Link>
+      <>
+        {/* <Link
+          target="_blank"
+          className="flex flex-col justify-center items-center gap-[4px]"
+          to={item.data?.url || "#"}
+        >
+          {imageLoading && (
+            <div className="w-[56px] h-[56px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
+              <p className="text-[12px] font-[500] text-[#888]">
+                {item?.remarks}
+              </p>
+            </div>
+          )}
+          {imgSrc && (
+            <img
+              src={imgSrc}
+              className="w-[56px] h-[56px] object-cover rounded-[8px] mx-auto"
+              alt="ad"
+              loading="lazy"
+            />
+          )}
+          <p className="text-[12px] font-[500] text-[#888]">
+            {item?.remarks || "No description"}
+          </p>
+        </Link> */}
+
+        <Link
+          to={item.data?.url || "#"}
+          target="_blank"
+          className="flex flex-col justify-center items-center gap-[6px]"
+        >
+          {imageLoading && (
+            <div className="w-[58px] h-[58px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
+              <p className="text-[12px] font-[500] text-[#888]">
+                {item?.remarks}
+              </p>
+            </div>
+          )}
+          {imgSrc && (
+            <img
+              src={imgSrc}
+              className="w-[58px] h-[58px] rounded-[8px] border-[#222]"
+              alt="ad"
+              loading="lazy"
+            />
+          )}
+          <h1 className="text-[12px] font-[500] text-[#888]">
+            {item?.remarks || "No description"}
+          </h1>
+        </Link>
+      </>
     );
   };
 
@@ -68,13 +95,13 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
       } flex flex-col justify-center py-1`}
     >
       <div className="grid w-full grid-cols-5 md:grid-cols-10 justify-center items-center gap-2">
-        {isLoading
+        {isLoading && !cur?.length
           ? Array.from({ length: 10 }).map((_, index) => (
               <div
                 key={index}
                 className="flex flex-col items-center gap-[4px] animate-pulse mb-1"
               >
-                <div className="w-[58px] h-[58px] bg-white/30 rounded-[4px]" />
+                <div className="w-[56px] h-[56px] bg-white/30 rounded-[4px]" />
               </div>
             ))
           : cur.map((item, index) => (

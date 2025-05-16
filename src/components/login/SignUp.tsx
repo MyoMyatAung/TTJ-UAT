@@ -6,7 +6,7 @@ import back from "../../assets/login/back.svg";
 import close from "../../assets/login/close.svg";
 import SignEmail from "./SignEmail";
 import SignPhone from "./SignPhone";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoginOpen } from "../../features/login/ModelSlice";
 import { setSignupOpen } from "../../features/login/ModelSlice";
 import { setAuthModel } from "../../features/login/ModelSlice";
@@ -14,13 +14,15 @@ import phone from "../../assets/login/phone.svg";
 import email from "../../assets/login/email.svg";
 import "../../pages/login/login.css";
 import { useLocation } from "react-router-dom";
+import { selectTheme } from "../../pages/search/slice/ThemeSlice";
 import CloseBtn from "../../assets/svg/CloseBtn";
-import BackBtn from "../../assets/svg/BackBtn";
 
 interface SignUpProps {
   handleBack: () => void; // Accept handleBack as a prop
 }
 const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
+  const darkmode = useSelector(selectTheme);
+
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +35,6 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
   const previousPathname = useRef(currentLocation.pathname);
 
   useEffect(() => {
-    handleShowSignUpEmail()
     if (previousPathname.current !== currentLocation.pathname) {
       setIsVisible(false);
       closeAllModals();
@@ -76,7 +77,7 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
   };
 
   const handleBack2 = () => {
-    setIsVisible(false); // Show the login component
+    setIsVisible(true); // Show the login component
     setEmailVisible(false); // Hide the LoginEmail component
     setPhoneVisible(false); // Hide the LoginEmail component
   };
@@ -101,13 +102,13 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-white flex items-center justify-center overflow-hidden">
-      {isEmailVisible && <SignEmail handleBack2={handleBack} />}
-      {/* {isPhoneVisible && <SignPhone handleBack2={handleBack2} />} */}
+    <div className="min-h-screen flex items-center justify-center overflow-hidden">
+      {isEmailVisible && <SignEmail handleBack2={handleBack2} />}
+      {isPhoneVisible && <SignPhone handleBack2={handleBack2} />}
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            className="login_box fixed hidden h-[480px]  bottom-0 z-[99999] w-screen max-w-m"
+            className="bg-[#fff] login_box dark:bg-[#2B2B2D] fixed h-[480px]  bottom-0 z-[99999] w-screen max-w-m"
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -121,34 +122,43 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
               <motion.p className="w-[60px] h-[4px] drag_line mt-[12px] cursor-pointer"></motion.p>
               {/* header */}
               <div className="flex justify-between items-center w-full pb-[px]">
-                {/* <img
-                  className="p-[6px] cursor-pointer"
+                <img
+                  className={`${
+                    darkmode ? "" : "w-[30px] bg-gray-300 rounded-full"
+                  } p-[6px]  cursor-pointer `}
                   src={back}
                   alt="Back"
                   onClick={handleBack}
-                /> */}
-                <div className="p-[6px]" onClick={handleBack}>
-                  <BackBtn />
-                </div>
-                <h2 className="text-[18px] font-[600] leading-[20px] text-black">
+                />
+                <h2 className="text-[18px] pr- font-[600] leading-[20px] text-black dark:text-white">
                   注册
                 </h2>
-                <div className="p-3 cursor-pointer" onClick={handleClose}>
-                  <CloseBtn />
+                <div onClick={handleClose} className="p-3">
+                  {darkmode ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                    >
+                      <path
+                        d="M5 3.88906L8.88906 0L10 1.11094L6.11094 5L10 8.88906L8.88906 10L5 6.11094L1.11094 10L0 8.88906L3.88906 5L0 1.11094L1.11094 0L5 3.88906Z"
+                        fill="white"
+                        fill-opacity="0.8"
+                      />
+                    </svg>
+                  ) : (
+                    <CloseBtn />
+                  )}
                 </div>
-                {/* <img
-                  className="close_btn p-3 cursor-pointer"
-                  src={close}
-                  alt="Close"
-                  onClick={handleClose}
-                /> */}
               </div>
               {/* decs */}
               <div className=" w-full pl-2 py-[10px]">
-                <h1 className=" text-black text-[14px] font-[500]">
+                <h1 className="text-black dark:text-white text-[14px] font-[500]">
                   选择注册方式{" "}
                 </h1>
-                <p className=" text-black/60 text-[14px] font-[400]">
+                <p className=" text-black/60 dark:text-white/60 text-[14px] font-[400]">
                   海外用户请选择使用邮箱注册
                 </p>
               </div>
@@ -159,14 +169,14 @@ const SignUp: React.FC<SignUpProps> = ({ handleBack }) => {
                 /> */}
                 <button
                   onClick={handleShowSignUpPhone}
-                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-black"
+                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-white"
                 >
                   <img className=" absolute left-[20px]" src={phone} alt="" />
                   使用手机号注册
                 </button>
                 <button
                   onClick={handleShowSignUpEmail}
-                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-black"
+                  className="new_css_button relative text-[14px] font-[600] leading-[22px] w-[320px] px-[16px] py-[10px] flex justify-center items-center gap-[8px] text-white"
                 >
                   <img className=" absolute left-[20px]" src={email} alt="" />
                   使用邮箱注册
