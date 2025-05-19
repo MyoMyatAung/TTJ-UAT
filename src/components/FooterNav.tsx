@@ -11,10 +11,6 @@ import socialIcon from "../assets/SocialFooter.svg";
 import socialSelectedIcon from "../assets/socialSelected1.png";
 import profileIcon from "../assets/ProfileFooter.svg";
 import profileSelectedIcon from "../assets/profileSelected1.png";
-import beforePostIcon from "../assets/beforepost.png";
-import afterPostIcon from "../assets/afterpost.png";
-import beforeShortIcon from "../assets/beforeshort.png";
-import afterShortIcon from "../assets/aftershort.png";
 
 const Footer: FC = () => {
   const { t } = useTranslation();
