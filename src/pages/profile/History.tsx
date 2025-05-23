@@ -47,6 +47,9 @@ const History = () => {
           isEditMode={isEditMode}
           onEditClick={handleEditClick}
         />
+        <div className="py-2 mt-20">
+          <NewAds section="play_record_up" />
+        </div>
         {movies?.length > 0 ? (
           <Main
             darkmode={darkmode}
