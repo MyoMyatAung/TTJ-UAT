@@ -320,7 +320,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
       {/* Tab content */}
       <div
         className={`dark:bg-[#161619] bg-white rounded-b-lg p-1 ${
-          activeTab === "tab-1" && "pt-4 px-4"
+          activeTab === "tab-1" && "pt-2 px-4"
         }`}
       >
         {activeTab === "tab-1" && (

@@ -66,7 +66,7 @@
 //           className="flex flex-col justify-center items-center gap-[6px]"
 //         >
 //           {imageLoading && (
-//             <div className="min-w-60px] min-h-[60px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
+//             <div className="min-w-60px] h-[60px] object-cover rounded-[8px] mx-auto bg-white/15 animate-pulse flex justify-center items-center">
 //               <p className="text-[12px] font-[500] text-[#888]">
 //                 {item?.remarks}
 //               </p>
@@ -75,7 +75,7 @@
 //           {imgSrc && (
 //             <img
 //               src={imgSrc}
-//               className="min-w-60px] min-h-[60px] rounded-[8px] border-[#222]"
+//               className="min-w-60px] h-[60px] rounded-[8px] border-[#222]"
 //               alt="ad"
 //               loading="lazy"
 //             />

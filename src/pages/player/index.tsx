@@ -236,6 +236,12 @@ const DetailPage: React.FC = () => {
     }
   }, [movieDetail, currentEpisode]);
 
+  useEffect(() => {
+    if (activeTab === "tab-1") {
+      window.scrollTo(0, 0);
+    }
+  }, [activeTab]);
+
   const handleVideoError = (errorUrl: string) => {
     // if (errorVideoUrl !== errorUrl && errorUrl) {
     //   setErrorVideoUrl(errorUrl);
