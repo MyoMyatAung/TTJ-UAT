@@ -328,7 +328,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         <div
           ref={videoElementRef}
           className={`absolute top-0 left-0 w-full ${
-            reHeight ? "h-[220px]" : "h-full"
+            reHeight ? "h-[220px]" : "h-[220px]"
           }`}
         ></div>
       </div>
