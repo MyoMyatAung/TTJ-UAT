@@ -556,7 +556,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
             backgroundSize: "cover",
           }}
         >
-          <div className="flex justify-start items-start flex-row gap-2.5 px-1.5 bg-[#FF6A33] rounded-tl-[10px] rounded-tr-sm rounded-br-[10px] rounded-bl-sm absolute right-[0px] top-[-7.5px]">
+          <div className="flex justify-start items-start flex-row gap-2.5 px-1.5 bg-[#FE58B5] rounded-tl-[10px] rounded-tr-sm rounded-br-[10px] rounded-bl-sm absolute right-[0px] top-[-7.5px]">
             <span className="text-[#FFFFFF] text-[10px] font-['PingFang_SC'] text-center font-medium">
               可兑换
             </span>
