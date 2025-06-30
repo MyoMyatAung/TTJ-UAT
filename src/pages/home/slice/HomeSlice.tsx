@@ -12,6 +12,7 @@ const HomeSlice = createSlice({
     activeNav: 0,
     showFilterTag: false,
     isScrolling: false,
+    activePointTab: 1,
   },
   reducers: {
     setActiveTab: (state, { payload }) => {
@@ -41,6 +42,9 @@ const HomeSlice = createSlice({
     setIsScrolling: (state, { payload }) => {
       state.isScrolling = payload;
     },
+    setActivePointTab: (state, { payload }) => {
+      state.activePointTab = payload;
+    },
   },
 });
 
@@ -54,5 +58,6 @@ export const {
   setShowFilterTag,
   setSortName,
   setIsScrolling,
+  setActivePointTab
 } = HomeSlice.actions;
 export default HomeSlice.reducer;
