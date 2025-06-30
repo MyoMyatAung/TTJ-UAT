@@ -62,6 +62,14 @@ const Contact = React.lazy(() => import("./pages/profile/Contact"));
 const Invite = React.lazy(() => import("./pages/profile/Invite"));
 const Share = React.lazy(() => import("./pages/share"));
 const Member = React.lazy(() => import("./pages/share/member"));
+//point
+const Game = React.lazy(() => import("./pages/Point/pages/Game"));
+const Mall = React.lazy(() => import("./pages/Point/pages/Mall"));
+const List = React.lazy(() => import("./pages/Point/pages/List"));
+const Shop = React.lazy(() => import("./pages/Point/pages/Shop"));
+const ItemDetail = React.lazy(() => import("./pages/Point/pages/ItemDetail"));
+const Point = React.lazy(() => import("./pages/Point"));
+const ItemInfo = React.lazy(() => import("./pages/Point/pages/ItemInfo"));
 
 // ProtectedRoute component to handle route guarding
 // const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -139,7 +147,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!panding) {
-      const hasSeenUpdateNotification = sessionStorage.getItem("hasSeenUpdateNotification");
+      const hasSeenUpdateNotification = sessionStorage.getItem(
+        "hasSeenUpdateNotification"
+      );
       if (!hasSeenUpdateNotification) {
         setShowUpdateNotification(true);
       }
@@ -188,7 +198,14 @@ const App: React.FC = () => {
     location.pathname.startsWith("/contact") ||
     location.pathname.startsWith("/share") ||
     location.pathname.startsWith("/invite") ||
-    location.pathname.startsWith("/share/member");
+    location.pathname.startsWith("/point_info") ||
+    location.pathname.startsWith("/game") ||
+    location.pathname.startsWith("/point_mall") ||
+    location.pathname.startsWith("/list") ||
+    location.pathname.startsWith("/itemDetail") ||
+    location.pathname.startsWith("/share/member") ||
+    location.pathname.startsWith("/shop") ||
+    location.pathname.startsWith("/info");
 
   const hideHeader = location.pathname.startsWith("/explorer");
 
@@ -298,8 +315,9 @@ const App: React.FC = () => {
 
   const handleUpdateClick = () => {
     const link = headerData?.data?.app_store_link;
+
     // Handle update action here
-    window.open(link, '_blank');
+    window.open(link, "_blank");
     // Or any other update logic
     setShowUpdateNotification(false);
     sessionStorage.setItem("hasSeenUpdateNotification", "true");
@@ -376,6 +394,14 @@ const App: React.FC = () => {
                   <Route path="/share" element={<Share />} />
                   <Route path="/invite" element={<Invite />} />
                   <Route path="/share/member" element={<Member />} />
+                  {/* points */}
+                  <Route path="/point_info" element={<Point />} />
+                  <Route path="/game" element={<Game />} />
+                  <Route path="/point_mall" element={<Mall />} />
+                  <Route path="/list" element={<List />} />
+                  <Route path="/itemDetail/:id" element={<ItemDetail />} />
+                  <Route path="/shop/:id" element={<Shop />} />
+                  <Route path="/info/:id" element={<ItemInfo />} />
                 </Routes>
               </Suspense>
               <ErrorToast />

@@ -131,7 +131,7 @@
   padding: 17px 16px;
   align-items: center;
   border-radius: 20px;
-  background: rgba(136, 136, 136, 0.12);
+  /* background: rgba(136, 136, 136, 0.12); */
 
   backdrop-filter: blur(12px);
 }
@@ -227,6 +227,13 @@
   padding: 8px;
   border-radius: 20px;
   background: white;
+  backdrop-filter: blur(16px);
+}
+
+.profile-div-main_dark {
+  padding: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
 }
 
