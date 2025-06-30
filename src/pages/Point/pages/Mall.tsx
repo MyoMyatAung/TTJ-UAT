@@ -30,13 +30,14 @@ export const Mall = () => {
     skip: !token,
   });
 
-   // staging
+  // staging
   const parsedUserData = JSON.parse(userData || "{}");
 
   //prod
   // const parsedUserData = userData;
 
   const integralDetails = parsedUserData?.data?.integral;
+  const coupon = parsedUserData?.data?.coupon;
 
   const [pageConfig, setPageConfig] = useState({
     page: 1,
@@ -258,18 +259,25 @@ export const Mall = () => {
       <div className="w-full relative mt-[-54px]">
         <img alt="" src="head_bg.png" />
         <div className="container px-4 absolute bottom-[-29px]">
-          <div className="w-full jf-card flex rounded-xl h-[84px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
-            <div className="flex items-end leading-[32px] gap-2">
-              <span className="text-[32px]">
-                {integralDetails ? integralDetails : 0}
+          <div className="w-full jf-card flex rounded-xl h-[94px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
+            {/* add line */}
+            <div className=" fles flex-col gap-[10px]">
+              <div className="flex items-end leading-[32px] gap-2">
+                <span className="text-[32px]">
+                  {integralDetails ? integralDetails : 0}
+                </span>
+                <span className="text-black/60 text-sm">积分</span>
+              </div>
+              <span className="new_redeem">
+                兑换劵 :{" "}
+                <span className="new_redeem_num">{coupon ? coupon : 0}</span> 张
               </span>
-              <span className="text-black/60 text-sm">积分</span>
             </div>
             <button
               onClick={handleOpenTask}
               className="border border-orange-secondary px-4 py-1.5 rounded-full font-medium text-xs;"
             >
-              获取积分
+              获取金币和劵
             </button>
           </div>
         </div>
