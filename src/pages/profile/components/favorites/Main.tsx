@@ -4,13 +4,12 @@ import Ads from "../../../search/components/Ads";
 import Loader from "../../../search/components/Loader";
 import ImageWithPlaceholder from "../../../search/components/ImgPlaceholder";
 import { useDeleteCollectMutation } from "../../services/profileApi"; // Import delete mutation
-import NewAds from "../../../../components/NewAds";
 
 interface MainProps {
   isEditMode: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   movies: any[];
-  advert: any;
+
   isLoading: boolean;
   isFetching: boolean;
   setMovies: any;
@@ -19,21 +18,19 @@ interface MainProps {
   setcurrentType: any;
   onTypeClick: any;
   currentPage: any;
-  isAdsLoading: any;
-  isAdsFetching: any;
+
   darkmode: boolean;
 }
 
 const Main: React.FC<MainProps> = ({
   currentType,
-  isAdsLoading,
-  isAdsFetching,
+
   currentPage,
   types,
   isEditMode,
   setIsEditMode,
   movies,
-  advert,
+
   isFetching,
   setMovies,
   onTypeClick,
@@ -101,10 +98,10 @@ const Main: React.FC<MainProps> = ({
     <div
       className={` ${
         darkmode ? "bg-[#161619]" : "bg-white"
-      }   pb-[50px] mt-[65px] `}
+      }   pb-[50px] mt-[20px] `}
     >
       <div className="mt-3">
-        {isAdsLoading || isAdsFetching ? (
+        {/* {isAdsLoading || isAdsFetching ? (
           <div
             className={`flex ${
               darkmode ? "bg-[#161619]" : "bg-white"
@@ -114,12 +111,12 @@ const Main: React.FC<MainProps> = ({
           </div>
         ) : (
           <>
-            {/* <Ads advert={advert} /> */}
+
             <NewAds section="collect_up" />
           </>
-        )}
+        )} */}
 
-        <div className="flex items-center gap-2 mt-7 px-3 overflow-x-scroll max-w-full whitespace-nowrap scrollbar-hide">
+        <div className="flex items-center gap-2 mt-0 pt-4 px-3 overflow-x-scroll max-w-full whitespace-nowrap scrollbar-hide">
           {types?.map((type: any, index: number) => (
             <button
               key={index}

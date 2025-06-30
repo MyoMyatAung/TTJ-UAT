@@ -242,10 +242,18 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname !== "/") {
-      refetchAds();
-      refetch();
+      const lastFetchTime = sessionStorage.getItem('lastRefetchTime');
+      const now = Date.now();
+      const twoHours = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+      
+      // If no previous fetch time or 2 hours have passed, refetch
+      if (!lastFetchTime || (now - parseInt(lastFetchTime)) > twoHours) {
+        refetchAds();
+        refetch();
+        sessionStorage.setItem('lastRefetchTime', now.toString());
+      }
     }
-  }, [location.pathname]);
+  }, [location.pathname, refetchAds, refetch]);
 
   const { hideMode } = JSON.parse(
     localStorage.getItem("movieAppSettings") || "{}"
@@ -338,7 +346,7 @@ const App: React.FC = () => {
             <></>
           )}
           <div
-            className={`flex  flex-col min-h-screen ${
+            className={`flex  flex-col full-height-fallback ${
               panding ? "invisible" : "visible"
             }`}
           >
