@@ -256,7 +256,7 @@ const Footer: FC = () => {
 
   return (
     <footer
-      className={`bg-[#1f1f21] fixed  transition-all duration-300 w-full shadow-lg z-[200] bottom-0`}
+    className={`bg-[#fff] dark:bg-[#1f1f21] fixed  transition-all duration-300 w-full shadow-lg z-[200] bottom-0`}
     >
       <div
         className={`flex pt-4 justify-around items-center py-2  ${
