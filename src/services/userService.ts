@@ -183,13 +183,19 @@ export const registerWithUsername = async ({
   }
 };
 
-export const signup = async ({ email, password, email_code }: any) => {
+export const signup = async ({
+  email,
+  password,
+  email_code,
+  invite_code,
+}: any) => {
   try {
     let bd = convertToSecurePayload({
       email,
       password,
       email_code,
       timestamp: new Date().getTime(),
+      invite_code,
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/email`,
@@ -202,13 +208,19 @@ export const signup = async ({ email, password, email_code }: any) => {
   }
 };
 
-export const signupPh = async ({ phone, password, sms_code }: any) => {
+export const signupPh = async ({
+  phone,
+  password,
+  sms_code,
+  invite_code,
+}: any) => {
   try {
     let bd = convertToSecurePayload({
       phone,
       password,
       sms_code,
       timestamp: new Date().getTime(),
+      invite_code,
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/phone`,

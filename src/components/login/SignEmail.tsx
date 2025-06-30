@@ -52,6 +52,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
 
   const currentLocation = useLocation(); // Use the `useLocation` hook from react-router-dom
   const previousPathname = useRef(currentLocation.pathname);
+  const [inviteCode, setInviteCode] = useState("");
 
   useEffect(() => {
     if (previousPathname.current !== currentLocation.pathname) {
@@ -146,6 +147,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
           password={password}
           email={email}
           setBox={setBox}
+          invite_code={inviteCode}
         />
       )}
       <div className="min-h-screen flex items-center justify-center overflow-hidde fixed z-[99999]">
@@ -164,7 +166,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
         <AnimatePresence>
           {isVisible && (
             <motion.div
-              className="bg-[#fff] login_box dark:bg-[#2B2B2D] h-[480px] fixed bottom-0 z-[9999] w-screen py-4 px-[20px] rounded-t-2xl"
+              className="bg-[#fff] login_box dark:bg-[#2B2B2D] h-[580px] fixed bottom-0 z-[9999] w-screen py-4 px-[20px] rounded-t-2xl"
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -252,7 +254,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
                       required
                       placeholder="设置您的密码"
-                      minLength={8}
+                      minLength={6}
                       maxLength={25}
                     />
                     {/* <label
@@ -287,6 +289,22 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                     <p>6-25个字符</p>
                     <p>必须是以下两者中的至少两种组合：字母，数字</p>{" "}
                     {/* <p>letters, numbers.</p> */}
+                  </div>
+
+                  {/* invite_code */}
+
+                  <div
+                    className={` ${
+                      darkmode ? "invite_code_dark" : "invite_code"
+                    }  w-full flex justify-center items-center py-[14px]`}
+                  >
+                    <input
+                      type="text"
+                      value={inviteCode}
+                      onChange={(e) => setInviteCode(e.target.value)}
+                      className={`w-[150px] bg-transparent focus:outline-none ${darkmode ? "text-white" : "text-black"}  placeholder-[#5B5B5B]`}
+                      placeholder="输入促销代码（可选）"
+                    />
                   </div>
 
                   <button
