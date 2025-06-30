@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import noListImg from "../test2.png";
+import { useGetUserQuery } from "../../../pages/profile/services/profileApi";
 
 export const Mall = () => {
   const [t, st] = useState<any>(0);
@@ -22,10 +23,21 @@ export const Mall = () => {
   const token = parsedLoggedIn?.data?.access_token;
   const navigate = useNavigate();
 
-  const { data: activity } = useGetActivityQuery("", {
+  // const { data: activity } = useGetActivityQuery("", {
+  //   skip: !token,
+  // });
+  const { data: userData } = useGetUserQuery(undefined, {
     skip: !token,
   });
-  const integralDetails = activity?.data.total;
+
+   // staging
+  const parsedUserData = JSON.parse(userData || "{}");
+
+  //prod
+  // const parsedUserData = userData;
+
+  const integralDetails = parsedUserData?.data?.integral;
+
   const [pageConfig, setPageConfig] = useState({
     page: 1,
     pageSize: 6,

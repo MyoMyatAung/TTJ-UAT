@@ -31,7 +31,13 @@ const Header = ({ darkmode }: any) => {
     }
   };
 
-  const user = userData?.data;
+ // prod
+//  const user = userData?.data;
+//  console.log(user);
+
+ // staging
+ const parsedUserData = JSON.parse(userData || "{}");
+ const user = parsedUserData?.data;
 
   const goToPointMall = () => {
     // dispatch(showToast({ message: "该功能正在开发中", type: "success" }));
