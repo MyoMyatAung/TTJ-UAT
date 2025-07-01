@@ -31,6 +31,7 @@ const Index = () => {
           <div>
             <Header darkmode={darkmode} />
           </div>
+          {/* notice box */}
           <div
             className={`pb-[100px] ${
               darkmode ? "bg-[#161619]" : "bg-[#dfdfdfc0]"

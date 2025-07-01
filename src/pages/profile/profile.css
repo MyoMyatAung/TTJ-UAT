@@ -470,7 +470,7 @@
   border-radius: 20px;
   /* background: rgba(245, 65, 0, 0.08); */
   background: #fe58b514;
-  color: #FE58B5;
+  color: #fe58b5;
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -1056,4 +1056,11 @@
   letter-spacing: -0.132px;
   margin-top: 10px;
   border-bottom: 1px solid #474747;
+}
+
+.new_notice_bind {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 189, 94, 0.16);
+  background: #ef4900;
+  box-shadow: 0px 0px 32px 0px rgba(255, 255, 255, 0.16) inset;
 }
