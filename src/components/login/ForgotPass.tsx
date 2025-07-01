@@ -311,14 +311,14 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
     useState(false); // Focus state for confirm password
 
   const validatePassword = (password: string) => {
-    const lengthValid = password.length >= 8 && password.length <= 25;
+    const lengthValid = password.length >= 6 && password.length <= 25;
     const containsLetters = /[a-zA-Z]/.test(password);
     const containsNumbers = /\d/.test(password);
     return lengthValid && containsLetters && containsNumbers;
   };
 
   const RevalidatePassword = (password: string) => {
-    const lengthValid = confirmPassword.length >= 8 && password.length <= 25;
+    const lengthValid = confirmPassword.length >= 6 && password.length <= 25;
     const containsLetters = /[a-zA-Z]/.test(password);
     const containsNumbers = /\d/.test(password);
     return lengthValid && containsLetters && containsNumbers;
@@ -410,7 +410,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   className="w-full px- py-2 bg-transparent input_border focus:outline-none text-white placeholder-[#5B5B5B]"
                   required
                   placeholder="输入新密码"
-                  minLength={8}
+                  minLength={6}
                   maxLength={25}
                 />
                 {/* <label
@@ -448,7 +448,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   className="w-full px- py-2 bg-transparent input_border focus:outline-none text-white placeholder-[#5B5B5B]"
                   required
                   placeholder="再次输入新密码"
-                  minLength={8}
+                  minLength={6}
                   maxLength={25}
                 />
                 {/* <label
@@ -479,7 +479,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   validatePassword(password) ? " text-[#00A048]" : "text-[#888]"
                 }  `}
               >
-                <p>8-25个字符</p>
+                <p>6-25个字符</p>
                 <p>必须是以下两者中的至少两种组合：字母，数字</p>{" "}
                 {/* <p>letters, numbers.</p> */}
               </div>
