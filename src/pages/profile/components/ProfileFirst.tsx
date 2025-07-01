@@ -11,6 +11,7 @@ import {
 } from "../services/profileApi";
 import { showToast } from "../error/ErrorSlice";
 import History from "../../../assets/svg/History";
+import sec from "../../../assets/sec.svg";
 import Collection from "../../../assets/svg/Collection";
 import Right from "../../../assets/svg/Right";
 
@@ -160,6 +161,34 @@ const ProfileFirst = ({ darkmode }: any) => {
   };
 
   // console.log(latestMovies);
+  const go = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="5"
+      height="7"
+      viewBox="0 0 5 7"
+      fill="none"
+    >
+      <path
+        d="M0.637325 0.617423C0.680566 0.580201 0.731934 0.55067 0.788487 0.530521C0.845041 0.510372 0.905668 0.5 0.966897 0.5C1.02813 0.5 1.08875 0.510372 1.14531 0.530521C1.20186 0.55067 1.25323 0.580201 1.29647 0.617423L4.39109 3.27453C4.42562 3.30412 4.45301 3.33925 4.47169 3.37793C4.49038 3.41661 4.5 3.45808 4.5 3.49996C4.5 3.54183 4.49038 3.5833 4.47169 3.62198C4.45301 3.66066 4.42562 3.6958 4.39109 3.72538L1.29647 6.38249C1.11399 6.53917 0.8198 6.53917 0.637325 6.38249C0.45485 6.22582 0.45485 5.97321 0.637325 5.81654L3.33348 3.49836L0.633602 1.18018C0.454851 1.0267 0.45485 0.770902 0.637325 0.617423Z"
+        fill="white"
+      />
+    </svg>
+  );
+  const close = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="8"
+      viewBox="0 0 8 8"
+      fill="none"
+    >
+      <path
+        d="M4 3.1668L6.9168 0.25L7.75 1.0832L4.8332 4L7.75 6.9168L6.9168 7.75L4 4.8332L1.0832 7.75L0.25 6.9168L3.1668 4L0.25 1.0832L1.0832 0.25L4 3.1668Z"
+        fill="white"
+      />
+    </svg>
+  );
 
   return (
     <div className="profile-div">
@@ -168,6 +197,29 @@ const ProfileFirst = ({ darkmode }: any) => {
           darkmode ? "profile-div-main_dark" : "profile-div-main"
         }`}
       >
+        {/* notice */}
+        {token && (
+          <div className=" px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]">
+            <div className=" flex w-full justify-between items-center">
+              <div className=" flex gap-[6px]">
+                <img src={sec} alt="" />
+                <span className=" text-white text-[14px] font-[700]">
+                  绑定邮箱或手机号
+                </span>
+              </div>
+              <div className=" p-2 bg-white/40 rounded-full">{close}</div>
+            </div>
+            <div className=" flex items-center justify-between w-full">
+              <span className=" w-2/3 text-white/80 text-[12px] font-[500] leading-[16px]">
+                您还没有绑定任何安全验证方式，确保账号丢失后可以找回，建议您立即绑定。
+              </span>
+              <button className=" bg-white/20 rounded-[12px] p-[8px] flex justify-center items-center gap-[6px] text-white text-[12px] font-[600]">
+                完善账号 {go}
+              </button>
+            </div>
+          </div>
+        )}
+
         <a className="p-first cursor-pointer" onClick={handleHistoryClick}>
           <div className="flex gap-3 items-center">
             <div>
@@ -343,14 +395,17 @@ const ProfileFirst = ({ darkmode }: any) => {
                   stroke-width="1.2"
                 />
               </svg>
-              <div className={`${darkmode ? "profile-text_dark" : "profile-text"}`}>积分商城</div>
+              <div
+                className={`${darkmode ? "profile-text_dark" : "profile-text"}`}
+              >
+                积分商城
+              </div>
             </div>
             <div className="flex gap-1 items-center">
               <div className="text-[12px] text-[#d0bc94]">
                 积分兑换价值百元大礼包
               </div>
               <div>{darkmode ? <RightDark /> : <Right />}</div>
-
             </div>
           </a>
         )}

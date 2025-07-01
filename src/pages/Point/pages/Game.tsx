@@ -48,10 +48,10 @@ export const Game = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // staging
-  // const parsedUserData = JSON.parse(userData || "{}");
+  const parsedUserData = JSON.parse(userData || "{}");
 
   // prod
-  const parsedUserData = userData;
+  // const parsedUserData = userData;
 
   // console.log(parsedUserData);
 
