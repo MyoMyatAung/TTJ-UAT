@@ -20,7 +20,7 @@ export const Card: FC<CardProps> = ({ data, key = "" }) => {
       key={key ?? ""}
     >
       {data?.discount === 0 ? null : (
-        <div className="absolute bg-[#ff6a33] text-white text-xs right-0 rounded-bl-lg px-3 h-[21px] flex items-center font-semibold">
+        <div className="absolute naw_label text-white text-xs right-0 px-3 h-[21px] flex items-center font-semibold">
           {data?.label}
         </div>
       )}
@@ -57,13 +57,13 @@ export const Card: FC<CardProps> = ({ data, key = "" }) => {
         </div>
         {data?.stock !== 0 ? (
           <button
-            className="py px-4 bg-[#ff6a33] text-xs h-[26px] leading-[26px] text-white font-medium rounded-full "
+            className="py px-4 new_兑换 text-xs h-[26px] leading-[26px] text-white font-medium "
             onClick={link}
           >
             兑换
           </button>
         ) : (
-          <button className="py px-4 bg-graybtn text-xs h-[26px] leading-[26px] text-white font-medium rounded-full">
+          <button className="py px-4 bg-[#bfbfbf] text-xs h-[26px] leading-[26px] text-white font-medium rounded-full">
             已售罄
           </button>
         )}

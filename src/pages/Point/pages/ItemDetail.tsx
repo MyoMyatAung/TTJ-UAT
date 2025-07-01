@@ -92,9 +92,9 @@ export const ItemDetail = () => {
         const order = await sendOrder(params.id, {
           form_data: "[]",
         });
-        console.log(order)
+        console.log(order);
         if (order?.data?.order_id) {
-          console.log("updating",order)
+          console.log("updating", order);
           update(order.data.surplus_integral);
           return navigate(`/info/${order.data.order_id}`);
         }
@@ -169,7 +169,7 @@ export const ItemDetail = () => {
                       {alertConfig.cancel}
                     </button>
                     <button
-                      className="bg-[#ff6a33] text-sm py-3 w-full text-white font-medium rounded"
+                      className="new_redeem_button text-sm py-3 w-full text-white font-medium "
                       onClick={handleOrder}
                     >
                       {alertConfig.ok}
@@ -268,7 +268,7 @@ export const ItemDetail = () => {
               // onTouchStart={handleBuy}
               onTouchEnd={handleBuy}
               onClick={handleBuy}
-              className="bg-[#ff6a33] text-sm py-[14px] px-[72px] text-white font-medium rounded "
+              className="new_redeem_button text-sm py-[14px] px-[72px] text-white font-medium "
             >
               立即兑换
             </button>

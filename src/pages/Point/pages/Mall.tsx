@@ -158,7 +158,7 @@ export const Mall = () => {
   // const noList = data?.data?.list.length === 0
   const noList = data?.data?.list.length === 0;
   return (
-    <div className="container bg-white/90" ref={ref}>
+    <div className="container bg-white/60" ref={ref}>
       <Head />
       {/* customer service */}
       <div className=" hidden absolute z-30 right-[20px] bottom-[100px]">
@@ -257,8 +257,8 @@ export const Mall = () => {
         </div>
       </div>
       <div className="w-full relative mt-[-54px]">
-        <img alt="" src="head_bg.png" />
-        <div className="container px-4 absolute bottom-[-29px]">
+        <img alt="" src="head_bg2.png" className=" h-[190px] mt-10" />
+        <div className="container px-4 absolute bottom-[-59px]">
           <div className="w-full jf-card flex rounded-xl h-[94px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
             {/* add line */}
             <div className=" fles flex-col gap-[10px]">
@@ -309,7 +309,7 @@ export const Mall = () => {
         </div>
       ) : (
         <div
-          className="jf-infinitescroll container px-4 mt-[45px] gap-3 pb-3 overflow-y-auto"
+          className="jf-infinitescroll bg-white/30 container px-4 mt-[55px] gap-3 pb-3 overflow-y-auto"
           id="scrollableDiv"
         >
           {/* {loading ? (

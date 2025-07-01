@@ -1,7 +1,7 @@
-import { FC, useCallback, Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { Copy } from './copy'
-import { useNavigate } from 'react-router-dom';
+import { FC, useCallback, Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Copy } from "./copy";
+import { useNavigate } from "react-router-dom";
 
 type AlertProps = {
   msg: string;
@@ -10,8 +10,8 @@ type AlertProps = {
   navBtn?: boolean;
   center?: boolean;
   btnText?: string;
-  isCopy?: boolean
-}
+  isCopy?: boolean;
+};
 
 export const Alert: FC<AlertProps> = ({
   msg,
@@ -20,11 +20,11 @@ export const Alert: FC<AlertProps> = ({
   navBtn,
   center,
   btnText,
-  isCopy
+  isCopy,
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleNavTask = () => {
-    navigate("/point_info")
+    navigate("/point_info");
     // try {
     //   //@ts-ignore
     //   JsBridge?.openNativePage?.(JSON.stringify({ "pageName": "get-integral" }))
@@ -32,7 +32,7 @@ export const Alert: FC<AlertProps> = ({
     //   //@ts-ignore
     //   dsBridge.call("openNativePage", JSON.stringify({ "pageName": "get-integral" }))
     // }
-  }
+  };
 
   return (
     <Transition show={show} as={Fragment}>
@@ -61,38 +61,44 @@ export const Alert: FC<AlertProps> = ({
           <div className="fixed z-30 inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4">
               <Dialog.Panel className="w-80 max-w-sm rounded bg-white p-6 flex gap-4 flex-col">
-                <Dialog.Title className={center ? "text-base font-medium items-center justify-center flex" : "text-base font-medium"}>
-                  {msg}
-                  {
-                    isCopy ? (
-                      <button className="text-[#ff6a33] text-sm pt-3 w-full font-medium border-none">
-                        <Copy btntype="text" ctx={msg} />
-                      </button>
-                    ) : null
+                <Dialog.Title
+                  className={
+                    center
+                      ? "text-base font-medium items-center justify-center flex"
+                      : "text-base font-medium"
                   }
+                >
+                  {msg}
+                  {isCopy ? (
+                    <button className="text-[#ff6a33] text-sm pt-3 w-full font-medium border-none">
+                      <Copy btntype="text" ctx={msg} />
+                    </button>
+                  ) : null}
                 </Dialog.Title>
                 <Dialog.Description className="flex gap-2">
-
-                  {
-                    navBtn ? (
-                      <>
-                        <button className=" text-sm py-3 w-full text-black font-medium rounded border border-black/10" onClick={onClose} >
-                          取消
-                        </button>
-                        <button className="bg-[#ff6a33] text-sm py-3 w-full text-white font-medium rounded" onClick={handleNavTask} >
-                          {
-                            btnText ? btnText : '获取积分'
-                          }
-
-                        </button>
-                      </>
-                    ) : (
-                      <button className="bg-[#ff6a33] text-sm py-3 w-full text-white font-medium rounded" onClick={onClose} >
-                        确定
+                  {navBtn ? (
+                    <>
+                      <button
+                        className=" text-sm py-3 w-full text-black font-medium rounded border border-black/10"
+                        onClick={onClose}
+                      >
+                        取消
                       </button>
-                    )
-                  }
-
+                      <button
+                        className="new_redeem_button text-sm py-3 w-full text-white font-medium "
+                        onClick={handleNavTask}
+                      >
+                        {btnText ? btnText : "获取积分"}
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="new_redeem_button text-sm py-3 w-full text-white font-medium "
+                      onClick={onClose}
+                    >
+                      确定
+                    </button>
+                  )}
                 </Dialog.Description>
               </Dialog.Panel>
             </div>
@@ -100,5 +106,5 @@ export const Alert: FC<AlertProps> = ({
         </Transition.Child>
       </Dialog>
     </Transition>
-  )
-}
+  );
+};
