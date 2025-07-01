@@ -18,6 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { showToast } from "../../pages/profile/error/ErrorSlice";
 import CloseBtn from "../../assets/svg/CloseBtn";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
+import Options from "./forgot/Options";
 
 interface LoginEmailProps {
   handleBack: () => void; // Accept handleBack as a prop
@@ -136,7 +137,8 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
         />
       )}
       {forgot ? (
-        <ForgotPass forgot={forgot} setForgot={setForgot} />
+        // <ForgotPass forgot={forgot} setForgot={setForgot} />
+        <Options forgot={forgot} setForgot={setForgot} />
       ) : (
         <AnimatePresence>
           {isVisible && (

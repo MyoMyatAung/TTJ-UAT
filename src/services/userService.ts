@@ -118,7 +118,12 @@ export const login = async (
 
     const loginResponse = await axios.post(
       convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/login`),
-      ll
+      ll,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
 
     // const dataIsEncrypt = loginResponse.headers;
@@ -199,7 +204,12 @@ export const signup = async ({
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/email`,
-      bd
+      bd,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
     return decryptWithAes(data);
   } catch (error) {
@@ -224,7 +234,12 @@ export const signupPh = async ({
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/phone`,
-      bd
+      bd,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
     return decryptWithAes(data);
   } catch (error) {

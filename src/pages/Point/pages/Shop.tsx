@@ -268,13 +268,13 @@ export const Shop = () => {
                     (res?.stock ?? 0) > 0 ? (
                       <button
                         type="submit"
-                        className="bg-[#ff6a33] text-sm py-[14px] px-[72px] text-white font-medium rounded "
+                        className=" new_redeem_button text-sm py-[14px] px-[72px] text-white font-medium  "
                       >
                         立即兑换
                       </button>
                     ) : (
                       <button
-                        className="bg-graybtn text-sm py-[14px] px-[72px] text-white font-medium rounded "
+                        className="bg-[#bfbfbf] text-sm py-[14px] px-[72px] text-white font-medium rounded "
                       >
                         已售罄
                       </button>
