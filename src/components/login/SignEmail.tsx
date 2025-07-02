@@ -228,7 +228,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setIsFocusedEmail(true)}
                       onBlur={() => setIsFocusedEmail(email !== "")}
-                      className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                       required
                       placeholder="请输入您的电子邮件"
                     />
@@ -251,7 +251,7 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       onChange={(e) => setPassword(e.target.value)}
                       onFocus={() => setIsFocusedPassword(true)}
                       onBlur={() => setIsFocusedPassword(password !== "")}
-                      className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
+                      className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                       required
                       placeholder="设置您的密码"
                       minLength={6}
@@ -302,7 +302,9 @@ const SignEmail: React.FC<SignEmailProps> = ({ handleBack2 }) => {
                       type="text"
                       value={inviteCode}
                       onChange={(e) => setInviteCode(e.target.value)}
-                      className={`w-[150px] bg-transparent focus:outline-none ${darkmode ? "text-white" : "text-black"}  placeholder-[#5B5B5B]`}
+                      className={`w-[150px] bg-transparent focus:outline-none ${
+                        darkmode ? "text-white" : "text-black"
+                      }  placeholder-[#5B5B5B]`}
                       placeholder="输入促销代码（可选）"
                     />
                   </div>

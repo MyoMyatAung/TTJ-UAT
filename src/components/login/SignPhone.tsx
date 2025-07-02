@@ -227,7 +227,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPhone(e.target.value)}
                     onFocus={() => setIsFocusedEmail(true)}
                     onBlur={() => setIsFocusedEmail(phone !== "")}
-                    className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                     required
                     placeholder="请输入您的电话号码"
                   />
@@ -250,7 +250,7 @@ const SignPhone: React.FC<SignPhoneProps> = ({ handleBack2 }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     onFocus={() => setIsFocusedPassword(true)}
                     onBlur={() => setIsFocusedPassword(password !== "")}
-                    className="w-full px- py-2 bg-transparent dark:bg-[#2B2B2D] input_border focus:outline-none text-black dark:text-white placeholder-[#5B5B5B]"
+                    className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                     required
                     placeholder="设置您的密码"
                     minLength={6}

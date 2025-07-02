@@ -54,8 +54,7 @@
 
 .new_css_button {
   border-radius: 8px;
-  /* background: #0000001f; */
-  @apply bg-[#393939] dark:bg-[#0000001f];
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .custom_select_ques {

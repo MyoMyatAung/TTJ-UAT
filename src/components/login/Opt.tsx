@@ -38,7 +38,7 @@ const Opt: React.FC<OptProps> = ({
   phone,
   setIsVisible,
   setBox,
-  invite_code
+  invite_code,
 }) => {
   const darkmode = useSelector(selectTheme);
 
@@ -222,7 +222,7 @@ const Opt: React.FC<OptProps> = ({
         {panding ? (
           <button
             disabled
-            className="next_button text-[#777] w-[320px] text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]"
+            className="login_button text-[#777] w-[320px] text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]"
           >
             加载中..
           </button>
@@ -231,7 +231,7 @@ const Opt: React.FC<OptProps> = ({
             disabled={timer > 0}
             onClick={resendOtp}
             className={`w-[320px] text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px] ${
-              timer > 0 ? "next_button text-[#777]" : "login_button text-white"
+              timer > 0 ? "login_button text-[#fff]" : " next_button text-white"
             }`}
           >
             {buttonText}

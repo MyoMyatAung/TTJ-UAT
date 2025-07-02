@@ -167,7 +167,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     登录
                   </h2>
                   <div
-                    className="p-3 cursor-pointer fixed z-[999991] right-[30px]"
+                    className="p-3 cursor-pointer rounded-full fixed z-[999991] right-[30px] bg-white/5"
                     onClick={handleClose}
                   >
                     {darkmode ? (
@@ -271,7 +271,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     type="submit"
                     className={`w-full text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]  ${
                       !validatePassword(password)
-                        ? "login_button text-white"
+                        ? "login_button text-[#777777]"
                         : "next_button text-[#fff]"
                     } transition duration-300 ease-in-out`}
                   >
