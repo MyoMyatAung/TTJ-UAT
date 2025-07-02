@@ -628,8 +628,6 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Brand-Color-2, #fe58b5);
   color: #fe58b5;
   /* font-family: Inter; */
   font-size: 12px;
@@ -637,6 +635,8 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.132px;
+  border-radius: 8px;
+  border: 1px solid var(--Brand-Color-2, #fe58b5);
 }
 
 .sidebar .active {
@@ -648,7 +648,10 @@
   color: white;
   align-self: stretch;
   border-radius: 8px;
-  background: #fe58b5;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
   border-bottom: none;
 }
 

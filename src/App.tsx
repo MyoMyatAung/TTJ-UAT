@@ -92,6 +92,7 @@ const App: React.FC = () => {
   const { refetch } = useGetRecommendedMoviesQuery();
   const [showNotice, setShowNotice] = useState(false);
   const { data: headerData } = useGetHeaderTopicsQuery();
+  const [hasCheckedUpdate, setHasCheckedUpdate] = useState(false);
 
   const [preloadedImage, setPreloadedImage] = useState<string | null>(null);
   const [showUpdateNotification, setShowUpdateNotification] = useState(false);
@@ -104,6 +105,18 @@ const App: React.FC = () => {
     }
   }, [open]);
   console.log(" is open", open?.data);
+
+  useEffect(() => {
+    if (!panding) {
+      const hasSeenUpdateNotification = sessionStorage.getItem(
+        "hasSeenUpdateNotification"
+      );
+      if (!hasSeenUpdateNotification && headerData?.data?.app_store_link) {
+        setShowUpdateNotification(true);
+      }
+      setHasCheckedUpdate(true); // mark check done even if app_store_link missing
+    }
+  }, [panding, headerData]);
 
   // Preload landing image
   useEffect(() => {
@@ -440,9 +453,9 @@ const App: React.FC = () => {
                 </div>
               )}
 
-            {!showNotice &&
-              location.pathname === "/" &&
-              !showUpdateNotification && <SpinAnimation open={open?.data} />}
+            {hasCheckedUpdate && !showNotice && location.pathname === "/" && (
+              <SpinAnimation open={open?.data} />
+            )}
 
             {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
