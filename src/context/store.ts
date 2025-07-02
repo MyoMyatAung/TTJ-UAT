@@ -26,11 +26,11 @@ import homeMovieSlice from "./homeMovieSlice";
 import { pointApi } from "../pages/Point/service/PointApi";
 
 // Define persist config
-const persistConfig = {
-  key: "root",
-  storage,
-  // whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
+// };
 
 // Combine all reducers
 const rootReducer = combineReducers({
@@ -59,9 +59,9 @@ const rootReducer = combineReducers({
 
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
