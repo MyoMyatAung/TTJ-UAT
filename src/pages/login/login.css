@@ -97,7 +97,11 @@
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
-  background: #f54100;
+  border-radius: 8px;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
   border-bottom: none;
 }
 
