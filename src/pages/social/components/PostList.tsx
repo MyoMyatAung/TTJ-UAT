@@ -593,6 +593,7 @@ import axios from "axios";
 import { convertToSecureUrl } from "../../../services/newEncryption";
 import { decryptWithAes } from "../../../services/newEncryption";
 import copy from "copy-to-clipboard";
+import ImageWithPlaceholder1 from "./gifPlaceholder";
 
 const PostList = ({
   data,
@@ -1110,6 +1111,13 @@ const PostList = ({
                   />
                 )}
               </div>
+            )}
+            {post.file_type === "gif" && (
+              <ImageWithPlaceholder1
+                src={post.files[0]?.resourceURL}
+                alt={`Picture of social_image`}
+                className="w-full h-full object-cover"
+              />
             )}
             {post.file_type === "video" && (
               <Player
