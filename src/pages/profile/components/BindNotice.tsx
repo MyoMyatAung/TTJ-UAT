@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BIND_NOTICE_KEY = "hideBindNoticeUntil";
 
@@ -16,6 +17,7 @@ function BindNotice({
   go: any;
 }) {
   const [showNotice, setShowNotice] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!token || !shouldShowBind) return;
@@ -28,7 +30,10 @@ function BindNotice({
     }
   }, [token, shouldShowBind]);
 
-  const handleClose = () => {
+  const handleClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log("click");
+    // return;
     const today = new Date().toISOString().slice(0, 10);
     localStorage.setItem(BIND_NOTICE_KEY, today);
     setShowNotice(false);
@@ -37,7 +42,10 @@ function BindNotice({
   if (!showNotice) return null;
 
   return (
-    <div className="px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]">
+    <div
+      onClick={() => navigate("/update_email")}
+      className="px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]"
+    >
       <div className="flex w-full justify-between items-center">
         <div className="flex gap-[6px]">
           <img src={sec} alt="" />
