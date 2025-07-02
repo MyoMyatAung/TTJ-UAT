@@ -561,7 +561,7 @@ export const ItemInfo = () => {
               <div className="flex pb-2 justify-between items-center">
                 <button
                   type="submit"
-                  className=" bg-[#ff6a33] text-sm py-[14px] px-[72px] text-white font-medium rounded w-full"
+                  className="new_redeem_button text-sm py-[14px] px-[72px] text-white font-medium w-full"
                 >
                   重新下单
                 </button>
@@ -598,7 +598,7 @@ export const ItemInfo = () => {
               onClick={() => {
                 navigate("/point_mall");
               }}
-              className=" bg-[#ff6a33] text-sm py-[14px] px-[72px] text-white font-medium rounded w-full"
+              className="new_redeem_button text-sm py-[14px] px-[72px] text-white font-medium w-full"
             >
               返回积分商城
             </button>

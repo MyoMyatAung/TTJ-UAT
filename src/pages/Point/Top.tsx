@@ -3,6 +3,8 @@ import "./point.css";
 import { useGetDailyTesksQuery, useGetUserQuery } from "./service/PointApi";
 import light from "./lignt.png";
 import { useSelector } from "react-redux";
+import coupon from "./coupon.png";
+
 
 interface TopProps {
   inretralDetails: any;
@@ -10,11 +12,7 @@ interface TopProps {
   point: any;
 }
 
-const Top: React.FC<TopProps> = ({
-  inretralDetails,
-  invite,
-  point,
-}) => {
+const Top: React.FC<TopProps> = ({ inretralDetails, invite, point }) => {
   const activeTab = useSelector((state: any) => state?.home?.activePointTab);
 
   // console.log(point)
@@ -69,13 +67,13 @@ const Top: React.FC<TopProps> = ({
           <div className=" p-[30px] flex w-full justify-between items-center">
             <div className=" flex flex-col gap-[4px] justify-center items-center">
               <span className=" text-white text-[16px] font-[600]">
-                {invite.today}
+                {invite?.today}
               </span>
               <span className=" text-[#888] font-[500] text-[10px]">today</span>
             </div>
             <div className=" flex flex-col gap-[4px] justify-center items-center">
               <span className=" text-white text-[16px] font-[600]">
-                {invite.yesterday}
+                {invite?.yesterday}
               </span>
               <span className=" text-[#888] font-[500] text-[10px]">
                 Yesterday{" "}
@@ -83,7 +81,7 @@ const Top: React.FC<TopProps> = ({
             </div>
             <div className=" flex flex-col gap-[4px] justify-center items-center">
               <span className=" text-white text-[16px] font-[600]">
-                {invite.thisweek}
+                {invite?.thisweek}
               </span>
               <span className=" text-[#888] font-[500] text-[10px]">
                 Weekly
@@ -93,22 +91,31 @@ const Top: React.FC<TopProps> = ({
           {/* badge */}
           <div className=" flex justify-center items-center">
             <div className="share_badge_box flex justify-center items-center w-fit">
-              {invite.total} invited users
+              {invite?.total} invited users
             </div>
           </div>
         </div>
       ) : (
         <div className=" relative overflow-hidd">
-            <img
-              className=" absolute top-[-25px] h-[50px] w-[168px] right-0"
-              src={light}
-              alt=""
-            />
+          <img
+            className=" absolute top-[-25px] h-[50px] w-[168px] right-0"
+            src={light}
+            alt=""
+          />
           <div className=" px-[18px] py-[20px] relative">
             {/* header */}
-            <span className=" text-[12px] font-[400] text-[#888]">
-              积分余额
-            </span>
+            <div className=" flex justify-between items-center">
+              <span className=" text-[12px] font-[400] text-[#888]">
+                积分余额
+              </span>
+              {/* coupons */}
+              <div className=" pr-3">
+                <span className=" text-[#BBB] text-[12px] font-[400] flex justify-center items-center gap-[2px]">
+                  兑换劵 : {point?.data?.coupon ? point?.data?.coupon : 0}{" "}
+                  <img className=" w-[12px] h-[12px]" src={coupon} alt="" />
+                </span>
+              </div>
+            </div>
             <div className=" pt-[10px] flex justify-between items-center">
               <div className=" flex justify-center items-center gap-[8px]">
                 <svg

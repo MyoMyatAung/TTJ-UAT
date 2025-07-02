@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import noListImg from "../test2.png";
+import { useGetUserQuery } from "../../../pages/profile/services/profileApi";
 
 export const Mall = () => {
   const [t, st] = useState<any>(0);
@@ -22,10 +23,22 @@ export const Mall = () => {
   const token = parsedLoggedIn?.data?.access_token;
   const navigate = useNavigate();
 
-  const { data: activity } = useGetActivityQuery("", {
+  // const { data: activity } = useGetActivityQuery("", {
+  //   skip: !token,
+  // });
+  const { data: userData } = useGetUserQuery(undefined, {
     skip: !token,
   });
-  const integralDetails = activity?.data.total;
+
+  // staging
+  const parsedUserData = JSON.parse(userData || "{}");
+
+  //prod
+  // const parsedUserData = userData;
+
+  const integralDetails = parsedUserData?.data?.integral;
+  const coupon = parsedUserData?.data?.coupon;
+
   const [pageConfig, setPageConfig] = useState({
     page: 1,
     pageSize: 6,
@@ -145,7 +158,7 @@ export const Mall = () => {
   // const noList = data?.data?.list.length === 0
   const noList = data?.data?.list.length === 0;
   return (
-    <div className="container bg-white/90" ref={ref}>
+    <div className="container bg-white/60" ref={ref}>
       <Head />
       {/* customer service */}
       <div className=" hidden absolute z-30 right-[20px] bottom-[100px]">
@@ -244,20 +257,27 @@ export const Mall = () => {
         </div>
       </div>
       <div className="w-full relative mt-[-54px]">
-        <img alt="" src="head_bg.png" />
-        <div className="container px-4 absolute bottom-[-29px]">
-          <div className="w-full jf-card flex rounded-xl h-[84px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
-            <div className="flex items-end leading-[32px] gap-2">
-              <span className="text-[32px]">
-                {integralDetails ? integralDetails : 0}
+        <img alt="" src="head_bg2.png" className=" h-[190px] mt-10" />
+        <div className="container px-4 absolute bottom-[-59px]">
+          <div className="w-full jf-card flex rounded-xl h-[94px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
+            {/* add line */}
+            <div className=" fles flex-col gap-[10px]">
+              <div className="flex items-end leading-[32px] gap-2">
+                <span className="text-[32px]">
+                  {integralDetails ? integralDetails : 0}
+                </span>
+                <span className="text-black/60 text-sm">积分</span>
+              </div>
+              <span className="new_redeem">
+                兑换劵 :{" "}
+                <span className="new_redeem_num">{coupon ? coupon : 0}</span> 张
               </span>
-              <span className="text-black/60 text-sm">积分</span>
             </div>
             <button
               onClick={handleOpenTask}
               className="border border-orange-secondary px-4 py-1.5 rounded-full font-medium text-xs;"
             >
-              获取积分
+              获取金币和劵
             </button>
           </div>
         </div>
@@ -289,7 +309,7 @@ export const Mall = () => {
         </div>
       ) : (
         <div
-          className="jf-infinitescroll container px-4 mt-[45px] gap-3 pb-3 overflow-y-auto"
+          className="jf-infinitescroll bg-white/30 container px-4 mt-[55px] gap-3 pb-3 overflow-y-auto"
           id="scrollableDiv"
         >
           {/* {loading ? (

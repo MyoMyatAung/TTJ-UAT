@@ -26,6 +26,7 @@ interface OptProps {
   phone?: string;
   setBox?: any;
   setIsVisible: (isVisible: boolean) => void;
+  invite_code: any;
 }
 interface messg {
   msg: string;
@@ -37,6 +38,7 @@ const Opt: React.FC<OptProps> = ({
   phone,
   setIsVisible,
   setBox,
+  invite_code
 }) => {
   const darkmode = useSelector(selectTheme);
 
@@ -119,6 +121,7 @@ const Opt: React.FC<OptProps> = ({
             email,
             password,
             email_code: otpCode,
+            invite_code: invite_code,
           });
           if (data) {
             dispatch(setOtpOpen(false));
@@ -131,6 +134,7 @@ const Opt: React.FC<OptProps> = ({
             phone,
             password,
             sms_code: otpCode,
+            invite_code: invite_code,
           });
           if (data) {
             dispatch(setOtpOpen(false));

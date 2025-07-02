@@ -59,6 +59,7 @@ export interface List {
    * 标题
    */
   title: string;
+  require_coupon : number
 }
 
 export interface DetailData {
@@ -109,6 +110,8 @@ export interface DetailData {
    * 浏览量
    */
   view: number;
+  require_coupon : number
+
 }
 
 export interface CustomForm {

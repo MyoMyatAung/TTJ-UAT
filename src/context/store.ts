@@ -30,7 +30,6 @@ import { pointApi } from "../pages/Point/service/PointApi";
 //   key: "root",
 //   storage,
 //   // whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
-// };
 
 // Combine all reducers
 const rootReducer = combineReducers({

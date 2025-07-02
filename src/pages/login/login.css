@@ -100,3 +100,15 @@
   background: #f54100;
   border-bottom: none;
 }
+
+.invite_code_dark {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #393939;
+}
+
+.invite_code {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgb(0 0 0 / 0.1);
+}

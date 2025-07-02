@@ -92,7 +92,9 @@ export const ItemDetail = () => {
         const order = await sendOrder(params.id, {
           form_data: "[]",
         });
+        console.log(order);
         if (order?.data?.order_id) {
+          console.log("updating", order);
           update(order.data.surplus_integral);
           return navigate(`/info/${order.data.order_id}`);
         }
@@ -167,7 +169,7 @@ export const ItemDetail = () => {
                       {alertConfig.cancel}
                     </button>
                     <button
-                      className="bg-[#ff6a33] text-sm py-3 w-full text-white font-medium rounded"
+                      className="new_redeem_button text-sm py-3 w-full text-white font-medium "
                       onClick={handleOrder}
                     >
                       {alertConfig.ok}
@@ -194,7 +196,7 @@ export const ItemDetail = () => {
         <div className="w-full px-4 my-2">
           <div className="w-full rounded-lg bg-white h-[200px] relative overflow-hidden p-2 ">
             {res?.label ?? "" ? (
-              <div className="absolute bg-[#ff6a33] text-white text-xs right-0 top-0 rounded-bl-lg px-3 h-[21px] flex items-center font-semibold">
+              <div className="absolute bg-[#ff6a33] text-white text-[12px] right-0 top-0 rounded-bl-lg px-3 h-[21px] flex items-center font-semibold">
                 {res.label}
               </div>
             ) : null}
@@ -248,11 +250,15 @@ export const ItemDetail = () => {
       <div className="jf-foot bg-white fixed w-full z-10 bottom-0 left-0 min-h-min px-4 py-2 py-4">
         <div className="flex pb-2 justify-between items-center">
           <div className="flex flex-col">
-            <span className="text-lg text-[#ff6a33] font-semibold">
-              {numeral(res?.current_price ?? 0).format("0,0")}&nbsp;积分
-            </span>
+            {typeof res?.current_price === "number" && (
+              <span className="text-md text-[#ff6a33] font-semibold">
+                {res?.require_coupon > 0 && `${res.require_coupon} 兑换劵 + `}
+                {numeral(res.current_price).format("0,0")}&nbsp;积分
+              </span>
+            )}
+
             {res?.original_price ?? 0 ? (
-              <span className="text-xs text-black/40 font-semibold line-through decoration-black/40">
+              <span className="text-[12px] text-black/40 font-semibold line-through decoration-black/40">
                 {numeral(res?.original_price ?? 0).format("0,0")}&nbsp;积分
               </span>
             ) : null}
@@ -262,12 +268,12 @@ export const ItemDetail = () => {
               // onTouchStart={handleBuy}
               onTouchEnd={handleBuy}
               onClick={handleBuy}
-              className="bg-[#ff6a33] text-sm py-[14px] px-[72px] text-white font-medium rounded "
+              className="new_redeem_button text-sm py-[14px] px-[72px] text-white font-medium "
             >
               立即兑换
             </button>
           ) : (
-            <p className="bg-graybtn text-sm py-[14px] px-[72px] text-white font-medium rounded ">
+            <p className="bg-[#bfbfbf] text-sm py-[14px] px-[72px] text-white font-medium rounded ">
               已售罄
             </p>
           )}
