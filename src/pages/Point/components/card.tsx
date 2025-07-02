@@ -16,7 +16,7 @@ export const Card: FC<CardProps> = ({ data, key = "" }) => {
 
   return (
     <div
-      className="w-full flex flex-col bg-white rounded-lg overflow-hidden relative"
+      className="w-full flex flex-col bg-white new_shadow rounded-lg overflow-hidden relative"
       key={key ?? ""}
     >
       {data?.discount === 0 ? null : (
@@ -30,9 +30,9 @@ export const Card: FC<CardProps> = ({ data, key = "" }) => {
       </button>
       <p className="mt-2 mb-1 px-2 text-sm">{data?.title}</p>
       <div className="w-full relative h-3">
-        <div className="w-3 h-3 bg-graybg rounded-full absolute top-0 left-[-6px]"></div>
-        <div className="border border-dashed border-graybg absolute top-[6px] left-0 w-full"></div>
-        <div className="w-3 h-3 bg-graybg rounded-full absolute top-0 right-[-6px]"></div>
+        <div className="w-3 h-3 bg-black/5 rounded-full absolute top-0 left-[-6px]"></div>
+        <div className="border border-dashed border-black/5 absolute top-[6px] left-0 w-full"></div>
+        <div className="w-3 h-3 bg-black/5 rounded-full absolute top-0 right-[-6px]"></div>
       </div>
 
       <div className="flex px-2 pb-3 pt-2 justify-between items-center">

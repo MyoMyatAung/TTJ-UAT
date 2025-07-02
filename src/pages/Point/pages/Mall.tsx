@@ -163,8 +163,8 @@ export const Mall = () => {
       <Head />
 
       <div className="w-full relative mt-[-54px]">
-        <img alt="" src="head_bg2.png" className=" h-[190px] w-full mt-10" />
-        <div className="container px-4 absolute bottom-[-39px]">
+        <img alt="" src="headblur.png" className=" w-full mt-10" />
+        <div className="container px-4 absolute bottom-[-59px]">
           <div className="w-full jf-card flex rounded-xl h-[94px] pl-[26px] pr-[19px] items-center justify-between text-[#ff6a33]">
             {/* add line */}
             <div className=" fles flex-col gap-[10px]">
@@ -181,7 +181,7 @@ export const Mall = () => {
             </div>
             <button
               onClick={handleOpenTask}
-              className="border-2 broder-[#FF9153] px-4 py-1.5 rounded-full font-medium text-xs;"
+              className="border-[3px] broder-[#FF9153] px-4 py-[4px] rounded-full font-medium text-[14px]"
             >
               获取积分
             </button>
@@ -215,7 +215,7 @@ export const Mall = () => {
         </div>
       ) : (
         <div
-          className="jf-infinitescroll bg-black/5 container px-4 mt-[55px] gap-3 pb-3 overflow-y-auto"
+          className="jf-infinitescroll container px-4 mt-[75px] gap-3 pb-3 overflow-y-auto"
           id="scrollableDiv"
         >
           {/* {loading ? (
