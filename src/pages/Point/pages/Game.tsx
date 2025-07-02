@@ -30,15 +30,18 @@ import WinAlert from "../components/WinAlert";
 import { setAuthModel } from "../../../features/login/ModelSlice";
 import { useDispatch } from "react-redux";
 import ImageWithPlaceholder from "../../../pages/profile/components/info/ImageWithPlaceholder";
+import useLotteryItems from "../../../utils/useLotteryItems";
 
 export const Game = () => {
   const myLucky = useRef<any>();
   const isLoggedIn = localStorage.getItem("authToken");
   const parsedLoggedIn = isLoggedIn ? JSON.parse(isLoggedIn) : null;
   const [spinLoad, setSpinLoad] = useState(false);
-  const { data, error, loading, refresh } = useRequest<any, any>(() =>
-    getLotteryItems()
-  );
+  // const { data, error, loading, refresh } = useRequest<any, any>(() =>
+  //   getLotteryItems()
+  // );
+  const { data, loading, error, refresh } = useLotteryItems();
+
   const token = parsedLoggedIn?.data?.access_token;
   const { data: userData, refetch } = useGetUserQuery(undefined, {
     skip: !token,
