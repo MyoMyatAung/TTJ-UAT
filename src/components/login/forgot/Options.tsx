@@ -145,7 +145,8 @@ const Options: React.FC<OptionsProps> = ({ setForgot }) => {
                 </div>
               </div>
               <p className=" text-white w-full pl-2 text-[16px] font-[400] text-start">
-                Select Your Password Recovery Options
+                {/* Select Your Password Recovery Options */}
+                选择密码找回方式
               </p>
               <div className=" w-full flex flex-col gap-[16px] pt-[20px]">
                 {/* ques */}
@@ -156,11 +157,13 @@ const Options: React.FC<OptionsProps> = ({ setForgot }) => {
                   <div className=" flex gap-[8px] items-center">
                     {quesIcon}{" "}
                     <span className=" text-white font-[600] text-[16px] leading-[22px]">
-                      Security Question
+                      {/* Security Question */}
+                      安全问题
                     </span>{" "}
                   </div>
                   <p className=" text-[14px] font-[500] leading-[22px] text-[#CCC]">
-                    For security question registration, select this.
+                    {/* For security question registration, select this. */}
+                    使用密保问题找回
                   </p>
                 </div>
                 {/* otp */}
@@ -171,11 +174,13 @@ const Options: React.FC<OptionsProps> = ({ setForgot }) => {
                   <div className=" flex gap-[8px] items-center">
                     {otpcode}{" "}
                     <span className=" text-white font-[600] text-[16px] leading-[22px]">
-                      SMS Verificaiton
+                      {/* SMS Verificaiton */}
+                      验证码验证
                     </span>{" "}
                   </div>
                   <p className=" text-[14px] font-[500] leading-[22px] text-[#CCC]">
-                    Receive OTP via Email or Phone for recovery.
+                    {/* Receive OTP via Email or Phone for recovery. */}
+                    通过邮箱/手机号找回
                   </p>
                 </div>
               </div>

@@ -35,6 +35,8 @@ import { useGetRecommendedMoviesQuery } from "./pages/home/services/homeApi";
 import land2 from "./assets/login/land2.png";
 import Announce from "./components/Announce";
 import UpdateNotification from "./components/UpdateNotification";
+import { useGetOpenStateQuery } from "./pages/Point/service/PointApi";
+import SpinAnimation from "./pages/Point/components/SpinAnimation";
 
 // import Menber from "./pages/share/member";
 // import Share from "./pages/share";
@@ -93,6 +95,15 @@ const App: React.FC = () => {
 
   const [preloadedImage, setPreloadedImage] = useState<string | null>(null);
   const [showUpdateNotification, setShowUpdateNotification] = useState(false);
+
+  const { data: open } = useGetOpenStateQuery("");
+  const [isopen, setIsopen] = useState(false);
+  useEffect(() => {
+    if (open?.data) {
+      setIsopen(true);
+    }
+  }, [open]);
+  console.log(" is open", open?.data);
 
   // Preload landing image
   useEffect(() => {
@@ -242,15 +253,15 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname !== "/") {
-      const lastFetchTime = sessionStorage.getItem('lastRefetchTime');
+      const lastFetchTime = sessionStorage.getItem("lastRefetchTime");
       const now = Date.now();
       const twoHours = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
-      
+
       // If no previous fetch time or 2 hours have passed, refetch
-      if (!lastFetchTime || (now - parseInt(lastFetchTime)) > twoHours) {
+      if (!lastFetchTime || now - parseInt(lastFetchTime) > twoHours) {
         refetchAds();
         refetch();
-        sessionStorage.setItem('lastRefetchTime', now.toString());
+        sessionStorage.setItem("lastRefetchTime", now.toString());
       }
     }
   }, [location.pathname, refetchAds, refetch]);
@@ -353,6 +364,7 @@ const App: React.FC = () => {
             {/* <BannerAds /> */}
             {/* Conditionally render Header */}
             {!hideHeaderFooter && !hideHeader && <Header />}
+
             <div className="flex-grow">
               <Suspense
                 fallback={
@@ -416,14 +428,22 @@ const App: React.FC = () => {
                 showNotice={showNotice}
               />
             )}
-            {showUpdateNotification && !showNotice && !isWebView() && headerData?.data?.app_store_link && (
+            {showUpdateNotification &&
+              !showNotice &&
+              !isWebView() &&
+              headerData?.data?.app_store_link && (
                 <div className="fixed bottom-20 left-0 right-0 z-[9999] flex justify-center">
-                  <UpdateNotification 
-                    onUpdate={handleUpdateClick} 
+                  <UpdateNotification
+                    onUpdate={handleUpdateClick}
                     onClose={handleCloseUpdateNotification}
                   />
                 </div>
               )}
+
+            {!showNotice &&
+              location.pathname === "/" &&
+              !showUpdateNotification && <SpinAnimation open={open?.data} />}
+
             {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
             {location.pathname.startsWith("/social") && !isShowingDetails && (

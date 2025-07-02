@@ -50,10 +50,10 @@ const Index = ({showTab = true}) => {
   });
 
     // staging
-  const parsedUserData = JSON.parse(userData || "{}");
+  // const parsedUserData = JSON.parse(userData || "{}");
 
   // prod
-  // const parsedUserData = userData;
+  const parsedUserData = userData;
 
 
   const actavityList = list?.data;

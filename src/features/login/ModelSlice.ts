@@ -16,6 +16,7 @@ interface model {
   GraphicKey: string;
   openSecQues: boolean;
   isShowingDetails: boolean;
+  pointMall: string;
 }
 
 const initialState: model = {
@@ -34,6 +35,7 @@ const initialState: model = {
   panding: 0,
   GraphicKey: "",
   isShowingDetails: false,
+  pointMall: "",
 };
 
 export const modelSlice = createSlice({
@@ -88,6 +90,9 @@ export const modelSlice = createSlice({
     setShowingDetail: (state, action) => {
       state.isShowingDetails = action.payload;
     },
+    setPointMall: (state, action) => {
+      state.pointMall = action.payload;
+    },
   },
 });
 
@@ -106,7 +111,8 @@ export const {
   setGraphicKey,
   setPanding,
   setOpenSecQues,
-  setShowingDetail
+  setShowingDetail,
+  setPointMall,
 } = modelSlice.actions;
 
 export default modelSlice.reducer;

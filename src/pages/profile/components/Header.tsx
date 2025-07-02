@@ -32,12 +32,12 @@ const Header = ({ darkmode }: any) => {
   };
 
  // prod
-//  const user = userData?.data;
-//  console.log(user);
+ const user = userData?.data;
+ console.log(user);
 
  // staging
- const parsedUserData = JSON.parse(userData || "{}");
- const user = parsedUserData?.data;
+//  const parsedUserData = JSON.parse(userData || "{}");
+//  const user = parsedUserData?.data;
 
   const goToPointMall = () => {
     // dispatch(showToast({ message: "该功能正在开发中", type: "success" }));

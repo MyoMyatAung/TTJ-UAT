@@ -33,9 +33,9 @@ export const Head: FC<HeadProps> = ({
         <button onClick={routerLink} className="w-[60px] focus:outline-none focus:bg-white">
           <img alt="back" src="/left.png" className="w-6 h-6" />
         </button>
-        <Link className="font-medium text-base" to="/">
+        <h1 className="font-medium text-base">
           {title ?? '积分商城'}
-        </Link>
+        </h1>
 
         <Link className="text-sm w-[60px]" to="/list" >
           {nomore ? '' : '订单信息'}

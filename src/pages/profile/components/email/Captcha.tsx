@@ -22,6 +22,7 @@ const Captcha: React.FC<{ data: string; type: string }> = ({ data, type }) => {
   const [checkCaptcha, { isLoading, isError }] = useCheckCaptchaMutation(); // RTK mutation hook for captcha verification
   const [triggerSendCode, { isLoading: isSendCodeLoading }] =
     useLazySendCodeQuery(); // RTK lazy query for sending code
+  console.log("type", type);
 
   // Fetch captcha when the component loads
   useEffect(() => {
@@ -112,7 +113,7 @@ const Captcha: React.FC<{ data: string; type: string }> = ({ data, type }) => {
             className={`mt-[16px] w-full rounded-[4px] p-[10px] text-[14px] font-[400] ${
               isButtonDisabled || isLoading || isSendCodeLoading
                 ? "bg-[#333237] text-[#777]"
-                : "bg-white text-black"
+                : "bg-[#fe58b5] text-white"
             }`}
             disabled={isButtonDisabled || isLoading || isSendCodeLoading}
             onClick={handleVerifyCaptcha}
