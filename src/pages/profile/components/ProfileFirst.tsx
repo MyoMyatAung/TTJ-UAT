@@ -14,6 +14,7 @@ import History from "../../../assets/svg/History";
 import sec from "../../../assets/sec.svg";
 import Collection from "../../../assets/svg/Collection";
 import Right from "../../../assets/svg/Right";
+import BindNotice from "./BindNotice";
 
 interface Movie {
   id: any;
@@ -41,6 +42,13 @@ const ProfileFirst = ({ darkmode }: any) => {
   });
 
   const user = userData?.data;
+
+  const hasNoEmail = !user?.email || user.email.trim() === "";
+  const hasNoPhone = !user?.phone || user.phone === "0";
+
+  const shouldShowBind = hasNoEmail && hasNoPhone;
+
+  // console.log("Need to bind phone and email:", shouldShowBind, user);
 
   const {
     data: favoriteMovies,
@@ -198,26 +206,33 @@ const ProfileFirst = ({ darkmode }: any) => {
         }`}
       >
         {/* notice */}
-        {token && (
-          <div className=" px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]">
-            <div className=" flex w-full justify-between items-center">
-              <div className=" flex gap-[6px]">
-                <img src={sec} alt="" />
-                <span className=" text-white text-[14px] font-[700]">
-                  绑定邮箱或手机号
-                </span>
-              </div>
-              <div className=" p-2 bg-white/40 rounded-full">{close}</div>
-            </div>
-            <div className=" flex items-center justify-between w-full">
-              <span className=" w-2/3 text-white/80 text-[12px] font-[500] leading-[16px]">
-                您还没有绑定任何安全验证方式，确保账号丢失后可以找回，建议您立即绑定。
-              </span>
-              <button className=" bg-white/20 rounded-[12px] p-[8px] flex justify-center items-center gap-[6px] text-white text-[12px] font-[600]">
-                完善账号 {go}
-              </button>
-            </div>
-          </div>
+        {token && shouldShowBind && (
+          <BindNotice
+            sec={sec}
+            close={close}
+            token={token}
+            shouldShowBind={shouldShowBind}
+            go={go}
+          />
+          // <div className=" px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]">
+          //   <div className=" flex w-full justify-between items-center">
+          //     <div className=" flex gap-[6px]">
+          //       <img src={sec} alt="" />
+          //       <span className=" text-white text-[14px] font-[700]">
+          //         绑定邮箱或手机号
+          //       </span>
+          //     </div>
+          //     <div className=" p-2 bg-white/40 rounded-full">{close}</div>
+          //   </div>
+          //   <div className=" flex items-center justify-between w-full">
+          //     <span className=" w-2/3 text-white/80 text-[12px] font-[500] leading-[16px]">
+          //       您还没有绑定任何安全验证方式，确保账号丢失后可以找回，建议您立即绑定。
+          //     </span>
+          //     <button className=" bg-white/20 rounded-[12px] p-[8px] flex justify-center items-center gap-[6px] text-white text-[12px] font-[600]">
+          //       完善账号 {go}
+          //     </button>
+          //   </div>
+          // </div>
         )}
 
         <a className="p-first cursor-pointer" onClick={handleHistoryClick}>
