@@ -102,9 +102,9 @@ export const Game = () => {
     dispatch(setAuthModel(true));
   };
 
-  // useEffect(() => {
-  //   refresh();
-  // }, [token]);
+  useEffect(() => {
+    refresh();
+  }, [token]);
 
   useEffect(() => {
     if (spinGroups.length > 0) {
