@@ -25,12 +25,11 @@ import movieSlice from "./movieSlice";
 import homeMovieSlice from "./homeMovieSlice";
 import { pointApi } from "../pages/Point/service/PointApi";
 
-// Define persist config
+// // Define persist config
 // const persistConfig = {
 //   key: "root",
 //   storage,
-//   whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
-// };
+//   // whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
 
 // Combine all reducers
 const rootReducer = combineReducers({
@@ -56,7 +55,6 @@ const rootReducer = combineReducers({
   [ShareApi.reducerPath]: ShareApi.reducer,
   [AdsApi.reducerPath]: AdsApi.reducer,
   [pointApi.reducerPath]: pointApi.reducer,
-
 });
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);

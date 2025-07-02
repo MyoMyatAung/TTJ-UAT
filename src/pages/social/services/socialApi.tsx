@@ -68,12 +68,14 @@ export const socialApi = createApi({
     baseUrl: process.env.REACT_APP_API_URL,
     prepareHeaders: (headers) => {
       const storedAuth = JSON.parse(localStorage.getItem("authToken") || "{}");
-      const accessToken = storedAuth?.data?.access_token; 
+      const accessToken = storedAuth?.data?.access_token;
       const settings = JSON.parse(
         localStorage.getItem("movieAppSettings") || "{}"
       );
       headers.set("Accept-Language", "en");
+
       headers.set("X-Client-Version", "3101");
+
       if (settings.filterToggle) {
         headers.set("X-Client-Setting", JSON.stringify({ "pure-mode": 1 }));
       } else {

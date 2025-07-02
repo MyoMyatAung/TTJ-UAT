@@ -554,7 +554,7 @@ const DetailPage: React.FC = () => {
         <>
           <div className="sticky top-0 z-50">
             <div id="upper-div">
-              {currentEpisode && !wholePageError ? (
+              {!wholePageError ? (
                 !isPlayerLoading ? (
                   <VideoPlayer
                     key={currentEpisode?.episode_id}
@@ -592,7 +592,9 @@ const DetailPage: React.FC = () => {
               <div className="flex">
                 <div
                   className={`px-4 py-3 bg-[#fff] dark:bg-[#161619] text-gray-400 rounded-t-lg cursor-pointer relative ${
-                    activeTab === "tab-1" ? "text-black dark:text-white z-10" : ""
+                    activeTab === "tab-1"
+                      ? "text-black dark:text-white z-10"
+                      : ""
                   }`}
                   onClick={() => setActiveTab("tab-1")}
                 >
@@ -603,7 +605,9 @@ const DetailPage: React.FC = () => {
                 </div>
                 <div
                   className={`px-4 py-3 bg-[#fff] dark:bg-[#161619] text-gray-400 rounded-t-lg cursor-pointer relative ${
-                    activeTab === "tab-2" ? "text-black dark:text-white z-10" : ""
+                    activeTab === "tab-2"
+                      ? "text-black dark:text-white z-10"
+                      : ""
                   }`}
                   onClick={() => setActiveTab("tab-2")}
                 >
