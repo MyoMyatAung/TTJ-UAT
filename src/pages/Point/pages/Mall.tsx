@@ -181,7 +181,7 @@ export const Mall = () => {
             </div>
             <button
               onClick={handleOpenTask}
-              className="border-[3px] broder-[#FF9153] px-4 py-[4px] rounded-full font-medium text-[14px]"
+              className="border-[1px] border-[#FF9153] px-4 py-[4px] rounded-full font-medium text-[14px]"
             >
               获取积分
             </button>

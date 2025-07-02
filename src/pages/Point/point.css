@@ -199,7 +199,7 @@
 }
 
 .scroll-animation {
-  animation: scrollText 130s linear infinite;
+  animation: scrollText 160s linear infinite;
   /* display: inline-block; */
   white-space: nowrap;
   padding-left: 24px;

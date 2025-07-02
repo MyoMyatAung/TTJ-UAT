@@ -53,7 +53,7 @@ const TextVirtual: React.FC<VirtualProps> = ({ data }) => {
     //   })}
     // </Swiper>
     <div className="new_v_text_box w-[230px] flex justify-center items-center">
-      <div className="relative w-[208px] h-fit py-[8px] overflow-hidden  flex items-center">
+      <div className="relative w-[208px] h-fit py-[8px] overflow-hidden  flex justify-center items-center">
         <div className="scroll-animation">
           {data?.data?.virtual_lottery_winners?.map(
             (item: any, index: number) => {
