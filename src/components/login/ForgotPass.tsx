@@ -350,7 +350,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
       {panding && <Panding />}
 
       {isVisible && (
-        <div className=" w-screen h-screen bg-[#161619] fixed top-0 z-[99990088]">
+        <div className=" w-screen h-screen bg-[#2B2B2D] fixed top-0 z-[99990088]">
           {openCaptcha && (
             <Capt
               password={password}
@@ -383,7 +383,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setIsFocusedEmail(true)}
                   onBlur={() => setIsFocusedEmail(email !== "")}
-                  className="w-full px- py-2 bg-transparent input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                  className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                   required
                   placeholder=" 请输入手机号/邮箱"
                 />
@@ -407,7 +407,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setIsFocusedPassword(true)}
                   onBlur={() => setIsFocusedPassword(password !== "")}
-                  className="w-full px- py-2 bg-transparent input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                  className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                   required
                   placeholder="输入新密码"
                   minLength={6}
@@ -445,7 +445,7 @@ const ForgotPass: React.FC<ForgotPassProps> = ({ setForgot }) => {
                   onBlur={() =>
                     setIsFocusedConfirmPassword(confirmPassword !== "")
                   }
-                  className="w-full px- py-2 bg-transparent input_border focus:outline-none text-white placeholder-[#5B5B5B]"
+                  className="w-full px- py-2 bg-[#fff] border-b-[1px] border-b-[#777] dark:border-b-white/40 focus:outline-none text-black placeholder-[#5B5B5B] dark:bg-[#2B2B2D] dark:text-white"
                   required
                   placeholder="再次输入新密码"
                   minLength={6}

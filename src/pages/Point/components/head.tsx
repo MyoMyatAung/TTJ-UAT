@@ -21,6 +21,8 @@ export const Head: FC<HeadProps> = ({ title, nomore }) => {
     }
   };
 
+  console.log("mall",pointMall)
+
   return (
     <>
       <div className="w-full h-[54px] bg-white flex justify-between items-center px-4 fixed top-0 z-10">

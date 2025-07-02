@@ -89,11 +89,11 @@ const Social_details: React.FC<any> = ({
   // console.log(" this is mf =>", isLoading);
   return (
     <div
-      className="inset-0 px-[10px] fixed w-screen top-0 h-screen bg-gray-300 dark:bg-black overflow-y-scroll z-[99999]"
+      className="inset-0 px-[10px] fixed w-screen top-0 h-screen bg-gray-300 dark:bg-[#161619] overflow-y-scroll z-[99999]"
       onScroll={(event) => handleScroll(event)}
     >
       {/* header */}
-      <div className="fixed bg-gray-300 dark:bg-black z-[99] w-full top-0 grid grid-cols-3 py-[10px] justify-betwee items-cente">
+      <div className="fixed bg-gray-300 dark:bg-[#161619] z-[99] w-full top-0 grid grid-cols-3 py-[10px] justify-betwee items-cente">
         <span onClick={handleBackSocial}>
           {!darkmode ? (
             <svg
@@ -313,7 +313,7 @@ const Social_details: React.FC<any> = ({
           )}
         </div>
         {/* status */}
-        <div className="flex bg-[#161619 bg-gray-300 dark:bg-black justify-between items-center px-[10px] py-3 text-xs">
+        <div className="flex bg-[#161619 bg-gray-300 dark:bg-[#161619] justify-between items-center px-[10px] py-3 text-xs">
           {showCreatedTime ? (
             <div className="fixed top-0 left-0 flex h-screen items-center justify-center z-[1000] w-full">
               <p className="text-[12px] text-white font-semibold bg-gradient-to-r from-background to-gray-800 px-3 py-1 rounded-md">
@@ -491,12 +491,12 @@ const Social_details: React.FC<any> = ({
           </div>
         </div>
         {isFetching || isLoading ? (
-          <div className="flex bg-gray-300 dark:bg-black justify-center items-center w-full py-[100px]">
+          <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full py-[100px]">
             <Loader />
           </div>
         ) : (
           <>
-            <div className=" h-[4px] bg-[#E4E4E4] dark:bg-[#161619] w-full"></div>
+            <div className=" h-[4px] bg-[#E4E4E4] dark:bg-[#000] w-full"></div>
             {/* comment */}
             <Comment
               setList={setList}
@@ -513,12 +513,12 @@ const Social_details: React.FC<any> = ({
               next={fetchMoreDataCmt}
               hasMore={hasMore}
               loader={
-                <div className="flex bg-gray-300 dark:bg-black justify-center items-center w-full pb-32">
+                <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full pb-32">
                   <Loader />
                 </div>
               }
               endMessage={
-                <div className="flex bg-gray-300 dark:bg-black justify-center items-center w-full pb-32">
+                <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full pb-32">
                   <p style={{ textAlign: "center" }}>
                     <b className=" hidden text-white/60">没有更多评论</b>
                   </p>

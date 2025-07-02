@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BG from "../../assets/share/BG.png";
 import Header from "./Header";
 import Top from "./Top";
@@ -15,9 +15,10 @@ import {
   useGetInvitaionMemberQuery,
 } from "./service/PointApi";
 import Loader from "../../components/login/Loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setActivePointTab } from "../home/slice/HomeSlice";
 
-const Index = ({showTab = true}) => {
+const Index = ({ showTab = true }) => {
   const isLoggedIn = localStorage.getItem("authToken");
   const parsedLoggedIn = isLoggedIn ? JSON.parse(isLoggedIn) : null;
   const token = parsedLoggedIn?.data?.access_token;
@@ -49,12 +50,17 @@ const Index = ({showTab = true}) => {
     skip: !token,
   });
 
-    // staging
+  // staging
   // const parsedUserData = JSON.parse(userData || "{}");
 
   // prod
   const parsedUserData = userData;
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setActivePointTab(2)); // shows Tab2 by default
+  }, []);
 
   const actavityList = list?.data;
   const taskList = task?.data;
@@ -82,7 +88,8 @@ const Index = ({showTab = true}) => {
         <Loader />
       ) : (
         <div className=" px-[20px]">
-          {tabs[activeTab ? activeTab - 1 : 0]?.content}
+          {/* {tabs[activeTab ? activeTab - 1 : 0]?.content} */}
+          {tabs[activeTab - 1]?.content}
         </div>
       )}
     </div>
