@@ -22,6 +22,7 @@ const Captcha: React.FC<{ data: string; type: string }> = ({ data, type }) => {
   const [checkCaptcha, { isLoading, isError }] = useCheckCaptchaMutation(); // RTK mutation hook for captcha verification
   const [triggerSendCode, { isLoading: isSendCodeLoading }] =
     useLazySendCodeQuery(); // RTK lazy query for sending code
+  console.log("type", type);
 
   // Fetch captcha when the component loads
   useEffect(() => {

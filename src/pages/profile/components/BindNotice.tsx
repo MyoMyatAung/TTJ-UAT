@@ -43,7 +43,7 @@ function BindNotice({
 
   return (
     <div
-      onClick={() => navigate("/update_email")}
+      onClick={() => navigate("/bind")}
       className="px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]"
     >
       <div className="flex w-full justify-between items-center">

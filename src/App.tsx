@@ -440,9 +440,9 @@ const App: React.FC = () => {
                 </div>
               )}
 
-            {!showNotice && location.pathname === "/" && (
-              <SpinAnimation open={open?.data} />
-            )}
+            {!showNotice &&
+              location.pathname === "/" &&
+              !showUpdateNotification && <SpinAnimation open={open?.data} />}
 
             {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
