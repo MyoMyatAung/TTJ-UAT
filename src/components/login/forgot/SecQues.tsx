@@ -122,7 +122,7 @@ const SecQues: React.FC<SecQuesProps> = ({ ques, ques_id, email,graphicKey }) =>
               <div className="flex justify-between items-center w-full pb-[20px]">
                 <div className=""></div>
                 <h2
-                  className={`text-[18px] font-[600] leading-[20px] opacity- ${
+                  className={`text-[18px] font-[600] leading-[20px] pl-5 opacity- ${
                     darkmode ? " text-white" : "text-black"
                   }`}
                 >
