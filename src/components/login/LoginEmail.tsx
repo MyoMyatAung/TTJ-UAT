@@ -58,7 +58,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
   };
 
   const validatePassword = (password: string) => {
-    const lengthValid = password.length >= 6 && password.length <= 25;
+    const lengthValid = password.length >= 5 && password.length <= 25;
     // const containsLetters = /[a-zA-Z]/.test(password);
     // const containsNumbers = /\d/.test(password);
     // return lengthValid && containsLetters && containsNumbers;
@@ -66,7 +66,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
   };
 
   const validateEmail = (email: string) => {
-    return email.length >= 6 && email.length <= 40;
+    return email.length >= 5 && email.length <= 40;
   };
 
   const toggleVisibility = (login: boolean, signup: boolean) => {
