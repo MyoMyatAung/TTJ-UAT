@@ -165,7 +165,7 @@ const FilterTag = () => {
                   </p>
                   <div
                     className={`py-[1px] rounded-full ${
-                      activeTab === item?.id && "bg-orange-600"
+                      activeTab === item?.id && "tab-bg-active"
                     } w-full`}
                   ></div>
                 </div>
