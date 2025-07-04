@@ -1141,7 +1141,7 @@ const PostList = ({
             {post.file_type === "audio" && (
               <AudioPlayer
                 src={post?.files[0]?.resourceURL}
-                title={post?.files[0]?.audio_file_name || post?.description}
+                title={post?.files[0]?.title || post?.description}
                 index={index}
                 setActivePlayer={setActivePlayer}
                 activePlayer={activePlayer}

@@ -308,7 +308,7 @@ const Social_details: React.FC<any> = ({
 
           {post.file_type === "audio" && (
             <AudioPlayer
-              title={post?.files[0]?.audio_file_name || post?.description}
+              title={post?.files[0]?.title || post?.description}
               src={post?.files[0]?.resourceURL}
               index={post.post_id}
               setActivePlayer={setActivePlayer}
