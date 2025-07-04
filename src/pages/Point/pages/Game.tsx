@@ -337,7 +337,8 @@ export const Game = () => {
       setMsg({
         show: true,
         msg: "抽奖劵不足，请通过邀请好友获取",
-        navBtn: "获取抽奖劵",
+        btnText: "获取抽奖劵",
+        navBtn: true,
       });
       return;
     }
