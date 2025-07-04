@@ -58,7 +58,7 @@ const ForgotQues: React.FC<ForgotPassProps> = ({ setForgot, parent }) => {
   const [ques, setQues] = useState<any>("");
 
   const validatePassword = (password: string) => {
-    const lengthValid = password.length >= 6 && password.length <= 25;
+    const lengthValid = password.length >= 5 && password.length <= 25;
     const containsLetters = /[a-zA-Z]/.test(password);
     const containsNumbers = /\d/.test(password);
     return lengthValid
