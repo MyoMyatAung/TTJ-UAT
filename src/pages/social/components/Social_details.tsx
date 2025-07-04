@@ -86,6 +86,8 @@ const Social_details: React.FC<any> = ({
     setList([]);
   };
 
+  console.log("post", post);
+
   // console.log(" this is mf =>", isLoading);
   return (
     <div
@@ -303,8 +305,10 @@ const Social_details: React.FC<any> = ({
               status={post?.type === "ads" ? true : false}
             />
           )}
+
           {post.file_type === "audio" && (
             <AudioPlayer
+              title={post?.files[0]?.audio_file_name || post?.description}
               src={post?.files[0]?.resourceURL}
               index={post.post_id}
               setActivePlayer={setActivePlayer}

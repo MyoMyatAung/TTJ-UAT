@@ -7,7 +7,9 @@ const AudioPlayer = ({
   index,
   setActivePlayer,
   activePlayer,
+  title,
 }: {
+  title: any;
   src: string;
   index: number;
   setActivePlayer: (index: number) => void;
@@ -21,11 +23,11 @@ const AudioPlayer = ({
   const [playbackRate, setPlaybackRate] = useState(1);
   const darkmode = useSelector(selectTheme);
 
-  // Extract title from the URL
-  const title = React.useMemo(() => {
-    const filename = src?.split("/").pop();
-    return filename?.split("_")[0] || "Audio Title";
-  }, [src]);
+  // // Extract title from the URL
+  // const title = React.useMemo(() => {
+  //   const filename = src?.split("/").pop();
+  //   return filename?.split("_")[0] || "Audio Title";
+  // }, [src]);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -47,6 +49,8 @@ const AudioPlayer = ({
       setPlaybackRate(newRate);
     }
   };
+
+  console.log("src", src);
 
   // const handleSpeedChange = () => {
   //   if (audioRef.current) {
@@ -154,8 +158,8 @@ const AudioPlayer = ({
               </svg>
             )}
           </button>
-          <div className="flex flex-col w-full">
-            <div className="text-sm font-medium truncate w-full -mr-5">
+          <div className="flex flex-col w-full max-w-[calc(100%-60px)]">
+            <div className="text-sm font-medium truncate  overflow-hidden">
               {title}
             </div>
             {/* Progress Bar */}

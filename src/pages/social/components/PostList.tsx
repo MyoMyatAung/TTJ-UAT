@@ -846,6 +846,15 @@ const PostList = ({
   //     }
   //   };
 
+  function decodeUrlEncodedString(encodedStr: any) {
+    try {
+      return decodeURIComponent(encodedStr);
+    } catch (e) {
+      console.error("Failed to decode the string:", e);
+      return encodedStr; // Return original if decoding fails
+    }
+  }
+
   const sendEventToNative = ({ value }: { value: any }) => {
     if (
       (window as any).webkit &&
@@ -910,6 +919,7 @@ const PostList = ({
       );
     }
   };
+  console.log("post", data);
   // console.log(data);
   return (
     <div className="bg-gray-300 dark:bg-black pt-0.5">
@@ -1131,6 +1141,7 @@ const PostList = ({
             {post.file_type === "audio" && (
               <AudioPlayer
                 src={post?.files[0]?.resourceURL}
+                title={post?.files[0]?.audio_file_name || post?.description}
                 index={index}
                 setActivePlayer={setActivePlayer}
                 activePlayer={activePlayer}
