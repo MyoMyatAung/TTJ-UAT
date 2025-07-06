@@ -146,7 +146,7 @@ const Otp: React.FC<{ data: string; type: string }> = ({ data, type }) => {
             <input
               key={index}
               id={`otp-input-${index}`}
-              type="text"
+              type="number"
               maxLength={1}
               className="w-10 h-10 otp-input text-center text-white border-b-2 focus:outline-none"
               value={digit}

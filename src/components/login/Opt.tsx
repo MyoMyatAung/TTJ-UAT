@@ -201,7 +201,7 @@ const Opt: React.FC<OptProps> = ({
             <input
               key={index}
               ref={(ref) => (inputRefs.current[index] = ref)}
-              type="password"
+              type="number"
               value={digit}
               maxLength={1}
               onChange={(e) => handleOTPChange(index, e.target.value)}
