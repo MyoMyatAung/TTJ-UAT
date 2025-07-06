@@ -442,7 +442,7 @@ const Player = ({
       miniProgressBar: true,
       fastForward: true,
       fullscreen: true,
-      theme: "#00a1d6",
+      theme: "#FE58B5",
 
       customType: {
         mp4: function (video: HTMLVideoElement, url: string) {
@@ -571,7 +571,7 @@ const Player = ({
             <p className="text-white">出了点小问题，请稍后重试</p>
             <button
               onClick={handleRetry}
-              className="p-1 px-4 text-[14px] rounded-full bg-[#F54100] mt-2"
+              className="p-1 px-4 text-[14px] rounded-full bg-[#FE58B5] mt-2"
             >
               重试
             </button>
