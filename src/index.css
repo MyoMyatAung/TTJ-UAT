@@ -181,8 +181,21 @@ input[type="range"]::-moz-range-thumb {
   background: linear-gradient(to right, #58402e, #58402e);
 }
 .tab-bg {
-  background: linear-gradient(to right, #ffffff29, #ffffff29);
-  /* @apply bg-gradient-to-r from-[#fe58b5] to-[#ff9153]  dark:to-[#FFFFFF29] dark:from-[#FFFFFF29]; */
+  /* border-radius: 16px; */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.16
+  ); /* @apply bg-gradient-to-r from-[#fe58b5] to-[#ff9153]  dark:to-[#FFFFFF29] dark:from-[#FFFFFF29]; */
+}
+
+.tab-bg-active {
+  border-radius: 2px;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
 }
 .tab-bg-light {
   background: linear-gradient(to right, #fe58b5, #ff9153);
@@ -469,4 +482,12 @@ input[type="radio"]:checked {
   .full-height-fallback {
     height: 100dvh; /* Used in modern browsers */
   }
+}
+
+.new_active_line {
+  border-radius: 2px;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
 }

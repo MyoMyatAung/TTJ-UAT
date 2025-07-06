@@ -18,6 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { showToast } from "../../pages/profile/error/ErrorSlice";
 import CloseBtn from "../../assets/svg/CloseBtn";
 import { selectTheme } from "../../pages/search/slice/ThemeSlice";
+import Options from "./forgot/Options";
 
 interface LoginEmailProps {
   handleBack: () => void; // Accept handleBack as a prop
@@ -57,7 +58,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
   };
 
   const validatePassword = (password: string) => {
-    const lengthValid = password.length >= 6 && password.length <= 25;
+    const lengthValid = password.length >= 5 && password.length <= 25;
     // const containsLetters = /[a-zA-Z]/.test(password);
     // const containsNumbers = /\d/.test(password);
     // return lengthValid && containsLetters && containsNumbers;
@@ -65,7 +66,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
   };
 
   const validateEmail = (email: string) => {
-    return email.length >= 6 && email.length <= 40;
+    return email.length >= 5 && email.length <= 40;
   };
 
   const toggleVisibility = (login: boolean, signup: boolean) => {
@@ -136,7 +137,8 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
         />
       )}
       {forgot ? (
-        <ForgotPass forgot={forgot} setForgot={setForgot} />
+        // <ForgotPass forgot={forgot} setForgot={setForgot} />
+        <Options forgot={forgot} setForgot={setForgot} />
       ) : (
         <AnimatePresence>
           {isVisible && (
@@ -165,7 +167,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     登录
                   </h2>
                   <div
-                    className="p-3 cursor-pointer fixed z-[999991] right-[30px]"
+                    className="p-3 cursor-pointer rounded-full fixed z-[999991] right-[30px] bg-white/5"
                     onClick={handleClose}
                   >
                     {darkmode ? (
@@ -269,7 +271,7 @@ const LoginEmail: React.FC<LoginEmailProps> = ({ handleBack }) => {
                     type="submit"
                     className={`w-full text-[14px] font-[600] leading-[22px]  mt-[20px] py-[10px] px-[16px] rounded-[80px]  ${
                       !validatePassword(password)
-                        ? "login_button text-white"
+                        ? "login_button text-[#777777]"
                         : "next_button text-[#fff]"
                     } transition duration-300 ease-in-out`}
                   >

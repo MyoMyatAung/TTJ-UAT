@@ -5,13 +5,16 @@ import { setCaptchaOpen } from "../../features/login/ModelSlice";
 import Captcha from "./components/email/Captcha";
 import Otp from "./components/email/Otp";
 import { useGetUserQuery } from "./services/profileApi";
+import { selectTheme } from "../search/slice/ThemeSlice";
 
 const Phnumber: React.FC = () => {
+  const darkmode = useSelector(selectTheme);
+
   const dispatch = useDispatch();
   const { openCaptcha, openOtp } = useSelector((state: any) => state.model); // OpenCaptcha and OpenOtp states
   const { data: userData } = useGetUserQuery(undefined);
   const user = userData?.data;
-  const initialPhone = user?.phone && user.phone !== '0' ? user.phone : ""; 
+  const initialPhone = user?.phone && user.phone !== "0" ? user.phone : "";
   // console.log(initialPhone)
   // const user = useSelector((state: any) => state.user.user);
   const [text, setText] = useState(initialPhone); // Email value
@@ -36,7 +39,7 @@ const Phnumber: React.FC = () => {
 
   return (
     <div>
-      <div className="fixed-bg"></div>
+      <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
 
       {/* Show email form only if Captcha and OTP components are not open */}
       {!openOtp && (
@@ -56,7 +59,13 @@ const Phnumber: React.FC = () => {
                 />
               </svg>
             </Link>
-            <div className="history-title pr-10">设置新电话号码</div>
+            <div
+              className={`${
+                darkmode ? "history-title_dark" : "history-title"
+              } pr-10`}
+            >
+              设置新电话号码
+            </div>
             <div className="edit-title cursor-pointer"></div>
           </div>
 
@@ -64,16 +73,18 @@ const Phnumber: React.FC = () => {
             <form onSubmit={handleSubmit} className="w-full">
               <input
                 type="number"
-                className="new-input no-spinner"
+                className={`${darkmode ? "new-input" : "new-input"}`}
                 placeholder="请输入手机号"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
               <button
                 className={`submit_btn`}
+                disabled={!active}
                 style={{
-                  background: active ? "#fe58b5" : "rgba(255, 255, 255, 0.04)",
-                  color: active ? "white" : "rgba(255, 255, 255, 0.20)",
+                  background: active ? "#FE58B5" : "#FE58B5",
+                  opacity: active ? "1" : "0.5",
+                  color: active ? "white" : "white",
                 }}
               >
                 保存

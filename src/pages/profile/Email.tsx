@@ -6,8 +6,11 @@ import Captcha from "./components/email/Captcha";
 import Otp from "./components/email/Otp";
 import { showToast } from "./error/ErrorSlice";
 import { useGetUserQuery } from "./services/profileApi";
+import { selectTheme } from "../search/slice/ThemeSlice";
 
 const Email: React.FC = () => {
+  const darkmode = useSelector(selectTheme);
+
   const dispatch = useDispatch();
   const { openCaptcha, openOtp } = useSelector((state: any) => state.model); // OpenCaptcha and OpenOtp states
   const { data: userData } = useGetUserQuery(undefined);
@@ -51,27 +54,48 @@ const Email: React.FC = () => {
 
   return (
     <div>
-      <div className="fixed-bg"></div>
+      <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
 
       {/* Show email form only if Captcha and OTP components are not open */}
       {!openOtp && (
         <div>
           <div className="flex fixed top-0 w-full z-10 bg-[#161619] justify-between items-center p-2">
             <Link to="/info" className="back-button">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M7.828 11H20V13H7.828L13.192 18.364L11.778 19.778L4 12L11.778 4.22198L13.192 5.63598L7.828 11Z"
-                  fill="white"
-                />
-              </svg>
+              {darkmode ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+                    fill="white"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+                    fill="#080808"
+                  />
+                </svg>
+              )}
             </Link>
-            <div className="history-title pr-10">设置新邮箱</div>
+            <div
+              className={`${
+                darkmode ? "history-title_dark" : "history-title"
+              } pr-10`}
+            >
+              设置新邮箱
+            </div>
             <div className="edit-title cursor-pointer"></div>
           </div>
           {/* <div className="mt-[60px] p-4">
@@ -89,16 +113,18 @@ const Email: React.FC = () => {
             <form onSubmit={handleSubmit} className="w-full">
               <input
                 type="text"
-                className="new-input"
+                className={`${darkmode ? "new-input" : "new-input"}`}
                 placeholder="输入您的电子邮件"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
               <button
                 className={`submit_btn`}
+                disabled={!active}
                 style={{
-                  background: active ? "#fe58b5" : "rgba(255, 255, 255, 0.04)",
-                  color: active ? "white" : "rgba(255, 255, 255, 0.20)",
+                  background: active ? "#FE58B5" : "#FE58B5",
+                  opacity: active ? "1" : "0.5",
+                  color: active ? "white" : "white",
                 }}
               >
                 保存

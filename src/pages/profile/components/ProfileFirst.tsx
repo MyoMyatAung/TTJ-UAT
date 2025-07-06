@@ -1,7 +1,7 @@
 import { startTransition, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ImageWithPlaceholder from "../../search/components/ImgPlaceholder";
-import { setAuthModel } from "../../../features/login/ModelSlice";
+import { setAuthModel, setPointMall } from "../../../features/login/ModelSlice";
 import { useDispatch, useSelector } from "react-redux";
 import RightDark from "../../../assets/svg/RightDark";
 import {
@@ -11,8 +11,10 @@ import {
 } from "../services/profileApi";
 import { showToast } from "../error/ErrorSlice";
 import History from "../../../assets/svg/History";
+import sec from "../../../assets/sec.svg";
 import Collection from "../../../assets/svg/Collection";
 import Right from "../../../assets/svg/Right";
+import BindNotice from "./BindNotice";
 
 interface Movie {
   id: any;
@@ -41,6 +43,13 @@ const ProfileFirst = ({ darkmode }: any) => {
 
   const user = userData?.data;
 
+  const hasNoEmail = !user?.email || user.email.trim() === "";
+  const hasNoPhone = !user?.phone || user.phone === "0";
+
+  const shouldShowBind = hasNoEmail && hasNoPhone;
+
+  // console.log("Need to bind phone and email:", shouldShowBind, user);
+
   const {
     data: favoriteMovies,
     // isLoading: isFavoritesLoading,
@@ -63,6 +72,20 @@ const ProfileFirst = ({ darkmode }: any) => {
   const navigate = useNavigate();
 
   const prevTokenRef = useRef(token);
+
+  const handleMallClick = () => {
+    if (!token) {
+      // If not logged in, open the login modal
+      startTransition(() => {
+        dispatch(setAuthModel(true));
+      });
+    } else {
+      // If logged in, redirect to the favorites page
+      dispatch(setPointMall("/profile"));
+
+      navigate("/point_mall");
+    }
+  };
 
   useEffect(() => {
     // Only trigger refetch if the token has changed
@@ -148,6 +171,34 @@ const ProfileFirst = ({ darkmode }: any) => {
   };
 
   // console.log(latestMovies);
+  const go = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="5"
+      height="7"
+      viewBox="0 0 5 7"
+      fill="none"
+    >
+      <path
+        d="M0.637325 0.617423C0.680566 0.580201 0.731934 0.55067 0.788487 0.530521C0.845041 0.510372 0.905668 0.5 0.966897 0.5C1.02813 0.5 1.08875 0.510372 1.14531 0.530521C1.20186 0.55067 1.25323 0.580201 1.29647 0.617423L4.39109 3.27453C4.42562 3.30412 4.45301 3.33925 4.47169 3.37793C4.49038 3.41661 4.5 3.45808 4.5 3.49996C4.5 3.54183 4.49038 3.5833 4.47169 3.62198C4.45301 3.66066 4.42562 3.6958 4.39109 3.72538L1.29647 6.38249C1.11399 6.53917 0.8198 6.53917 0.637325 6.38249C0.45485 6.22582 0.45485 5.97321 0.637325 5.81654L3.33348 3.49836L0.633602 1.18018C0.454851 1.0267 0.45485 0.770902 0.637325 0.617423Z"
+        fill="white"
+      />
+    </svg>
+  );
+  const close = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="8"
+      viewBox="0 0 8 8"
+      fill="none"
+    >
+      <path
+        d="M4 3.1668L6.9168 0.25L7.75 1.0832L4.8332 4L7.75 6.9168L6.9168 7.75L4 4.8332L1.0832 7.75L0.25 6.9168L3.1668 4L0.25 1.0832L1.0832 0.25L4 3.1668Z"
+        fill="white"
+      />
+    </svg>
+  );
 
   return (
     <div className="profile-div">
@@ -156,6 +207,36 @@ const ProfileFirst = ({ darkmode }: any) => {
           darkmode ? "profile-div-main_dark" : "profile-div-main"
         }`}
       >
+        {/* notice */}
+        {token && shouldShowBind && (
+          <BindNotice
+            sec={sec}
+            close={close}
+            token={token}
+            shouldShowBind={shouldShowBind}
+            go={go}
+          />
+          // <div className=" px-[16px] py-[12px] new_notice_bind flex flex-col gap-[8px]">
+          //   <div className=" flex w-full justify-between items-center">
+          //     <div className=" flex gap-[6px]">
+          //       <img src={sec} alt="" />
+          //       <span className=" text-white text-[14px] font-[700]">
+          //         绑定邮箱或手机号
+          //       </span>
+          //     </div>
+          //     <div className=" p-2 bg-white/40 rounded-full">{close}</div>
+          //   </div>
+          //   <div className=" flex items-center justify-between w-full">
+          //     <span className=" w-2/3 text-white/80 text-[12px] font-[500] leading-[16px]">
+          //       您还没有绑定任何安全验证方式，确保账号丢失后可以找回，建议您立即绑定。
+          //     </span>
+          //     <button className=" bg-white/20 rounded-[12px] p-[8px] flex justify-center items-center gap-[6px] text-white text-[12px] font-[600]">
+          //       完善账号 {go}
+          //     </button>
+          //   </div>
+          // </div>
+        )}
+
         <a className="p-first cursor-pointer" onClick={handleHistoryClick}>
           <div className="flex gap-3 items-center">
             <div>
@@ -300,6 +381,51 @@ const ProfileFirst = ({ darkmode }: any) => {
               ))}
             </div>
           )}
+
+        {token && (
+          <a className="p-first cursor-pointer " onClick={handleMallClick}>
+            <div className="flex gap-3 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="24"
+                viewBox="0 0 18 24"
+                fill="none"
+              >
+                <path
+                  d="M1.23474 15.4848C1.23474 11.1972 4.7125 7.71948 9.00002 7.71948C13.2875 7.71948 16.7653 11.1972 16.7653 15.4848C16.7653 19.7723 13.2875 23.25 9.00002 23.25C4.7125 23.25 1.23474 19.7723 1.23474 15.4848Z"
+                  stroke="#A3A3A4"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M9.76309 14.219C9.87963 14.4552 10.105 14.6189 10.3656 14.6567L12.0725 14.9044L10.8384 16.1093C10.6502 16.293 10.5644 16.5573 10.6086 16.8165L10.8991 18.5162L9.37275 17.7125C9.13945 17.5896 8.8606 17.5896 8.6273 17.7125L7.10099 18.5162L7.3914 16.8165C7.43568 16.5573 7.34981 16.293 7.16169 16.1093L5.92755 14.9044L7.63444 14.6567C7.89508 14.6189 8.12041 14.4552 8.23696 14.219L9.00002 12.6726L9.76309 14.219ZM12.3623 14.6216L12.3621 14.6217L12.3623 14.6216Z"
+                  stroke="#A3A3A4"
+                />
+                <path
+                  d="M4.76176 6.58111L2.34555 0.6H6.71289L7.94859 3.6624L7.08215 5.81033C6.26918 5.97126 5.49008 6.23233 4.76176 6.58111Z"
+                  stroke="#A3A3A4"
+                  stroke-width="1.2"
+                />
+                <path
+                  d="M15.6512 0.6L13.2377 6.58175C12.0288 6.00354 10.6818 5.66211 9.26218 5.62456L11.2909 0.6H15.6512Z"
+                  stroke="#A3A3A4"
+                  stroke-width="1.2"
+                />
+              </svg>
+              <div
+                className={`${darkmode ? "profile-text_dark" : "profile-text"}`}
+              >
+                积分商城
+              </div>
+            </div>
+            <div className="flex gap-1 items-center">
+              <div className="text-[12px] text-[#d0bc94]">
+                积分兑换价值百元大礼包
+              </div>
+              <div>{darkmode ? <RightDark /> : <Right />}</div>
+            </div>
+          </a>
+        )}
 
         <a className="p-firs hidden cursor-pointer" onClick={handleInviteClick}>
           <div className="flex gap-3 items-center">

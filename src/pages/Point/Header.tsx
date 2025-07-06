@@ -1,0 +1,44 @@
+import React from "react";
+import back from "../../assets/login/back.svg";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setPointMall } from "../../features/login/ModelSlice";
+
+interface HeaderProps {}
+
+const Header: React.FC<HeaderProps> = ({}) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { pointMall } = useSelector((state: any) => state.model);
+  console.log(pointMall);
+
+  const routerLink = () => {
+    if (pointMall === "/point_info") {
+      navigate("/profile");
+    } else {
+      navigate(-1);
+    }
+  };
+
+  const goPOintmall = () => {
+    dispatch(setPointMall("/point_info"));
+    navigate("/point_mall");
+  };
+
+  return (
+    <div className=" flex justify-between items-center px-[20px] py-[10px]">
+      <div onClick={routerLink}>
+        <img src={back} className=" p-[20px" alt="" />
+      </div>
+      <h1 className=" text-white text-[18px] pl-[16px] font-[600]">我的积分</h1>
+      <div
+       onClick={goPOintmall}
+        className=" py-[8px] px-[10px mt-[5px"
+      >
+        <span className=" text-white text-[14px] font-[500]">积分商城</span>
+      </div>
+    </div>
+  );
+};
+
+export default Header;

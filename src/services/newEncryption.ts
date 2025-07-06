@@ -64,7 +64,11 @@ export function urlSafeB64encode(data: string): string {
 // }
 // import CryptoJS from "crypto-js";
 
-export function decryptWithAes(data: string): object | null {
+export function decryptWithAes(data: string): any | null {
+   // staging
+  // return data;
+
+   // prod
   try {
     // Decode the encrypted data (if URL-safe base64 encoding was used)
     const encryptedData = data.replace(/-/g, "+").replace(/_/g, "/"); // Convert URL-safe base64 to standard base64

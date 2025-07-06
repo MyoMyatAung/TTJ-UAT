@@ -131,7 +131,7 @@
   padding: 17px 16px;
   align-items: center;
   border-radius: 20px;
-  background: rgba(136, 136, 136, 0.12);
+  /* background: rgba(136, 136, 136, 0.12); */
 
   backdrop-filter: blur(12px);
 }
@@ -227,6 +227,13 @@
   padding: 8px;
   border-radius: 20px;
   background: white;
+  backdrop-filter: blur(16px);
+}
+
+.profile-div-main_dark {
+  padding: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
 }
 
@@ -463,7 +470,7 @@
   border-radius: 20px;
   /* background: rgba(245, 65, 0, 0.08); */
   background: #fe58b514;
-  color: #FE58B5;
+  color: #fe58b5;
   text-align: center;
   font-family: "PingFang SC";
   font-size: 14px;
@@ -621,8 +628,6 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--Brand-Color-2, #fe58b5);
   color: #fe58b5;
   /* font-family: Inter; */
   font-size: 12px;
@@ -630,6 +635,8 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.132px;
+  border-radius: 8px;
+  border: 1px solid var(--Brand-Color-2, #fe58b5);
 }
 
 .sidebar .active {
@@ -641,7 +648,10 @@
   color: white;
   align-self: stretch;
   border-radius: 8px;
-  background: #fe58b5;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
   border-bottom: none;
 }
 
@@ -785,7 +795,7 @@
   align-items: center;
   border-bottom: 0.5px solid #777;
   border-radius: 0%;
-  color: #5b5b5b;
+  color: #fff;
   /* font-family: Inter; */
   font-size: 16px;
   font-style: normal;
@@ -803,7 +813,7 @@
   align-items: center;
   border-bottom: 0.5px solid #777;
   border-radius: 0%;
-  color: #fff;
+  color: #5b5b5b;
   /* font-family: Inter; */
   font-size: 16px;
   font-style: normal;
@@ -1049,4 +1059,11 @@
   letter-spacing: -0.132px;
   margin-top: 10px;
   border-bottom: 1px solid #474747;
+}
+
+.new_notice_bind {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 189, 94, 0.16);
+  background: #ef4900;
+  box-shadow: 0px 0px 32px 0px rgba(255, 255, 255, 0.16) inset;
 }

@@ -1,13 +1,32 @@
 import "../../../../utils/polyfills";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { showToast } from "../../error/ErrorSlice";
+import { useDispatch } from "react-redux";
+// import { setActiveNav, setActivePointTab } from "../../../../pages/home/slice/HomeSlice";
 import Markdown from 'react-markdown'
+// import remarkGfm from 'remark-gfm'
+import {
+  setActiveNav,
+  setActivePointTab,
+} from "../../../../pages/home/slice/HomeSlice";
+import { setAuthModel, setPointMall } from "../../../../features/login/ModelSlice";
 
-const Content = ({ notice, darkmode }: any) => {
+const Content = ({ notice }: any) => {
+  const isLoggedIn = localStorage.getItem("authToken");
+  const parsedLoggedIn = isLoggedIn ? JSON.parse(isLoggedIn) : null;
+  const token = parsedLoggedIn?.data?.access_token;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pageType, setPageType] = useState(false);
 
   const type = notice?.extend?.page_type;
+
+  const handleLoginClick = () => {
+    if (!token) {
+      dispatch(setAuthModel(true)); // Open the login modal if not logged in
+    }
+  };
 
   useEffect(() => {
     if (type === "internal") {
@@ -21,24 +40,69 @@ const Content = ({ notice, darkmode }: any) => {
     return null;
   }
 
+  const JumpAction = (notice: any) => {
+    console.log(notice?.extend);
+
+    switch (notice?.extend.page_path) {
+      case "rankings":
+        dispatch(setActiveNav(3));
+        setTimeout(() => {
+          navigate("/explorer");
+        }, 300);
+        break;
+      case "points_mall":
+        if (!token) {
+          dispatch(setAuthModel(true));
+        } else {
+          dispatch(setPointMall("/notifications"))
+          navigate("/point_mall");
+        }
+        break;
+      case "points_lottery":
+        if (!token) {
+          dispatch(setAuthModel(true));
+        } else {
+          navigate("/game");
+        }
+        break;
+      case "daily_task":
+        if (!token) {
+          dispatch(setAuthModel(true));
+          return;
+        }
+        dispatch(setActivePointTab(2));
+        setTimeout(() => {
+          navigate("/point_info_redeem");
+        }, 300);
+        break;
+      case "invite_home":
+        navigate("/share");
+        break;
+      default:
+        dispatch(
+          showToast({
+            // message: "IOS积分系统正在开发中！敬请期待～",
+            message: ` ${notice.extend.page_name} 正在开发中！敬请期待~`,
+            type: "error",
+          })
+        );
+        break;
+    }
+  };
+
   return (
     <div className="content p-3">
       <div className="text-card">
-        <h3
-          className={`${
-            darkmode ? "text-white" : "text-black"
-          } text-[12px] font-[500] leading-[14px]`}
-        >
-          {notice.title}
-        </h3>
-        <p
-          className={`mt-3 text-[10px] font-[500] ${
-            darkmode ? "text-white" : "text-black"
-          }`}
-        >
+        <h3>{notice.title}</h3>
+        <span className="mt-3" style={{
+          fontFamily: 'PingFang SC',
+          fontWeight: 500,
+          fontSize: '12px',
+          lineHeight: '100%',
+        }}>
           <Markdown>{notice.content}</Markdown>
-        </p>
-        {pageType ? (
+        </span>
+        {/* {pageType ? (
           <>
             {notice.extend.parameters?.video_id && (
               <button
@@ -63,7 +127,7 @@ const Content = ({ notice, darkmode }: any) => {
             {!notice.extend.parameters?.topic_id &&
               !notice.extend.parameters?.video_id && (
                 <button
-                  onClick={() => navigate(`/${notice.extend.page_path}`)}
+                  onClick={() => JumpAction(notice)}
                   className="noti-btn mt-6"
                 >
                   {notice.extend.page_name}
@@ -73,12 +137,32 @@ const Content = ({ notice, darkmode }: any) => {
         ) : (
           notice.extend.page_name && (
             <button
-              className={` mt-6 ${darkmode ? "noti-btn_dark" : "noti-btn"}`}
-              onClick={() => window.open(notice.extend.page_path, "_blank")}
+              className="noti-btn mt-6"
+              onClick={() => JumpAction(notice)}
             >
               {notice.extend.page_name}
             </button>
           )
+        )} */}
+        {pageType ? (
+          <button className="noti-btn_dark mt-6" onClick={() => JumpAction(notice)}>
+            {notice.extend.page_name}
+          </button>
+        ) : (
+          <>
+            {notice?.extend.page_name ? (
+              <a
+                target="_blink"
+                href={notice?.extend?.page_path}
+                className="noti-btn_dark mt-6"
+                // onClick={() => JumpAction(notice)}
+              >
+                {notice.extend.page_name ? notice.extend.page_name : ""}
+              </a>
+            ) : (
+              ""
+            )}
+          </>
         )}
       </div>
     </div>

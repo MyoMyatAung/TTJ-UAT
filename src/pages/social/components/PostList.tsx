@@ -593,6 +593,7 @@ import axios from "axios";
 import { convertToSecureUrl } from "../../../services/newEncryption";
 import { decryptWithAes } from "../../../services/newEncryption";
 import copy from "copy-to-clipboard";
+import ImageWithPlaceholder1 from "./gifPlaceholder";
 
 const PostList = ({
   data,
@@ -845,6 +846,15 @@ const PostList = ({
   //     }
   //   };
 
+  function decodeUrlEncodedString(encodedStr: any) {
+    try {
+      return decodeURIComponent(encodedStr);
+    } catch (e) {
+      console.error("Failed to decode the string:", e);
+      return encodedStr; // Return original if decoding fails
+    }
+  }
+
   const sendEventToNative = ({ value }: { value: any }) => {
     if (
       (window as any).webkit &&
@@ -909,6 +919,7 @@ const PostList = ({
       );
     }
   };
+  console.log("post", data);
   // console.log(data);
   return (
     <div className="bg-gray-300 dark:bg-black pt-0.5">
@@ -1111,6 +1122,13 @@ const PostList = ({
                 )}
               </div>
             )}
+            {post.file_type === "gif" && (
+              <ImageWithPlaceholder1
+                src={post.files[0]?.resourceURL}
+                alt={`Picture of social_image`}
+                className="w-full h-full object-cover"
+              />
+            )}
             {post.file_type === "video" && (
               <Player
                 videoData={videoData}
@@ -1123,6 +1141,7 @@ const PostList = ({
             {post.file_type === "audio" && (
               <AudioPlayer
                 src={post?.files[0]?.resourceURL}
+                title={post?.files[0]?.title || post?.description}
                 index={index}
                 setActivePlayer={setActivePlayer}
                 activePlayer={activePlayer}

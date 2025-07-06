@@ -8,9 +8,11 @@ import {
 } from "../profile/services/profileApi"; // import the hook
 import { showToast } from "./error/ErrorSlice";
 import { setUser } from "./components/slice/UserSlice";
+import { selectTheme } from "../search/slice/ThemeSlice";
 
 const Invite = () => {
   const dispatch = useDispatch();
+  const darkmode = useSelector(selectTheme);
   const navigate = useNavigate();
 
   const [text, setText] = useState("");
@@ -92,24 +94,45 @@ const Invite = () => {
 
   return (
     <div>
-      <div className="fixed-bg"></div>
+      <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
       <div>
         <div className="flex fixed top-0 w-full z-10 bg-[#161619] justify-between items-center p-2">
-          <div onClick={()=>navigate(-1)} className="back-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            > 
-              <path
-                d="M7.828 11H20V13H7.828L13.192 18.364L11.778 19.778L4 12L11.778 4.22198L13.192 5.63598L7.828 11Z"
-                fill="white"
-              />
-            </svg>
+          <div onClick={() => navigate(-1)} className="back-button">
+            {darkmode ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+                  fill="white"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M7.828 10.9999H20V12.9999H7.828L13.192 18.3639L11.778 19.7779L4 11.9999L11.778 4.22192L13.192 5.63592L7.828 10.9999Z"
+                  fill="#080808"
+                />
+              </svg>
+            )}
           </div>
-          <div className="history-title pr-10">填写邀请码</div>
+          <div
+            className={`${
+              darkmode ? "history-title_dark" : "history-title"
+            } pr-10`}
+          >
+            填写邀请码
+          </div>
           <div className="edit-title cursor-pointer"></div>{" "}
           {/* Trigger form submit */}
         </div>
@@ -117,7 +140,7 @@ const Invite = () => {
           <form onSubmit={handleSubmit} className="w-full">
             <input
               type="text"
-              className="new-input"
+              className={`${darkmode ? "new-input" : "new-input"}`}
               placeholder="请输入邀请码"
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -125,9 +148,11 @@ const Invite = () => {
             />
             <button
               className={`submit_btn`}
+              disabled={!active}
               style={{
-                background: active ? "#fe58b5" : "rgba(255, 255, 255, 0.04)",
-                color: active ? "white" : "rgba(255, 255, 255, 0.20)",
+                background: active ? "#FE58B5" : "#FE58B5",
+                opacity: active ? "1" : "0.5",
+                color: active ? "white" : "white",
               }}
             >
               保存

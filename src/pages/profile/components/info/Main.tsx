@@ -244,13 +244,23 @@ const Main = ({ darkmode }: any) => {
             </div>
           </div>
           {/* invite */}
-          <div className="info-main-first hidden mt-3">
+          <div
+            className={`mt-3 rounded-[30px] ${
+              darkmode ? "bg-[#1B1B1F]" : "bg-white"
+            }`}
+          >
             <a
               className="cursor-pointer info-first1"
               onClick={handleInviteClick}
             >
               <div className="flex gap-1 max-w-[230px] ">
-                <div className="profile-text">我的推广达人</div>
+                <div
+                  className={`info-text ${
+                    darkmode ? "text-white" : "text-black"
+                  }`}
+                >
+                  我的推广达人
+                </div>
               </div>
               <div className="flex gap-1 items-center">
                 <div className="text-[12px] text-[#d0bc94]">
@@ -364,7 +374,11 @@ const Main = ({ darkmode }: any) => {
             </Link>
           </div>
           {/* email */}
-          <div className="info-main-first mt-3 hidden">
+          <div
+            className={` mt-3 ${
+              darkmode ? "text-white" : "text-black"
+            }`}
+          >
             <Link to={"/update_email"} className="info-first1">
               <div className="flex gap-1 max-w-[230px] flex-col ">
                 <h1 className="info-text">绑定邮箱</h1>

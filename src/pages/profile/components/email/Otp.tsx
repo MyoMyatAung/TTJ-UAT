@@ -25,6 +25,7 @@ const Otp: React.FC<{ data: string; type: string }> = ({ data, type }) => {
   const [triggerSendCode, { isLoading: isResending }] = useLazySendCodeQuery(); // Add sendCode mutation for resending OTP
   // const user = useSelector((state: any) => state.user.user);
   const { data: userData, refetch } = useGetUserQuery(undefined);
+  console.log("type", type);
 
   // Countdown for resending OTP
   useEffect(() => {

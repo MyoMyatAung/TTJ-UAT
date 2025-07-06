@@ -162,9 +162,9 @@ const Comment: React.FC<any> = ({
     setContent("");
   };
   return (
-    <div className="py-[12px] bg-[#161619 bg-gray-300 dark:bg-black">
+    <div className="py-[12px] dark:bg-[#161619] bg-gray-300 ">
       {panding && (
-        <div className="absolute top-0 left-0 z-[9999909] w-screen h-screen bg-gray-300 dark:bg-black flex justify-center items-center">
+        <div className="absolute top-0 left-0 z-[9999909] w-screen h-screen bg-gray-300 dark:bg-[#161619] flex justify-center items-center">
           <div className=" w-[100px] h-[100px] bg-black/70 rounded-lg flex justify-center items-center">
             <div className="w-5 h-5 border-[3px] border-t-orange-600 border-r-orange-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
           </div>
@@ -383,14 +383,14 @@ const Comment: React.FC<any> = ({
             {isRp ? (
               <button
                 onClick={handleReplyCmt}
-                className=" text-[#F54100] text-[16px] font-[600] leading-[16px]"
+                className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
               >
                 发送
               </button>
             ) : (
               <button
                 onClick={handlePostCmt}
-                className=" text-[#F54100] text-[16px] font-[600] leading-[16px]"
+                className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
               >
                 发送
               </button>

@@ -35,6 +35,8 @@ import { useGetRecommendedMoviesQuery } from "./pages/home/services/homeApi";
 import land2 from "./assets/login/land2.png";
 import Announce from "./components/Announce";
 import UpdateNotification from "./components/UpdateNotification";
+import { useGetOpenStateQuery } from "./pages/Point/service/PointApi";
+import SpinAnimation from "./pages/Point/components/SpinAnimation";
 
 // import Menber from "./pages/share/member";
 // import Share from "./pages/share";
@@ -62,6 +64,14 @@ const Contact = React.lazy(() => import("./pages/profile/Contact"));
 const Invite = React.lazy(() => import("./pages/profile/Invite"));
 const Share = React.lazy(() => import("./pages/share"));
 const Member = React.lazy(() => import("./pages/share/member"));
+//point
+const Game = React.lazy(() => import("./pages/Point/pages/Game"));
+const Mall = React.lazy(() => import("./pages/Point/pages/Mall"));
+const List = React.lazy(() => import("./pages/Point/pages/List"));
+const Shop = React.lazy(() => import("./pages/Point/pages/Shop"));
+const ItemDetail = React.lazy(() => import("./pages/Point/pages/ItemDetail"));
+const Point = React.lazy(() => import("./pages/Point"));
+const ItemInfo = React.lazy(() => import("./pages/Point/pages/ItemInfo"));
 
 // ProtectedRoute component to handle route guarding
 // const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -82,9 +92,31 @@ const App: React.FC = () => {
   const { refetch } = useGetRecommendedMoviesQuery();
   const [showNotice, setShowNotice] = useState(false);
   const { data: headerData } = useGetHeaderTopicsQuery();
+  const [hasCheckedUpdate, setHasCheckedUpdate] = useState(false);
 
   const [preloadedImage, setPreloadedImage] = useState<string | null>(null);
   const [showUpdateNotification, setShowUpdateNotification] = useState(false);
+
+  const { data: open } = useGetOpenStateQuery("");
+  const [isopen, setIsopen] = useState(false);
+  useEffect(() => {
+    if (open?.data) {
+      setIsopen(true);
+    }
+  }, [open]);
+  console.log(" is open", open?.data);
+
+  useEffect(() => {
+    if (!panding) {
+      const hasSeenUpdateNotification = sessionStorage.getItem(
+        "hasSeenUpdateNotification"
+      );
+      if (!hasSeenUpdateNotification && headerData?.data?.app_store_link) {
+        setShowUpdateNotification(true);
+      }
+      setHasCheckedUpdate(true); // mark check done even if app_store_link missing
+    }
+  }, [panding, headerData]);
 
   // Preload landing image
   useEffect(() => {
@@ -139,7 +171,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!panding) {
-      const hasSeenUpdateNotification = sessionStorage.getItem("hasSeenUpdateNotification");
+      const hasSeenUpdateNotification = sessionStorage.getItem(
+        "hasSeenUpdateNotification"
+      );
       if (!hasSeenUpdateNotification) {
         setShowUpdateNotification(true);
       }
@@ -188,7 +222,14 @@ const App: React.FC = () => {
     location.pathname.startsWith("/contact") ||
     location.pathname.startsWith("/share") ||
     location.pathname.startsWith("/invite") ||
-    location.pathname.startsWith("/share/member");
+    location.pathname.startsWith("/point_info") ||
+    location.pathname.startsWith("/game") ||
+    location.pathname.startsWith("/point_mall") ||
+    location.pathname.startsWith("/list") ||
+    location.pathname.startsWith("/itemDetail") ||
+    location.pathname.startsWith("/share/member") ||
+    location.pathname.startsWith("/shop") ||
+    location.pathname.startsWith("/info");
 
   const hideHeader = location.pathname.startsWith("/explorer");
 
@@ -225,15 +266,15 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname !== "/") {
-      const lastFetchTime = sessionStorage.getItem('lastRefetchTime');
+      const lastFetchTime = sessionStorage.getItem("lastRefetchTime");
       const now = Date.now();
       const twoHours = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
-      
+
       // If no previous fetch time or 2 hours have passed, refetch
-      if (!lastFetchTime || (now - parseInt(lastFetchTime)) > twoHours) {
+      if (!lastFetchTime || now - parseInt(lastFetchTime) > twoHours) {
         refetchAds();
         refetch();
-        sessionStorage.setItem('lastRefetchTime', now.toString());
+        sessionStorage.setItem("lastRefetchTime", now.toString());
       }
     }
   }, [location.pathname, refetchAds, refetch]);
@@ -298,8 +339,9 @@ const App: React.FC = () => {
 
   const handleUpdateClick = () => {
     const link = headerData?.data?.app_store_link;
+
     // Handle update action here
-    window.open(link, '_blank');
+    window.open(link, "_blank");
     // Or any other update logic
     setShowUpdateNotification(false);
     sessionStorage.setItem("hasSeenUpdateNotification", "true");
@@ -335,6 +377,7 @@ const App: React.FC = () => {
             {/* <BannerAds /> */}
             {/* Conditionally render Header */}
             {!hideHeaderFooter && !hideHeader && <Header />}
+
             <div className="flex-grow">
               <Suspense
                 fallback={
@@ -376,6 +419,14 @@ const App: React.FC = () => {
                   <Route path="/share" element={<Share />} />
                   <Route path="/invite" element={<Invite />} />
                   <Route path="/share/member" element={<Member />} />
+                  {/* points */}
+                  <Route path="/point_info" element={<Point />} />
+                  <Route path="/game" element={<Game />} />
+                  <Route path="/point_mall" element={<Mall />} />
+                  <Route path="/list" element={<List />} />
+                  <Route path="/itemDetail/:id" element={<ItemDetail />} />
+                  <Route path="/shop/:id" element={<Shop />} />
+                  <Route path="/info/:id" element={<ItemInfo />} />
                 </Routes>
               </Suspense>
               <ErrorToast />
@@ -390,14 +441,22 @@ const App: React.FC = () => {
                 showNotice={showNotice}
               />
             )}
-            {showUpdateNotification && !showNotice && !isWebView() && headerData?.data?.app_store_link && (
+            {showUpdateNotification &&
+              !showNotice &&
+              !isWebView() &&
+              headerData?.data?.app_store_link && (
                 <div className="fixed bottom-20 left-0 right-0 z-[9999] flex justify-center">
-                  <UpdateNotification 
-                    onUpdate={handleUpdateClick} 
+                  <UpdateNotification
+                    onUpdate={handleUpdateClick}
                     onClose={handleCloseUpdateNotification}
                   />
                 </div>
               )}
+
+            {hasCheckedUpdate && !showNotice && location.pathname === "/" && (
+              <SpinAnimation open={open?.data} />
+            )}
+
             {location.pathname.startsWith("/profile") && <FooterNav />}
             {/* {location.pathname.startsWith("/social") && <FooterNav />} */}
             {location.pathname.startsWith("/social") && !isShowingDetails && (

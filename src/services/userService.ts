@@ -118,7 +118,12 @@ export const login = async (
 
     const loginResponse = await axios.post(
       convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/login`),
-      ll
+      ll,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
 
     // const dataIsEncrypt = loginResponse.headers;
@@ -183,17 +188,28 @@ export const registerWithUsername = async ({
   }
 };
 
-export const signup = async ({ email, password, email_code }: any) => {
+export const signup = async ({
+  email,
+  password,
+  email_code,
+  invite_code,
+}: any) => {
   try {
     let bd = convertToSecurePayload({
       email,
       password,
       email_code,
       timestamp: new Date().getTime(),
+      invite_code,
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/email`,
-      bd
+      bd,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
     return decryptWithAes(data);
   } catch (error) {
@@ -202,17 +218,28 @@ export const signup = async ({ email, password, email_code }: any) => {
   }
 };
 
-export const signupPh = async ({ phone, password, sms_code }: any) => {
+export const signupPh = async ({
+  phone,
+  password,
+  sms_code,
+  invite_code,
+}: any) => {
   try {
     let bd = convertToSecurePayload({
       phone,
       password,
       sms_code,
       timestamp: new Date().getTime(),
+      invite_code,
     });
     const { data } = await axios.post(
       `${process.env.REACT_APP_API_URL}/user/register/phone`,
-      bd
+      bd,
+      {
+        headers: {
+          "X-Client-Version": "3101",
+        },
+      }
     );
     return decryptWithAes(data);
   } catch (error) {

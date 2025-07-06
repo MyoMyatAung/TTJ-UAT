@@ -63,8 +63,9 @@ const Detail = () => {
             {details?.description}
           </p>
           <NewAds section="topic_movies_top" />
-          <p className="px-3 text-[12px] mt-2 mb-3">
-            Include {details?.movies?.length} Films
+          <p className="px-3 text-[13px] mt-2 mb-3">
+            {/* Include {details?.movies?.length} Films */}
+            本专题包含的影片 影片 {details?.movies?.length} 
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:gird-cols-8 gap-3 px-3">
             {details?.movies?.map((movie: any) => (

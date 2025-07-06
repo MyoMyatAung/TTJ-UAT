@@ -54,8 +54,7 @@
 
 .new_css_button {
   border-radius: 8px;
-  /* background: #0000001f; */
-  @apply bg-[#393939] dark:bg-[#0000001f];
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .custom_select_ques {
@@ -97,6 +96,22 @@
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
-  background: #f54100;
+  border-radius: 8px;
+  background: var(
+    --Gradient-Brand-Gradient-1,
+    linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
+  );
   border-bottom: none;
+}
+
+.invite_code_dark {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #393939;
+}
+
+.invite_code {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgb(0 0 0 / 0.1);
 }
