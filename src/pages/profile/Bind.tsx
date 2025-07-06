@@ -113,7 +113,7 @@ const Bind = () => {
               <input
                 type="text"
                 className={`${darkmode ? "new-input" : "new-input"}`}
-                placeholder="输入你的昵称"
+                placeholder="请输入邮箱账号"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 disabled={isLoading} // Disable input during submission
