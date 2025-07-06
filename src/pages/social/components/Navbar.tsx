@@ -290,10 +290,10 @@ const Navbar = () => {
               {social_menu?.map((tab: any, index: any) => (
                 <button
                   key={index}
-                  className={`inline-flex whitespace-nowrap social_nav relative ${
+                  className={`inline-flex whitespace-nowrap social_nav text-white relative ${
                     activeTab === index
-                      ? "text-[#FE58B5] text-[20px]"
-                      : "text-[#000000B2] dark:text-[#FFFFFFCC] text-[20px]"
+                      ? " text-[20px]"
+                      : "text-[20px]"
                   }`}
                   onClick={() => handleTabClick(index)}
                   style={{ paddingBottom: "4px" }}

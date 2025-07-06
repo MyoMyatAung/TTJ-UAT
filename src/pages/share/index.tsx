@@ -173,7 +173,7 @@ const Share: React.FC<ShareProps> = ({}) => {
     <div className="bg-[#161619] min-h-screen flex flex-col  gap-[10px]">
       {/* header */}
       <img src={bg1} className=" absolute z-[1] top-0 left-0 w-screen" alt="" />
-      <div className="flex w-full justify-between items-center pl-[20px] py-4">
+      <div className="flex w-full z-[2] justify-between items-center pl-[20px] py-4">
         <Link className=" absolute z-[2]" to="/profile">
           <img src={back} className="" alt="" />
         </Link>
@@ -300,7 +300,7 @@ const Share: React.FC<ShareProps> = ({}) => {
           className=" flex flex-col items-center justify-center gap-[8px]"
         >
           <h1 className=" text-[18px] font-[600] text-white/70">
-            {userData?.data?.invite_user_num}
+            {userData?.data?.invite_user_num ? userData?.data?.invite_user_num : 0}
           </h1>
           <div className=" flex justify-center items-center gap-[6px]">
             <h1 className="text-center text-[12px] font-[500] text-[#CCC3B2]">

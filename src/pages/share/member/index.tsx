@@ -168,7 +168,7 @@ const Member: React.FC<MemberProps> = ({}) => {
               </div>
             </div>
           ) : isError ? (
-            <div className="text-red-500 text-xl">Error fetching data</div>
+            <div className="text-red-500 hidden text-xl">Error fetching data</div>
           ) : memberList?.data?.list.length === 0 ? (
             <div className=" h-[600px] member_pag">
               <div className="flex flex-col h-full justify-center items-center w-full gap-2">
