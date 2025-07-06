@@ -236,7 +236,9 @@ const WeeklyMoviesNavigation = ({ currentDate }: { currentDate: number }) => {
               window.scrollTo(0, 0);
             }}
             className={`${
-              activeWeek === index + 1 ? "text-white" : "text-[#FFFFFFCC]"
+              activeWeek === index + 1
+                ? "dark:text-white text-black"
+                : "dark:text-[#FFFFFFCC] text-[#000000CC]"
             } text-[14px] text-center`}
           >
             {findDay(day.day)}
