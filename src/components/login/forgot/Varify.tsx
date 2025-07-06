@@ -90,22 +90,35 @@ const Verify: React.FC<OptProps> = ({
       dispatch(setCaptchaOpen(false));
     });
   };
-
   const handleOTPChange = async (index: number, value: string) => {
     const updatedOTP = [...otpDigits];
-    updatedOTP[index] = value;
-    setOtpDigits(updatedOTP);
 
-    if (value && index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1]?.focus();
+    // Handle backspace/delete
+    if (value === "" && updatedOTP[index] !== "") {
+      updatedOTP[index] = "";
+      setOtpDigits(updatedOTP);
+      if (index > 0) {
+        inputRefs.current[index - 1]?.focus();
+      }
+      return;
     }
 
-    if (!value && index > 0) {
-      inputRefs.current[index - 1]?.focus();
+    // Handle new input
+    if (value && value !== updatedOTP[index]) {
+      // Only allow numeric input
+      if (!/^\d+$/.test(value)) return;
+
+      updatedOTP[index] = value.slice(-1); // Take only the last character
+      setOtpDigits(updatedOTP);
+
+      if (updatedOTP[index] && index < inputRefs.current.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
     }
 
     // Handle OTP submission when all digits are filled
     if (updatedOTP.every((digit) => digit)) {
+      inputRefs.current.forEach((input) => input?.blur());
       const otpCode = updatedOTP.join("");
       if (otpCode) {
         try {
@@ -136,6 +149,52 @@ const Verify: React.FC<OptProps> = ({
       }
     }
   };
+
+  // const handleOTPChange = async (index: number, value: string) => {
+  //   const updatedOTP = [...otpDigits];
+  //   updatedOTP[index] = value;
+  //   setOtpDigits(updatedOTP);
+
+  //   if (value && index < inputRefs.current.length - 1) {
+  //     inputRefs.current[index + 1]?.focus();
+  //   }
+
+  //   if (!value && index > 0) {
+  //     inputRefs.current[index - 1]?.focus();
+  //   }
+
+  //   // Handle OTP submission when all digits are filled
+  //   if (updatedOTP.every((digit) => digit)) {
+  //     const otpCode = updatedOTP.join("");
+  // if (otpCode) {
+  //   try {
+  //     setPanding(true);
+  //     const { data, error } = await passwordRecovery({
+  //       password,
+  //       repassword: confirmPassword,
+  //       session_token: accessToken,
+  //       forget_code: otpCode,
+  //     });
+  //     console.log(error);
+  //     if (data) {
+  //       dispatch(showToast({ message: "找回成功", type: "success" }));
+  //       closeAllModals();
+  //       setTimeout(() => {
+  //         dispatch(setAuthModel(true));
+  //       }, 300);
+  //       // navigate("/profile");
+  //       console.log("set success");
+  //     }
+  //     if (error) {
+  //       setPanding(false);
+  //       dispatch(showToast({ message: "验证码错误", type: "error" }));
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  //   }
+  // };
 
   const resendOtp = async () => {
     try {
@@ -173,12 +232,26 @@ const Verify: React.FC<OptProps> = ({
             <input
               key={index}
               ref={(ref) => (inputRefs.current[index] = ref)}
-              type="password"
+              type="number"
               value={digit}
               maxLength={1}
               onChange={(e) => handleOTPChange(index, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace" && !digit && index > 0) {
+                  inputRefs.current[index - 1]?.focus();
+                }
+              }}
               className="w-10 h-10 mx-1 text-center rounded-lg bg-[#303030] text-white text-[20px]"
             />
+            // <input
+            //   key={index}
+            //   ref={(ref) => (inputRefs.current[index] = ref)}
+            //   type="password"
+            //   value={digit}
+            //   maxLength={1}
+            //   onChange={(e) => handleOTPChange(index, e.target.value)}
+            //   className="w-10 h-10 mx-1 text-center rounded-lg bg-[#303030] text-white text-[20px]"
+            // />
           ))}
         </div>
 

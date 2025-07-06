@@ -375,13 +375,19 @@ const Main = ({ darkmode }: any) => {
           </div>
           {/* email */}
           <div
-            className={` mt-3 ${
-              darkmode ? "text-white" : "text-black"
+            className={` mt-3 rounded-[30px] ${
+              darkmode ? "bg-[#1B1B1F]" : "bg-white"
             }`}
           >
             <Link to={"/update_email"} className="info-first1">
               <div className="flex gap-1 max-w-[230px] flex-col ">
-                <h1 className="info-text">绑定邮箱</h1>
+                <h1
+                  className={`info-text ${
+                    darkmode ? "text-white" : "text-black"
+                  }`}
+                >
+                  绑定邮箱
+                </h1>
               </div>
               <div className="flex items-center gap-1">
                 <p className="info-main-text">
@@ -403,7 +409,13 @@ const Main = ({ darkmode }: any) => {
             </Link>
             <Link to={"/update_phone"} className="info-first1">
               <div className="flex gap-1 max-w-[230px] ">
-                <h1 className="info-text">绑定电话号码</h1>
+                <h1
+                  className={`info-text ${
+                    darkmode ? "text-white" : "text-black"
+                  }`}
+                >
+                  绑定电话号码
+                </h1>
               </div>
               <div className="flex items-center gap-1">
                 <p className="info-main-text">
