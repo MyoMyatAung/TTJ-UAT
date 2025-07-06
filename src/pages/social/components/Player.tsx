@@ -547,6 +547,17 @@ const Player = ({
     }, 150);
   };
 
+  // const handleRetry = () => {
+  //   setError(false);
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     if (playerContainerRef.current && !artPlayerInstanceRef.current) {
+  //       initializePlayer();
+  //     }
+  //   }, 500);
+  // };
+
   return (
     <div className={`social-player ${status ? "hide-controls" : ""}`}>
       {loading && (
