@@ -157,7 +157,7 @@ const Tabs: React.FC = () => {
             </div>
 
             <span
-              className={` ml-1 w-[38px] h-[3px] bg-[#F44100] rounded-[12px] text-center ${
+              className={` ml-1 w-[38px] h-[3px] new_active_line rounded-[12px] text-center ${
                 activeTab === tt.id ? "opacity-100" : "opacity-0"
               }`}
             ></span>

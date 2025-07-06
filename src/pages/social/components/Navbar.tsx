@@ -300,7 +300,7 @@ const Navbar = () => {
                 >
                   {tab.text}
                   {activeTab === index && (
-                    <span className="absolute rounded-full bottom-0 left-1/2 transform -translate-x-1/2 bg-[#FE58B5] h-[2px] w-[50%]" />
+                    <span className="absolute rounded-full bottom-0 left-1/2 transform -translate-x-1/2 new_active_line h-[2px] w-[50%]" />
                   )}
                 </button>
               ))}

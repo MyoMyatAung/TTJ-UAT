@@ -69,7 +69,7 @@ export const List = () => {
                     {i}
                     <span
                       className={`w-4 h-1 rounded ${
-                        selected ? "bg-[#ff6a33]" : "bg-transparent"
+                        selected ? "new_active_line" : "bg-transparent"
                       }`}
                     ></span>
                   </button>
