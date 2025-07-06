@@ -98,21 +98,33 @@ const Opt: React.FC<OptProps> = ({
 
   const handleOTPChange = async (index: number, value: string) => {
     const updatedOTP = [...otpDigits];
-    updatedOTP[index] = value;
-    setOtpDigits(updatedOTP);
 
-    if (value && index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1]?.focus();
+    // Handle backspace/delete
+    if (value === "" && updatedOTP[index] !== "") {
+      updatedOTP[index] = "";
+      setOtpDigits(updatedOTP);
+      if (index > 0) {
+        inputRefs.current[index - 1]?.focus();
+      }
+      return;
     }
-    if (!value && index > 0) {
-      inputRefs.current[index - 1]?.focus();
+
+    // Handle new input
+    if (value && value !== updatedOTP[index]) {
+      // Only allow numeric input
+      if (!/^\d+$/.test(value)) return;
+
+      updatedOTP[index] = value.slice(-1); // Take only the last character
+      setOtpDigits(updatedOTP);
+
+      if (updatedOTP[index] && index < inputRefs.current.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
     }
 
     // Handle OTP submission when all digits are filled
     if (updatedOTP.every((digit) => digit)) {
-      // Remove focus from all inputs
       inputRefs.current.forEach((input) => input?.blur());
-
       const otpCode = updatedOTP.join("");
       try {
         if (email && password) {
@@ -146,11 +158,66 @@ const Opt: React.FC<OptProps> = ({
         const Errmessage = err.response.data.msg;
         dispatch(showToast({ message: Errmessage, type: "error" }));
         setPanding(false);
-        inputRefs.current.forEach((input) => input?.focus()); // Optional: Refocus on inputs i
-        // console.log(err,'email')
+        inputRefs.current.forEach((input) => input?.focus());
       }
     }
   };
+
+  // const handleOTPChange = async (index: number, value: string) => {
+  //   const updatedOTP = [...otpDigits];
+  //   updatedOTP[index] = value;
+  //   setOtpDigits(updatedOTP);
+
+  //   if (value && index < inputRefs.current.length - 1) {
+  //     inputRefs.current[index + 1]?.focus();
+  //   }
+  //   if (!value && index > 0) {
+  //     inputRefs.current[index - 1]?.focus();
+  //   }
+
+  //   // Handle OTP submission when all digits are filled
+  //   if (updatedOTP.every((digit) => digit)) {
+  //     // Remove focus from all inputs
+  //     inputRefs.current.forEach((input) => input?.blur());
+
+  //     const otpCode = updatedOTP.join("");
+  //     try {
+  //       if (email && password) {
+  //         setPanding(true);
+  //         const data: any = await signup({
+  //           email,
+  //           password,
+  //           email_code: otpCode,
+  //           invite_code: invite_code,
+  //         });
+  //         if (data) {
+  //           dispatch(setOtpOpen(false));
+  //           localStorage.setItem("authToken", JSON.stringify(data));
+  //           setTimeout(() => closeAllModals(), 1000);
+  //         }
+  //       } else if (phone && password) {
+  //         setPanding(true);
+  //         const data: any = await signupPh({
+  //           phone,
+  //           password,
+  //           sms_code: otpCode,
+  //           invite_code: invite_code,
+  //         });
+  //         if (data) {
+  //           dispatch(setOtpOpen(false));
+  //           localStorage.setItem("authToken", JSON.stringify(data));
+  //           setTimeout(() => closeAllModals(), 1000);
+  //         }
+  //       }
+  //     } catch (err: any) {
+  //       const Errmessage = err.response.data.msg;
+  //       dispatch(showToast({ message: Errmessage, type: "error" }));
+  //       setPanding(false);
+  //       inputRefs.current.forEach((input) => input?.focus()); // Optional: Refocus on inputs i
+  //       // console.log(err,'email')
+  //     }
+  //   }
+  // };
 
   const resendOtp = () => {
     if (email) {
@@ -205,8 +272,22 @@ const Opt: React.FC<OptProps> = ({
               value={digit}
               maxLength={1}
               onChange={(e) => handleOTPChange(index, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace" && !digit && index > 0) {
+                  inputRefs.current[index - 1]?.focus();
+                }
+              }}
               className="w-10 h-10 mx-1 text-center rounded-lg bg-[#303030] text-white text-[20px]"
             />
+            // <input
+            //   key={index}
+            //   ref={(ref) => (inputRefs.current[index] = ref)}
+            //   type="number"
+            //   value={digit}
+            //   maxLength={1}
+            //   onChange={(e) => handleOTPChange(index, e.target.value)}
+            //   className="w-10 h-10 mx-1 text-center rounded-lg bg-[#303030] text-white text-[20px]"
+            // />
           ))}
         </div>
 

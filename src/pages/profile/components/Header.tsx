@@ -31,19 +31,19 @@ const Header = ({ darkmode }: any) => {
     }
   };
 
- // prod
- const user = userData?.data;
- console.log(user);
+  // prod
+  const user = userData?.data;
+  console.log(user);
 
- // staging
-//  const parsedUserData = JSON.parse(userData || "{}");
-//  const user = parsedUserData?.data;
+  // staging
+  //  const parsedUserData = JSON.parse(userData || "{}");
+  //  const user = parsedUserData?.data;
 
   const goToPointMall = () => {
     // dispatch(showToast({ message: "该功能正在开发中", type: "success" }));
     navigate("/point_info");
   };
-// console.log(user)
+  // console.log(user)
   return (
     <div className="profile-header">
       {user && !isFetching ? (
