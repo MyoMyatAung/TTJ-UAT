@@ -329,7 +329,7 @@ const SettingFirst = ({ darkmode }: any) => {
             </label>
           </div>
         </div>
-        <div className="p-first">
+        <div className="p-firs hidden">
           <div className="flex gap-1 max-w-[230px] flex-col ">
             <h1 className={`${darkmode ? " text-white" : "text-black"}`}>
               深色主题

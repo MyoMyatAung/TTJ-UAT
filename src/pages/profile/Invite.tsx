@@ -96,7 +96,7 @@ const Invite = () => {
     <div>
       <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
       <div>
-        <div className="flex fixed top-0 w-full z-10 bg-[#161619] justify-between items-center p-2">
+        <div className="flex fixed top-0 w-full z-10 bg-transparent justify-between items-center p-2">
           <div onClick={() => navigate(-1)} className="back-button">
             {darkmode ? (
               <svg

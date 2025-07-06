@@ -242,9 +242,7 @@ const Header = ({ darkmode }: any) => {
       ) : (
         <div
           onClick={handleLoginClick}
-          className={`flex gap-4 bg-red-4 w-full  cursor-pointer ${
-            darkmode ? "profile-card_dark" : "profile-card"
-          }`}
+          className={`flex gap-4 bg-red- profile-card_dark_lo w-full  cursor-pointer`}
         >
           <div className="profile-p">
             <svg
