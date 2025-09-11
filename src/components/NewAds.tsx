@@ -82,6 +82,8 @@ const NewAds: React.FC<NewAdsProps> = ({ section, fromMovie = false }) => {
     if (!data?.data?.[section]) return [];
     
     const ads = data.data[section];
+    // Ensure ads is an array before spreading
+    if (!Array.isArray(ads)) return [];
     return [...ads].sort((a, b) => (b.sort || 0) - (a.sort || 0)) as AdItem[];
   }, [data, section]);
 

@@ -949,6 +949,7 @@ const PostList = ({
             className="bg-background dark:bg-[#161619] mt-2 rounded-lg p-0 text-white"
           >
             <div className="flex justify-between items-center mb-4 px-4 pt-4">
+              {/* profile, name, level, etc. */}
               <div className="flex items-center ">
                 {post?.user?.avatar ? (
                   <img
@@ -1063,6 +1064,7 @@ const PostList = ({
                   )}
                 </div>
               </div>
+              {/* follow button */}
               {post?.type !== "ads" && (
                 <button
                   onClick={() =>
