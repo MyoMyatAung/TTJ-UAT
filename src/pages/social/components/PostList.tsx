@@ -613,10 +613,12 @@ const PostList = ({
 }) => {
   const [showCreatedTime, setShowCreatedTime] = useState(false);
   const [activePost, setActivePost] = useState(null);
+  const navigate = useNavigate()
 
   const handleShowDetail = (post: any) => {
-    setActivePost(post); // Set the active post
-    setShowDetail(true); // Show the modal
+    // setActivePost(post); // Set the active post
+    // setShowDetail(true); // Show the modal
+    navigate(`/detail-social/:${post.post_id}`);
   };
   const isLoggedIn = localStorage.getItem("authToken");
   const parsedLoggedIn = isLoggedIn ? JSON.parse(isLoggedIn) : null;

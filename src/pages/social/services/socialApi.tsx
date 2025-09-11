@@ -87,6 +87,7 @@ export const socialApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["POST_DETAIL"],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: ({ page, path }) =>
@@ -169,6 +170,10 @@ export const socialApi = createApi({
         }),
       }),
     }),
+    getPostDetail: builder.query({
+      query: ({ id }) => convertToSecureUrl(`post/detail?post_id=${id}`),
+      providesTags: ["POST_DETAIL"]
+    })
   }),
 });
 
@@ -182,4 +187,5 @@ export const {
   useFollowUserMutation,
   useLikePostMutation,
   useGetAudioPostsQuery,
+  useGetPostDetailQuery,
 } = socialApi;

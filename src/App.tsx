@@ -48,6 +48,7 @@ const Main = React.lazy(() => import("./pages/search/Main"));
 const Explorer = React.lazy(() => import("./pages/explorer"));
 const Profile = React.lazy(() => import("./pages/profile"));
 const Player = React.lazy(() => import("./pages/player"));
+const SocialDetail = React.lazy(() => import("./pages/social/SocialDetail"))
 const Detail = React.lazy(() => import("./pages/explorer/Detail"));
 const History = React.lazy(() => import("./pages/profile/History"));
 const Settings = React.lazy(() => import("./pages/profile/Settings"));
@@ -212,6 +213,7 @@ const App: React.FC = () => {
     location.pathname.startsWith("/social") ||
     location.pathname.startsWith("/short") ||
     location.pathname.startsWith("/social_callback") ||
+    location.pathname.startsWith("/detail-social") ||
     location.pathname.startsWith("/info") ||
     location.pathname.startsWith("/nickname") ||
     location.pathname.startsWith("/username") ||
@@ -232,6 +234,8 @@ const App: React.FC = () => {
     location.pathname.startsWith("/info");
 
   const hideHeader = location.pathname.startsWith("/explorer");
+
+  console.log("HIDE FOOTER", hideHeaderFooter);
 
   const sendMessageToNative = (message: string) => {
     if (
@@ -399,6 +403,7 @@ const App: React.FC = () => {
                   ) : (
                     <Route path="/social" element={<div />} />
                   )}
+                  <Route path="/detail-social/:id" element={<SocialDetail />} />
                   <Route path="/short" element={<Short />} />
                   <Route path="/explorer/:id" element={<Detail />} />
                   <Route path="/profile" element={<Profile />} />
@@ -463,7 +468,6 @@ const App: React.FC = () => {
               <FooterNav />
             )}
             {location.pathname.startsWith("/short") && <FooterNav />}
-
             {(openAuthModel || openLoginModel || openSignupModel) && (
               <div
                 className="fixed inset-0 bg-black/40 opacity-50 z-[99899] h-screen" // Overlay with 50% opacity
