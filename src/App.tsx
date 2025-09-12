@@ -105,7 +105,6 @@ const App: React.FC = () => {
       setIsopen(true);
     }
   }, [open]);
-  console.log(" is open", open?.data);
 
   useEffect(() => {
     if (!panding) {
@@ -154,7 +153,6 @@ const App: React.FC = () => {
       }
     };
   }, [data]);
-  // console.log(isShowingDetails)
 
   const sendNativeEvent = (message: string) => {
     if (
@@ -235,7 +233,6 @@ const App: React.FC = () => {
 
   const hideHeader = location.pathname.startsWith("/explorer");
 
-  console.log("HIDE FOOTER", hideHeaderFooter);
 
   const sendMessageToNative = (message: string) => {
     if (
