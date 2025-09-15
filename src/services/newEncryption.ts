@@ -134,7 +134,6 @@ export function convertToSecureUrl(apiUrl: string): string {
   const formData = query
     ? convertUrlToFormData(query)
     : { timestamp: new Date().getTime() };
-
   return createSecureUrl(base, formData);
   // } else {
   //   return apiUrl;

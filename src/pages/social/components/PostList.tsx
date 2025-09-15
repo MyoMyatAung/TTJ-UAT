@@ -124,25 +124,6 @@ const PostList = ({
 
   return (
     <div className="bg-gray-300 dark:bg-black pt-0.5">
-      {/* {showDetail && (
-        <Social_details
-          darkmode={darkmode}
-          followStatus={followStatus}
-          handleFollowChange={handleFollowChange}
-          post={activePost}
-          setShowDetail={setShowDetail}
-          openLightbox={openLightbox}
-          lightboxStates={lightboxStates}
-          closeLightbox={closeLightbox}
-          showCreatedTime={showCreatedTime}
-          likeStatus={likeStatus}
-          sendEventToNative={handleShare}
-          handleLikeChange={handleLikeChange}
-        />
-      )} */}
-      {/* {!showDetail && (
-
-      )} */}
       <div>
         {data.map((post: any, index: number) => {
           return (

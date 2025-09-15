@@ -5,31 +5,31 @@ import Player from "./Player";
 import Comment from "./Comment";
 import { useGetCommentListQuery } from "../services/socialApi";
 import InfiniteScroll from "react-infinite-scroll-component/dist";
-import Loader from "../../../pages/search/components/Loader";
+import Loader from "../../search/components/Loader";
 import AudioPlayer from "./AudioPlayer";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowingDetail } from "../../../features/login/ModelSlice";
+import FollowButton from "./FollowButton";
+import LikeButton from "./LikeButton";
+import { selectTheme } from "../../../pages/search/slice/ThemeSlice";
+import { useNavigate } from "react-router-dom";
+import ShareButton from "./ShareButton";
 
-const Social_details: React.FC<any> = ({
-  setShowDetail,
+const SocialPostDetail: React.FC<any> = ({
   post,
-  handleFollowChange,
-  followStatus,
   openLightbox,
   lightboxStates,
   closeLightbox,
   showCreatedTime,
-  likeStatus,
-  sendEventToNative,
-  handleLikeChange,
   activePlayer,
   setActivePlayer,
-  darkmode,
 }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [list, setList] = useState<any[]>([]);
   const { isShowingDetails } = useSelector((state: any) => state.model);
+  const darkmode = useSelector(selectTheme);
+  const navigate = useNavigate();
   // console.log(isShowingDetails);
   const dispatch = useDispatch();
   let videoData = useRef<HTMLVideoElement[]>([]);
@@ -81,9 +81,10 @@ const Social_details: React.FC<any> = ({
     // console.log('next', scrollTop, scrollHeight, clientHeight);
   };
   const handleBackSocial = () => {
-    setShowDetail(false);
     dispatch(setShowingDetail(false));
     setList([]);
+    // go back to previous page
+    navigate(-1);
   };
 
   console.log("post", post);
@@ -234,36 +235,7 @@ const Social_details: React.FC<any> = ({
               )}
             </div>
           </div>
-          <button
-            onClick={() =>
-              handleFollowChange(post.user.id, followStatus[post.user.id])
-            }
-            className={`flex gap-2 follow_btn items-center ${
-              followStatus[post.user.id]
-                ? "border-[#fe58b5] border-[1px] text-[#fe58b5] bg-transparent"
-                : "bg-[#fe58b5] text-white"
-            } rounded-[6px]`}
-          >
-            {followStatus[post.user.id] ? (
-              <span className="text-sm">已关注</span>
-            ) : (
-              <>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="11"
-                  height="12"
-                  viewBox="0 0 11 12"
-                  fill="none"
-                >
-                  <path
-                    d="M5.92392 5.25532H9.40265C9.8198 5.25532 10.158 5.59349 10.158 6.01064C10.158 6.42779 9.8198 6.76596 9.40265 6.76596H5.92392V10.383C5.92392 10.806 5.58099 11.1489 5.15797 11.1489C4.73494 11.1489 4.39201 10.806 4.39201 10.383V6.76596H0.913287C0.496135 6.76596 0.157967 6.42779 0.157967 6.01064C0.157967 5.59349 0.496135 5.25532 0.913286 5.25532H4.39201V1.61702C4.39201 1.194 4.73494 0.851067 5.15797 0.851067C5.58099 0.851067 5.92392 1.194 5.92392 1.61702V5.25532Z"
-                    fill="white"
-                  />
-                </svg>
-                <span className="text-sm">关注</span>
-              </>
-            )}
-          </button>
+          <FollowButton is_followed={post.is_followed} user_id={post.user.id} />
         </div>
         {/* decs */}
         <p className="px-[10px] dark:text-white text-black text-[16px] font-[400] leading-[20px]">
@@ -334,87 +306,11 @@ const Social_details: React.FC<any> = ({
             </p>
           </div>
           <div className="flex gap-x-5  items-center justify-center">
-            {darkmode ? (
-              <button
-                onClick={() =>
-                  handleLikeChange(post.post_id, likeStatus[post.post_id])
-                }
-                className="flex -mt-[2px] text-black items-center gap-x-2"
-              >
-                {likeStatus[post.post_id]?.liked ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.2 8.79627V18.3963H1V8.79627H4.2ZM7.4 18.3963C6.97565 18.3963 6.56869 18.2277 6.26863 17.9276C5.96857 17.6276 5.8 17.2206 5.8 16.7963V8.79627C5.8 8.35627 5.976 7.95627 6.272 7.66827L11.536 2.39627L12.384 3.24427C12.6 3.46027 12.736 3.75627 12.736 4.08427L12.712 4.34027L11.952 7.99627H17C17.4243 7.99627 17.8313 8.16484 18.1314 8.4649C18.4314 8.76496 18.6 9.17192 18.6 9.59627V11.1963C18.6 11.4043 18.56 11.5963 18.488 11.7803L16.072 17.4203C15.832 17.9963 15.264 18.3963 14.6 18.3963H7.4Z"
-                      fill="#FE58B5"
-                      stroke="#FE58B5"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.2 8.79624V18.3962H1V8.79624H4.2ZM7.4 18.3962C6.97565 18.3962 6.56869 18.2277 6.26863 17.9276C5.96857 17.6276 5.8 17.2206 5.8 16.7962V8.79624C5.8 8.35624 5.976 7.95624 6.272 7.66824L11.536 2.39624L12.384 3.24424C12.6 3.46024 12.736 3.75624 12.736 4.08424L12.712 4.34024L11.952 7.99624H17C17.4243 7.99624 17.8313 8.16481 18.1314 8.46487C18.4314 8.76493 18.6 9.17189 18.6 9.59624V11.1962C18.6 11.4042 18.56 11.5962 18.488 11.7802L16.072 17.4202C15.832 17.9962 15.264 18.3962 14.6 18.3962H7.4Z"
-                      stroke="white"
-                    />
-                  </svg>
-                )}{" "}
-                <span className="text-black dark:text-white">
-                  {" "}
-                  {likeStatus[post.post_id]?.count}
-                </span>
-              </button>
-            ) : (
-              <button
-                onClick={() =>
-                  handleLikeChange(post.post_id, likeStatus[post.post_id])
-                }
-                className="flex -mt-[2px] items-center gap-x-2"
-              >
-                {likeStatus[post.post_id]?.liked ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="22"
-                    viewBox="0 0 21 22"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.2 9.098V18.698H1V9.098H4.2ZM7.4 18.698C6.97565 18.698 6.56869 18.5294 6.26863 18.2294C5.96857 17.9293 5.8 17.5223 5.8 17.098V9.098C5.8 8.658 5.976 8.258 6.272 7.97L11.536 2.698L12.384 3.546C12.6 3.762 12.736 4.058 12.736 4.386L12.712 4.642L11.952 8.298H17C17.4243 8.298 17.8313 8.46657 18.1314 8.76663C18.4314 9.06669 18.6 9.47365 18.6 9.898V11.498C18.6 11.706 18.56 11.898 18.488 12.082L16.072 17.722C15.832 18.298 15.264 18.698 14.6 18.698H7.4Z"
-                      fill="#FE58B5"
-                      stroke="#FE58B5"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.2 8.4V18H1V8.4H4.2ZM7.4 18C6.97565 18 6.56869 17.8314 6.26863 17.5314C5.96857 17.2313 5.8 16.8243 5.8 16.4V8.4C5.8 7.96 5.976 7.56 6.272 7.272L11.536 2L12.384 2.848C12.6 3.064 12.736 3.36 12.736 3.688L12.712 3.944L11.952 7.6H17C17.4243 7.6 17.8313 7.76857 18.1314 8.06863C18.4314 8.36869 18.6 8.77565 18.6 9.2V10.8C18.6 11.008 18.56 11.2 18.488 11.384L16.072 17.024C15.832 17.6 15.264 18 14.6 18H7.4Z"
-                      stroke="black"
-                    />
-                  </svg>
-                )}{" "}
-                <span className="text-black dark:text-white">
-                  {" "}
-                  {likeStatus[post.post_id]?.count}
-                </span>
-              </button>
-            )}
+            <LikeButton
+              post_id={post.post_id}
+              is_liked={post.is_liked}
+              like_count={post.like_count}
+            />
 
             <button
               // onClick={() => handleShowDetail(post)}
@@ -450,48 +346,7 @@ const Social_details: React.FC<any> = ({
               {post.comment_count}
             </button>
 
-            <button
-              className="flex items-center gap-x-2"
-              onClick={sendEventToNative}
-            >
-              {darkmode ? (
-                <button
-                  className="flex items-center gap-x-2"
-                  onClick={sendEventToNative}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                  >
-                    <path
-                      d="M17.2918 2.71541H13.0443C12.8491 2.71541 12.6819 2.78412 12.5441 2.92291C12.4768 2.9878 12.4236 3.06588 12.3878 3.15226C12.352 3.23863 12.3344 3.33146 12.3361 3.42494C12.3361 3.61961 12.4048 3.78589 12.5441 3.92422C12.6815 4.06301 12.8491 4.13218 13.0443 4.13218H15.5824L9.70869 10.0045C9.64197 10.0691 9.5894 10.1469 9.55432 10.233C9.51923 10.319 9.50239 10.4114 9.50485 10.5042C9.50485 10.7058 9.57219 10.8743 9.7064 11.0081C9.84061 11.1446 10.0096 11.2119 10.2126 11.2119C10.4118 11.2119 10.5795 11.1428 10.716 11.0058L16.5837 5.1335V7.67114C16.5837 7.86765 16.6524 8.03438 16.7912 8.17271C16.9295 8.31105 17.0963 8.38021 17.2918 8.38021C17.487 8.38021 17.6542 8.31151 17.792 8.17271C17.9308 8.03438 18 7.86765 18 7.67068V3.42448C18 3.23026 17.9313 3.06124 17.792 2.92291C17.7273 2.85596 17.6495 2.803 17.5635 2.76731C17.4774 2.73162 17.385 2.71396 17.2918 2.71541ZM9.4334 2.75434C8.48567 2.84687 7.56406 3.11575 6.71482 3.54587C5.00585 4.40599 3.67242 5.86397 2.9679 7.64274C2.60837 8.5532 2.4245 9.52352 2.42602 10.5024C2.42602 11.5601 2.63077 12.5701 3.03936 13.5329C3.41955 14.4435 3.97471 15.2699 4.7044 16.0096C5.44508 16.7407 6.27142 17.2945 7.18204 17.6751C8.14396 18.0837 9.15398 18.2889 10.2126 18.2889C11.1912 18.2904 12.1613 18.1062 13.0713 17.7461C13.9493 17.399 14.7571 16.8956 15.4555 16.2602C16.1603 15.618 16.7414 14.8519 17.17 14.0001C17.599 13.151 17.8671 12.2297 17.9606 11.2829C17.9789 11.0708 17.9194 10.889 17.7806 10.7333C17.7148 10.6585 17.6334 10.599 17.5422 10.5591C17.4509 10.5192 17.352 10.4999 17.2525 10.5024C17.072 10.5024 16.9144 10.5629 16.7797 10.6838C16.6441 10.8052 16.5681 10.9586 16.5498 11.1382C16.4752 11.9143 16.257 12.6698 15.9062 13.3662C15.556 14.0644 15.0783 14.691 14.4977 15.2135C13.9307 15.7376 13.2703 16.1506 12.5509 16.431C11.806 16.7239 11.0125 16.8737 10.2121 16.8726C9.34545 16.8726 8.51957 16.7059 7.734 16.3752C6.9892 16.0614 6.31264 15.6047 5.70434 15.0079C5.10704 14.4 4.65172 13.7253 4.33887 12.9787C4.00686 12.1955 3.83731 11.353 3.8405 10.5024C3.8405 9.6953 3.988 8.91477 4.28253 8.16172C4.56226 7.44208 4.97516 6.78163 5.49959 6.21497C6.55364 5.04562 8.00777 4.3139 9.57494 4.16425C9.75587 4.14501 9.90703 4.06943 10.0284 3.93293C10.1503 3.79917 10.2116 3.64114 10.2116 3.46158C10.2116 3.32096 10.1851 3.20187 10.131 3.10247C10.0832 3.00926 10.0094 2.93193 9.91848 2.87985C9.83904 2.83608 9.7544 2.80253 9.66655 2.77999C9.58929 2.76234 9.51035 2.75313 9.43111 2.75251L9.43294 2.75434H9.4334Z"
-                      fill="white"
-                    />
-                  </svg>
-                </button>
-              ) : (
-                <button
-                  className="flex items-center gap-x-2"
-                  onClick={sendEventToNative}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="21"
-                    height="22"
-                    viewBox="0 0 21 22"
-                    fill="none"
-                  >
-                    <path
-                      d="M17.2919 3.01717H13.0443C12.8492 3.01717 12.682 3.08588 12.5441 3.22467C12.4768 3.28957 12.4236 3.36764 12.3878 3.45402C12.352 3.5404 12.3344 3.63323 12.3361 3.7267C12.3361 3.92138 12.4048 4.08765 12.5441 4.22599C12.6815 4.36478 12.8492 4.43395 13.0443 4.43395H15.5824L9.7087 10.3063C9.64199 10.3709 9.58942 10.4487 9.55433 10.5347C9.51924 10.6208 9.5024 10.7131 9.50487 10.806C9.50487 11.0075 9.5722 11.1761 9.70641 11.3099C9.84062 11.4464 10.0096 11.5137 10.2126 11.5137C10.4118 11.5137 10.5795 11.4445 10.716 11.3076L16.5837 5.43526V7.97291C16.5837 8.16941 16.6524 8.33615 16.7912 8.47448C16.9295 8.61281 17.0963 8.68198 17.2919 8.68198C17.487 8.68198 17.6542 8.61327 17.7921 8.47448C17.9309 8.33615 18 8.16941 18 7.97245V3.72625C18 3.53203 17.9313 3.36301 17.7921 3.22467C17.7273 3.15772 17.6495 3.10477 17.5635 3.06908C17.4774 3.03339 17.385 3.01572 17.2919 3.01717ZM9.43341 3.05611C8.48569 3.14864 7.56407 3.41752 6.71483 3.84763C5.00587 4.70776 3.67244 6.16573 2.96792 7.94451C2.60838 8.85497 2.42452 9.82528 2.42603 10.8042C2.42603 11.8618 2.63079 12.8718 3.03937 13.8347C3.41956 14.7453 3.97473 15.5716 4.70442 16.3114C5.4451 17.0425 6.27143 17.5963 7.18205 17.9769C8.14398 18.3855 9.154 18.5907 10.2126 18.5907C11.1912 18.5922 12.1613 18.408 13.0713 18.0479C13.9493 17.7008 14.7571 17.1973 15.4555 16.562C16.1603 15.9197 16.7414 15.1537 17.17 14.3019C17.5991 13.4527 17.8671 12.5315 17.9606 11.5847C17.9789 11.3726 17.9194 11.1908 17.7806 11.035C17.7148 10.9602 17.6335 10.9008 17.5422 10.8609C17.4509 10.821 17.352 10.8016 17.2525 10.8042C17.072 10.8042 16.9144 10.8646 16.7797 10.9856C16.6442 11.1069 16.5681 11.2604 16.5498 11.4399C16.4752 12.2161 16.257 12.9716 15.9062 13.6679C15.5561 14.3662 15.0783 14.9927 14.4977 15.5153C13.9307 16.0394 13.2704 16.4524 12.551 16.7328C11.806 17.0257 11.0126 17.1755 10.2121 17.1744C9.34546 17.1744 8.51958 17.0076 7.73401 16.6769C6.98921 16.3632 6.31266 15.9065 5.70436 15.3096C5.10705 14.7018 4.65174 14.0271 4.33889 13.2804C4.00688 12.4972 3.83733 11.6548 3.84052 10.8042C3.84052 9.99706 3.98801 9.21653 4.28255 8.46349C4.56228 7.74385 4.97518 7.0834 5.49961 6.51674C6.55366 5.34739 8.00778 4.61567 9.57495 4.46601C9.75588 4.44677 9.90704 4.37119 10.0284 4.23469C10.1503 4.10094 10.2117 3.94291 10.2117 3.76335C10.2117 3.62273 10.1851 3.50363 10.131 3.40423C10.0832 3.31103 10.0094 3.2337 9.9185 3.18162C9.83906 3.13785 9.75441 3.1043 9.66656 3.08176C9.58931 3.06411 9.51036 3.0549 9.43112 3.05428L9.43295 3.05611H9.43341Z"
-                      fill="black"
-                    />
-                  </svg>
-                </button>
-              )}
-            </button>
+            <ShareButton />
           </div>
         </div>
         {isFetching || isLoading ? (
@@ -538,4 +393,4 @@ const Social_details: React.FC<any> = ({
   );
 };
 
-export default Social_details;
+export default SocialPostDetail;

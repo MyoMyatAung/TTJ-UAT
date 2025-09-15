@@ -7,14 +7,14 @@ import { selectTheme } from "../../search/slice/ThemeSlice";
 import LockPost from "./LockPost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
-import { useGetUserQuery } from "../../../pages/profile/services/profileApi";
+import { useGetUserQuery } from "../../profile/services/profileApi";
 import { setAuthModel } from "../../../features/login/ModelSlice";
 
 type Props = {
   post: typeof DUMMY_DETAIL;
 };
 
-const PostDetail: React.FC<Props> = ({ post }) => {
+const WebViewPostDetail: React.FC<Props> = ({ post }) => {
   const dispatch = useDispatch();
   let videoData = useRef<HTMLVideoElement[]>([]);
   const darkmode = useSelector(selectTheme);
@@ -26,7 +26,7 @@ const PostDetail: React.FC<Props> = ({ post }) => {
   });
 
   const [isDisplayUnlock, setIsDisplayUnlock] = useState(false);
-  console.log("PostDetail -> ", userData);
+  console.log("WebViewPostDetail -> ", userData);
   const handleShowUnlock = () => {
     setIsDisplayUnlock(true);
   };
@@ -118,4 +118,4 @@ const PostDetail: React.FC<Props> = ({ post }) => {
   );
 };
 
-export default PostDetail;
+export default WebViewPostDetail;

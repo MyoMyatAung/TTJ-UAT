@@ -48,7 +48,7 @@ const Main = React.lazy(() => import("./pages/search/Main"));
 const Explorer = React.lazy(() => import("./pages/explorer"));
 const Profile = React.lazy(() => import("./pages/profile"));
 const Player = React.lazy(() => import("./pages/player"));
-const SocialDetail = React.lazy(() => import("./pages/social/SocialDetail"))
+const SocialDetail = React.lazy(() => import("./pages/social/SocialDetailPage"))
 const Detail = React.lazy(() => import("./pages/explorer/Detail"));
 const History = React.lazy(() => import("./pages/profile/History"));
 const Settings = React.lazy(() => import("./pages/profile/Settings"));
