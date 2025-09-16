@@ -26,6 +26,10 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
   });
 
   const [isDisplayUnlock, setIsDisplayUnlock] = useState(false);
+  const [isNotEnoughPoints, setIsNotEnoughPoints] = useState(false);
+  const [isNotEnoughLevel, setIsNotEnoughLevel] = useState(false);
+  const [isEnoughUnlock, setIsEnoughUnlock] = useState(false);
+
   console.log("WebViewPostDetail -> ", userData);
   const handleShowUnlock = () => {
     setIsDisplayUnlock(true);
@@ -100,7 +104,10 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
           className="fixed top-0 bottom-0 h-full w-full bg-black/75 z-20"
         >
           <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
-            <button onClick={handleLoginClick} className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1">
+            <button
+              onClick={handleLoginClick}
+              className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+            >
               <FontAwesomeIcon icon={faLock} className="text-white" />
               Unlock this post
             </button>
@@ -111,6 +118,88 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
               </span>{" "}
               to unlock this post
             </p>
+          </div>
+        </div>
+      )}
+      {isNotEnoughPoints && (
+        <div
+          onClick={() => setIsNotEnoughPoints(false)}
+          className="fixed top-0 bottom-0 h-full w-full bg-black/75 z-20"
+        >
+          <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
+            <p className="text-white">积分不足，快去赚取吧！</p>
+            <div className="flex justify-center items-center w-full gap-1">
+              <button
+                onClick={() => setIsNotEnoughPoints(false)}
+                className="bg-[#FFFFFF1F] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                取消
+              </button>
+              <button
+                onClick={() => setIsNotEnoughPoints(false)}
+                className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                获取积分{" "}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isNotEnoughLevel && (
+        <div
+          onClick={() => setIsNotEnoughLevel(false)}
+          className="fixed top-0 bottom-0 h-full w-full bg-black/75 z-20"
+        >
+          <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
+            <p className="text-white">灵气等级不足，继续加油升级吧！</p>
+            <div className="flex justify-center items-center w-full gap-1">
+              <button
+                onClick={() => setIsNotEnoughLevel(false)}
+                className="bg-[#FFFFFF1F] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                取消
+              </button>
+              <button
+                onClick={() => setIsNotEnoughLevel(false)}
+                className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                我要升级{" "}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isEnoughUnlock && (
+        <div
+          onClick={() => setIsEnoughUnlock(false)}
+          className="fixed top-0 bottom-0 h-full w-full bg-black/75 z-20"
+        >
+          <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
+            <p className="text-white">
+              解锁此帖子需 【
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FE58B5] to-[#FF9153]">
+                练气四层
+              </span>
+              】 并消耗 【
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FE58B5] to-[#FF9153]">
+                2积分
+              </span>
+              】
+            </p>
+            <div className="flex justify-center items-center w-full gap-1">
+              <button
+                onClick={() => setIsNotEnoughLevel(false)}
+                className="bg-[#FFFFFF1F] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                取消
+              </button>
+              <button
+                onClick={() => setIsEnoughUnlock(false)}
+                className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+              >
+                确认
+              </button>
+            </div>
           </div>
         </div>
       )}
