@@ -304,6 +304,17 @@ const CommentComponent: React.FC<CommentProps> = ({
     setPage((prev) => prev + 1);
   };
 
+  const handleReplyClick = (commentId: number) => {
+    console.log("Reply button clicked for comment:", commentId);
+    console.log("Is logged in:", isLoggedIn);
+    if (!isLoggedIn) {
+      dispatch(setAuthModel(true));
+      return;
+    }
+    setReplyingTo(commentId);
+    console.log("ReplyingTo set to:", commentId);
+  };
+
   return (
     <div>
       <div style={{ height: lowerDivHeight - 140, overflow: "scroll" }}>
@@ -368,7 +379,7 @@ const CommentComponent: React.FC<CommentProps> = ({
                       {comment.status !== 0 && (
                         <span
                           className="time text-commentIcon text-sm mr-4 cursor-pointer hover:text-blue-400"
-                          onClick={() => setReplyingTo(comment.id)}
+                          onClick={() => handleReplyClick(comment.id)}
                         >
                           回复
                         </span>
@@ -440,7 +451,7 @@ const CommentComponent: React.FC<CommentProps> = ({
                                   {reply.status !== 0 && (
                                     <span
                                       className="time text-commentIcon text-sm mr-4 cursor-pointer hover:text-blue-400"
-                                      onClick={() => setReplyingTo(comment.id)}
+                                      onClick={() => handleReplyClick(reply.id)}
                                     >
                                       回复
                                     </span>
