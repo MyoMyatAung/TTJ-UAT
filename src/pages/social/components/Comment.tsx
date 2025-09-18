@@ -171,7 +171,9 @@ const Comment: React.FC<any> = ({
         </div>
       )}
 
-      <h1 className="dark:text-white text-black text-[16px] font-[400]">评论</h1>
+      <h1 className="dark:text-white text-black text-[16px] font-[400]">
+        评论
+      </h1>
       {list?.length === 0 && !isFetching ? (
         <div className="w-full flex flex-col justify-center items-center py-[40px] gap-[10px]">
           <img src={nc} alt="No Comments" />
@@ -286,7 +288,6 @@ const Comment: React.FC<any> = ({
                         }
                         className="dark:text-white/40 text-black text-[12px] font-[400] leading-[14px] flex justify-center items-center gap-[2px]"
                       >
-                       
                         {likeStatus[cmt.id]?.liked ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -345,12 +346,11 @@ const Comment: React.FC<any> = ({
                     <div className="">
                       <span
                         onClick={() => toggleReplyVisibility(cmt.id)}
-                        className={`dark:text-white/50 text-black/50 ${
-                          showReplies[cmt.id] ? "hidden" : "block"
-                        }`}
+                        className={`dark:text-white/50 text-black/50 block cursor-pointer`}
                       >
                         {" "}
-                        --- view {cmt.replies.replies_count} replies
+                        --- {showReplies[cmt.id] ? "关闭" : "展开"}{" "}
+                        {cmt.replies.replies_count} 条评论
                       </span>
                       {showReplies[cmt.id] && (
                         <Reply
