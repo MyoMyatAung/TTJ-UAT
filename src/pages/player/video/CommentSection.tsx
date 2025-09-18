@@ -35,13 +35,13 @@ const CommentComponent: React.FC<CommentProps> = ({
   // comments,
   // setComments,
   hasMore,
-  setHasMore
+  setHasMore,
 }) => {
   const [newComment, setNewComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const commentInputRef = useRef<HTMLInputElement>(null);
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
   const [isLoggedIn, setIsLoggedLogIn] = useState<boolean>(false);
   const [openPopup, setOpenPopup] = useState(false);
   const [openReportPopup, setOpenReportPopup] = useState(false);
@@ -79,10 +79,10 @@ const CommentComponent: React.FC<CommentProps> = ({
   const fetchComments = async () => {
     setIsLoading(true);
     try {
-      const response: any = await fetchCommentData(movieId || '', page);
+      const response: any = await fetchCommentData(movieId || "", page);
       const data: any = response ? await decryptWithAes(response) : null;
 
-      console.log('data is=>', data);
+      console.log("data is=>", data);
       // Concatenate new comments to existing ones using spread operator (...)
       const updatedComments =
         comments &&
@@ -259,12 +259,14 @@ const CommentComponent: React.FC<CommentProps> = ({
               "Content-Type": "application/json",
               Authorization: authorization,
             },
-            body: JSON.stringify(convertToSecurePayload({
-              comment_id: replyingTo ? replyingTo : 0,
-              movie_id: movieId,
-              type: "text",
-              content: newComment,
-            })),
+            body: JSON.stringify(
+              convertToSecurePayload({
+                comment_id: replyingTo ? replyingTo : 0,
+                movie_id: movieId,
+                type: "text",
+                content: newComment,
+              })
+            ),
           }
         );
 
@@ -290,6 +292,11 @@ const CommentComponent: React.FC<CommentProps> = ({
   useEffect(() => {
     if (replyingTo !== null && commentInputRef.current) {
       commentInputRef.current.focus();
+      // Scroll to the input
+      commentInputRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [replyingTo]);
 
@@ -342,7 +349,11 @@ const CommentComponent: React.FC<CommentProps> = ({
                   />
                 </div>
                 <div style={{ marginLeft: "46px", marginTop: "-8px" }}>
-                  <div className={`comment-text text-gray-300 dark:text-gray-300 text-gray-700 mb-1 ${comment.status === 0 ? 'italic' : ''}`}>
+                  <div
+                    className={`comment-text text-gray-300 dark:text-gray-300 text-gray-700 mb-1 ${
+                      comment.status === 0 ? "italic" : ""
+                    }`}
+                  >
                     {comment.content}
                   </div>
                   <div className="comment-actions flex items-center justify-start gap-4 mt-2">
@@ -356,7 +367,7 @@ const CommentComponent: React.FC<CommentProps> = ({
                     <div>
                       {comment.status !== 0 && (
                         <span
-                          className="time text-commentIcon text-sm mr-4"
+                          className="time text-commentIcon text-sm mr-4 cursor-pointer hover:text-blue-400"
                           onClick={() => setReplyingTo(comment.id)}
                         >
                           回复
@@ -410,7 +421,11 @@ const CommentComponent: React.FC<CommentProps> = ({
                             <div
                               style={{ marginLeft: "46px", marginTop: "-8px" }}
                             >
-                              <div className={`comment-text text-gray-300 dark:text-gray-300 text-gray-700 mb-1 ${comment.status === 0 ? 'italic' : ''}`}>
+                              <div
+                                className={`comment-text text-gray-300 dark:text-gray-300 text-gray-700 mb-1 ${
+                                  comment.status === 0 ? "italic" : ""
+                                }`}
+                              >
                                 {reply.content}
                               </div>
                               <div className="comment-actions flex items-center justify-start gap-4 mt-2">
@@ -424,7 +439,7 @@ const CommentComponent: React.FC<CommentProps> = ({
                                 <div>
                                   {reply.status !== 0 && (
                                     <span
-                                      className="time text-commentIcon text-sm mr-4"
+                                      className="time text-commentIcon text-sm mr-4 cursor-pointer hover:text-blue-400"
                                       onClick={() => setReplyingTo(comment.id)}
                                     >
                                       回复
@@ -513,7 +528,11 @@ const CommentComponent: React.FC<CommentProps> = ({
             className="flex justify-center items-center text-center comment-btn"
             style={{ height: lowerDivHeight, width: "100%" }}
           >
-            <img src={ darkmode ? NoData : NodataWhiteBg } alt="nodata" width={120} />
+            <img
+              src={darkmode ? NoData : NodataWhiteBg}
+              alt="nodata"
+              width={120}
+            />
           </div>
         )}
       </div>
@@ -526,6 +545,7 @@ const CommentComponent: React.FC<CommentProps> = ({
             className={`w-8 h-8 rounded-full mr-1`}
           />
           <textarea
+            ref={commentInputRef}
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             onKeyDown={(e) => {
@@ -544,7 +564,7 @@ const CommentComponent: React.FC<CommentProps> = ({
               }
             }}
             className="flex-grow bg-source dark:bg-source bg-white text-gray-900 dark:text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder={"确认过眼神，你是发言人！"}
+            placeholder={replyingTo ? "写回复..." : "确认过眼神，你是发言人！"}
             rows={numberOfRow} // Dynamically adjust the rows
           />
 
