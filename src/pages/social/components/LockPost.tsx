@@ -3,20 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Props = {
   unlock: () => void;
+  unlockText?: string;
 };
 
-const LockPost: React.FC<Props> = ({ unlock }) => {
+const LockPost: React.FC<Props> = ({ unlock, unlockText = "Unlock Now" }) => {
   return (
-    <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full z-10 gap-2 bg-gray-700/75 rounded-lg shadow-2xl">
-      <FontAwesomeIcon icon={faLock} className="text-white text-xl" />
+    <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full z-10 gap-4 bg-gray-700/75 shadow-2xl">
+      <FontAwesomeIcon icon={faLock} className="text-white text-2xl" />
       <p className="text-white font-semibold text-lg">
-        You need to to unlock this post to view this media
+        You need to to unlock to view exclusive videos{" "}
       </p>
       <button
         onClick={unlock}
         className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white"
       >
-        Unlock New
+        {unlockText}
       </button>
     </div>
   );

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CustomLightbox from "./CustomLightBox";
 import ImageWithPlaceholder from "./socialImgPlaceholder";
+import LockPost from "./LockPost";
 
 type Props = {
   post: any;
@@ -11,9 +12,19 @@ type Props = {
   };
 };
 
-const WebViewPost: React.FC<Props> = ({ post, openLightbox, closeLightbox, lightboxStates }) => {
+const WebViewPost: React.FC<Props> = ({
+  post,
+  openLightbox,
+  closeLightbox,
+  lightboxStates,
+}) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/detail-social/${post.post_id}`);
+  };
   return (
-    <div>
+    <div className="relative">
+      <LockPost unlock={handleNavigate} unlockText="Click To View Details" />
       {post.files.map((file: any, index: any) => (
         <div
           key={index}
@@ -27,36 +38,6 @@ const WebViewPost: React.FC<Props> = ({ post, openLightbox, closeLightbox, light
           />
         </div>
       ))}
-      <div className="pt-3 px-4 flex items-center gap-x-2 justify-between">
-        <div className="flex items-center gap-x-1">
-          {post?.level_info && (
-            <img src={post?.level_info?.icon} alt="" className="h-6 w-auto" />
-          )}
-          <p className="text-xs px-2 bg-mainColor rounded-full">
-            {post?.info_text}
-          </p>
-        </div>
-
-        <Link
-          // update route on post detail
-          to={`/social/${post?.post_id}`}
-          className="flex border bg-[#FE58B51F] border-mainColor rounded-md px-2 py-1 text-mainColor"
-        >
-          <span className="text-sm">点击查看完整版</span>
-          <svg
-            width="21"
-            height="21"
-            viewBox="0 0 21 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M11.3125 10.3238L7.1875 6.19884L8.36583 5.02051L13.6692 10.3238L8.36583 15.6272L7.1875 14.4488L11.3125 10.3238Z"
-              fill="#FE58B5"
-            />
-          </svg>
-        </Link>
-      </div>
       {lightboxStates[post.post_id]?.isOpen && (
         <CustomLightbox
           images={post.files}
