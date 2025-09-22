@@ -46,8 +46,10 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
     setShowRedirectModal(true);
   };
 
-  const handleContinue = () => {
-    window.location.href = "https://wws.dyls.com";
+  const handleContinue = (url: string) => {
+    // Redirect to the URL with new tab
+    window.open(url, "_blank");
+    setShowRedirectModal(false);
   };
 
   const handleCancel = () => {
@@ -222,7 +224,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
             Cancel
           </button>
           <button
-            onClick={handleContinue}
+            onClick={() => handleContinue(post.post_detail.jump_url)}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
           >
             Continue
