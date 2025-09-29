@@ -15,7 +15,6 @@ import { useGetCommentListQuery, useUnlockPostMutation } from "../services/socia
 import Loader from "../../search/components/Loader";
 import Comment from "./Comment";
 import InfiniteScroll from "react-infinite-scroll-component";
-import PostComment from "./PostComment";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

@@ -7,9 +7,6 @@ import AudioPlayer from "./AudioPlayer";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectTheme } from "../../../pages/search/slice/ThemeSlice";
-import ShareButton from "./ShareButton";
-import FollowButton from "./FollowButton";
-import LikeButton from "./LikeButton";
 import WebViewPost from "./WebViewPost";
 import PostHeader from "./PostHeader";
 import PostFooter from "./PostFooter";
@@ -36,13 +33,6 @@ const PostItem: React.FC<Props> = ({
   setActivePlayer,
 }) => {
   let videoData = useRef<HTMLVideoElement[]>([]);
-  const [showCreatedTime, setShowCreatedTime] = useState(false);
-  const darkmode = useSelector(selectTheme);
-  const navigate = useNavigate();
-
-  const handleShowDetail = (post: any) => {
-    navigate(`/detail-social/${post.post_id}`);
-  };
 
   return (
     <div

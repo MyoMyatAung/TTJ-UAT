@@ -39,12 +39,11 @@ const SocialDetailPage = () => {
     }
     setLightboxStates(newState);
   };
-  const { data, refetch, isFetching, isLoading, isError, error } =
+  const { data, isLoading } =
     useGetPostDetailQuery({
       id,
     });
   let content = null;
-  console.log("SocialDetailPage -> data", data, isError, error);
   if (isLoading) {
     content = (
       <div className="text-center -mt-[100px] max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
