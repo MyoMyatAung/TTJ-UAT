@@ -347,12 +347,11 @@ const Comment: React.FC<any> = ({
                     <div className="">
                       <span
                         onClick={() => toggleReplyVisibility(cmt.id)}
-                        className={`dark:text-white/50 text-black/50 ${
-                          showReplies[cmt.id] ? "hidden" : "block"
-                        }`}
+                        className={`dark:text-white/50 text-black/50 block cursor-pointer`}
                       >
                         {" "}
-                        --- view {cmt.replies.replies_count} replies
+                        --- {showReplies[cmt.id] ? "关闭" : "展开"}{" "}
+                        {cmt.replies.replies_count} 条评论
                       </span>
                       {showReplies[cmt.id] && (
                         <Reply
