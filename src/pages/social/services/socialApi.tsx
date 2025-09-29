@@ -136,6 +136,7 @@ export const socialApi = createApi({
         }),
         invalidatesTags: (result, error, args) => [
           { type: "LIST", _id: args.follow_user_id },
+          { type: "POST_DETAIL", _id: args.follow_user_id },
         ],
       }
     ),
@@ -188,6 +189,19 @@ export const socialApi = createApi({
       },
       providesTags: ["POST_DETAIL"],
     }),
+    unlockPost: builder.mutation<void, { post_id: any }>({
+      query: ({ post_id }) => ({
+        url: `post/unlock`,
+        method: "POST",
+        body: convertToSecurePayload({
+          post_id,
+        }),
+      }),
+      invalidatesTags: (result, error, args) => [
+        { type: "LIST", _id: args.post_id },
+        { type: "POST_DETAIL", _id: args.post_id },
+      ],
+    }),
   }),
 });
 
@@ -202,4 +216,5 @@ export const {
   useLikePostMutation,
   useGetAudioPostsQuery,
   useGetPostDetailQuery,
+  useUnlockPostMutation
 } = socialApi;

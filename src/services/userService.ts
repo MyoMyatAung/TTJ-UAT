@@ -59,20 +59,11 @@ export const login = async (
       key: keyStatus,
       timestamp: new Date().getTime(),
     });
-    // const captchaResult = await fetch(
-    //   convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/check_captcha`),
-    //   {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: gg
-    //   }
-    // );
-
-    const captchaResult = await axios.post(
-      convertToSecureUrl(`${process.env.REACT_APP_API_URL}/user/check_captcha`),
-      gg
+    const url = convertToSecureUrl(
+      `${process.env.REACT_APP_API_URL}/user/check_captcha`
     );
-    // console.log(captchaResult);
+    console.log("url", url, gg);
+    const captchaResult = await axios.post(url, gg);
 
     const captchaResponse = await captchaResult.data;
     let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};

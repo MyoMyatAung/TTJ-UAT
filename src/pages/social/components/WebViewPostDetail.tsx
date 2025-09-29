@@ -11,21 +11,55 @@ import { setAuthModel } from "../../../features/login/ModelSlice";
 import PostHeader from "./PostHeader";
 import PostFooter from "./PostFooter";
 import Modal from "../../../components/Modal";
+import { useGetCommentListQuery, useUnlockPostMutation } from "../services/socialApi";
+import Loader from "../../search/components/Loader";
+import Comment from "./Comment";
+import InfiniteScroll from "react-infinite-scroll-component";
+import PostComment from "./PostComment";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   post: typeof DUMMY_DETAIL;
 };
 
 const WebViewPostDetail: React.FC<Props> = ({ post }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   let videoData = useRef<HTMLVideoElement[]>([]);
   const darkmode = useSelector(selectTheme);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [list, setList] = useState<any[]>([]);
   const isLoggedIn = localStorage.getItem("authToken");
   const parsedLoggedIn = isLoggedIn ? JSON.parse(isLoggedIn) : null;
   const token = parsedLoggedIn?.data?.access_token;
   const { data: userData } = useGetUserQuery(undefined, {
     skip: !token,
   });
+
+  console.log("userData", userData, post);
+
+  const { data, isFetching, refetch, isLoading } = useGetCommentListQuery({
+    post_id: post.post_id,
+    page,
+  });
+  const [unlockPost, { isLoading: isUnlocking }] = useUnlockPostMutation();
+
+  const fetchMoreDataCmt = () => {
+    if (hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
+    // console.log("Fetching more data...", page);
+  };
+
+  useEffect(() => {
+    if (data?.data) {
+      setList((prevList) => [...prevList, ...data.data.list]);
+      const loadedItems = data?.data.page * data?.data.pageSize;
+      //   console.log("text", loadedItems);
+      setHasMore(loadedItems < data?.data.total);
+    }
+  }, [data]);
 
   const [isNotEnoughPoints, setIsNotEnoughPoints] = useState(false);
   const [isNotEnoughLevel, setIsNotEnoughLevel] = useState(false);
@@ -55,10 +89,36 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
   const handleCancel = () => {
     setShowRedirectModal(false);
   };
-  const handleLoginClick = () => {
+  const handleUnlockClick = () => {
     if (!token) {
       dispatch(setAuthModel(true)); // Open the login modal if not logged in
+      return;
     }
+    if (userData) {
+      if (userData.data.level_id < post.level_id) {
+        setIsNotEnoughLevel(true);
+        return;
+      } else if (userData.data.integral < post.point) {
+        setIsNotEnoughPoints(true);
+        return;
+      } else {
+        setIsEnoughUnlock(true);
+        return;
+      }
+    }
+  }
+  const handleUnlock = async () => {
+    try {
+      await unlockPost({ post_id: post.post_id }).unwrap();
+    } catch (error) {
+      console.error("Failed to unlock post:", error);
+    } finally {
+      setIsEnoughUnlock(false);
+    }
+  };
+  const handleNavigatePointInfo = () => {
+    // Navigate to point info page
+    navigate("/point_info");
   };
   return (
     <>
@@ -90,7 +150,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
           })}
           {!post.unlock_post ? (
             <div className="relative">
-              <LockPost unlock={handleLoginClick} />
+              <LockPost unlock={handleUnlockClick} />
               <img
                 className="blur-[2px] grayscale bg-black"
                 src={post.files[0].resourceURL}
@@ -110,8 +170,50 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
         <PostFooter post={post} />
         {!post.unlock_post && <div className="h-[104px]" />}
       </div>
+      {isFetching || isLoading ? (
+        <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full py-[100px]">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          <div className=" h-[4px] bg-[#E4E4E4] dark:bg-[#000] w-full"></div>
+          {/* comment */}
+          <div className="px-4">
+            <Comment
+              setList={setList}
+              darkmode={darkmode}
+              post_id={post.post_id}
+              list={list}
+              isFetching={hasMore}
+              isLoading={isLoading}
+              hideCommentInput={post.unlock_post ? false : true}
+            />
+          </div>
+
+          <InfiniteScroll
+            // className=" h-[100px]"
+            dataLength={list.length}
+            next={fetchMoreDataCmt}
+            hasMore={hasMore}
+            loader={
+              <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full pb-32">
+                <Loader />
+              </div>
+            }
+            endMessage={
+              <div className="flex bg-gray-300 dark:bg-[#161619] justify-center items-center w-full pb-32">
+                <p style={{ textAlign: "center" }}>
+                  <b className=" hidden text-white/60">没有更多评论</b>
+                </p>
+              </div>
+            }
+          >
+            <></>
+          </InfiniteScroll>
+        </>
+      )}
       {post.unlock_post ? (
-        <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
+        <div className="p-4 fixed bottom-[74px] left-0 z-30 w-full flex flex-col gap-2">
           <button
             onClick={handleRedirectClick}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
@@ -122,7 +224,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
       ) : (
         <div className="p-4 rounded-md fixed bottom-0 left-0 z-30 bg-gray-800 w-full flex flex-col gap-2">
           <button
-            onClick={handleLoginClick}
+            onClick={handleUnlockClick}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
           >
             <FontAwesomeIcon icon={faLock} className="text-white" />
@@ -131,7 +233,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
           <p className="text-white text-center">
             Require{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FE58B5] to-[#FF9153]">
-              Qi Refining Level 4 + 2 Points
+              Qi Refining Level {post.level_id} + {post.point} Points
             </span>{" "}
             to unlock this post
           </p>
@@ -150,7 +252,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
             取消
           </button>
           <button
-            onClick={() => setIsNotEnoughPoints(false)}
+            onClick={handleNavigatePointInfo}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
           >
             获取积分{" "}
@@ -170,7 +272,7 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
             取消
           </button>
           <button
-            onClick={() => setIsNotEnoughLevel(false)}
+            onClick={handleNavigatePointInfo}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
           >
             我要升级{" "}
@@ -191,14 +293,15 @@ const WebViewPostDetail: React.FC<Props> = ({ post }) => {
         </p>
         <div className="flex justify-center items-center w-full gap-1">
           <button
-            onClick={() => setIsNotEnoughLevel(false)}
+            onClick={() => setIsEnoughUnlock(false)}
             className="bg-[#FFFFFF1F] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
           >
             取消
           </button>
           <button
-            onClick={() => setIsEnoughUnlock(false)}
+            onClick={handleUnlock}
             className="bg-gradient-to-r from-[#FE58B5] to-[#FF9153] px-4 py-2 rounded-md text-white w-full flex justify-center items-center gap-1"
+            disabled={isUnlocking}
           >
             确认
           </button>

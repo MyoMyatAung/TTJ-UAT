@@ -33,7 +33,6 @@ const Header = ({ darkmode }: any) => {
 
   // prod
   const user = userData?.data;
-  console.log(darkmode, "darkmode");
 
   // staging
   //  const parsedUserData = JSON.parse(userData || "{}");
