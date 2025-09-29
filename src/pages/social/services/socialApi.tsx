@@ -87,26 +87,31 @@ export const socialApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["POST_DETAIL", "LIST"],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: ({ page, path }) =>
         convertToSecureUrl(`${path ? path : "/post/list"}?page=${page}`),
+      providesTags: ["LIST"],
     }),
     getRecommandPosts: builder.query({
       query: ({ page, path }) =>
         convertToSecureUrl(
           `${path ? path : "/post/recommend/list"}?page=${page}`
         ),
+      providesTags: ["LIST"],
     }),
     getFollowPosts: builder.query({
       query: ({ page, path }) =>
         convertToSecureUrl(
           `${path ? path : "/followed/post/list"}?page=${page}`
         ),
+      providesTags: ["LIST"],
     }),
     getAudioPosts: builder.query({
       query: ({ page, path }) =>
         convertToSecureUrl(`${path ? path : "/post/audio/list"}?page=${page}`),
+      providesTags: ["LIST"],
     }),
     // getPosts: builder.query({
     //   query: ({ page }) => convertToSecureUrl(`post/list?page=${page}`),
@@ -129,6 +134,10 @@ export const socialApi = createApi({
             follow_user_id,
           }),
         }),
+        invalidatesTags: (result, error, args) => [
+          { type: "LIST", _id: args.follow_user_id },
+          { type: "POST_DETAIL", _id: args.follow_user_id },
+        ],
       }
     ),
     likePost: builder.mutation<void, { post_id: any; is_like: any }>({
@@ -140,6 +149,10 @@ export const socialApi = createApi({
           post_id,
         }),
       }),
+      invalidatesTags: (result, error, args) => [
+        { type: "LIST", _id: args.post_id },
+        { type: "POST_DETAIL", _id: args.post_id },
+      ],
     }),
     getCommentList: builder.query({
       query: ({ post_id, page }) =>
@@ -169,6 +182,26 @@ export const socialApi = createApi({
         }),
       }),
     }),
+    getPostDetail: builder.query({
+      query: ({ id }) => {
+        // return convertToSecureUrl(`post/detail?post_id=${id}`)
+        return `${process.env.REACT_APP_API_URL}/post/detail?post_id=${id}`;
+      },
+      providesTags: ["POST_DETAIL"],
+    }),
+    unlockPost: builder.mutation<void, { post_id: any }>({
+      query: ({ post_id }) => ({
+        url: `post/unlock`,
+        method: "POST",
+        body: convertToSecurePayload({
+          post_id,
+        }),
+      }),
+      invalidatesTags: (result, error, args) => [
+        { type: "LIST", _id: args.post_id },
+        { type: "POST_DETAIL", _id: args.post_id },
+      ],
+    }),
   }),
 });
 
@@ -182,4 +215,6 @@ export const {
   useFollowUserMutation,
   useLikePostMutation,
   useGetAudioPostsQuery,
+  useGetPostDetailQuery,
+  useUnlockPostMutation
 } = socialApi;
