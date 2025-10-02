@@ -64,11 +64,11 @@ export function urlSafeB64encode(data: string): string {
 // }
 // import CryptoJS from "crypto-js";
 
-export function decryptWithAes(data: string): any | null {
+export function decryptWithAes(data: any): any | null {
    // staging
   // return data;
   const isProd = (process.env.REACT_APP_IS_PRODUCTION)?.toLocaleLowerCase() === 'true';
-  if (!isProd) return JSON.parse(data);
+  if (!isProd) return typeof data === 'string' ? JSON.parse(data) : data;
    // prod
   try {
     // Decode the encrypted data (if URL-safe base64 encoding was used)

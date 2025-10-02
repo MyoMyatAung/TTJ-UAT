@@ -25,6 +25,8 @@ const Header = ({ darkmode }: any) => {
     skip: !token,
   });
 
+  console.log(typeof userData, "user data");
+
   const handleLoginClick = () => {
     if (!token) {
       dispatch(setAuthModel(true)); // Open the login modal if not logged in

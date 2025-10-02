@@ -281,7 +281,7 @@ const Captch: React.FC<{
         captchaCode,
         keyStatus
       );
-      // console.log(loginResponse)
+      console.log(loginResponse, 'login res');
       if (loginResponse.errorCode) {
         dispatch(showToast({ message: loginResponse.msg, type: "error" }));
       } else {
@@ -297,6 +297,7 @@ const Captch: React.FC<{
 
       // Manually redirect to the home page after login
     } catch (err: any) {
+      console.log("err", JSON.stringify(err));
       const Errmessage = err.response.data.msg;
       dispatch(showToast({ message: Errmessage, type: "error" }));
       dispatch(setCaptchaOpen(false));
