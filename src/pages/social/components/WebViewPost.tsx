@@ -24,7 +24,7 @@ const WebViewPost: React.FC<Props> = ({
   };
   return (
     <div className="relative">
-      <LockPost unlock={handleNavigate} unlockText="Click To View Details" />
+      {!post.unlock_post && <LockPost unlock={handleNavigate} unlockText="Click To View Details" />}
       {post.files.map((file: any, index: any) => (
         <div
           key={index}

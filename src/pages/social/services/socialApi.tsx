@@ -150,8 +150,8 @@ export const socialApi = createApi({
         }),
       }),
       invalidatesTags: (result, error, args) => [
-        { type: "LIST", _id: args.post_id },
-        { type: "POST_DETAIL", _id: args.post_id },
+        { type: "LIST", post_id: args.post_id },
+        { type: "POST_DETAIL", post_id: args.post_id },
       ],
     }),
     getCommentList: builder.query({
