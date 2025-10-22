@@ -59,7 +59,7 @@ export const profileApi = createApi({
 
         try {
           // Decrypt the response
-          const decryptedData = decryptWithAes(result.data as string);
+          const decryptedData = decryptWithAes(result.data);
           // const decryptedData = result.data 
           if (!decryptedData) {
             throw new Error("Decryption failed for user info");
@@ -184,7 +184,7 @@ export const profileApi = createApi({
         }
 
         try {
-          const decryptedData = decryptWithAes(result.data as string);
+          const decryptedData = decryptWithAes(result.data);
           if (!decryptedData) {
             throw new Error("Decryption failed for checkCaptcha");
           }

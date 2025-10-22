@@ -491,3 +491,30 @@ input[type="radio"]:checked {
     linear-gradient(270deg, #ff9153 3.81%, #ff7584 45.16%, #fe58b5 86.5%)
   );
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Ensure the modal is above other content */
+}
+
+.modal-container {
+  background: #1f2937;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1000;
+}

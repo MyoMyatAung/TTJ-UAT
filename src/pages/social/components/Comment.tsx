@@ -21,6 +21,7 @@ const Comment: React.FC<any> = ({
   post_id,
   setList,
   darkmode,
+  hideCommentInput = false,
 }) => {
   const [panding, setpanding] = useState(false);
   const [likeCmt, { isLoading: isLikeloading }] = useLikeCommentMutation();
@@ -369,44 +370,46 @@ const Comment: React.FC<any> = ({
         </>
       )}
       {/* ment mal :) */}
-      {token ? (
-        <div className=" fixed py-[12px] flex justify-center bottom-0 left-0 bg-[#E4E4E4] dark:bg-[#1F1F21] w-screen z-[999992]">
-          <div className=" mr-[10px] grid grid-cols-4 w-full px-[20px]">
-            <input
-              ref={inputRef}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="请输入内容"
-              className=" focus:outline-none text-black dark:text-white py-[12px] px-[16px] col-span-3 bg-black/5 dark:bg-white/10 w-full rounded-[100px]"
-              type="text"
-            />
-            {isRp ? (
-              <button
-                onClick={handleReplyCmt}
-                className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
-              >
-                发送
-              </button>
-            ) : (
-              <button
-                onClick={handlePostCmt}
-                className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
-              >
-                发送
-              </button>
-            )}
+      {!hideCommentInput ? (
+        token ? (
+          <div className=" fixed py-[12px] flex justify-center bottom-0 left-0 bg-[#E4E4E4] dark:bg-[#1F1F21] w-screen z-[999992]">
+            <div className=" mr-[10px] grid grid-cols-4 w-full px-[20px]">
+              <input
+                ref={inputRef}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="请输入内容"
+                className=" focus:outline-none text-black dark:text-white py-[12px] px-[16px] col-span-3 bg-black/5 dark:bg-white/10 w-full rounded-[100px]"
+                type="text"
+              />
+              {isRp ? (
+                <button
+                  onClick={handleReplyCmt}
+                  className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
+                >
+                  发送
+                </button>
+              ) : (
+                <button
+                  onClick={handlePostCmt}
+                  className=" text-[#FE58B5] text-[16px] font-[600] leading-[16px]"
+                >
+                  发送
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className=" fixed py-[12px] flex justify-center bottom-0 left-0 w-full z-[999992]">
-          <button
-            onClick={() => dispatch(setAuthModel(true))}
-            className=" m-[20px] py-[16px] rounded-[10px] bg-[#FE58B5] text-white w-full"
-          >
-            登录发表评论
-          </button>
-        </div>
-      )}
+        ) : (
+          <div className=" fixed py-[12px] flex justify-center bottom-0 left-0 w-full z-[999992]">
+            <button
+              onClick={() => dispatch(setAuthModel(true))}
+              className=" m-[20px] py-[16px] rounded-[10px] bg-[#FE58B5] text-white w-full"
+            >
+              登录发表评论
+            </button>
+          </div>
+        )
+      ) : null}
     </div>
   );
 };

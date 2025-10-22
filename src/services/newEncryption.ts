@@ -64,10 +64,11 @@ export function urlSafeB64encode(data: string): string {
 // }
 // import CryptoJS from "crypto-js";
 
-export function decryptWithAes(data: string): any | null {
+export function decryptWithAes(data: any): any | null {
    // staging
   // return data;
-
+  const isProd = (process.env.REACT_APP_IS_PRODUCTION)?.toLocaleLowerCase() === 'true';
+  if (!isProd) return typeof data === 'string' ? JSON.parse(data) : data;
    // prod
   try {
     // Decode the encrypted data (if URL-safe base64 encoding was used)
@@ -128,22 +129,19 @@ function createSecureUrl(base: string, formData: Record<string, any>): string {
 }
 
 export function convertToSecureUrl(apiUrl: string): string {
-  const isPro = process.env.REACT_APP_IS_PRODUCTION;
-  // if (isPro == "true") {
+  const isProd = (process.env.REACT_APP_IS_PRODUCTION)?.toLocaleLowerCase() === 'true';
+  if (!isProd) return apiUrl;
+
   const [base, query] = apiUrl.split("?", 2); // Split URL into base and query string
   const formData = query
     ? convertUrlToFormData(query)
     : { timestamp: new Date().getTime() };
-
   return createSecureUrl(base, formData);
-  // } else {
-  //   return apiUrl;
-  // }
 }
 
 export function convertToSecurePayload(formData: any): any {
-  const isPro = process.env.REACT_APP_IS_PRODUCTION;
-  // if (!isPro) return formData;
+  const isProd = (process.env.REACT_APP_IS_PRODUCTION)?.toLocaleLowerCase() === 'true';
+  if (!isProd) return formData;
   const publicKey = process.env.REACT_APP_PUBLIC_KEY;
 
   if (!publicKey) {

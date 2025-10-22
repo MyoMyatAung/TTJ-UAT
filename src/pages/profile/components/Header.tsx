@@ -25,6 +25,8 @@ const Header = ({ darkmode }: any) => {
     skip: !token,
   });
 
+  console.log(typeof userData, "user data");
+
   const handleLoginClick = () => {
     if (!token) {
       dispatch(setAuthModel(true)); // Open the login modal if not logged in
@@ -33,7 +35,6 @@ const Header = ({ darkmode }: any) => {
 
   // prod
   const user = userData?.data;
-  console.log(darkmode, "darkmode");
 
   // staging
   //  const parsedUserData = JSON.parse(userData || "{}");
