@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import CustomLightbox from "./CustomLightBox";
 import ImageWithPlaceholder from "./socialImgPlaceholder";
 import LockPost from "./LockPost";
+import UnlockedPost from "./UnlockedPost";
 
 type Props = {
   post: any;
@@ -24,7 +25,7 @@ const WebViewPost: React.FC<Props> = ({
   };
   return (
     <div className="relative">
-      {!post.unlock_post && <LockPost unlock={handleNavigate} unlockText="点击查看详情" />}
+      {!post.unlock_post? <LockPost unlock={handleNavigate} unlockText="点击查看详情" />: <UnlockedPost unlock={handleNavigate} unlockText="点击查看详情" />}
       {post.files.map((file: any, index: any) => (
         <div
           key={index}
