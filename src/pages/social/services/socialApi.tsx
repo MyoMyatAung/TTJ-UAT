@@ -184,8 +184,8 @@ export const socialApi = createApi({
     }),
     getPostDetail: builder.query({
       query: ({ id }) => {
-        // return convertToSecureUrl(`post/detail?post_id=${id}`)
-        return `${process.env.REACT_APP_API_URL}/post/detail?post_id=${id}`;
+        return convertToSecureUrl(`post/detail?post_id=${id}`)
+        // return `${process.env.REACT_APP_API_URL}/post/detail?post_id=${id}`;
       },
       providesTags: ["POST_DETAIL"],
     }),
