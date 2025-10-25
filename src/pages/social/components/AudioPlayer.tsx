@@ -50,8 +50,6 @@ const AudioPlayer = ({
     }
   };
 
-  console.log("src", src);
-
   // const handleSpeedChange = () => {
   //   if (audioRef.current) {
   //     const newRate = playbackRate === 2 ? 1 : 2;
