@@ -1,6 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setShowSetSkipDialog } from "../../../features/player/playerSlice";
 
+const sendNativeEvent = (message: string) => {
+  if (
+    (window as any).webkit &&
+    (window as any).webkit.messageHandlers &&
+    (window as any).webkit.messageHandlers.jsBridge
+  ) {
+    (window as any).webkit.messageHandlers.jsBridge.postMessage(message);
+  }
+};
+
 const SetSkipButton = () => {
   const { skipIntro, skipOutro } = useSelector((state: any) => state.episode);
   const dispatch = useDispatch();
@@ -8,6 +18,7 @@ const SetSkipButton = () => {
 
   const handleClick = () => {
     dispatch(setShowSetSkipDialog(true));
+    sendNativeEvent('open_set_skip_dialog');
   };
 
   return <button className="flex items-center gap-0.5" onClick={handleClick}>
