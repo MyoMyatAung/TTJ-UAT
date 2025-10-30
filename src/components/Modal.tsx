@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, containerStyle
 
   // Use createPortal to render the modal content into the modal-root div.
   return ReactDOM.createPortal(
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" style={containerStyle}>
         {children}
       </div>
