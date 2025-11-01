@@ -24,6 +24,7 @@ import ThemeSlice from "../pages/search/slice/ThemeSlice";
 import movieSlice from "./movieSlice";
 import homeMovieSlice from "./homeMovieSlice";
 import { pointApi } from "../pages/Point/service/PointApi";
+import socialSlice from "../features/social/socialSlice";
 
 // // Define persist config
 const persistConfig = {
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   explore: ExploreSlice,
   movie: movieSlice,
   homemovie: homeMovieSlice,
+  social: socialSlice,
 
   [searchApi.reducerPath]: searchApi.reducer,
   [socialApi.reducerPath]: socialApi.reducer,
