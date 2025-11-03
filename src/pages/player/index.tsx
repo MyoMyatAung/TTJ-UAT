@@ -701,7 +701,7 @@ const DetailPage: React.FC = () => {
           </div>
         )}
       </div>
-      <Modal containerStyle={{backgroundColor: "#161619E5"}} isOpen={showSetSkipDialog} onClose={closeSetSkipDialog}>
+      <Modal containerStyle={{backgroundColor: "#161619E5"}} isOpen={showSetSkipDialog} onClose={() => {}}>
         <SetSkipForm />
       </Modal>
     </>

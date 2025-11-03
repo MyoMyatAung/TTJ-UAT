@@ -132,7 +132,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             {
               html: `<div id="skip-intro-control" style="display: none; justify-content: flex-end; z-index: 1000;">
                 <button style="background: #161619CC; color: #FF6A33; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
-                  Skip Intro
+                  跳过片头
                 </button>
               </div>`,
               click() {
@@ -149,7 +149,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             {
               html: `<div id="next-episode-control" style="display: none; justify-content: flex-end; z-index: 1000;">
                 <button style="background: #161619CC; color: #FF6A33; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
-                  Next Episode
+                  下一集
                 </button>
               </div>`,
               click() {
