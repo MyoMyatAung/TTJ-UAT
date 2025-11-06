@@ -34,6 +34,7 @@ const Favorite = () => {
     data: favoriteMovies,
     isLoading: isFavoritesLoading,
     isFetching: isFavoritesFetching,
+    refetch,
   } = useGetListQuery({ page: currentPage, type_id: currentType }); // Fetch favorite movies list from API
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -87,12 +88,7 @@ const Favorite = () => {
     <>
       <div className={`${darkmode ? "fixed-bg_dark" : "fixed-bg"}`}></div>
       <div className=" text-white">
-        <Navbar
-          isEditMode={isEditMode}
-          darkmode={darkmode}
-          onEditClick={handleEditClick}
-        />
-
+        <Navbar darkmode={darkmode} isEditMode={isEditMode} onEditClick={handleEditClick} />
         <div className="mt-20">
           <NewAds section="collect_up" />
         </div>
@@ -101,6 +97,7 @@ const Favorite = () => {
           <Main
             darkmode={darkmode}
             currentPage={currentPage}
+            setCurrentPage={setcurrentPage}
             setcurrentType={setcurrentType}
             currentType={currentType}
             types={types}
@@ -111,6 +108,7 @@ const Favorite = () => {
             movies={movies}
             setMovies={setMovies}
             onTypeClick={handleTypeClick}
+            refetch={refetch}
           />
         </>
       </div>
