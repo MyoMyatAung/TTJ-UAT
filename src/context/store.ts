@@ -24,12 +24,15 @@ import ThemeSlice from "../pages/search/slice/ThemeSlice";
 import movieSlice from "./movieSlice";
 import homeMovieSlice from "./homeMovieSlice";
 import { pointApi } from "../pages/Point/service/PointApi";
+import socialSlice from "../features/social/socialSlice";
 
 // // Define persist config
-// const persistConfig = {
-//   key: "root",
-//   storage,
-//   // whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
+const persistConfig = {
+  key: "root",
+  storage,
+  // whitelist: ["history", "favorite", "user", "explore", "home", "model"], // Reducers you want to persist
+  whitelist: ["episode"]
+};
 
 // Combine all reducers
 const rootReducer = combineReducers({
@@ -45,6 +48,7 @@ const rootReducer = combineReducers({
   explore: ExploreSlice,
   movie: movieSlice,
   homemovie: homeMovieSlice,
+  social: socialSlice,
 
   [searchApi.reducerPath]: searchApi.reducer,
   [socialApi.reducerPath]: socialApi.reducer,
@@ -57,9 +61,9 @@ const rootReducer = combineReducers({
   [pointApi.reducerPath]: pointApi.reducer,
 });
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

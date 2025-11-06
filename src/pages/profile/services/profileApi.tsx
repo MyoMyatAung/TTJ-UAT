@@ -38,7 +38,7 @@ export const profileApi = createApi({
       return headers;
     },
   }),
-
+  tagTypes: ["FAV_COLLECTION_LIST"],
   endpoints: (builder) => ({
     getNotification: builder.query<any, void>({
       query: () => {
@@ -59,7 +59,7 @@ export const profileApi = createApi({
 
         try {
           // Decrypt the response
-          const decryptedData = decryptWithAes(result.data as string);
+          const decryptedData = decryptWithAes(result.data);
           // const decryptedData = result.data 
           if (!decryptedData) {
             throw new Error("Decryption failed for user info");
@@ -82,6 +82,7 @@ export const profileApi = createApi({
           `/user/movie_collect/list?page=${page}&pageSize=${12}&type_id=${type_id}`
         );
       },
+      providesTags: ["FAV_COLLECTION_LIST"],
     }),
     collectMovie: builder.mutation<
       void,
@@ -95,6 +96,7 @@ export const profileApi = createApi({
           movie_id: movie.movie_id,
         }),
       }),
+      invalidatesTags: ["FAV_COLLECTION_LIST"],
     }),
     deleteCollect: builder.mutation<void, { ids: string }>({
       query: (data) => ({
@@ -104,6 +106,7 @@ export const profileApi = createApi({
           ids: data.ids,
         }),
       }),
+      invalidatesTags: ["FAV_COLLECTION_LIST"],
     }),
     changeNickname: builder.mutation<void, { new_nickname: string }>({
       query: ({ new_nickname }) => ({
@@ -184,7 +187,7 @@ export const profileApi = createApi({
         }
 
         try {
-          const decryptedData = decryptWithAes(result.data as string);
+          const decryptedData = decryptWithAes(result.data);
           if (!decryptedData) {
             throw new Error("Decryption failed for checkCaptcha");
           }

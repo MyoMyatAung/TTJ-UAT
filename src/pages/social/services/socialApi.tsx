@@ -150,8 +150,8 @@ export const socialApi = createApi({
         }),
       }),
       invalidatesTags: (result, error, args) => [
-        { type: "LIST", _id: args.post_id },
-        { type: "POST_DETAIL", _id: args.post_id },
+        { type: "LIST", post_id: args.post_id },
+        { type: "POST_DETAIL", post_id: args.post_id },
       ],
     }),
     getCommentList: builder.query({
@@ -184,8 +184,8 @@ export const socialApi = createApi({
     }),
     getPostDetail: builder.query({
       query: ({ id }) => {
-        // return convertToSecureUrl(`post/detail?post_id=${id}`)
-        return `${process.env.REACT_APP_API_URL}/post/detail?post_id=${id}`;
+        return convertToSecureUrl(`post/detail?post_id=${id}`)
+        // return `${process.env.REACT_APP_API_URL}/post/detail?post_id=${id}`;
       },
       providesTags: ["POST_DETAIL"],
     }),

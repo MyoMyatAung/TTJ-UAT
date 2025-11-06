@@ -7,9 +7,10 @@ type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  containerStyle?: React.CSSProperties;
 };
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, containerStyle }) => {
   // If the modal isn't open, we don't render anything.
   if (!isOpen) {
     return null;
@@ -22,8 +23,8 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
 
   // Use createPortal to render the modal content into the modal-root div.
   return ReactDOM.createPortal(
-    <div className="modal-overlay">
-      <div className="modal-container">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-container" style={containerStyle}>
         {children}
       </div>
     </div>,

@@ -6,12 +6,12 @@ type Props = {
   unlockText?: string;
 };
 
-const LockPost: React.FC<Props> = ({ unlock, unlockText = "Unlock Now" }) => {
+const LockPost: React.FC<Props> = ({ unlock, unlockText = "立即解锁" }) => {
   return (
     <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full z-10 gap-4 bg-gray-700/75 shadow-2xl">
       <FontAwesomeIcon icon={faLock} className="text-white text-2xl" />
       <p className="text-white font-semibold text-lg">
-        You need to to unlock to view exclusive videos{" "}
+        您需要解锁才能观看独家视频
       </p>
       <button
         onClick={unlock}

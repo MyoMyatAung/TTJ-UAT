@@ -62,12 +62,12 @@ export const login = async (
     const url = convertToSecureUrl(
       `${process.env.REACT_APP_API_URL}/user/check_captcha`
     );
-    console.log("url", url, gg);
     const captchaResult = await axios.post(url, gg);
-
+    console.log(captchaResult, "cap res");
     const captchaResponse = await captchaResult.data;
+    console.log(captchaResponse, "cap res 2");
     let newCap: { data?: any } = decryptWithAes(captchaResponse) || {};
-
+    console.log(newCap, "new cap");
     if (!newCap.data) {
       throw new Error("Captcha verification failed");
     }

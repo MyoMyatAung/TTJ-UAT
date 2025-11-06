@@ -22,7 +22,7 @@ import { setAuthModel } from "../../../features/login/ModelSlice";
 import FeedbackComponent from "./Feedback";
 import AdsSection from "./AdsSection";
 import { DetailSectionProps } from "../../../model/videoModel";
-import { useGetListQuery } from "../../../pages/profile/services/profileApi";
+import { useCollectMovieMutation, useGetListQuery } from "../../../pages/profile/services/profileApi";
 import NewAds from "../../../components/NewAds";
 import Fire from "../../../assets/Fire.png";
 import PlayerText from "../../../assets/playerText.svg";
@@ -50,6 +50,8 @@ const DetailSection: React.FC<DetailSectionProps> = ({
   const [hasMore, setHasMore] = useState(false);
   const [showModal, setShowModal] = useState(false); // For triggering modal
   const dispatch = useDispatch();
+  const [collectMovie] = useCollectMovieMutation();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isStarred, setIsStarred] = useState<boolean>(
     movieDetail && movieDetail.is_collect ? true : false
@@ -92,29 +94,12 @@ const DetailSection: React.FC<DetailSectionProps> = ({
   const handleStarToggle = async (authorization: string) => {
     setIsLoading(true);
     try {
-      // Toggle collection API call
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/movie/collect/action`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: authorization,
-          },
-          body: JSON.stringify(
-            convertToSecurePayload({
-              movie_id: id,
-              state: isStarred ? 0 : 1,
-            })
-          ),
-        }
-      );
-      if (response.ok) {
-        refetch();
-        setIsStarred(!isStarred);
-      } else {
-        alert("收藏操作失败，请稍后重试");
-      }
+      await collectMovie({
+        movie_id: id,
+        is_collect: !isStarred,
+      }).unwrap();
+      refetch();
+      setIsStarred(!isStarred);
     } catch (error) {
       console.error("Error toggling star:", error);
       alert("收藏操作失败，请稍后重试");
@@ -288,9 +273,8 @@ const DetailSection: React.FC<DetailSectionProps> = ({
 
       {/* Tab content */}
       <div
-        className={`dark:bg-[#161619] bg-white rounded-b-lg p-1 ${
-          activeTab === "tab-1" && "pt-2 px-4"
-        }`}
+        className={`dark:bg-[#161619] bg-white rounded-b-lg p-1 ${activeTab === "tab-1" && "pt-2 px-4"
+          }`}
       >
         {activeTab === "tab-1" && (
           <div id="tab-1" className="block">
@@ -464,9 +448,9 @@ const DetailSection: React.FC<DetailSectionProps> = ({
                       <span key={index} className="text-black dark:text-white">
                         {actor.name || "Unknown"}
                         {index <
-                        movieDetail.members.filter(
-                          (member) => member.type === 1
-                        ).length -
+                          movieDetail.members.filter(
+                            (member) => member.type === 1
+                          ).length -
                           1
                           ? ", "
                           : ""}
@@ -507,7 +491,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
               onClick={() => setIsModalOpen(true)}
               className="flex flex-col items-center px-2 py-1 rounded-md"
             >
-                <img src={episode} alt="" className="h-5 mb-[5px] mt-0.5" />
+              <img src={episode} alt="" className="h-5 mb-[5px] mt-0.5" />
               <span className="text-black/40 dark:text-white/40 text-[14px]">选集</span>
             </button>
             {/* 收藏 */}
@@ -543,39 +527,38 @@ const DetailSection: React.FC<DetailSectionProps> = ({
           </div>
           {/* 分享好友得积分按钮 */}
           <button
-          onClick={() => handleShare()}
-          disabled={isLoading}
-          className={`ml-2 flex items-center rounded-full px-5 py-2 relative min-w-[170px] justify-center ${
-            isLoading ? 'opacity-70 cursor-not-allowed' : ''
-          }`}
-          style={{
-            background:
-              "linear-gradient(271deg, rgba(254,228,179,0.06) 0%, rgba(255,217,147,0.06) 100%)",
-            backgroundBlendMode: "normal",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="flex justify-start items-start flex-row gap-2.5 px-1.5 bg-[#FE58B5] rounded-tl-[10px] rounded-tr-sm rounded-br-[10px] rounded-bl-sm absolute right-[0px] top-[-7.5px]">
-            <span className="text-[#FFFFFF] text-[10px] font-['PingFang_SC'] text-center font-medium">
-              可兑换
-            </span>
-          </div>
-          {isLoading ? (
-            <>
-              <div className="animate-spin rounded-full h-5 w-5 border-2 border-[#E6D3A7] border-t-transparent mr-2"></div>
-              <span className="text-[#E6D3A7] text-[15px] font-normal">
+            onClick={() => handleShare()}
+            disabled={isLoading}
+            className={`ml-2 flex items-center rounded-full px-5 py-2 relative min-w-[170px] justify-center ${isLoading ? 'opacity-70 cursor-not-allowed' : ''
+              }`}
+            style={{
+              background:
+                "linear-gradient(271deg, rgba(254,228,179,0.06) 0%, rgba(255,217,147,0.06) 100%)",
+              backgroundBlendMode: "normal",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
+            <div className="flex justify-start items-start flex-row gap-2.5 px-1.5 bg-[#FE58B5] rounded-tl-[10px] rounded-tr-sm rounded-br-[10px] rounded-bl-sm absolute right-[0px] top-[-7.5px]">
+              <span className="text-[#FFFFFF] text-[10px] font-['PingFang_SC'] text-center font-medium">
+                可兑换
               </span>
-            </>
-          ) : (
-            <>
-              <img src={share1} className="h-6 mr-1" alt="" />
-              <span className="text-[#E6D3A7] text-[15px] font-normal">
-                分享好友得积分
-              </span>
-            </>
-          )}
-        </button>
+            </div>
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-[#E6D3A7] border-t-transparent mr-2"></div>
+                <span className="text-[#E6D3A7] text-[15px] font-normal">
+                </span>
+              </>
+            ) : (
+              <>
+                <img src={share1} className="h-6 mr-1" alt="" />
+                <span className="text-[#E6D3A7] text-[15px] font-normal">
+                  分享好友得积分
+                </span>
+              </>
+            )}
+          </button>
         </div>
       )}
     </div>
