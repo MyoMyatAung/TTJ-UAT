@@ -108,7 +108,7 @@ const Announce: React.FC<AnnounceProps> = ({
                 >
                   <h1>{category.name}</h1>
                   {selectedCategory === category.id && (
-                    <span className=" bg-[#F54100] rounded-[8px] w-[32px] h-[3px]"></span>
+                    <span className=" bg-[#FE58B5] rounded-[8px] w-[32px] h-[3px]"></span>
                   )}
                 </div>
               ))}

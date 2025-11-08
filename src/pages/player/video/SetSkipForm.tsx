@@ -28,13 +28,13 @@ const SetSkipForm = () => {
       <label className="text-white" htmlFor="intro">
         跳过片头: {formatTime(introSkip)}
       </label>
-      <input type="range" className="accent-[#F54100]" id="intro" name="intro" min="0" max="180" value={introSkip} onChange={(e) => handleIntroChange(Number(e.target.value))} />
+      <input type="range" className="accent-[#FE58B5]" id="intro" name="intro" min="0" max="180" value={introSkip} onChange={(e) => handleIntroChange(Number(e.target.value))} />
     </div>
     <div>
       <label className="text-white" htmlFor="outro">
         跳过片尾 : {formatTime(outroSkip)}
       </label>
-      <input type="range" className="accent-[#F54100]" id="outro" name="outro" min="0" max="180" value={outroSkip} onChange={(e) => handleOutroChange(Number(e.target.value))} />
+      <input type="range" className="accent-[#FE58B5]" id="outro" name="outro" min="0" max="180" value={outroSkip} onChange={(e) => handleOutroChange(Number(e.target.value))} />
     </div>
     <div className="flex justify-between">
       <button onClick={() => dispatch(setShowSetSkipDialog(false))} className="px-4 py-2 rounded text-white">定位</button>

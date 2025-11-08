@@ -175,7 +175,7 @@ const Main: React.FC<MainProps> = ({
                         handleMovieSelect(movie.movie_id);
                         handleDeleteSelect(movie.id);
                       }}
-                      className="h-5 w-5 text-[#F54100] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
+                      className="h-5 w-5 text-[#FE58B5] border-2 border-gray-600 rounded-full focus:ring-0 focus:outline-none"
                     />
                   </div>
                   <ImageWithPlaceholder
@@ -465,7 +465,7 @@ const Main: React.FC<MainProps> = ({
                   取消
                 </button>
                 <button
-                  className="text-[#f54100] w-[50%] p-3 border-t-[1px] border-gray-500"
+                  className="text-[#FE58B5] w-[50%] p-3 border-t-[1px] border-gray-500"
                   onClick={confirmDelete}
                 >
                   删除全部

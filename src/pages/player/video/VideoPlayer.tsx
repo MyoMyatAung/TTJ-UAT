@@ -115,23 +115,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             },
             {
               // disable: ,
-              position: 'top',
+              position: "top",
               html: '<button id="show-set-skip-dialog-btn">跳过片头片尾</button>',
               index: 1,
-              tooltip: '',
+              tooltip: "",
               style: {
                 // marginRight: '20px',
                 // display: 'none',
               },
               click() {
-                sendNativeEvent('open_set_skip_dialog');
+                sendNativeEvent("open_set_skip_dialog");
               },
             },
           ],
           layers: [
             {
               html: `<div id="skip-intro-control" style="display: none; justify-content: flex-end; z-index: 1000;">
-                <button style="background: #161619CC; color: #FF6A33; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
+                <button style="background: #161619CC; color: #FE58B5; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
                   跳过片头
                 </button>
               </div>`,
@@ -140,34 +140,36 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 // console.info('You clicked on the custom layer')
               },
               style: {
-                position: 'absolute',
-                bottom: '80px',
-                right: '20px',
-                opacity: '.9',
+                position: "absolute",
+                bottom: "80px",
+                right: "20px",
+                opacity: ".9",
               },
             },
             {
               html: `<div id="next-episode-control" style="display: none; justify-content: flex-end; z-index: 1000;">
-                <button style="background: #161619CC; color: #FF6A33; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
-                  下一集
+                <button class="flex gap-1 items-center" style="background: #161619CC; color: #FE58B5; font-size: 12px; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;">
+                  <span>下一集</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 4V12H10.6667V8.00016L4 12V4L10.6667 7.99969V4H12Z" fill="#FE58B5"/>
+</svg>
                 </button>
               </div>`,
               click() {
                 // This will be handled by our custom event listener
               },
               style: {
-                position: 'absolute',
-                bottom: '80px',
-                right: '20px',
-                opacity: '.9',
+                position: "absolute",
+                bottom: "80px",
+                right: "20px",
+                opacity: ".9",
               },
-            }
-          ]
+            },
+          ],
           // miniProgressBar: true,
           // moreVideoAttr: {
           //   playsInline: true,
           // },
-
         });
 
         // Handle HLS streams: prioritize native support, fallback to HLS.js
@@ -355,11 +357,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const handleSkipIntro = React.useCallback(() => {
     if (playerRef.current && skipIntro && skipIntro > 0) {
       playerRef.current.currentTime = skipIntro;
-      sendNativeEvent('skip_intro');
+      sendNativeEvent("skip_intro");
       // setShowSkipIntro(false);
-      const skipIntroControl = document.getElementById('skip-intro-control');
+      const skipIntroControl = document.getElementById("skip-intro-control");
       if (skipIntroControl) {
-        skipIntroControl.style.display = 'none';
+        skipIntroControl.style.display = "none";
       }
     }
   }, [skipIntro]);
@@ -367,11 +369,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   // Handle Next Episode button click
   const handleNextEpisode = React.useCallback(() => {
     autoPlayNextEpisode();
-    sendNativeEvent('skip_outro');
+    sendNativeEvent("skip_outro");
     // setShowNextEpisode(false);
-    const nextEpisodeControl = document.getElementById('next-episode-control');
+    const nextEpisodeControl = document.getElementById("next-episode-control");
     if (nextEpisodeControl) {
-      nextEpisodeControl.style.display = 'none';
+      nextEpisodeControl.style.display = "none";
     }
   }, [autoPlayNextEpisode]);
 
@@ -383,51 +385,66 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       timeUpdateInterval = setInterval(() => {
         const currentTime = playerRef.current?.currentTime || 0;
         const duration = playerRef.current?.duration || 0;
-        const skipIntroControl = document.getElementById('skip-intro-control');
-        const nextEpisodeControl = document.getElementById('next-episode-control');
+        const skipIntroControl = document.getElementById("skip-intro-control");
+        const nextEpisodeControl = document.getElementById(
+          "next-episode-control"
+        );
 
         // Show Skip Intro button if we're within the intro period
         if (skipIntro > 0 && currentTime >= 0 && currentTime < skipIntro) {
           // setShowSkipIntro(true);
           if (skipIntroControl) {
-            skipIntroControl.style.display = 'flex';
+            skipIntroControl.style.display = "flex";
           }
         } else {
           // setShowSkipIntro(false);
           if (skipIntroControl) {
-            skipIntroControl.style.display = 'none';
+            skipIntroControl.style.display = "none";
           }
         }
 
         // Show Next Episode button if we're within the outro period (near the end)
-        if (skipOutro > 0 && duration > 0 && currentTime >= (duration - skipOutro) && hasNextEpisode) {
+        if (
+          skipOutro > 0 &&
+          duration > 0 &&
+          currentTime >= duration - skipOutro &&
+          hasNextEpisode
+        ) {
           // setShowNextEpisode(true);
           if (nextEpisodeControl) {
-            nextEpisodeControl.style.display = 'flex';
+            nextEpisodeControl.style.display = "flex";
           }
         } else {
           // setShowNextEpisode(false);
           if (nextEpisodeControl) {
-            nextEpisodeControl.style.display = 'none';
+            nextEpisodeControl.style.display = "none";
           }
         }
       }, 500); // Check every 500ms
 
       // Add click event listeners to the ArtPlayer buttons
       const addEventListeners = () => {
-        const skipIntroControl = document.getElementById('skip-intro-control');
-        const skipIntroButton = skipIntroControl?.querySelector('button');
-        const nextEpisodeControl = document.getElementById('next-episode-control');
-        const nextEpisodeButton = nextEpisodeControl?.querySelector('button');
+        const skipIntroControl = document.getElementById("skip-intro-control");
+        const skipIntroButton = skipIntroControl?.querySelector("button");
+        const nextEpisodeControl = document.getElementById(
+          "next-episode-control"
+        );
+        const nextEpisodeButton = nextEpisodeControl?.querySelector("button");
 
-        if (skipIntroButton && !skipIntroButton.hasAttribute('data-listener-added')) {
-          skipIntroButton.addEventListener('click', handleSkipIntro);
-          skipIntroButton.setAttribute('data-listener-added', 'true');
+        if (
+          skipIntroButton &&
+          !skipIntroButton.hasAttribute("data-listener-added")
+        ) {
+          skipIntroButton.addEventListener("click", handleSkipIntro);
+          skipIntroButton.setAttribute("data-listener-added", "true");
         }
 
-        if (nextEpisodeButton && !nextEpisodeButton.hasAttribute('data-listener-added')) {
-          nextEpisodeButton.addEventListener('click', handleNextEpisode);
-          nextEpisodeButton.setAttribute('data-listener-added', 'true');
+        if (
+          nextEpisodeButton &&
+          !nextEpisodeButton.hasAttribute("data-listener-added")
+        ) {
+          nextEpisodeButton.addEventListener("click", handleNextEpisode);
+          nextEpisodeButton.setAttribute("data-listener-added", "true");
         }
       };
 
@@ -441,17 +458,26 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         clearInterval(timeUpdateInterval);
       }
     };
-  }, [skipIntro, skipOutro, isControlsVisible, handleSkipIntro, handleNextEpisode, hasNextEpisode]);
+  }, [
+    skipIntro,
+    skipOutro,
+    isControlsVisible,
+    handleSkipIntro,
+    handleNextEpisode,
+    hasNextEpisode,
+  ]);
 
   useEffect(() => {
     // If the video is fullscreen, display show-set-skip-dialog button
-    const showSetSkipDialogBtn = document.getElementById('show-set-skip-dialog-btn');
+    const showSetSkipDialogBtn = document.getElementById(
+      "show-set-skip-dialog-btn"
+    );
     if (showSetSkipDialogBtn) {
-      console.log('Fullscreen status changed:', playerRef.current.fullscreen);
+      console.log("Fullscreen status changed:", playerRef.current.fullscreen);
       if (playerRef.current.fullscreen) {
-        showSetSkipDialogBtn.style.display = 'block';
+        showSetSkipDialogBtn.style.display = "block";
       } else {
-        showSetSkipDialogBtn.style.display = 'none';
+        showSetSkipDialogBtn.style.display = "none";
       }
     }
   }, [playerRef?.current?.fullscreen]);
@@ -502,8 +528,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   return (
     <div
       id="my-player"
-      className={`relative w-full bg-black ${reHeight ? "h-[220px]" : "h-[220px]"
-        }`}
+      className={`relative w-full bg-black ${
+        reHeight ? "h-[220px]" : "h-[220px]"
+      }`}
     >
       {/* Back button */}
       {isControlsVisible && (
@@ -557,12 +584,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Video element */}
         <div
           ref={videoElementRef}
-          className={`absolute w-full ${reHeight
-            ? "h-[220px]"
-            : isLandscape
+          className={`absolute w-full ${
+            reHeight
+              ? "h-[220px]"
+              : isLandscape
               ? "h-[220px] flex items-center justify-center"
               : "h-[220px]"
-            }`}
+          }`}
           style={
             isLandscape
               ? { top: "50%", left: "50%", transform: "translate(-50%, -50%)" }

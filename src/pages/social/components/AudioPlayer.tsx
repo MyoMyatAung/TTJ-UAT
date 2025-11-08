@@ -164,7 +164,7 @@ const AudioPlayer = ({
             <div className="flex justify-center items-center py-2 pt-4">
               <input
                 type="range"
-                className="progress-bar1"
+                className="progress-bar1 accent-[#FE58B5]"
                 value={progress}
                 onChange={(e) => {
                   if (audioRef.current) {
