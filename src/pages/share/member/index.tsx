@@ -66,7 +66,8 @@ const Member: React.FC<MemberProps> = ({}) => {
         <a
           target="_blink"
           href="https://cc3e497d.qdhgtch.com:1333/help"
-          className=" py-[8px] px-[10px mt-[5px"
+          className=" py-[8px] px-[10px mt-[5px pointer-events-none opacity-50 cursor-not-allowed"
+          onClick={(e) => e.preventDefault()}
         >
           <span className=" text-white text-[14px] font-[500]">
             {/* Point Rules */}
