@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 html,
-body {
+body, #root {
   margin: 0;
   padding-top: env(safe-area-inset-top); /* Respect safe areas */
+  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -30,6 +32,10 @@ code {
 
 .video-player {
   max-height: 100%; /* Ensure the video fits properly */
+}
+
+footer {
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 button {

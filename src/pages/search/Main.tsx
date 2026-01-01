@@ -191,7 +191,7 @@ const Main = () => {
 
       <div className="lg:container lg:mx-auto lg:px-[100px]">
         {tabLoading || tabFetching || (isFetching && currentPage === 1) ? (
-          <div className="flex justify-center h-[100vh] items-center text-center text-white">
+          <div className="flex justify-center h-[100dvh] items-center text-center text-white">
             <Loader />
           </div>
         ) : noDataFound ? ( // If no data is found, show a message

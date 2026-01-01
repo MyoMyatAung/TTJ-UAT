@@ -6,6 +6,9 @@
 .pnp.js
 .env
 
+# sample
+/src/assets/sample
+
 /.github
 
 # testing

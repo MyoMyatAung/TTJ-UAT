@@ -28,12 +28,14 @@
 .jf-infinitescroll {
   /* @apply container px-4 mt-[45px] gap-3 pb-3 overflow-y-auto; */
   height: calc(100vh - 300px);
+  height: calc(100dvh - 300px);
   /* height: 400px; */
 }
 
 .jf-infinitescroll-panel {
   /* @apply container  overflow-y-auto; */
   height: calc(100vh - 220px);
+  height: calc(100dvh - 220px);
 }
 /* .game-box {
       background: url(../../public/gamebg.jpg) no-repeat;

@@ -46,7 +46,7 @@ const SocialDetailPage = () => {
   let content = null;
   if (isLoading) {
     content = (
-      <div className="text-center -mt-[100px] max-sm:h-[80vh]  h-[100vh] flex justify-center items-center">
+      <div className="text-center -mt-[100px] max-sm:h-[80vh]  h-[100dvh] flex justify-center items-center">
         <Loader />
       </div>
     );
