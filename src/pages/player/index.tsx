@@ -105,6 +105,7 @@ const DetailPage: React.FC = () => {
   const [wholePageError, setWholePageError] = useState(false);
   const [errorVideoUrl, setErrorVideoUrl] = useState("");
   const abortControllerRef = useRef<AbortController | null>(null);
+  const currentTimeRef = useRef<number>(0);
   const [episodes, setEpisodes] = useState<any>([]);
   const [forwardedCount, setForwardedCount] = useState(-1);
   const [commentCount, setCommentCount] = useState(0);
@@ -186,6 +187,10 @@ const DetailPage: React.FC = () => {
       console.error("Error fetching movie details:", error);
       setIsPlayerLoading(false);
     }
+  };
+
+  const handleTimeUpdate = (time: number) => {
+    currentTimeRef.current = time;
   };
 
   const setInitialEpisode = async (mvDetail: any) => {
@@ -451,6 +456,8 @@ const DetailPage: React.FC = () => {
 
   const handleChangeSource = async (nextSource: any) => {
     if (nextSource && nextSource.code && id) {
+      const currentTime = currentTimeRef.current || 0;
+      setResumeTime(currentTime); 
       setIsPlayerLoading(true);
       try {
         const res = await getEpisodesBySource(nextSource.code, id || "");
@@ -606,6 +613,7 @@ const DetailPage: React.FC = () => {
                       resumeTime={resumeTime}
                       handleVideoError={handleVideoError}
                       autoPlayNextEpisode={autoPlayNextEpisode}
+                      onTimeUpdate={handleTimeUpdate}
                     />
                   ) : (
                     <PlayerLoading onBack={navigateBackFunction} />

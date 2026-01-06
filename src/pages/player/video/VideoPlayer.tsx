@@ -18,6 +18,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   handleVideoError,
   autoPlayNextEpisode,
   hasNextEpisode = false,
+  onTimeUpdate,
 }) => {
   const playerRef = useRef<any>(null);
   const dispatch = useDispatch();
@@ -309,6 +310,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         art.on("video:ended", () => {
           autoPlayNextEpisode();
         });
+        art.on("video:timeupdate", () => {
+          onTimeUpdate?.(art.currentTime || 0);
+        });
         playerRef.current = art;
       }
     };
@@ -336,6 +340,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         playerRef.current.video.src = ""; // Clear video source
         playerRef.current.destroy(); // Destroy ArtPlayer
         playerRef.current = null;
+      }
+      // Clean up event listeners
+      if (playerRef.current) {
+        playerRef.current.off("video:timeupdate");
       }
     };
   }, [videoUrl, resumeTime]);
