@@ -14,11 +14,11 @@ export const Head: FC<HeadProps> = ({ title, nomore }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const routerLink = () => {
-    if (location.pathname === "/point_mall") {
-      navigate(pointMall);
-    } else {
-      navigate(-1);
-    }
+    // if (location.pathname === "/point_mall") {
+    //   navigate(pointMall);
+    // } else {
+    // }
+    navigate(-1);
   };
 
   console.log("mall",pointMall)
